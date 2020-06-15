@@ -1,0 +1,7 @@
+手机序列号
+8DF6R16729018868
+平板电脑序列号
+0071ea56
+
+powershell 中 打开wediter编辑器
+ python -m weditor
