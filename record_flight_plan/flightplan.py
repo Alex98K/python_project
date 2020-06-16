@@ -393,9 +393,9 @@ if cc_guan:
     text_font(para2, '{}地区管理局，'.format(cc_guan))
 if cc_jian:
     text_font(para2, '{}监管局，'.format(cc_jian))
-text_font(para2, '{}，{}机场，华北空管局，管理局京津冀办。'.format(cc_comp, cc_airport))
+text_font(para2, '{}，{}机场，华北空管局，华北局京津冀办。'.format(cc_comp, cc_airport))
 table_para_style_input(table.cell(0, 1), '承办单位：', style='两端对齐', font_pos='抄送')
-table_para_style_input(table.cell(0, 1), '华北局运输管理处             ', style='两端对齐')
+table_para_style_input(table.cell(0, 1), '华北局运输管理处          ', style='两端对齐')
 table_para_style_input(table.cell(0, 1), '电话：', style='两端对齐', font_pos='抄送')
 table_para_style_input(table.cell(0, 1), '010-64593776', style='两端对齐')
 
