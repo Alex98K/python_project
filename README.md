@@ -1,2 +1,3 @@
 # python_project
 自己学习python编写的各个小项目
+以后计划pyqt5编写几个图形化界面，然后做几个网页
