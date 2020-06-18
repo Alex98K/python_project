@@ -1,4 +1,3 @@
-from itertools import groupby
 from docx.shared import Pt
 from docx.oxml.ns import qn
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -10,7 +9,10 @@ import time
 import xlrd
 import os
 
-PATH = os.path.abspath(os.path.dirname(__file__))
+PATH_PROGRAM = os.path.abspath(os.path.dirname(__file__))
+PATH = "E:\e\航线航班"  # 航线经营许可表格
+PASS_DENG = 1667
+PASS_ZHU = 803
 
 
 def text_font(paragragh, text, font_pos='正文'):
@@ -100,16 +102,23 @@ def replace_text(doc, old_text, new_text):
 time_start = time.time()
 
 # 读取航班计划备案excel文件
-book = xlrd.open_workbook(os.path.join(PATH, '待做许可证的记录.xlsx'))
+# book = xlrd.open_workbook(os.path.join(PATH, '待做许可证的记录.xlsx'))
+book = xlrd.open_workbook(os.path.join(PATH, '航线经营许可汇总表.xlsx'))
 data_deng = book.sheet_by_name('登记')
 data_zhu = book.sheet_by_name('注销')
 
 ALL_deng = {}
-for i in range(1, data_deng.nrows):
+for i in range(PASS_DENG, data_deng.nrows):
     temp = data_deng.row_values(i)
-    temp[4] = int(temp[4])
-    temp[5] = xlrd.xldate_as_tuple(temp[5], 0)
-    temp[7] = xlrd.xldate_as_tuple(temp[7], 0)
+    try:
+        temp[4] = int(temp[4])
+    except ValueError:
+        continue
+    try:
+        temp[5] = xlrd.xldate_as_tuple(temp[5], 0)
+        temp[7] = xlrd.xldate_as_tuple(temp[7], 0)
+    except TypeError:
+        continue
     r = temp[1:6]
     r.extend(temp[7:])
     if ALL_deng.get(temp[6]):
@@ -119,14 +128,17 @@ for i in range(1, data_deng.nrows):
 
 for key, value in ALL_deng.items():
     # 新建word文档，并输入文件开头几段
-    document = docx.Document(os.path.join(PATH, '模板文件/登记.docx'))
+    document = docx.Document(os.path.join(PATH_PROGRAM, '模板文件/登记.docx'))
     res = re.findall(r'〔(\d+)〕(\d+)', key)
-    year = res[0][0]
-    nb = res[0][1]
-    company = value[0][1]
-    com = value[0][0]
-    month = value[0][5][1]
-    day = value[0][5][2]
+    try:
+        year = res[0][0]
+        nb = res[0][1]
+        company = value[0][1]
+        com = value[0][0]
+        month = value[0][5][1]
+        day = value[0][5][2]
+    except IndexError:
+        continue
     replace_text(document, 'year', f'{year}')
     replace_text(document, 'nb', f'{nb}')
     replace_text(document, 'company', f'{company}')
@@ -151,12 +163,21 @@ for key, value in ALL_deng.items():
         table_para_style_input(table.cell(i + 1, 3), '{}/{}/{}'.format(exe_date[0], exe_date[1], exe_date[2]))
 
     title = f'{year}{nb}-{com}-登记'
-    document.save(os.path.join(PATH, '登记文件/{}.docx'.format(title)))
+    path_deng = (os.path.join(PATH, '航线航班\航线经营许可\登记\{}'.format(year)))
+    if not os.path.isdir(path_deng):
+        os.mkdir(path_deng)
+    path_deng_file = os.path.join(path_deng, '{}.docx'.format(title))
+    if not os.path.isfile(path_deng_file):
+        document.save(path_deng_file)
+        print(path_deng_file)
 
 ALL_zhu = {}
-for i in range(1, data_zhu.nrows):
+for i in range(PASS_ZHU, data_zhu.nrows):
     temp = data_zhu.row_values(i)
-    temp[6] = xlrd.xldate_as_tuple(temp[6], 0)
+    try:
+        temp[6] = xlrd.xldate_as_tuple(temp[6], 0)
+    except TypeError:
+        continue
     r = temp[1:4]
     r.extend(temp[6:])
     if ALL_zhu.get(temp[5]):
@@ -166,14 +187,17 @@ for i in range(1, data_zhu.nrows):
 
 for key, value in ALL_zhu.items():
     # 新建word文档，并输入文件开头几段
-    document = docx.Document(os.path.join(PATH, '模板文件/注销.docx'))
+    document = docx.Document(os.path.join(PATH_PROGRAM, '模板文件/注销.docx'))
     res = re.findall(r'〔(\d+)〕(\d+)', key)
-    year = res[0][0]
-    nb = res[0][1]
-    company = value[0][1]
-    com = value[0][0]
-    month = value[0][3][1]
-    day = value[0][3][2]
+    try:
+        year = res[0][0]
+        nb = res[0][1]
+        company = value[0][1]
+        com = value[0][0]
+        month = value[0][3][1]
+        day = value[0][3][2]
+    except IndexError:
+        continue
     replace_text(document, 'year', f'{year}')
     replace_text(document, 'nb', f'{nb}')
     replace_text(document, 'company', f'{company}')
@@ -193,6 +217,12 @@ for key, value in ALL_zhu.items():
     para_style_input(document, '注：1、此通知书一式两份；', font_pos='发往单位')
     para_style_input(document, '2、相关内容已在“中国民航航线航班信息管理系统”（http: // product.caachbjc.com）或WWW.CAAC.GOV.CN网站上予以公告。')
     title = f'{year}{nb}-{com}-注销'
-    document.save(os.path.join(PATH, '注销文件/{}.docx'.format(title)))
+    path_zhu = (os.path.join(PATH, '航线航班\航线经营许可\注销\{}'.format(year)))
+    if not os.path.isdir(path_zhu):
+        os.mkdir(path_zhu)
+    path_zhu_file = os.path.join(path_zhu, '{}.docx'.format(title))
+    if not os.path.isfile(path_zhu_file):
+        document.save(path_zhu_file)
+        print(path_zhu_file)
 
 print('\n*********docx文件成功生成！用时{}秒......*********\n'.format(time.time() - time_start))
