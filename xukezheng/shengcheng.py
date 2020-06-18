@@ -169,7 +169,7 @@ for key, value in ALL_deng.items():
     path_deng_file = os.path.join(path_deng, '{}.docx'.format(title))
     if not os.path.isfile(path_deng_file):
         document.save(path_deng_file)
-        print(path_deng_file)
+        print(title)
 
 ALL_zhu = {}
 for i in range(PASS_ZHU, data_zhu.nrows):
@@ -223,6 +223,6 @@ for key, value in ALL_zhu.items():
     path_zhu_file = os.path.join(path_zhu, '{}.docx'.format(title))
     if not os.path.isfile(path_zhu_file):
         document.save(path_zhu_file)
-        print(path_zhu_file)
+        print(title)
 
 print('\n*********docx文件成功生成！用时{}秒......*********\n'.format(time.time() - time_start))
