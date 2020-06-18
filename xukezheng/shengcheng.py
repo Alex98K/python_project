@@ -9,10 +9,10 @@ import time
 import xlrd
 import os
 
-PATH_PROGRAM = os.path.abspath(os.path.dirname(__file__))
-PATH = "E:\e\航线航班"  # 航线经营许可表格
-PASS_DENG = 1667
-PASS_ZHU = 803
+PATH_PROGRAM = os.path.abspath(os.path.dirname(__file__))  # 本程序所在位置，主要是定位模板文件夹的位置
+PATH = "E:\e\航线航班"  # 航线经营许可表格所在位置
+PASS_DENG = 1667  # 需要跳过的登记表格行数，之前的登记许可不再计算word文件，默认2020年开始
+PASS_ZHU = 803  # 需要跳过的注销表格行数，之前的注销许可不再计算word文件，默认2020年开始
 
 
 def text_font(paragragh, text, font_pos='正文'):
@@ -103,18 +103,18 @@ time_start = time.time()
 
 # 读取航班计划备案excel文件
 # book = xlrd.open_workbook(os.path.join(PATH, '待做许可证的记录.xlsx'))
-book = xlrd.open_workbook(os.path.join(PATH, '航线经营许可汇总表.xlsx'))
+book = xlrd.open_workbook(os.path.join(PATH, '航线经营许可汇总表.xlsx'))  # 找到许可大表的位置
 data_deng = book.sheet_by_name('登记')
 data_zhu = book.sheet_by_name('注销')
 
-ALL_deng = {}
+ALL_deng = {}  # 获取登记表格中许可的情况字典，以许可证号为键，许可具体情况为值
 for i in range(PASS_DENG, data_deng.nrows):
     temp = data_deng.row_values(i)
-    try:
+    try:  # 获取班次出问题就跳过这个许可信息
         temp[4] = int(temp[4])
     except ValueError:
         continue
-    try:
+    try:  # 获取计划开航日期、批准日期出错就跳过
         temp[5] = xlrd.xldate_as_tuple(temp[5], 0)
         temp[7] = xlrd.xldate_as_tuple(temp[7], 0)
     except TypeError:
@@ -130,7 +130,7 @@ for key, value in ALL_deng.items():
     # 新建word文档，并输入文件开头几段
     document = docx.Document(os.path.join(PATH_PROGRAM, '模板文件/登记.docx'))
     res = re.findall(r'〔(\d+)〕(\d+)', key)
-    try:
+    try:  # 如果下面的批准日期、公司等信息获取有问题，就不生成word
         year = res[0][0]
         nb = res[0][1]
         company = value[0][1]
@@ -171,10 +171,10 @@ for key, value in ALL_deng.items():
         document.save(path_deng_file)
         print(title)
 
-ALL_zhu = {}
+ALL_zhu = {}  # 获取注销表格中许可的情况字典，以许可证号为键，许可具体情况为值
 for i in range(PASS_ZHU, data_zhu.nrows):
     temp = data_zhu.row_values(i)
-    try:
+    try: # 获取批准日期出错就跳过
         temp[6] = xlrd.xldate_as_tuple(temp[6], 0)
     except TypeError:
         continue
@@ -189,7 +189,7 @@ for key, value in ALL_zhu.items():
     # 新建word文档，并输入文件开头几段
     document = docx.Document(os.path.join(PATH_PROGRAM, '模板文件/注销.docx'))
     res = re.findall(r'〔(\d+)〕(\d+)', key)
-    try:
+    try:  # 如果下面的批准日期、公司等信息获取有问题，就不生成word
         year = res[0][0]
         nb = res[0][1]
         company = value[0][1]
