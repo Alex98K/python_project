@@ -61,6 +61,9 @@ class SubmitSystem(object):
 
     def yanzheng_data(self, ses, file_path):
         yanzheng_html = ses.get(self.list_url, headers=self.header1)
+        if yanzheng_html.status_code == 404:
+            print("获取验证数据错误，404")
+            return False
         data_yeshu = etree.HTML(yanzheng_html.text).xpath(self.update_data_xpath)[0]
         res = re.search(r'\d+', data_yeshu.text).group()
         book = xlrd.open_workbook(file_path)
