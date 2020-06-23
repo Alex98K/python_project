@@ -37,3 +37,5 @@ venv/Lib/site-packages/django/core/checks/compatibility/
 !/xukezheng/注销文件/*.*
 !/xukezheng/登记文件/*.*
 !/transport_afernoon/华北地区疫情防控人员物资航空运输统计表.xls
+!/record_flight_plan/*.docx
+!/record_flight_plan/*.doc
