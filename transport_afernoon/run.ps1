@@ -1,1 +1,1 @@
-python ./transport_everyday.py
+python -i ./transport_everyday.py

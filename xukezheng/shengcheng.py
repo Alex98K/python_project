@@ -10,7 +10,7 @@ import xlrd
 import os
 
 PATH_PROGRAM = os.path.abspath(os.path.dirname(__file__))  # 本程序所在位置，主要是定位模板文件夹的位置
-PATH = "E:\e\航线航班"  # 航线经营许可表格所在位置
+PATH = "D:\工作\e\航线航班"  # 航线经营许可表格所在位置
 PASS_DENG = 1667  # 需要跳过的登记表格行数，之前的登记许可不再计算word文件，默认2020年开始
 PASS_ZHU = 803  # 需要跳过的注销表格行数，之前的注销许可不再计算word文件，默认2020年开始
 
