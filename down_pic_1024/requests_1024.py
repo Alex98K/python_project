@@ -126,7 +126,7 @@ def page_down(pic_dir_adr, thread1):
                 f11.write(pic_data)
 
     for key, val in PAGE_DATA.items():
-        dir_name = key + '--' + f'点赞数{val[1]}' + '--' + f'回复数{val[2]}' + '--' + f'作者是{val[3]}'
+        dir_name = f'点赞数：{val[1]}' + '--' + f'回复数：{val[2]}' + '--' + f'作者：{val[3]}' + '--' + key
         dir_path = os.path.join(pic_dir_adr, dir_name)
         if not os.path.exists(dir_path):
             try:
@@ -171,7 +171,7 @@ def store_return_url(url2=None):
     """
     url_temp = None
     sign = 0
-    with open('url_head.json', 'r', encoding='UTF-8') as f3:
+    with open(url_head_dir, 'r', encoding='UTF-8') as f3:
         try:
             head_list = json.load(f3)
         except json.decoder.JSONDecodeError:
@@ -190,7 +190,7 @@ def store_return_url(url2=None):
                     url_temp = i
                     break
     if sign == 1:
-        with open('url_head.json', 'w', encoding='UTF-8') as f2:
+        with open(url_head_dir, 'w', encoding='UTF-8') as f2:
             json.dump(head_list, f2)
             print(f"加入新地址--{url2}")
     if url_temp:
@@ -233,16 +233,18 @@ if __name__ == '__main__':
     headers = {'user-agent': user_agent}
     PATH = os.path.abspath(os.path.dirname(__file__))
     pic_dir = os.path.join(PATH, 'pic')
+    url_head_dir = os.path.join(PATH, 'url_head.json')
+    page_data_dir = os.path.join(PATH, 'page_data.json')
     if not os.path.isdir(pic_dir):
         os.mkdir(pic_dir)
     try:
-        with open('page_data.json', 'r', encoding='UTF-8') as f1:
+        with open(page_data_dir, 'r', encoding='UTF-8') as f1:
             try:
                 PAGE_DATA = json.load(f1)
             except json.decoder.JSONDecodeError:
                 PAGE_DATA = {}
     except FileNotFoundError:
-        with open('page_data.json', 'w', encoding='UTF-8') as f12:
+        with open(page_data_dir, 'w', encoding='UTF-8') as f12:
             json.dump({}, f12)
             PAGE_DATA = {}
     url_head = store_return_url(url_head_new(headers))
