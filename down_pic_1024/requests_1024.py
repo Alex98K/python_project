@@ -10,11 +10,6 @@ import requests
 from lxml import etree
 
 
-# 每个详细页面名字的xpath地址     '//td[contains(@class,'tal')]/h3/a/font/text()'
-# 每个详细页面的xpath地址    '//td[contains(@class,'tal')]/h3/a/@href'
-# 图片xpath地址     '//img/@src'
-
-
 def download(html_url):  # 下载器，将传入的url地址进行get请求，获取返回页面
     try:
         response = requests.get(url=html_url, headers=headers, timeout=100, allow_redirects=True)
@@ -58,11 +53,16 @@ def page_title_pic_url(html_url):
         return list1
 
     html1 = etree.HTML(download(html_url).text)
+    # 标题列表
     html_title = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a//text()")
+    # 详情页地址列表
     pic_url_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a/@href")
+    # 点赞数列表
     dian_zan_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[1]//text()")
     dian_zan_list = remove_trip_list(dian_zan_list)
+    # 作者列表
     author_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[3]/a//text()")
+    # 回复数列表
     hui_fu_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[4]//text()")
     hui_fu_list = remove_trip_list(hui_fu_list)
     if len(html_title) != len(pic_url_list):
