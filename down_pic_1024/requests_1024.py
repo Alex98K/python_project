@@ -62,7 +62,7 @@ def page_title_pic_url(html_url):
     pic_url_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a/@href")
     dian_zan_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[1]//text()")
     dian_zan_list = remove_trip_list(dian_zan_list)
-    auther_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[3]/a//text()")
+    author_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[3]/a//text()")
     hui_fu_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]/td[4]//text()")
     hui_fu_list = remove_trip_list(hui_fu_list)
     if len(html_title) != len(pic_url_list):
@@ -71,25 +71,30 @@ def page_title_pic_url(html_url):
     if len(html_title) != len(dian_zan_list):
         print(f"详细页标题数{len(html_title)}和点赞数{len(dian_zan_list)}不一致")
         raise
-    if len(html_title) != len(auther_list):
-        print(f"详细页标题数{len(html_title)}和发布者数{len(auther_list)}不一致")
+    if len(html_title) != len(author_list):
+        print(f"详细页标题数{len(html_title)}和发布者数{len(author_list)}不一致")
         raise
     if len(html_title) != len(hui_fu_list):
         print(f"详细页标题数{len(html_title)}和回复数{len(hui_fu_list)}不一致")
         raise
     for i, k in enumerate(html_title):
-        html_title[i] = re.sub(r"[\/\\\:\*\?\"\<\>\|]", "", k)
-    page_url = list(zip(html_title, pic_url_list, dian_zan_list, hui_fu_list, auther_list))
+        html_title[i] = re.sub(r"[/\\:*?\"<>|]", "", k)
+    page_url = list(zip(html_title, pic_url_list, dian_zan_list, hui_fu_list, author_list))
     print(page_url)
     for i, v in enumerate(page_url):
         if condition_title(v[0]) and int(v[2]) >= 0 and int(v[3]) >= 0 and condition_author(v[4]):
             try:
                 date_html = etree.HTML(download(url_head + v[1]).text)
                 pic_down_adr_list = date_html.xpath("//img/@ess-data")
-            except Exception:
+                time.sleep(INTERVAL_TIME_DETAIL)
+            except Exception as e:
+                print(e)
                 print(f'获取{v[0]}详细页，就是图片页出现错误，跳过')
                 continue
-            post_date = remove_trip_list(date_html.xpath("//div[@class='tipad']/text()"))[0].replace('Posted:', '')
+            try:
+                post_date = remove_trip_list(date_html.xpath("//div[@class='tipad']/text()"))[0].replace('Posted:', '')
+            except IndexError:
+                post_date = None
             print(f'{v[0]} 图片下载地址是', pic_down_adr_list)
             PAGE_DATA[v[0]] = (v[1], v[2], v[3], v[4], post_date, pic_down_adr_list)
             with open('page_data.json', 'w', encoding='UTF-8') as fp:
@@ -100,26 +105,28 @@ def page_title_pic_url(html_url):
                     print("出现UnicodeEncodeError编码错误，跳过保存该页面信息")
 
 
-def down_one_pic(url_one1, dir_path, pic_name, index):
-    """
-     # 下载一个图片
-    :param url_one1: 图片地址
-    :param dir_path:存储路径
-    :param pic_name:图片名字
-    :param index:图片索引排序
-    """
-    suffix = re.search(r'\.\w*$', url_one1).group()
-    file_name = os.path.join(dir_path, '{}-{}{}'.format(pic_name, index, suffix))
-    pic_data = None
-    if (not os.path.exists(file_name)) and (pic_data := download(url_one1).content):
-        print('下载完一个图片 {}-{}'.format(pic_name, index))
-        with open(file_name, 'wb') as f11:
-            f11.write(pic_data)
-
-
 def page_down(pic_dir_adr, thread1):
+    """
+    下载PAGE_DATA中图片的函数
+    :param pic_dir_adr:pic文件夹路径，用来计算下面文件夹目录地址
+    :param thread1: 线程对象
+    :return:
+    """
+    def down_one_pic(url_one1, pic_name, index1, file_name1):
+        """
+         # 下载一个图片
+        :param file_name1:
+        :param url_one1: 图片地址
+        :param pic_name:图片名字
+        :param index1:图片索引排序
+        """
+        if pic_data := download(url_one1).content:
+            print('下载完一个图片 {}-{}'.format(pic_name, index1))
+            with open(file_name1, 'wb') as f11:
+                f11.write(pic_data)
+
     for key, val in PAGE_DATA.items():
-        dir_name = key + '--' + f'点赞数{val[1]}' + '--' + f'回复数{val[2]}' + '--' + f'作者:{val[3]}'
+        dir_name = key + '--' + f'点赞数{val[1]}' + '--' + f'回复数{val[2]}' + '--' + f'作者是{val[3]}'
         dir_path = os.path.join(pic_dir_adr, dir_name)
         if not os.path.exists(dir_path):
             try:
@@ -128,10 +135,13 @@ def page_down(pic_dir_adr, thread1):
                 print(f"创建下载图片目录文件夹{dir_path}出错")
                 continue
         for index, pic_url_one in enumerate(val[5]):
-            time.sleep(0.5)
-            task = thread1.submit(down_one_pic, pic_url_one, dir_path, key, index)
-            print("{}提交一个线程, {}-{}".format(threading.current_thread().name, key, index))
-            task.running()
+            suffix = re.search(r'\.\w*$', pic_url_one).group()
+            file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
+            if not os.path.exists(file_name):
+                time.sleep(INTERVAL_TIME)
+                task = thread1.submit(down_one_pic, pic_url_one, key, index, file_name)
+                print("{}提交一个线程, {}-{}".format(threading.current_thread().name, key, index))
+                task.running()
 
 
 def url_head_new(headers1):
@@ -209,9 +219,22 @@ def verify_url(url3):
 
 
 if __name__ == '__main__':
+    # 标题中不得含有的关键词列表，如果有列表中的关键词，会屏蔽下载及获取信息，节省资源
     PASS_TITLE = ['上传图片发布', '各类图片上传的图床',
                   '自拍区发帖前必读', '新手必學', '官方客戶',
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
+    total_pages = 100  # 计划获取多少个标题页
+    INTERVAL_TIME = 0  # 下载图片的请求间隔时间，太短容易被禁IP
+    INTERVAL_TIME_DETAIL = 10  # 详情页请求间隔时间，太短容易被禁IP
+    WORKER_NUM = 100  # 下载图片时候的线程数
+    # 请求头信息，用于下载器的get请求
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
+                 '(KHTML, like Gecko) Chrome/80.0.3945.88 Safari/537.36'
+    headers = {'user-agent': user_agent}
+    PATH = os.path.abspath(os.path.dirname(__file__))
+    pic_dir = os.path.join(PATH, 'pic')
+    if not os.path.isdir(pic_dir):
+        os.mkdir(pic_dir)
     try:
         with open('page_data.json', 'r', encoding='UTF-8') as f1:
             try:
@@ -222,14 +245,6 @@ if __name__ == '__main__':
         with open('page_data.json', 'w', encoding='UTF-8') as f12:
             json.dump({}, f12)
             PAGE_DATA = {}
-    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
-                 '(KHTML, like Gecko) Chrome/80.0.3945.88 Safari/537.36'
-    headers = {'user-agent': user_agent}
-    PATH = os.path.abspath(os.path.dirname(__file__))
-    pic_dir = os.path.join(PATH, 'pic')
-    if not os.path.isdir(pic_dir):
-        os.mkdir(pic_dir)
-    total_pages = 100
     url_head = store_return_url(url_head_new(headers))
     if url_head:
         url_head = store_return_url(url_head_new(headers))[:-9]
@@ -237,6 +252,8 @@ if __name__ == '__main__':
         print(url_list)
         for url_one in url_list:
             page_title_pic_url(url_one)
-    thread = ThreadPoolExecutor(max_workers=100)
+    else:
+        print('没有可用网址，可能被禁IP了，跳过网站获取详细页信息，直接从原来存储的page_data中获取地址，下载图片')
+    thread = ThreadPoolExecutor(max_workers=WORKER_NUM)
     page_down(pic_dir, thread)
     thread.shutdown(wait=True)
