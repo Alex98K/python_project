@@ -17,7 +17,7 @@ from lxml import etree
 
 def download(html_url):  # 下载器，将传入的url地址进行get请求，获取返回页面
     try:
-        response = requests.get(url=html_url, headers=headers, timeout=100)
+        response = requests.get(url=html_url, headers=headers, timeout=100, allow_redirects=True)
         response.keep_alive = False
         response.encoding = 'gbk'
         if response.status_code != 200:
@@ -27,23 +27,36 @@ def download(html_url):  # 下载器，将传入的url地址进行get请求，�
         print(e, html_url)
 
 
-def remove_trip_list(list2):  # 去除列表中的空字符/r /n /t 等，返回去除后的列表副本
-    list1 = copy(list2)
-    for i, j in enumerate(list1):
-        list1[i] = list1[i].strip()
-        if '.::' in j:
-            list1[i] = '0'
-    while list1.count(''):
-        list1.remove('')
-    return list1
-
-
 def page_title_url(html_url):
     """
-     # 获取列表页的相关内容，也就是盖区的标题列表页
+     # 获取列表页的相关内容，以及每个详情页的内容，包括每页图片的地址，形成一个全部信息的字典PAGE_DATA，并且进行文件保存
     :param html_url:列表页地址
-    :return:列表，包含标题，地址,点赞数、回复数、作者
     """
+    def condition_title(title, update: bool = False):
+        if list(filter(lambda x: x in title, PASS_TITLE)):
+            return False
+        elif title in PAGE_DATA and update:
+            return False
+        else:
+            return True
+
+    def condition_author(author):
+        author_pass_list = []
+        if author not in author_pass_list:
+            return True
+        else:
+            return False
+
+    def remove_trip_list(list2):  # 去除列表中的空字符/r /n /t 等，返回去除后的列表副本
+        list1 = copy(list2)
+        for i1, j in enumerate(list1):
+            list1[i1] = list1[i1].strip()
+            if '.::' in j:
+                list1[i1] = '0'
+        while list1.count(''):
+            list1.remove('')
+        return list1
+
     html1 = etree.HTML(download(html_url).text)
     html_title = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a//text()")
     pic_url_list = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a/@href")
@@ -64,9 +77,27 @@ def page_title_url(html_url):
     if len(html_title) != len(hui_fu_list):
         print(f"详细页标题数{len(html_title)}和回复数{len(hui_fu_list)}不一致")
         raise
-    # html_url = map(lambda x: url_head + x, pic_url_list)
-    # return list(zip(html_title, html_url, dian_zan_list, hui_fu_list, auther_list))
-    return list(zip(html_title, pic_url_list, dian_zan_list, hui_fu_list, auther_list))
+    for i, k in enumerate(html_title):
+        html_title[i] = re.sub(r"[\/\\\:\*\?\"\<\>\|]", "", k)
+    page_url = list(zip(html_title, pic_url_list, dian_zan_list, hui_fu_list, auther_list))
+    print(page_url)
+    for i, v in enumerate(page_url):
+        if condition_title(v[0]) and int(v[2]) >= 0 and int(v[3]) >= 0 and condition_author(v[4]):
+            try:
+                date_html = etree.HTML(download(url_head + v[1]).text)
+                pic_down_adr_list = date_html.xpath("//img/@ess-data")
+            except Exception:
+                print(f'获取{v[0]}详细页，就是图片页出现错误，跳过')
+                continue
+            post_date = remove_trip_list(date_html.xpath("//div[@class='tipad']/text()"))[0].replace('Posted:', '')
+            print(f'{v[0]} 图片下载地址是', pic_down_adr_list)
+            PAGE_DATA[v[0]] = (v[1], v[2], v[3], v[4], post_date, pic_down_adr_list)
+            with open('page_data.json', 'w', encoding='UTF-8') as fp:
+                try:
+                    json.dump(PAGE_DATA, fp, ensure_ascii=False, indent=2)
+                    print('保存page_data文件完成')
+                except UnicodeEncodeError:
+                    print("出现UnicodeEncodeError编码错误，跳过保存该页面信息")
 
 
 def down_one_pic(url_one1, dir_path, pic_name, index):
@@ -76,60 +107,32 @@ def down_one_pic(url_one1, dir_path, pic_name, index):
     :param dir_path:存储路径
     :param pic_name:图片名字
     :param index:图片索引排序
-    :return:
     """
-    style = re.search(r'\.\w*$', url_one1).group()
-    file_name = os.path.join(dir_path, '{}-{}{}'.format(pic_name, index, style))
+    suffix = re.search(r'\.\w*$', url_one1).group()
+    file_name = os.path.join(dir_path, '{}-{}{}'.format(pic_name, index, suffix))
     pic_data = None
     if (not os.path.exists(file_name)) and (pic_data := download(url_one1).content):
         print('下载完一个图片 {}-{}'.format(pic_name, index))
-        with open(file_name, 'wb') as f1:
-            f1.write(pic_data)
+        with open(file_name, 'wb') as f11:
+            f11.write(pic_data)
 
 
-def detail_page_down(page_url, thread):
-    def condition_title(title):
-        if title in PASS_TITLE or '官方客戶端' in title or '新手必學' in title:
-            return False
-        else:
-            return True
-
-    def condition_author(author):
-        author_list = []
-        if author in author_list:
-            return True
-        else:
-            return False
-
-    def doing():
-        date_html = None
-        pic_down_adr_list = None
-        if condition_title(v[0]) and int(v[2]) >= 0 and int(v[3]) >= 0 and condition_author(v[4]) and \
-                (pic_down_adr_list := (date_html := etree.HTML(
-                    download(url_head + v[1]).text)).xpath("//img/@ess-data")):
-            post_date = remove_trip_list(date_html.xpath("//div[@class='tipad']/text()"))[0].replace('Posted:', '')
-            print(f'{v[0]} 图片下载地址是', pic_down_adr_list)
-            file_name = re.sub(r"[\/\\\:\*\?\"\<\>\|]", "", v[0])
-            dir_name = file_name + '--' + f'点赞数{v[2]}' + '--' + f'回复数{v[3]}' + '--' + f'作者是{v[4]}'
-            pic_dir = os.path.join(path, 'pic')
-            if not os.path.isdir(pic_dir):
-                os.mkdir(pic_dir)
-            dir_path = os.path.join(pic_dir, dir_name)
-            if not os.path.exists(dir_path):
-                try:
-                    os.makedirs(dir_path)
-                except OSError:
-                    raise
-                finally:
-                    for index, pic_url_one in enumerate(pic_down_adr_list):
-                        time.sleep(1)
-                        task = thread.submit(down_one_pic, pic_url_one, dir_path, file_name, index)
-                        ALL_TASK.append(task)
-                        print("{}提交一个线程, {}-{}".format(threading.current_thread().name, file_name, index))
-                        task.running()
-                    print(len(ALL_TASK))
-    for i, v in enumerate(page_url):
-        doing()
+def page_down(pic_dir_adr, thread1):
+    for key, val in PAGE_DATA.items():
+        dir_name = key + '--' + f'点赞数{val[1]}' + '--' + f'回复数{val[2]}' + '--' + f'作者是{val[3]}'
+        dir_path = os.path.join(pic_dir_adr, dir_name)
+        if not os.path.exists(dir_path):
+            try:
+                os.makedirs(dir_path)
+            except OSError:
+                print(f"创建下载图片目录文件夹{dir_path}出错")
+                continue
+        for index, pic_url_one in enumerate(val[5]):
+            time.sleep(0.5)
+            task = thread1.submit(down_one_pic, pic_url_one, dir_path, key, index)
+            ALL_TASK.append(task)
+            print("{}提交一个线程, {}-{}".format(threading.current_thread().name, key, index))
+            task.running()
 
 
 def url_head_new(headers1):
@@ -159,13 +162,13 @@ def store_return_url(url2=None):
     """
     url_temp = None
     sign = 0
-    with open('url_head.json', 'r') as f3:
+    with open('url_head.json', 'r', encoding='UTF-8') as f3:
         try:
             head_list = json.load(f3)
         except json.decoder.JSONDecodeError:
             head_list = []
         if verify_url(url2):
-            print(f"新获取的地址可以使用{url2}")
+            print(f"新获取的地址可以使用：{url2}")
             url_temp = url2
             if url2 not in head_list:
                 head_list.append(url2)
@@ -178,11 +181,11 @@ def store_return_url(url2=None):
                     url_temp = i
                     break
     if sign == 1:
-        with open('url_head.json', 'w') as f2:
+        with open('url_head.json', 'w', encoding='UTF-8') as f2:
             json.dump(head_list, f2)
             print(f"加入新地址--{url2}")
     if url_temp:
-        return url_temp, head_list
+        return url_temp
     else:
         print('没有可用的地址')
         raise
@@ -207,31 +210,35 @@ def verify_url(url3):
 
 
 if __name__ == '__main__':
-    ALL_TASK = []
-    PASS_TITLE = ['[岛叔原创]怎么上传图片发布在论坛共享的简单图文教程', '各类图片上传的图床[更新7-28]',
-                  '自拍区发帖前必读(最新版）', '[技术贴]再现(寡人教程)之发图详解, 其實发图很簡單, 新手必學!',
-                  '为什么你的帖子没有得到评分？', '图区禁止使用下列图床，违者永久禁言，屏蔽IP', '發圖貼會員&訪客須知']
-    with open('page_data.json', 'r') as f1:
-        try:
-            PAGE_DATA = json.load(f1)
-        except json.decoder.JSONDecodeError:
+    PASS_TITLE = ['上传图片发布', '各类图片上传的图床',
+                  '自拍区发帖前必读', '新手必學', '官方客戶',
+                  '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
+    try:
+        with open('page_data.json', 'r', encoding='UTF-8') as f1:
+            try:
+                PAGE_DATA = json.load(f1)
+            except json.decoder.JSONDecodeError:
+                PAGE_DATA = {}
+    except FileNotFoundError:
+        with open('page_data.json', 'w', encoding='UTF-8') as f12:
+            json.dump({}, f12)
             PAGE_DATA = {}
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
                  '(KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'
     headers = {'user-agent': user_agent}
-    path = os.path.abspath(os.path.dirname(__file__))
-    thread2 = ThreadPoolExecutor(max_workers=1)
-    if not os.path.isdir('pic/'):
-        os.mkdir('pic/')
+    ALL_TASK = []
+    PATH = os.path.abspath(os.path.dirname(__file__))
+    pic_dir = os.path.join(PATH, 'pic')
+    if not os.path.isdir(pic_dir):
+        os.mkdir(pic_dir)
     total_pages = 2
-    url_index, _ = store_return_url(url_head_new(headers))
-    url_head = url_index[:-9]
+    url_head = store_return_url(url_head_new(headers))[:-9]
     url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages)]
     print(url_list)
     for url_one in url_list:
-        page_adr = page_title_url(url_one)
-        print(page_adr)
-        detail_page_down(page_adr, thread2)
+        page_title_url(url_one)
+    thread = ThreadPoolExecutor(max_workers=1)
+    page_down(pic_dir, thread)
     # for j in ALL_TASK:
-        # print(j.done())
-    thread2.shutdown(wait=True)
+    #     print(j.done())
+    thread.shutdown(wait=True)
