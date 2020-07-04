@@ -53,7 +53,7 @@ def page_title_pic_url(html_url):
         return list1
 
     html1 = etree.HTML(download(html_url).text)
-    if not html1:
+    if not len(html1):
         return None
     # 标题列表
     html_title = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a//text()")
