@@ -27,7 +27,7 @@ def download(html_url):  # 下载器，将传入的url地址进行get请求，�
         print(e, html_url)
 
 
-def page_title_url(html_url):
+def page_title_pic_url(html_url):
     """
      # 获取列表页的相关内容，以及每个详情页的内容，包括每页图片的地址，形成一个全部信息的字典PAGE_DATA，并且进行文件保存
     :param html_url:列表页地址
@@ -35,7 +35,7 @@ def page_title_url(html_url):
     def condition_title(title, update: bool = False):
         if list(filter(lambda x: x in title, PASS_TITLE)):
             return False
-        elif title in PAGE_DATA and update:
+        elif (title in PAGE_DATA.keys()) and not update:
             return False
         else:
             return True
@@ -119,7 +119,7 @@ def down_one_pic(url_one1, dir_path, pic_name, index):
 
 def page_down(pic_dir_adr, thread1):
     for key, val in PAGE_DATA.items():
-        dir_name = key + '--' + f'点赞数{val[1]}' + '--' + f'回复数{val[2]}' + '--' + f'作者是{val[3]}'
+        dir_name = key + '--' + f'点赞数{val[1]}' + '--' + f'回复数{val[2]}' + '--' + f'作者:{val[3]}'
         dir_path = os.path.join(pic_dir_adr, dir_name)
         if not os.path.exists(dir_path):
             try:
@@ -130,7 +130,6 @@ def page_down(pic_dir_adr, thread1):
         for index, pic_url_one in enumerate(val[5]):
             time.sleep(0.5)
             task = thread1.submit(down_one_pic, pic_url_one, dir_path, key, index)
-            ALL_TASK.append(task)
             print("{}提交一个线程, {}-{}".format(threading.current_thread().name, key, index))
             task.running()
 
@@ -188,7 +187,7 @@ def store_return_url(url2=None):
         return url_temp
     else:
         print('没有可用的地址')
-        raise
+        return None
 
 
 def verify_url(url3):
@@ -224,21 +223,20 @@ if __name__ == '__main__':
             json.dump({}, f12)
             PAGE_DATA = {}
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
-                 '(KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'
+                 '(KHTML, like Gecko) Chrome/80.0.3945.88 Safari/537.36'
     headers = {'user-agent': user_agent}
-    ALL_TASK = []
     PATH = os.path.abspath(os.path.dirname(__file__))
     pic_dir = os.path.join(PATH, 'pic')
     if not os.path.isdir(pic_dir):
         os.mkdir(pic_dir)
-    total_pages = 1
-    url_head = store_return_url(url_head_new(headers))[:-9]
-    url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
-    print(url_list)
-    for url_one in url_list:
-        page_title_url(url_one)
-    thread = ThreadPoolExecutor(max_workers=1)
+    total_pages = 100
+    url_head = store_return_url(url_head_new(headers))
+    if url_head:
+        url_head = store_return_url(url_head_new(headers))[:-9]
+        url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
+        print(url_list)
+        for url_one in url_list:
+            page_title_pic_url(url_one)
+    thread = ThreadPoolExecutor(max_workers=100)
     page_down(pic_dir, thread)
-    # for j in ALL_TASK:
-    #     print(j.done())
     thread.shutdown(wait=True)
