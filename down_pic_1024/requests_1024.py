@@ -53,6 +53,8 @@ def page_title_pic_url(html_url):
         return list1
 
     html1 = etree.HTML(download(html_url).text)
+    if not html1:
+        return None
     # 标题列表
     html_title = html1.xpath("//tr[@class='tr3 t_one tac' and not(contains(@align,'middle'))]//h3/a//text()")
     # 详情页地址列表
@@ -161,6 +163,8 @@ def url_head_new(headers1):
         return head
     except TypeError:
         print('在首页获取1024网址出错')
+    except AttributeError:
+        print('在首页获取1024网址出错')
 
 
 def store_return_url(url2=None):
@@ -249,7 +253,7 @@ if __name__ == '__main__':
             PAGE_DATA = {}
     url_head = store_return_url(url_head_new(headers))
     if url_head:
-        url_head = store_return_url(url_head_new(headers))[:-9]
+        url_head = url_head[:-9]
         url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
         print(url_list)
         for url_one in url_list:
