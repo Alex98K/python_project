@@ -211,15 +211,15 @@ if __name__ == '__main__':
     PASS_TITLE = ['[岛叔原创]怎么上传图片发布在论坛共享的简单图文教程', '各类图片上传的图床[更新7-28]',
                   '自拍区发帖前必读(最新版）', '[技术贴]再现(寡人教程)之发图详解, 其實发图很簡單, 新手必學!',
                   '为什么你的帖子没有得到评分？', '图区禁止使用下列图床，违者永久禁言，屏蔽IP', '發圖貼會員&訪客須知']
+    with open('page_data.json', 'r') as f1:
+        try:
+            PAGE_DATA = json.load(f1)
+        except json.decoder.JSONDecodeError:
+            PAGE_DATA = {}
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
                  '(KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'
     headers = {'user-agent': user_agent}
     path = os.path.abspath(os.path.dirname(__file__))
-    with open('page_data.json', 'r') as f:
-        try:
-            PAGE_DATA = json.load(f)
-        except json.decoder.JSONDecodeError:
-            PAGE_DATA = {}
     thread2 = ThreadPoolExecutor(max_workers=1)
     if not os.path.isdir('pic/'):
         os.mkdir('pic/')
