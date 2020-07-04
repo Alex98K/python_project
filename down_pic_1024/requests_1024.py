@@ -231,9 +231,9 @@ if __name__ == '__main__':
     pic_dir = os.path.join(PATH, 'pic')
     if not os.path.isdir(pic_dir):
         os.mkdir(pic_dir)
-    total_pages = 2
+    total_pages = 1
     url_head = store_return_url(url_head_new(headers))[:-9]
-    url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages)]
+    url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
     print(url_list)
     for url_one in url_list:
         page_title_url(url_one)
