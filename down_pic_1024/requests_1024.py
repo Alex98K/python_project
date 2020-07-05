@@ -51,8 +51,10 @@ def page_title_pic_url(html_url):
         while list1.count(''):
             list1.remove('')
         return list1
-
-    html1 = etree.HTML(download(html_url).text)
+    try:
+        html1 = etree.HTML(download(html_url).text)
+    except AttributeError:
+        return None
     if not len(html1):
         return None
     # 标题列表
@@ -229,7 +231,7 @@ if __name__ == '__main__':
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
     total_pages = 100  # 计划获取多少个标题页
     INTERVAL_TIME = 0  # 下载图片的请求间隔时间，太短容易被禁IP
-    INTERVAL_TIME_DETAIL = 10  # 详情页请求间隔时间，太短容易被禁IP
+    INTERVAL_TIME_DETAIL = 1  # 详情页请求间隔时间，太短容易被禁IP
     WORKER_NUM = 100  # 下载图片时候的线程数
     # 请求头信息，用于下载器的get请求
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' \
