@@ -10,7 +10,7 @@ def work(i, n):
 
 
 def doing(thread2):
-    print('休息一会{}'.format(t := random.randint(1, 5)))
+    print('休息一会{}'.format(t := random.random()))
     time.sleep(t)
     # for i in range(10):
     #     task = thread2.submit(work, i, random.randint(1, 5))
@@ -26,12 +26,12 @@ if __name__ == '__main__':
     task_list = []
     for j in range(100):
         pool.apply_async(doing, (thread2,))
-        # task = process1.submit(doing, thread2)
+        task = process1.submit(doing, thread2)
         # task_list.append(task)
         # task.running()
         # task.result()
-        pool.close()
-        pool.join()
+        # pool.close()
+        # pool.join()
     print("\n线程都准备好了\t\n")
     process1.shutdown(wait=True)
     thread2.shutdown(wait=True)
