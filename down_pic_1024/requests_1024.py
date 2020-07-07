@@ -23,7 +23,7 @@ def download(html_url):  # 下载器，将传入的url地址进行get请求，�
         print(e, html_url)
 
 
-def page_title_pic_url(index, html_url, thread):
+def page_title_pic_url(index, html_url):
     """
      # 获取列表页的相关内容，以及每个详情页的内容，包括每页图片的地址，形成一个全部信息的字典PAGE_DATA，并且进行文件保存
     :param thread: 线程对象
@@ -301,7 +301,7 @@ if __name__ == '__main__':
         url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
         print(url_list)
         for url_index, url_one in enumerate(url_list):
-            thread1.submit(page_title_pic_url, url_index, url_one, thread1)
+            thread1.submit(page_title_pic_url, url_index, url_one)
     else:
         print('没有可用网址，可能被禁IP了，跳过网站获取详细页信息，直接从原来存储的page_data中获取地址，下载图片')
     thread1.shutdown(wait=True)
