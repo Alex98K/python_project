@@ -26,7 +26,6 @@ def download(html_url):  # 下载器，将传入的url地址进行get请求，�
 def page_title_pic_url(index, html_url):
     """
      # 获取列表页的相关内容，以及每个详情页的内容，包括每页图片的地址，形成一个全部信息的字典PAGE_DATA，并且进行文件保存
-    :param thread: 线程对象
     :param index: 标题页索引序号
     :param html_url:列表页地址
     """
@@ -204,7 +203,7 @@ def store_return_url(url2=None):
         else:
             print('新地址不可使用，从存储的地址中获取')
             for i in head_list:
-                print(f'测试地址{i}')
+                print(f'测试地址： {i}')
                 if verify_url(i, host=i[8:-10]):
                     url_temp = i
                     break
