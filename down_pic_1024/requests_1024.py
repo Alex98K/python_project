@@ -11,8 +11,6 @@ import socket
 
 
 def download(html_url):  # 下载器，将传入的url地址进行get请求，获取返回页面
-    # headers['cookie'] = '__cfduid=d8820278eebccdea98714721a2976fa7b1569319655'
-    print(headers)
     try:
         response = requests.get(url=html_url, headers=headers, timeout=100, allow_redirects=True)
         response.keep_alive = False
@@ -159,21 +157,21 @@ def page_down(pic_dir_adr, thread):
                 suffix = '.jpg'
             file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
             if not os.path.exists(file_name):
-                time.sleep(INTERVAL_TIME)
+                time.sleep(INTERVAL_TIME_PIC)
                 thread.submit(down_one_pic, pic_url_one, key, index, file_name)
-                if WORKER_NUM_PIC <= 5:
+                if INTERVAL_TIME_PIC >= 1 and WORKER_NUM_PIC <= 5:
                     print("提交一个线程, {}-{}".format(key, index))
                     pass
 
 
-def url_head_new(headers1):
+def url_head_new(headers2):
     """
     用来获取新的1024地址，从rr567网站点击两次可以获取到。
-    :param headers1:通用请求头
+    :param headers2:通用请求头
     :return:获取到的地址
     """
     url_start = 'https://rr567.net/'
-    headers1['cookie'] = '__cfduid=d8820278eebccdea98714721a2976fa7b1569319655; _ga=GA1.2.829357220.1569319655; ' \
+    headers2['cookie'] = '__cfduid=d8820278eebccdea98714721a2976fa7b1569319655; _ga=GA1.2.829357220.1569319655; ' \
                          'page=http%3A%2F%2Frvedc.com; _gid=GA1.2.334072831.1590379178; fuck1=yes '
     print("准备获取新地址")
     res = requests.get(url_start, headers=headers1, timeout=30).text
@@ -274,14 +272,15 @@ if __name__ == '__main__':
                   '自拍区发帖前必读', '新手必學', '官方客戶',
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
     total_pages = 5  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
-    INTERVAL_TIME = 0  # 下载图片的请求间隔时间，太短容易被图片所在网站禁IP或者封UA
+    INTERVAL_TIME_PIC = 0  # 下载图片的请求间隔时间，太短容易被图片所在网站禁IP或者封UA
     INTERVAL_TIME_DETAIL = 0.1  # 详情页请求间隔时间，太短容易被1024网站禁IP
-    WORKER_NUM_PIC = 1  # 下载图片时候的线程数
+    WORKER_NUM_PIC = 60  # 下载图片时候的线程数
     WORKER_NUM_PAGE = 1  # 下载页面时候的线程数
     # 请求头信息，用于下载器的get请求
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ' \
                  'Chrome/83.0.4103.116 Safari/537.36 '
     headers = {'user-agent': user_agent}
+    headers1 = {'user-agent': user_agent}
     PATH = os.path.abspath(os.path.dirname(__file__))
     pic_dir = os.path.join(PATH, 'pic')
     url_head_dir = os.path.join(PATH, 'url_head.json')
@@ -306,15 +305,14 @@ if __name__ == '__main__':
             json.dump({}, f12)
             PAGE_DATA = {}
     # 获取可用的1024网站域名，如果不成功，尝试获取可用的直连IP地址
-    if url_head := store_return_url(url_head_new(headers), headers_ve=headers):
+    if url_head := store_return_url(url_head_new(headers1), headers_ve=headers1):
         pass
     else:
-        url_head = store_return_ip(headers_ver=headers)
+        url_head = store_return_ip(headers_ver=headers1)
     thread1 = ThreadPoolExecutor(max_workers=WORKER_NUM_PAGE)
     if url_head:  # 有网址、有域名，才能下载标题页，否则就用存储的信息下载图片
         url_head = url_head[:-9]
         url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
-        print(url_list)
         for url_index, url_one in enumerate(url_list):
             thread1.submit(page_title_pic_url, url_index, url_one)
     else:
