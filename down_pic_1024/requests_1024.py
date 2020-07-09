@@ -2,7 +2,6 @@
 import json
 import os
 import re
-import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from copy import copy
@@ -12,6 +11,8 @@ import socket
 
 
 def download(html_url):  # 下载器，将传入的url地址进行get请求，获取返回页面
+    # headers['cookie'] = '__cfduid=d8820278eebccdea98714721a2976fa7b1569319655'
+    print(headers)
     try:
         response = requests.get(url=html_url, headers=headers, timeout=100, allow_redirects=True)
         response.keep_alive = False
@@ -89,7 +90,7 @@ def page_title_pic_url(index, html_url):
     page_url = list(zip(html_title, pic_url_list, dian_zan_list, hui_fu_list, author_list))
     if not page_url:
         return
-    print(f'第{index+1}页标题页读取完成')
+    print(f'***********第{index+1}页标题页读取完成***********')
     # print(page_url)
     for i, v in enumerate(page_url):
         if condition_title(v[0]) and int(v[2]) >= 0 and int(v[3]) >= 0 and condition_author(v[4]):
@@ -137,7 +138,7 @@ def page_down(pic_dir_adr, thread):
         :param pic_name:图片名字
         :param index1:图片索引排序
         """
-        if pic_data := download(url_one1).content:
+        if len(pic_data := download(url_one1).content) > 1000:
             print('下载完一个图片 {}-{}'.format(pic_name, index1))
             with open(file_name1, 'wb') as f11:
                 f11.write(pic_data)
@@ -152,12 +153,17 @@ def page_down(pic_dir_adr, thread):
                 print(f"创建下载图片目录文件夹{dir_path}出错")
                 continue
         for index, pic_url_one in enumerate(val[5]):
-            suffix = re.search(r'\.\w*$', pic_url_one).group()
+            try:
+                suffix = re.search(r'\.\w*$', pic_url_one).group()
+            except AttributeError:
+                suffix = '.jpg'
             file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
             if not os.path.exists(file_name):
                 time.sleep(INTERVAL_TIME)
                 thread.submit(down_one_pic, pic_url_one, key, index, file_name)
-                print("{}提交一个线程, {}-{}".format(threading.current_thread().name, key, index))
+                if WORKER_NUM_PIC <= 5:
+                    print("提交一个线程, {}-{}".format(key, index))
+                    pass
 
 
 def url_head_new(headers1):
@@ -181,9 +187,10 @@ def url_head_new(headers1):
         print('在首页获取1024网址出错')
 
 
-def store_return_url(url2=None):
+def store_return_url(url2=None, headers_ve=None):
     """
     将新获取的地址传入，进行验证，如果可以用，就加入原来的json中存储，如果不可用，就用原来的json中遍历获取一个可以用的地址
+    :param headers_ve:
     :param url2:新获取的地址
     :return:可用的1024地址
     """
@@ -194,7 +201,7 @@ def store_return_url(url2=None):
             head_list = json.load(f3)
         except json.decoder.JSONDecodeError:
             head_list = []
-        if verify_url(url2, host=url2[8:-10]):
+        if verify_url(url2, host=url2[8:-10], headers_ver=headers_ve):
             print(f"新获取的地址可以使用：{url2}")
             url_temp = url2
             if url2 not in head_list:
@@ -204,7 +211,7 @@ def store_return_url(url2=None):
             print('新地址不可使用，从存储的地址中获取')
             for i in head_list:
                 print(f'测试地址： {i}')
-                if verify_url(i, host=i[8:-10]):
+                if verify_url(i, host=i[8:-10], headers_ver=headers_ve):
                     url_temp = i
                     break
     if sign == 1:
@@ -218,14 +225,14 @@ def store_return_url(url2=None):
         return None
 
 
-def store_return_ip():
-    def run():
+def store_return_ip(headers_ver):
+    def run(headers_v):
         for k in head_list:
             print(f'获取{k}的IP地址')
             my_addr = socket.getaddrinfo(host=k[8:-10], port=80, family=socket.AF_INET)
             if my_addr:
                 for j in my_addr:
-                    if verify_url(k[0:4] + k[5:8] + j[4][0] + k[-10:], host=k[8:-10]):
+                    if verify_url(k[0:4] + k[5:8] + j[4][0] + k[-10:], host=k[8:-10], headers_ver=headers_v):
                         url_t = k[0:4] + k[5:8] + j[4][0] + k[-10:]
                         return url_t
     with open(url_head_dir, 'r', encoding='UTF-8') as f3:
@@ -233,7 +240,7 @@ def store_return_ip():
             head_list = json.load(f3)
         except json.decoder.JSONDecodeError:
             head_list = []
-        url_temp = run()
+        url_temp = run(headers_ver)
     if url_temp:
         return url_temp
     else:
@@ -241,16 +248,17 @@ def store_return_ip():
         return None
 
 
-def verify_url(url3, host):
+def verify_url(url3, host, headers_ver):
     """
     用来验证获取的1024地址是否可用
+    :param headers_ver:
     :param host: 请求头host字段
     :param url3:地址
     :return:是否可用
     """
-    headers['Host'] = host
+    headers_ver['Host'] = host
     try:
-        res = requests.get(url3, headers=headers, timeout=3)
+        res = requests.get(url3, headers=headers_ver, timeout=3)
     except Exception as e:
         print(f'验证地址{url3}出现错误', e)
         return False
@@ -265,10 +273,10 @@ if __name__ == '__main__':
     PASS_TITLE = ['上传图片发布', '各类图片上传的图床',
                   '自拍区发帖前必读', '新手必學', '官方客戶',
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
-    total_pages = 100  # 计划获取多少个标题页
-    INTERVAL_TIME = 0  # 下载图片的请求间隔时间，太短容易被禁IP
-    INTERVAL_TIME_DETAIL = 0.1  # 详情页请求间隔时间，太短容易被禁IP
-    WORKER_NUM_PIC = 60  # 下载图片时候的线程数
+    total_pages = 5  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
+    INTERVAL_TIME = 0  # 下载图片的请求间隔时间，太短容易被图片所在网站禁IP或者封UA
+    INTERVAL_TIME_DETAIL = 0.1  # 详情页请求间隔时间，太短容易被1024网站禁IP
+    WORKER_NUM_PIC = 1  # 下载图片时候的线程数
     WORKER_NUM_PAGE = 1  # 下载页面时候的线程数
     # 请求头信息，用于下载器的get请求
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ' \
@@ -280,6 +288,13 @@ if __name__ == '__main__':
     page_data_dir = os.path.join(PATH, 'page_data.json')
     if not os.path.isdir(pic_dir):
         os.mkdir(pic_dir)
+    # 下面的代码是为了删除文件夹中大小小于1000字节的文件，一般为下载出现错误保存的文件
+    for root1, dirs, files1 in os.walk(pic_dir):
+        for file1 in files1:
+            if os.stat(del_path := os.path.join(root1, file1)).st_size < 1000:
+                print(del_path)
+                os.remove(del_path)
+    # 下面的是获取page_data中保存的之前的标题、图片信息，存入PAGE_DATA字典中
     try:
         with open(page_data_dir, 'r', encoding='UTF-8') as f1:
             try:
@@ -290,12 +305,13 @@ if __name__ == '__main__':
         with open(page_data_dir, 'w', encoding='UTF-8') as f12:
             json.dump({}, f12)
             PAGE_DATA = {}
-    if url_head := store_return_url(url_head_new(headers)):
+    # 获取可用的1024网站域名，如果不成功，尝试获取可用的直连IP地址
+    if url_head := store_return_url(url_head_new(headers), headers_ve=headers):
         pass
     else:
-        url_head = store_return_ip()
+        url_head = store_return_ip(headers_ver=headers)
     thread1 = ThreadPoolExecutor(max_workers=WORKER_NUM_PAGE)
-    if url_head:
+    if url_head:  # 有网址、有域名，才能下载标题页，否则就用存储的信息下载图片
         url_head = url_head[:-9]
         url_list = ['{}thread0806.php?fid=16&search=&page={}'.format(url_head, i) for i in range(1, total_pages+1)]
         print(url_list)
