@@ -149,7 +149,7 @@ def page_down(pic_dir_adr, thread):
                 f11.write(pic_data)
 
     for key, val in PAGE_DATA.items():
-        dir_name = f'点赞数：{val[1]}' + '--' + f'回复数：{val[2]}' + '--' + f'标题：{key}' + '--' + f'作者：{val[3]}'
+        dir_name = f'点赞：{val[1]} ' + '--' + f'回复：{val[2]} ' + '--' + f'标题：{key}' + '--' + f'作者：{val[3]}'
         dir_path = os.path.join(pic_dir_adr, dir_name)
         for index, pic_url_one in enumerate(val[5]):
             try:
