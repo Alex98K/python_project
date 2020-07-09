@@ -288,12 +288,17 @@ if __name__ == '__main__':
     page_data_dir = os.path.join(PATH, 'page_data.json')
     if not os.path.isdir(pic_dir):
         os.mkdir(pic_dir)
-    # 下面的代码是为了删除文件夹中大小小于1000字节的文件，一般为下载出现错误保存的文件
+    # 下面的代码是为了删除文件夹中大小小于1000字节的文件，一般为下载出现错误保存的文件，同时删除空文件夹
     for root1, dirs, files1 in os.walk(pic_dir):
         for file1 in files1:
             if os.stat(del_path := os.path.join(root1, file1)).st_size < 1000:
                 print(del_path)
                 os.remove(del_path)
+        for dir_one in dirs:
+            try:
+                os.rmdir(os.path.join(root1, dir_one))
+            except OSError:
+                pass
     # 下面的是获取page_data中保存的之前的标题、图片信息，存入PAGE_DATA字典中
     try:
         with open(page_data_dir, 'r', encoding='UTF-8') as f1:

@@ -18,6 +18,7 @@ venv.bak/
 *.jpeg
 *.png
 *.bmp
+*.gif
 *.avi
 .idea/
 id_rsa
