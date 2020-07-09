@@ -36,9 +36,6 @@ venv/Lib/site-packages/django/core/checks/compatibility/
 !/transport_afernoon/*.xls
 !/transport_afernoon/*.xlsx
 !/record_flight_plan/*.doc
-!/xukezheng/注销文件/*.*
-!/xukezheng/登记文件/*.*
 !/record_flight_plan/*.docx
-!/record_flight_plan/*.doc
-/transport_afernoon/华北地区疫情防控人员物资航空运输统计表.xls
+/transport_afernoon/*.xls
 !/crawl_down_pic_1024/pic/
