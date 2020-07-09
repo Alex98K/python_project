@@ -128,28 +128,29 @@ def page_down(pic_dir_adr, thread):
     :param thread: 线程对象
     :return:
     """
-    def down_one_pic(url_one1, pic_name, index1, file_name1):
+    def down_one_pic(dir_path_c, url_one1, pic_name, index1, file_name1):
         """
          # 下载一个图片
-        :param file_name1:
+        :param dir_path_c: 文件夹路径
+        :param file_name1:文件名
         :param url_one1: 图片地址
         :param pic_name:图片名字
         :param index1:图片索引排序
         """
         if len(pic_data := download(url_one1).content) > 1000:
             print('下载完一个图片 {}-{}'.format(pic_name, index1))
+            if not os.path.exists(dir_path_c):
+                try:
+                    os.makedirs(dir_path_c)
+                except OSError:
+                    print(f"创建下载图片目录文件夹{dir_path_c}出错")
+                    return
             with open(file_name1, 'wb') as f11:
                 f11.write(pic_data)
 
     for key, val in PAGE_DATA.items():
         dir_name = f'点赞数：{val[1]}' + '--' + f'回复数：{val[2]}' + '--' + f'作者：{val[3]}' + '--' + f'标题：{key}'
         dir_path = os.path.join(pic_dir_adr, dir_name)
-        if not os.path.exists(dir_path):
-            try:
-                os.makedirs(dir_path)
-            except OSError:
-                print(f"创建下载图片目录文件夹{dir_path}出错")
-                continue
         for index, pic_url_one in enumerate(val[5]):
             try:
                 suffix = re.search(r'\.\w*$', pic_url_one).group()
@@ -158,7 +159,7 @@ def page_down(pic_dir_adr, thread):
             file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
             if not os.path.exists(file_name):
                 time.sleep(INTERVAL_TIME_PIC)
-                thread.submit(down_one_pic, pic_url_one, key, index, file_name)
+                thread.submit(down_one_pic, dir_path, pic_url_one, key, index, file_name)
                 if INTERVAL_TIME_PIC >= 1 and WORKER_NUM_PIC <= 5:
                     print("提交一个线程, {}-{}".format(key, index))
                     pass
@@ -188,7 +189,7 @@ def url_head_new(headers2):
 def store_return_url(url2=None, headers_ve=None):
     """
     将新获取的地址传入，进行验证，如果可以用，就加入原来的json中存储，如果不可用，就用原来的json中遍历获取一个可以用的地址
-    :param headers_ve:
+    :param headers_ve:请求头
     :param url2:新获取的地址
     :return:可用的1024地址
     """
@@ -249,7 +250,7 @@ def store_return_ip(headers_ver):
 def verify_url(url3, host, headers_ver):
     """
     用来验证获取的1024地址是否可用
-    :param headers_ver:
+    :param headers_ver:请求头
     :param host: 请求头host字段
     :param url3:地址
     :return:是否可用
@@ -318,6 +319,7 @@ if __name__ == '__main__':
     else:
         print('没有可用网址，可能被禁IP了，跳过网站获取详细页信息，直接从原来存储的page_data中获取地址，下载图片')
     thread1.shutdown(wait=True)
-    thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
-    page_down(pic_dir, thread2)
-    thread2.shutdown(wait=True)
+    for n in range(5):
+        thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
+        page_down(pic_dir, thread2)
+        thread2.shutdown(wait=True)

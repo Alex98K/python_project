@@ -15,6 +15,7 @@ env.bak/
 venv.bak/
 
 *.jpg
+*.jpeg
 *.png
 *.bmp
 *.avi
@@ -39,3 +40,4 @@ venv/Lib/site-packages/django/core/checks/compatibility/
 !/record_flight_plan/*.docx
 !/record_flight_plan/*.doc
 /transport_afernoon/华北地区疫情防控人员物资航空运输统计表.xls
+!/crawl_down_pic_1024/pic/
