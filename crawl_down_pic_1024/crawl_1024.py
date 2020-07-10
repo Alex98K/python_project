@@ -84,7 +84,9 @@ def page_title_pic_url(index, html_url):
         print(f"详细页标题数{len(html_title)}和回复数{len(hui_fu_list)}不一致")
         raise
     for i, k in enumerate(html_title):
-        html_title[i] = re.sub(r"[/\\:*?\"<>|]", "", k)
+        html_title[i] = re.sub(r"[/\\:*?\"<>|]", "", k).replace(' ', '').replace('［', '[')\
+            .replace('］', ']').replace('p', 'P').replace('【', '[').replace('】', ']')\
+            .replace('(', '[').replace(')', ']').replace('（', '[').replace('）', ']')
     page_url = list(zip(html_title, pic_url_list, dian_zan_list, hui_fu_list, author_list))
     if not page_url:
         return
@@ -94,7 +96,11 @@ def page_title_pic_url(index, html_url):
         if condition_title(v[0]) and int(v[2]) >= 0 and int(v[3]) >= 0 and condition_author(v[4]):
             try:
                 date_html = etree.HTML(download(url_head + v[1]).text)
-                if pic_down_adr_list1 := date_html.xpath("//img/@ess-data"):
+                if pic_down_adr_list1 := date_html.xpath("//div[@class='t t2'][1]//img/@ess-data"):
+                    pic_down_adr_list = pic_down_adr_list1
+                elif pic_down_adr_list2 := date_html.xpath("//div[@class='t t2'][1]//img/@src"):
+                    pic_down_adr_list = pic_down_adr_list2
+                elif pic_down_adr_list1 := date_html.xpath("//img/@ess-data"):
                     pic_down_adr_list = pic_down_adr_list1
                 elif pic_down_adr_list2 := date_html.xpath("//img/@src"):
                     pic_down_adr_list = pic_down_adr_list2
@@ -305,12 +311,56 @@ def verify_url(url3, host, headers_ver):
         return False
 
 
+def del_error_pic_num():
+    # 获取PAGE_DATA后，寻找标题中标记的图片数量，如果实际数量+3少于标记数量，判断为获取地址出现问题，删除page_data中数据，重新下载
+    del_dic = []
+    pattern = re.compile(r'\[(\d{1,3}).*?\]|(\d{1,3}).{1,3}\]|\[(\d{1,3})P|\[(\d{1,3})\]|[(（](\d{1,3}).*?[）)]')
+    for t1, vl in PAGE_DATA.items():
+        t = str(t1).replace(' ', '').replace('［', '[').replace('］', ']').replace('p', 'P') \
+            .replace('【', '[').replace('】', ']')
+        try:
+            res_t = [j for j in re.search(pattern, t).groups() if j][0]
+            if int(res_t) > len(vl[-1]) + 3:
+                print(t)
+                print(res_t)
+                print(len(vl[-1]))
+                print('****************')
+                del_dic.append(t1)
+        except AttributeError:
+            # print(f'{t}没有标出来图片数量')
+            pass
+    for d in del_dic:
+        del PAGE_DATA[d]
+    if len(del_dic) >= 3:
+        print(f'有空了检查下图片获取xpath，因为有{len(del_dic)}个标题的图片数多于实际数量，已删除')
+    with open(page_data_dir, 'w', encoding='UTF-8') as fp:
+        try:
+            json.dump(PAGE_DATA, fp, ensure_ascii=False, indent=2)
+            print('保存page_data文件完成')
+        except UnicodeEncodeError:
+            print("出现UnicodeEncodeError编码错误，跳过保存该页面信息")
+
+
+def del_none_file_dir():
+    # 下面的代码是为了删除文件夹中大小小于1000字节的文件，一般为下载出现错误保存的文件，同时删除空文件夹
+    for root1, dirs, files1 in os.walk(pic_dir):
+        for file1 in files1:
+            if os.stat(del_path := os.path.join(root1, file1)).st_size < 1000:
+                print(del_path)
+                os.remove(del_path)
+        for dir_one in dirs:
+            try:
+                os.rmdir(os.path.join(root1, dir_one))
+            except OSError:
+                pass
+
+
 if __name__ == '__main__':
     # 标题中不得含有的关键词列表，如果有列表中的关键词，会屏蔽下载及获取信息，节省资源
-    PASS_TITLE = ['上传图片发布', '各类图片上传的图床',
+    PASS_TITLE = ['上传图片发布', '各类图片上传的图床', '删',
                   '自拍区发帖前必读', '新手必學', '官方客戶',
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
-    total_pages = 5  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
+    total_pages = 100  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
     INTERVAL_TIME_PIC = 0  # 下载图片的请求间隔时间，太短容易被图片所在网站禁IP或者封UA
     INTERVAL_TIME_DETAIL = 0.1  # 详情页请求间隔时间，太短容易被1024网站禁IP
     WORKER_NUM_PIC = 60  # 下载图片时候的线程数
@@ -327,16 +377,7 @@ if __name__ == '__main__':
     if not os.path.isdir(pic_dir):
         os.mkdir(pic_dir)
     # 下面的代码是为了删除文件夹中大小小于1000字节的文件，一般为下载出现错误保存的文件，同时删除空文件夹
-    for root1, dirs, files1 in os.walk(pic_dir):
-        for file1 in files1:
-            if os.stat(del_path := os.path.join(root1, file1)).st_size < 1000:
-                print(del_path)
-                os.remove(del_path)
-        for dir_one in dirs:
-            try:
-                os.rmdir(os.path.join(root1, dir_one))
-            except OSError:
-                pass
+    del_none_file_dir()
     # 下面的是获取page_data中保存的之前的标题、图片信息，存入PAGE_DATA字典中
     try:
         with open(page_data_dir, 'r', encoding='UTF-8') as f1:
@@ -348,11 +389,15 @@ if __name__ == '__main__':
         with open(page_data_dir, 'w', encoding='UTF-8') as f12:
             json.dump({}, f12)
             PAGE_DATA = {}
+    # 获取PAGE_DATA后，寻找标题中标记的图片数量，如果实际数量+3少于标记数量，判断为获取地址出现问题，删除page_data中数据，重新下载
+    del_error_pic_num()
+    print(f'已保存的文件中共有{len(PAGE_DATA)}个网页信息')
     # 获取可用的1024网站域名，如果不成功，尝试获取可用的直连IP地址
     if url_head := store_return_url(url_head_new(headers1), headers_ve=headers1):
         pass
     else:
         url_head = store_return_ip(headers_ver=headers1)
+    # 开始获取标题、图片、点赞数、回复数、作者信息，存入字典中，并保存json
     thread1 = ThreadPoolExecutor(max_workers=WORKER_NUM_PAGE)
     if url_head:  # 有网址、有域名，才能下载标题页，否则就用存储的信息下载图片
         url_head = url_head[:-9]
@@ -362,6 +407,7 @@ if __name__ == '__main__':
     else:
         print('没有可用网址，可能被禁IP了，跳过网站获取详细页信息，直接从原来存储的page_data中获取地址，下载图片')
     thread1.shutdown(wait=True)
+    # 开始按照字典中信息，下载图片
     for n in range(5):
         thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
         page_down(pic_dir, thread2)

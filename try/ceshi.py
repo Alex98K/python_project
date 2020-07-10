@@ -1,15 +1,6 @@
-def condition_author(author):  # 作者是谁或者不能是谁，才下载
-    author_pass_down_list = []
-    author_keep_down_word = '张婉芳'
-    if author not in author_pass_down_list:
-        if len(author_keep_down_word) > 0 and author_keep_down_word in author:
-            return True
-        elif len(author_keep_down_word) == 0:
-            return True
-        else:
-            return False
-    else:
-        return False
+import re
 
+pattern = re.compile(r'\[(\d{1,3})P.*?\]|(\d{1,3})P.{1,3}\]|\[(\d{1,3})P|\[(\d{1,3})\]')
+st = '[控丝原创]第七期，小母狗穿着狼友挑选的情趣黑丝配婚鞋展现风骚的一面[16]'
 
-print(condition_author('张婉'))
+print([j for j in re.search(pattern, st).groups() if j][0])
