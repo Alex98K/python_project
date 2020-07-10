@@ -148,21 +148,59 @@ def page_down(pic_dir_adr, thread):
             with open(file_name1, 'wb') as f11:
                 f11.write(pic_data)
 
+    def condition_title(title):  # 标题不能包含什么或者必须包含什么才能下载
+        title_pass_down_list = []  # 计划下载的标题中不应该包含的关键字列表
+        title_keep_down_word = ''  # 计划下载的标题中必须包含的关键字
+        if list(filter(lambda x: x in str(title), title_pass_down_list)):
+            return False
+        elif title_keep_down_word not in str(title):
+            return False
+        else:
+            return True
+
+    def condition_author(author):  # 作者是谁或者不能是谁，才下载
+        author_pass_down_list = []
+        author_keep_down_word = ''
+        if str(author) not in author_pass_down_list:
+            if len(author_keep_down_word) > 0 and author_keep_down_word in str(author):
+                return True
+            elif len(author_keep_down_word) == 0:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def dian_zan(num):  # 点赞大于一定条件才下载
+        dian_zan_hum = 0
+        if int(num) >= dian_zan_hum:
+            return True
+        else:
+            return False
+
+    def hui_fu(num):  # 回复大于一定条件才下载
+        hui_fu_num = 0
+        if int(num) >= hui_fu_num:
+            return True
+        else:
+            return False
+
     for key, val in PAGE_DATA.items():
-        dir_name = f'点赞：{val[1]} ' + '--' + f'回复：{val[2]} ' + '--' + f'标题：{key}' + '--' + f'作者：{val[3]}'
-        dir_path = os.path.join(pic_dir_adr, dir_name)
-        for index, pic_url_one in enumerate(val[5]):
-            try:
-                suffix = re.search(r'\.\w*$', pic_url_one).group()
-            except AttributeError:
-                suffix = '.jpg'
-            file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
-            if not os.path.exists(file_name):
-                time.sleep(INTERVAL_TIME_PIC)
-                thread.submit(down_one_pic, dir_path, pic_url_one, key, index, file_name)
-                if INTERVAL_TIME_PIC >= 1 and WORKER_NUM_PIC <= 5:
-                    print("提交一个线程, {}-{}".format(key, index))
-                    pass
+        if condition_title(val[0]) and dian_zan(val[1]) and hui_fu(val[2]) and condition_author(val[3]):
+            dir_name = f'点赞：{val[1]} ' + '--' + f'回复：{val[2]} ' + '--' + f'标题：{key}' + '--' + f'作者：{val[3]}'
+            dir_path = os.path.join(pic_dir_adr, dir_name)
+            for index, pic_url_one in enumerate(val[5]):
+                try:
+                    suffix = re.search(r'\.\w*$', pic_url_one).group()
+                except AttributeError:
+                    suffix = '.jpg'
+                file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
+                if not os.path.exists(file_name):
+                    time.sleep(INTERVAL_TIME_PIC)
+                    thread.submit(down_one_pic, dir_path, pic_url_one, key, index, file_name)
+                    if INTERVAL_TIME_PIC >= 1 and WORKER_NUM_PIC <= 5:
+                        print("提交一个线程, {}-{}".format(key, index))
+                        pass
 
 
 def url_head_new(headers2):

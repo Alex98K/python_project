@@ -1,59 +1,15 @@
-import socket, json, threading
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import requests, time, random, re
-headers = {
-# 'Cookie': '__cfduid = dedb7b74217ad13177da53c040882908d1594199084',
-'Host': 'cl.5w9.xyz',
-# 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
-}
-# user_agent = 'baidu'
-# headers = {'User-Agent': user_agent, 'Host': 'cl.5v6.xyz'}
-url2 = 'https://privacypic.com/images/2020/06/15/uaeDxy.jpg'
-# url3 = 'http://172.67.131.109/index.php'
-# headers = {'Host': url2}
-res = requests.get(url2, headers=headers, timeout=31)
-print()
-if len(res.content) > 1000:
-# res.encoding = 'gbk'
-    print(len(res.content))
-    with open('1.jpg', 'bw') as f:
-        f.write(res.content)
+def condition_author(author):  # 作者是谁或者不能是谁，才下载
+    author_pass_down_list = []
+    author_keep_down_word = '张婉芳'
+    if author not in author_pass_down_list:
+        if len(author_keep_down_word) > 0 and author_keep_down_word in author:
+            return True
+        elif len(author_keep_down_word) == 0:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
-# thread = ThreadPoolExecutor(max_workers=60)
-# dict1 = {}
-# lock = threading.Lock()
-
-#
-# def haha(int1):
-#     # time.sleep(random.random())
-#     dict1[str(int1)] = int1
-#     # lock.acquire()
-#     p1 = time.time()
-#     with open('1.json', 'w', encoding='UTF-8') as f:
-#         json.dump(dict1, f)
-#     if (t1 := time.time()-p1) > 0.3:
-#         print(t1)
-#         # lock.release()
-#
-#
-# for j in range(10000):
-#     thread.submit(haha, j)
-# thread.shutdown(wait=True)
-#
-# print(len(dict1))
-#
-# with open('1.json', 'r') as f:
-#     p = json.load(f)
-#     print(len(p))
-
-
-# with open('2.json', 'r', encoding='UTF-8') as f:
-#     p = json.load(f)
-# p1 = time.time()
-#
-# with open('3.json', 'w', encoding='gbk') as f:
-#     json.dump(p, f)
-# # if (t1 := time.time()-p1) > 0.3:
-# #     print(t1)
-# print(time.time()-p1)
+print(condition_author('张婉'))
