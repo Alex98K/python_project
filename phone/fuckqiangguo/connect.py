@@ -180,6 +180,27 @@ def run_tiao_zhan(ti_num=10):
 
 
 def read_issue():
+    def kan_wenzhang():
+        pp(text='要闻').wait()
+        pp(text='要闻').click()
+        for i in pp.xpath(f'//android.widget.ListView//android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.TextView').all():
+            t1 = time.time()
+            print(i.text)
+            raise ()
+            i.wait()
+            i.click()
+
+            # 阅读文章
+            while True:
+                pp(scrollable=True).scroll.vert.forward(steps=random.randint(30, 50))
+                if time.time() - t1 > 120:
+                    break
+                time.sleep(1)
+                pp(scrollable=True).scroll.vert.backward(steps=random.randint(10, 30))
+                time.sleep(1)
+
+
+
     pp(text='学习积分').wait()
     pp(text='学习积分').click()
     pp(text='积分规则').wait()
@@ -190,6 +211,7 @@ def read_issue():
         pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').click()
         pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').wait()  # 点击首页下面的中间学习按钮
         pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click()
+        # kan_wenzhang()
         pp(text='要闻').wait()
         pp(text='要闻').click()
         for i in range(6):
@@ -225,14 +247,18 @@ def read_issue():
                 .click()  # 分享
             pp(text="分享到短信").wait()
             pp(text="分享到短信").click()
-            pp(text="选择收件人").wait()
-            pp(description="向上导航").click()
+            time.sleep(2)
+            while pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]/android.widget.ImageView[1]').exists:
+                pp.press('back')
+                time.sleep(1)
             pp.press('back')
         time.sleep(2)
         pp(text='我的').wait()
         pp(text='我的').click()
     else:
+        time.sleep(1)
         print('今日学习文章任务已完成')
+        pp.press('back')
 
 
 def read_video():
@@ -265,7 +291,63 @@ def read_video():
         pp(text='我的').wait()
         pp(text='我的').click()
     else:
+        time.sleep(1)
         print('今日学习视频任务已完成')
+        pp.press('back')
+
+
+def ding_yue():
+    pp(text='学习积分').wait()
+    pp(text='学习积分').click()
+    pp(text='积分规则').wait()
+    if pp.xpath('//android.widget.ListView/android.view.View[10]/android.view.View[4]').get_text() != '已完成':
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').wait()
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').click()
+        pp(text='订阅').wait()
+        pp(text='订阅').click()
+        pp(text='添加').wait()
+        pp(text='添加').click()
+        for i in range(3):
+            if pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]/android.widget.LinearLayout[2]')\
+                    .exists:
+                pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]/android.widget.LinearLayout[2]')\
+                    .click()
+                time.sleep(1)
+                pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]/android.widget.LinearLayout[2]') \
+                    .click()
+            time.sleep(1)
+        pp.press("back")
+        pp(text='我的订阅').wait()
+        pp.press("back")
+    else:
+        time.sleep(1)
+        print('已完成订阅')
+        pp.press('back')
+
+
+def ben_di():
+    pp(text='学习积分').wait()
+    pp(text='学习积分').click()
+    pp(text='积分规则').wait()
+    if pp.xpath('//android.widget.ListView/android.view.View[14]/android.view.View[4]').get_text() != '已完成':
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').wait()
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').click()
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').wait()
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').click()
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
+                 '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
+                 '1]/android.widget.LinearLayout[4]').wait()
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
+                 '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
+                 '1]/android.widget.LinearLayout[4]').click()
+        pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait()
+        pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click()
+        pp(text='我的').wait()
+        pp(text='我的').click()
+    else:
+        time.sleep(1)
+        print('已完成本地频道')
+        pp.press('back')
 
 
 if __name__ == '__main__':
@@ -280,5 +362,7 @@ if __name__ == '__main__':
     pp(text='我的').wait()
     pp(text='我的').click()
     # run_tiao_zhan()
-    # read_issue()
+    # ding_yue()
+    # ben_di()
+    read_issue()
     read_video()
