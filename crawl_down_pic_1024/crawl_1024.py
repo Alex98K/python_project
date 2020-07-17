@@ -336,9 +336,9 @@ def del_error_pic_num():
     with open(page_data_dir, 'w', encoding='UTF-8') as fp:
         try:
             json.dump(PAGE_DATA, fp, ensure_ascii=False, indent=2)
-            print('保存page_data文件完成')
+            print('更新page_data文件完成')
         except UnicodeEncodeError:
-            print("出现UnicodeEncodeError编码错误，跳过保存该页面信息")
+            print("出现UnicodeEncodeError编码错误，跳过保存")
 
 
 def del_none_file_dir():
@@ -360,9 +360,9 @@ if __name__ == '__main__':
     PASS_TITLE = ['上传图片发布', '各类图片上传的图床', '删',
                   '自拍区发帖前必读', '新手必學', '官方客戶',
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
-    total_pages = 100  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
+    total_pages = 5  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
     INTERVAL_TIME_PIC = 0  # 下载图片的请求间隔时间，太短容易被图片所在网站禁IP或者封UA
-    INTERVAL_TIME_DETAIL = 0.1  # 详情页请求间隔时间，太短容易被1024网站禁IP
+    INTERVAL_TIME_DETAIL = 0  # 详情页请求间隔时间，太短容易被1024网站禁IP
     WORKER_NUM_PIC = 60  # 下载图片时候的线程数
     WORKER_NUM_PAGE = 1  # 下载页面时候的线程数
     # 请求头信息，用于下载器的get请求
@@ -390,7 +390,7 @@ if __name__ == '__main__':
             json.dump({}, f12)
             PAGE_DATA = {}
     # 获取PAGE_DATA后，寻找标题中标记的图片数量，如果实际数量+3少于标记数量，判断为获取地址出现问题，删除page_data中数据，重新下载
-    del_error_pic_num()
+    # del_error_pic_num()
     print(f'已保存的文件中共有{len(PAGE_DATA)}个网页信息')
     # 获取可用的1024网站域名，如果不成功，尝试获取可用的直连IP地址
     if url_head := store_return_url(url_head_new(headers1), headers_ve=headers1):
