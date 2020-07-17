@@ -157,12 +157,14 @@ def page_down(pic_dir_adr, thread):
     def condition_title(title):  # 标题不能包含什么或者必须包含什么才能下载
         title_pass_down_list = []  # 计划下载的标题中不应该包含的关键字列表
         title_keep_down_word = ''  # 计划下载的标题中必须包含的关键字
-        if list(filter(lambda x: x in str(title), title_pass_down_list)):
+        if title_pass_down_list and list(filter(lambda x: x in str(title), title_pass_down_list)):
             return False
-        elif title_keep_down_word not in str(title):
-            return False
-        else:
+        elif title_keep_down_word and title_keep_down_word in str(title):
             return True
+        elif title_pass_down_list == [] and title_keep_down_word == '':
+            return True
+        else:
+            return False
 
     def condition_author(author):  # 作者是谁或者不能是谁，才下载
         author_pass_down_list = []
@@ -192,7 +194,7 @@ def page_down(pic_dir_adr, thread):
             return False
 
     for key, val in PAGE_DATA.items():
-        if condition_title(val[0]) and dian_zan(val[1]) and hui_fu(val[2]) and condition_author(val[3]):
+        if condition_title(key) and dian_zan(val[1]) and hui_fu(val[2]) and condition_author(val[3]):
             dir_name = f'点赞：{val[1]} ' + '--' + f'回复：{val[2]} ' + '--' + f'标题：{key}' + '--' + f'作者：{val[3]}'
             dir_path = os.path.join(pic_dir_adr, dir_name)
             for index, pic_url_one in enumerate(val[5]):
