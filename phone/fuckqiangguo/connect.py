@@ -7,44 +7,22 @@ import time
 import uiautomator2
 
 
-def connect():
+def connect(serial):
     """
-    链接手机
+    链接手机     phone = {'lao_po': '3EP7N18C11002513', 'wo_de': '8DF6R16729018868',
+     'jiu_de': 'F7R0214305002612', 'ping_ban': '0071ea56'}
     :return: 手机连接引用
     """
-    lao_po = '3EP7N18C11002513'
-    wo_de = '8DF6R16729018868'
-    jiu_de = 'F7R0214305002612'
-    ping_ban = '0071ea56'
-    phone = None
     try:
-        phone = uiautomator2.connect_usb(lao_po)
-    except Exception as e:
-        print(e)
-        pass
-    try:
-        phone = uiautomator2.connect_usb(wo_de)
-    except Exception as e:
-        print(e)
-        pass
-    try:
-        phone = uiautomator2.connect_usb(ping_ban)
-    except Exception as e:
-        print(e)
-        pass
-    try:
-        phone = uiautomator2.connect_usb(jiu_de)
-    except Exception as e:
-        print(e)
-        pass
-    # try:
-    #     phone = uiautomator2.connect_wifi('192.168.1.218')
-    # except Exception:
-    #     pass
-    if phone:
+        print('手机的序列号是', serial)
+        phone = uiautomator2.connect_usb(serial)
         return phone
-    else:
-        return False
+    except ConnectionError:
+        print('连接手机失败')
+        raise ()
+    except RuntimeError:
+        print('连接手机失败')
+        raise ()
 
 
 def do_tiao_zhan_ti(data_ti_ku, duplicate_title):
@@ -145,6 +123,7 @@ def do_tiao_zhan_ti(data_ti_ku, duplicate_title):
 
 
 def run_tiao_zhan(ti_num=10):
+    time.sleep(1)
     pp(text='我要答题').wait()
     pp(text='我要答题').click()
     pp(text='挑战答题').wait()
@@ -152,10 +131,10 @@ def run_tiao_zhan(ti_num=10):
     with open('ti_ku_verify.json', 'r', encoding="UTF-8") as f1:
         data_ti_ku = json.load(f1)
     duplicate_title_w = []
-    for ij, j in enumerate(data_ti_ku):
+    for ij, j1 in enumerate(data_ti_ku):
         for ik, k in enumerate(data_ti_ku):
-            if j[0] == k[0] and ij != ik:
-                duplicate_title_w.append(j[0])
+            if j1[0] == k[0] and ij != ik:
+                duplicate_title_w.append(j1[0])
     duplicate_title_w = list(set(duplicate_title_w))
     dui_num = 0
     while True:
@@ -171,189 +150,329 @@ def run_tiao_zhan(ti_num=10):
         else:
             dui_num = 0
         if dui_num == ti_num:
-            pp.press('back')
-            pp(text='退出').wait()
-            pp(text='退出').click()
+            time.sleep(30)
+            pp(text='结束本局').wait()
+            pp(text='结束本局').click()
             break
-    time.sleep(3)
+    time.sleep(1)
+    pp.press('back')
+    time.sleep(1)
     pp.press('back')
 
 
-def read_issue():
-    def kan_wenzhang():
-        pp(text='要闻').wait()
-        pp(text='要闻').click()
-        for i in pp.xpath(f'//android.widget.ListView//android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.TextView').all():
-            t1 = time.time()
-            print(i.text)
-            raise ()
-            i.wait()
-            i.click()
-
-            # 阅读文章
-            while True:
-                pp(scrollable=True).scroll.vert.forward(steps=random.randint(30, 50))
-                if time.time() - t1 > 120:
-                    break
-                time.sleep(1)
-                pp(scrollable=True).scroll.vert.backward(steps=random.randint(10, 30))
-                time.sleep(1)
-
-
-
-    pp(text='学习积分').wait()
-    pp(text='学习积分').click()
-    pp(text='积分规则').wait()
-    if pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[4]').get_text() != '已完成':
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').wait()  # 从积分界面返回我的界面
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').click()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').wait()  # 从我的界面回到APP首页
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').click()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').wait()  # 点击首页下面的中间学习按钮
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click()
-        # kan_wenzhang()
-        pp(text='要闻').wait()
-        pp(text='要闻').click()
-        for i in range(6):
-            t1 = time.time()
-            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i + 1}]').wait()
-            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i + 1}]').click()
-            # 阅读文章
-            while True:
-                pp(scrollable=True).scroll.vert.forward(steps=random.randint(30, 50))
-                if time.time() - t1 > 120:
-                    break
-                time.sleep(1)
-                pp(scrollable=True).scroll.vert.backward(steps=random.randint(10, 30))
-                time.sleep(1)
-            pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]/android.widget.ImageView[1]').wait()  # 收藏
-            pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]/android.widget.ImageView[1]').click()  # 收藏
-            # 评论，之后删除评论
-            pp(text="欢迎发表你的观点").click()  # 评论
-            pp(text="好观点将会被优先展示").wait()  # 评论
-            pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
-            pp(text="发布").wait()  # 评论
-            pp(text="发布").click()  # 评论
-            pp(text="删除").wait()  # 评论
-            while pp(text="删除").exists:
-                pp(text="删除").click()  # 评论
-                pp.xpath('//*[@resource-id="android:id/button1"]').wait()
-                pp.xpath('//*[@resource-id="android:id/button1"]').click()
-                time.sleep(2)
-            # 分享及返回
-            pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]/android.widget.ImageView[2]')\
-                .wait()  # 分享
-            pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]/android.widget.ImageView[2]')\
-                .click()  # 分享
-            pp(text="分享到短信").wait()
-            pp(text="分享到短信").click()
-            time.sleep(2)
-            while pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]/android.widget.ImageView[1]').exists:
-                pp.press('back')
-                time.sleep(1)
-            pp.press('back')
-        time.sleep(2)
-        pp(text='我的').wait()
-        pp(text='我的').click()
-    else:
+def read_issue(job_temp):
+    try:
+        with open(f'data_issue_{learn_num}.json', 'r', encoding="UTF-8") as f1:
+            data_issue = json.load(f1)
+    except FileNotFoundError:
+        data_issue = []
+    pp.press('back')  # 从我的界面回到APP首页
+    time.sleep(1)
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').wait()  # 点击首页下面的中间学习按钮
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click()
+    for it, t in enumerate(pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
+                                    '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
+                                    '/android.view.ViewGroup[1]//android.widget.LinearLayout'
+                                    '/android.widget.TextView').all()):  # 获取文章分类列表
+        t.click()
         time.sleep(1)
-        print('今日学习文章任务已完成')
-        pp.press('back')
+        for i in range(2, 10):  # 从每个分类中点击前五个文章，例如  要闻
+            t2 = time.time()
+            con = 0
+            while not pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]').exists:
+                time.sleep(1)
+                pp(scrollable=True).scroll(steps=90)
+                time.sleep(1)
+                if time.time() - t2 > 20:
+                    con = 1
+                    print(f'定位不到{t.text} 第{i}个文章，跳过')
+                    break
+            if con == 1:
+                continue
+            if it in [0, 4, 5, 6]:
+                try:
+                    title = pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]'
+                                     f'/android.widget.LinearLayout[1]/android.widget.TextView').get_text()
+                except uiautomator2.exceptions.XPathElementNotFoundError:
+                    print(f'{t.text} 第{i}个文章标题获取出错，跳过')
+                    continue
+            if it in [2, 7]:
+                try:
+                    title = pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]'
+                                     f'/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
+                                     f'/android.widget.TextView').get_text()
+                except uiautomator2.exceptions.XPathElementNotFoundError:
+                    print(f'{t.text} 第{i}个文章标题获取出错，跳过')
+                    continue
+            elif it in [1, 3]:
+                try:
+                    title = pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]'
+                                     f'/android.widget.LinearLayout[1]/android.view.ViewGroup[1]'
+                                     f'/android.widget.TextView').get_text()
+                except uiautomator2.exceptions.XPathElementNotFoundError:
+                    print(f'{t.text} 第{i}个文章标题获取出错，跳过')
+                    continue
+            else:
+                continue
+            if title in data_issue:
+                print(f'{t.text} {title}  已经看过了，跳过')
+                continue
+            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]').click()
+            print('正在看', t.text, title)
+            data_issue.append(title)
+            with open(f'data_issue_{learn_num}.json', 'w', encoding='UTF-8') as f2:
+                json.dump(data_issue, f2, ensure_ascii=False, indent=2)
+            time.sleep(10)  # 每个文章学习七秒
+            if job_temp[3] != '已完成':  # 如果没有完成文章学习时长任务，就开始
+                t1 = time.time()
+                while True:
+                    if time.time() - t1 > 110:
+                        break
+                    pp(scrollable=True).scroll.vert.forward(steps=random.randint(130, 150))
+                    time.sleep(1)
+                    pp(scrollable=True).scroll.vert.backward(steps=random.randint(110, 130))
+                    time.sleep(1)
+            if job_temp[10] != '已完成':  # 如果没有完成收藏任务，就开始
+                pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
+                         f'/android.widget.ImageView[1]').wait()  # 收藏
+                pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
+                         f'/android.widget.ImageView[1]').click()  # 收藏
+            if job_temp[11] != '已完成':  # 如果没有完成分享任务，就分享及返回
+                pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
+                         f'/android.widget.ImageView[2]').wait()  # 分享
+                pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
+                         f'/android.widget.ImageView[2]').click()  # 分享
+                pp(text="分享到短信").wait()
+                pp(text="分享到短信").click()
+                time.sleep(1)
+                while not pp.xpath(
+                        f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
+                        f'/android.widget.ImageView[1]').exists:
+                    pp.press('back')
+                    time.sleep(1)
+                time.sleep(1)
+            if job_temp[12] != '已完成':  # 如果没有完成评论任务，就开始评论，之后删除评论
+                pp(text="欢迎发表你的观点").click()  # 评论
+                pp(text="好观点将会被优先展示").wait()  # 评论
+                pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
+                pp(text="发布").wait()  # 评论
+                pp(text="发布").click()  # 评论
+                pp(text="删除").wait()  # 评论
+                while pp(text="删除").exists:
+                    pp(text="删除").click()  # 评论
+                    pp.xpath('//*[@resource-id="android:id/button1"]').wait()
+                    pp.xpath('//*[@resource-id="android:id/button1"]').click()
+                    time.sleep(1)
+            pp.press('back')  # 学习完每一篇文章后返回
+            time.sleep(1)
+            pp(text='我的').wait()
+            pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click()  # 点击积分,查一下积分完成情况
+            job_temp = job_status()  # 查一下积分完成情况
+            if job_temp[1] == '已完成':  # 如果学习文章没完成，就开始学习//android.widget.ListView/android.widget.FrameLayout[4]
+                pp(text='我的').wait()
+                pp(text='我的').click()
+                print('阅读文章任务已完成')
+                return
 
 
-def read_video():
-    def video_look(ping_dao, nums):
-        pp(text=ping_dao).wait()
-        for i in range(nums):
+def read_video(job_temp):
+    try:
+        with open(f'data_video_{learn_num}.json', 'r', encoding="UTF-8") as f1:
+            data_video = json.load(f1)
+    except FileNotFoundError:
+        data_video = []
+    time.sleep(1)
+    pp.press('back')  # 从我的界面回到APP首页
+    time.sleep(1)
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').wait()  # 点击首页下面的电视台按钮
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click()
+    for it, t in enumerate(pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
+                                    '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
+                                    'android.view.ViewGroup[1]//android.widget.LinearLayout').all()):  # 获取视频分类列表
+        t.click()
+        time.sleep(1)
+        for i in range(2, 10):
+            t2 = time.time()
+            con = 0
+            while not pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]').exists:
+                time.sleep(1)
+                pp(scrollable=True).scroll(steps=90)
+                time.sleep(1)
+                if time.time() - t2 > 20:
+                    con = 1
+                    print(f'定位不到{t.text} 第{i}个视频，跳过')
+                    break
+            if con == 1:
+                continue
+            if it in [2]:
+                try:
+                    title = pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]'
+                                     f'/android.widget.LinearLayout[1]/android.widget.TextView').get_text()
+                except uiautomator2.exceptions.XPathElementNotFoundError:
+                    print(f'{t.text} 第{i}个视频标题获取出错，跳过')
+                    continue
+            elif it in [1, 4, 5]:
+                try:
+                    title = pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]'
+                                     f'/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
+                                     f'/android.widget.TextView').get_text()
+                except uiautomator2.exceptions.XPathElementNotFoundError:
+                    print(f'{t.text} 第{i}个视频标题获取出错，跳过')
+                    continue
+            elif it in [0]:
+                try:
+                    title = pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]'
+                                     f'/android.widget.LinearLayout[1]/android.view.ViewGroup[1]'
+                                     f'/android.widget.TextView').get_text()
+                except uiautomator2.exceptions.XPathElementNotFoundError:
+                    print(f'{t.text} 第{i}个视频标题获取出错，跳过')
+                    continue
+            else:
+                continue
+            if title in data_video:
+                print(f'{t.text} {title}  已经看过了，跳过')
+                continue
+            data_video.append(title)
+            with open(f'data_video_{learn_num}.json', 'w', encoding='UTF-8') as f2:
+                json.dump(data_video, f2, ensure_ascii=False, indent=2)
+            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i}]').click()
+            time.sleep(1)  # 每个视频学习10秒
+            if pp(text='继续播放').exists:
+                pp(text='继续播放').click()
+            time.sleep(10)  # 每个视频学习10秒
+            if job_temp[4] != '已完成':  # 如果没有完成视频学习时长任务，就开始
+                t1 = time.time()
+                while True:
+                    if time.time() - t1 > 180:
+                        break
+                    pp(text='点赞').click()
+                    time.sleep(1)
+            pp.press('back')  # 学习完每一个视频后返回
+            time.sleep(1)
+            pp(text='我的').wait()
+            pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click()  # 点击积分,查一下积分完成情况
+            job_temp = job_status()  # 查一下积分完成情况
+            time.sleep(1)
+            if job_temp[2] == '已完成':  # 如果学习视频没完成，就开始学习//android.widget.ListView/android.widget.FrameLayout[4]
+                time.sleep(1)
+                pp(text='我的').wait()
+                pp(text='我的').click()
+                print('看视频任务已完成')
+                return
+
+
+def look_tel(job_temp):  # 看电视台的视频
+    time.sleep(1)
+    pp.press('back')  # 从我的界面回到APP首页
+    time.sleep(1)
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').wait()  # 点击首页下面的电视台按钮
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click()
+    time.sleep(1)
+    pp(text='看电视').wait()
+    pp(text='看电视').click()
+    time.sleep(1)
+    for i in range(1, 7):
+        t2 = time.time()
+        con = 0
+        while not pp.xpath(f'//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[{i}]').exists:
+            time.sleep(1)
+            pp(scrollable=True).scroll(steps=90)
+            time.sleep(1)
+            if time.time() - t2 > 20:
+                con = 1
+                print(f'定位不到第{i}个视频，跳过')
+                break
+        if con == 1:
+            continue
+        pp.xpath(f'//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[{i}]').click()
+        time.sleep(1)  # 每个视频学习10秒
+        if pp(text='继续播放').exists:
+            pp(text='继续播放').click()
+        time.sleep(10)  # 每个视频学习10秒
+        if job_temp[4] != '已完成':  # 如果没有完成视频学习时长任务，就开始
             t1 = time.time()
-            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]').wait()
-            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]').click()
-            # 看视频
             while True:
-                pp.screen_on()
                 if time.time() - t1 > 180:
                     break
-                time.sleep(5)
-            pp.press('back')
-    pp(text='学习积分').wait()
-    pp(text='学习积分').click()
-    pp(text='积分规则').wait()
-    if pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[4]').get_text() != '已完成':
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').wait()  # 从积分界面返回我的界面
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').click()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').wait()  # 从我的界面回到APP首页
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').click()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').wait()  # 点击首页下面的电视台按钮
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click()
-        video_look('第一频道', 2)
-        video_look('联播频道', 4)
-        time.sleep(2)
+                pp.screen_on()
+                time.sleep(1)
         pp(text='我的').wait()
-        pp(text='我的').click()
-    else:
+        pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click()  # 点击积分,查一下积分完成情况
+        job_temp = job_status()  # 查一下积分完成情况
         time.sleep(1)
-        print('今日学习视频任务已完成')
-        pp.press('back')
+        if job_temp[2] == '已完成':  # 如果学习视频没完成，就开始学习//android.widget.ListView/android.widget.FrameLayout[4]
+            time.sleep(1)
+            pp(text='我的').wait()
+            pp(text='我的').click()
+            print('看视频任务已完成')
+            return
 
 
 def ding_yue():
-    pp(text='学习积分').wait()
-    pp(text='学习积分').click()
-    pp(text='积分规则').wait()
-    if pp.xpath('//android.widget.ListView/android.view.View[10]/android.view.View[4]').get_text() != '已完成':
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').wait()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').click()
-        pp(text='订阅').wait()
-        pp(text='订阅').click()
-        pp(text='添加').wait()
-        pp(text='添加').click()
-        for i in range(3):
-            if pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]/android.widget.LinearLayout[2]')\
-                    .exists:
-                pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]/android.widget.LinearLayout[2]')\
-                    .click()
-                time.sleep(1)
-                pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i+1}]/android.widget.LinearLayout[2]') \
-                    .click()
+    time.sleep(1)
+    pp(text='订阅').wait()
+    pp(text='订阅').click()
+    time.sleep(1)
+    pp(text='添加').wait()
+    pp(text='添加').click()
+    for i in range(8):
+        if pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i + 1}]/android.widget.LinearLayout[2]') \
+                .exists:
+            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i + 1}]/android.widget.LinearLayout[2]') \
+                .click()
             time.sleep(1)
-        pp.press("back")
-        pp(text='我的订阅').wait()
-        pp.press("back")
-    else:
+            pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout[{i + 1}]/android.widget.LinearLayout[2]') \
+                .click()
         time.sleep(1)
-        print('已完成订阅')
-        pp.press('back')
+    print('已完成订阅')
+    pp.press("back")
+    pp(text='我的订阅').wait()
+    pp.press("back")
 
 
 def ben_di():
-    pp(text='学习积分').wait()
-    pp(text='学习积分').click()
-    pp(text='积分规则').wait()
-    if pp.xpath('//android.widget.ListView/android.view.View[14]/android.view.View[4]').get_text() != '已完成':
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').wait()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/back_layout"]').click()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').wait()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/my_back"]').click()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
-                 '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
-                 '1]/android.widget.LinearLayout[4]').wait()
-        pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
-                 '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
-                 '1]/android.widget.LinearLayout[4]').click()
-        pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait()
-        pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click()
-        pp(text='我的').wait()
-        pp(text='我的').click()
-    else:
-        time.sleep(1)
-        print('已完成本地频道')
-        pp.press('back')
+    time.sleep(1)
+    pp.press("back")
+    time.sleep(1)
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
+             '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
+             '1]/android.widget.LinearLayout[4]').wait()
+    pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
+             '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
+             '1]/android.widget.LinearLayout[4]').click()
+    time.sleep(1)
+    pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait()
+    pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click()
+    print('已完成本地频道')
+    time.sleep(1)
+    pp.press('back')
+    pp(text='我的').wait()
+    pp(text='我的').click()
+
+
+def job_status():
+    time.sleep(1)
+    job_status1 = []
+    for j in range(1, 15):
+        while not pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').exists:
+            pp(scrollable=True).scroll(steps=100)
+            time.sleep(1)
+        job_status1.append(pp.xpath(f'//android.widget.ListView/'
+                                    f'android.view.View[{j}]/android.view.View[4]').get_text())
+    pp.press('back')  # 查一下积分完成情况
+    time.sleep(1)
+    return job_status1
 
 
 if __name__ == '__main__':
-    os.system('adb devices')
-    pp = connect()
+    fp = os.popen('adb devices').readlines()
+    if 'List of devices attached' in fp[0] and 'device' in fp[1]:
+        phone_serial = re.search(r'(.*)\t', fp[1]).group().strip()
+    else:
+        phone_serial = None
+    pp = connect(phone_serial)
     pp.unlock()
+    # pp(scrollable=True).scroll(steps=90)
     # print(pp.dump_hierarchy())
     # raise ()
     if 'cn.xuexi.android' in pp.app_list_running():
@@ -361,8 +480,42 @@ if __name__ == '__main__':
     pp.app_start('cn.xuexi.android')
     pp(text='我的').wait()
     pp(text='我的').click()
-    # run_tiao_zhan()
-    # ding_yue()
-    # ben_di()
-    read_issue()
-    read_video()
+    time.sleep(1)
+    pp(description='我的信息').wait()
+    pp(description='我的信息').click()
+    time.sleep(1)
+    learn_num = pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
+                         '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
+                         '/android.widget.TextView[2]').get_text()
+    print('这个手机学习强国的学号是', learn_num)
+    pp.press('back')
+    time.sleep(1)
+    pp(text='学习积分').wait()
+    pp(text='学习积分').click()
+    pp(text='积分规则').wait()
+    job_stat = job_status()
+    pp(text='我的').wait()
+    # read_issue(job_stat)
+    # raise ()
+    if job_stat[1] != '已完成':
+        read_issue(job_stat)
+    else:
+        print('已完成文章阅读')
+    if job_stat[2] != '已完成':
+        # look_tel(job_stat)
+        read_video(job_stat)
+    else:
+        print('已完成视频观看')
+    if job_stat[8] != '已完成':
+        run_tiao_zhan()
+    else:
+        print('已完成挑战答题')
+    if job_stat[9] != '已完成':
+        ding_yue()
+    else:
+        print('已完成订阅')
+    if job_stat[13] != '已完成':
+        ben_di()
+    else:
+        print('已完成本地频道')
+    pp(text='学习积分').click()
