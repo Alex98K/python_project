@@ -6,6 +6,7 @@ import time
 import pytesseract
 import uiautomator2
 from fuzzywuzzy import fuzz, process
+from PIL import Image
 
 
 def connect_phone_usb():
@@ -87,35 +88,63 @@ def do_tiao_zhan_ti(data_ti_ku, duplicate_title):  # 挑战答题主程序，用
         if 'A' in fuz_answer_num:
             pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[0] \
                 .click()
+            if fuz_answer_num == 'ABCD':
+                img_a = pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                 'android.view.View').all()[0].screenshot()
+                r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
+                if 230 > g > 150 > b > 100 > r > 50:
+                    fuz_answer_num = 'A'
+                    print(title, answer, 'A')
             time.sleep(1)
-            if pp(text="结束本局").exists or pp(text="再来一局").exists:
-                fuz_answer_num = fuz_answer_num.replace('A', '')
-            else:
-                fuz_answer_num = fuz_answer_num.replace('B', '').replace('C', '').replace('D', '')
+            # if pp(text="结束本局").exists or pp(text="再来一局").exists:
+            #     fuz_answer_num = fuz_answer_num.replace('A', '')
+            # else:
+            #     fuz_answer_num = fuz_answer_num.replace('B', '').replace('C', '').replace('D', '')
         elif 'B' in fuz_answer_num:
             pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[1] \
                 .click()
+            if fuz_answer_num == 'ABCD':
+                img_b = pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                 'android.view.View').all()[0].screenshot()
+                r, g, b = img_b.resize((1, 1)).getpixel((0, 0))
+                if 230 > g > 150 > b > 100 > r > 50:
+                    fuz_answer_num = 'B'
+                    print(title, answer, 'B')
             time.sleep(1)
-            if pp(text="结束本局").exists or pp(text="再来一局").exists:
-                fuz_answer_num = fuz_answer_num.replace('B', '')
-            else:
-                fuz_answer_num = fuz_answer_num.replace('A', '').replace('C', '').replace('D', '')
+            # if pp(text="结束本局").exists or pp(text="再来一局").exists:
+            #     fuz_answer_num = fuz_answer_num.replace('B', '')
+            # else:
+            #     fuz_answer_num = fuz_answer_num.replace('A', '').replace('C', '').replace('D', '')
         elif 'C' in fuz_answer_num:
             pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[2] \
                 .click()
+            if fuz_answer_num == 'ABCD':
+                img_c = pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                 'android.view.View').all()[0].screenshot()
+                r, g, b = img_c.resize((1, 1)).getpixel((0, 0))
+                if 230 > g > 150 > b > 100 > r > 50:
+                    fuz_answer_num = 'C'
+                    print(title, answer, 'C')
             time.sleep(1)
-            if pp(text="结束本局").exists or pp(text="再来一局").exists:
-                fuz_answer_num = fuz_answer_num.replace('C', '')
-            else:
-                fuz_answer_num = fuz_answer_num.replace('B', '').replace('A', '').replace('D', '')
+            # if pp(text="结束本局").exists or pp(text="再来一局").exists:
+            #     fuz_answer_num = fuz_answer_num.replace('C', '')
+            # else:
+            #     fuz_answer_num = fuz_answer_num.replace('B', '').replace('A', '').replace('D', '')
         elif 'D' in fuz_answer_num:
             pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[3] \
                 .click()
+            if fuz_answer_num == 'ABCD':
+                img_d = pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                 'android.view.View').all()[0].screenshot()
+                r, g, b = img_d.resize((1, 1)).getpixel((0, 0))
+                if 230 > g > 150 > b > 100 > r > 50:
+                    fuz_answer_num = 'D'
+                    print(title, answer, 'D')
             time.sleep(1)
-            if pp(text="结束本局").exists or pp(text="再来一局").exists:
-                fuz_answer_num = fuz_answer_num.replace('D', '')
-            else:
-                fuz_answer_num = fuz_answer_num.replace('B', '').replace('C', '').replace('A', '')
+            # if pp(text="结束本局").exists or pp(text="再来一局").exists:
+            #     fuz_answer_num = fuz_answer_num.replace('D', '')
+            # else:
+            #     fuz_answer_num = fuz_answer_num.replace('B', '').replace('C', '').replace('A', '')
         else:
             print(f'{fuz_title}在记录中没有正确答案')
         data_ti_ku[fuz_index] = [fuz_title, fuz_choose, fuz_answer_num]
@@ -389,6 +418,10 @@ def read_issue(job_temp, test=False):
                              f'/android.widget.ImageView[1]').wait()  # 收藏
                     pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
                              f'/android.widget.ImageView[1]').click()  # 收藏
+                    time.sleep(1)
+                    if pp(text='我知道了').exists:
+                        pp(text='我知道了').click()
+                        time.sleep(1)
                 if job_temp[11] != '已完成':  # 如果没有完成分享任务，就分享及返回
                     pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
                              f'/android.widget.ImageView[2]').wait()  # 分享
@@ -610,7 +643,8 @@ if __name__ == '__main__':
     pp.unlock()
     # print(pp.dump_hierarchy())
     # run_everyday_ti()
-    # raise ()
+    run_tiao_zhan(ti_num=9999)
+    raise ()
     if 'cn.xuexi.android' in pp.app_list_running():
         pp.app_stop('cn.xuexi.android')
     pp.app_start('cn.xuexi.android')
