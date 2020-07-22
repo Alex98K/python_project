@@ -210,6 +210,10 @@ def pic_to_text(ti_shi_pic):
     return ti_shi_word
 
 
+def video_to_text():
+    return 'wwo le qu ge ren a ha ah'
+
+
 def do_everyday_ti():
     pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[1]'
              '/android.view.View[1]/android.view.View[1]/android.view.View').wait()
@@ -226,7 +230,10 @@ def do_everyday_ti():
     # ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
     ti_shi_pic = pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
                           '/android.view.View[2]/android.view.View').screenshot()
-    ti_shi_word = pic_to_text(ti_shi_pic)
+    if video:
+        ti_shi_word = video_to_text()
+    else:
+        ti_shi_word = pic_to_text(ti_shi_pic)
     # print('提示中获取到的关键词是 ', ti_shi_word)
     # raise
     pp.press('back')
@@ -241,7 +248,7 @@ def do_everyday_ti():
                 ti_shi_word_temp = ti_shi_word[:text_len]
                 pp1.set_text(ti_shi_word_temp)
                 ti_shi_word = ti_shi_word.replace(ti_shi_word_temp, '')
-                print(ti_shi_word, ti_shi_word_temp)
+                # print(ti_shi_word, ti_shi_word_temp)
         time.sleep(1)
         if pp(text='确定').exists:
             pp(text='确定').click()
@@ -251,7 +258,7 @@ def do_everyday_ti():
             elif pp(text='完成').exists:
                 pp(text='完成').click()
         else:
-            print('没找到完全匹配的答案，随便填写了')
+            # print('没找到完全匹配的答案，随便填写了')
             for pp2 in pp(className='android.widget.EditText'):
                 pp2.set_text('wolegequashoubuliaole')
             time.sleep(1)
@@ -282,12 +289,12 @@ def do_everyday_ti():
             elif pp(text='完成').exists:
                 pp(text='完成').click()
         else:
-            print('没找到完全匹配的答案，找个最合适的')
+            # print('没找到完全匹配的答案，找个最合适的')
             da_an = str(process.extractOne(ti_shi_word, answer)[0])
             pp(text=da_an).click()
             time.sleep(1)
             if not pp(text='确定').exists:
-                print('这个填空题没法自动答题，手动答题吧')
+                print('这个选择题没法自动答题，手动答题吧')
                 raise
             else:
                 pp(text='确定').wait()
@@ -427,7 +434,7 @@ def read_issue(job_temp, test=False):
             time.sleep(1)
 
 
-def read_video(job_temp, test=False):
+def read_video(test=False):
     try:
         with open(f'data_video_{learn_num}.json', 'r', encoding="UTF-8") as f1:
             data_video = json.load(f1)
@@ -602,8 +609,8 @@ if __name__ == '__main__':
     pp = connect_phone_usb()
     pp.unlock()
     # print(pp.dump_hierarchy())
-    run_everyday_ti()
-    raise ()
+    # run_everyday_ti()
+    # raise ()
     if 'cn.xuexi.android' in pp.app_list_running():
         pp.app_stop('cn.xuexi.android')
     pp.app_start('cn.xuexi.android')
@@ -632,17 +639,17 @@ if __name__ == '__main__':
     else:
         print('已完成文章阅读')
     if job_stat[2] != '已完成':
-        read_video(job_stat)
+        read_video()
     else:
         print('已完成视频观看')
     if job_stat[4] != '已完成':
         look_tel()
     else:
         print('已完成视听时长学习')
-    # if job_stat[5] != '已完成':
-    #     run_everyday_ti(job_stat)
-    # else:
-    #     print('已完成每日答题任务')
+    if job_stat[5] != '已完成':
+        run_everyday_ti()
+    else:
+        print('已完成每日答题任务')
     if job_stat[8] != '已完成':
         run_tiao_zhan()
     else:
