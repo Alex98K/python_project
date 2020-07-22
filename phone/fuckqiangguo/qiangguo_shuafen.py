@@ -6,7 +6,6 @@ import time
 import pytesseract
 import uiautomator2
 from fuzzywuzzy import fuzz, process
-from PIL import Image
 
 
 def connect_phone_usb():
