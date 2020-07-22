@@ -11,10 +11,14 @@ from fuzzywuzzy import fuzz, process
 class FuckQiangGuo(object):
     def __init__(self):
         super(FuckQiangGuo, self).__init__()
+        pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
         self.pp = self.connect_phone_usb()
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
         self.duplicate_title = []
         self.learn_num = None
+        self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
+                                                   "/notification_container_parent']").press('back')
+        self.pp.watcher.start(0.2)
 
     @staticmethod
     def connect_phone_usb():
@@ -56,115 +60,95 @@ class FuckQiangGuo(object):
                               'android.view.View[1]/android.view.View[2]/android.view.View[1]/'
                               'android.view.View[1]').get_text()  # 匹配标题
         title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(title).replace('\xa0', '').replace('_', ''))  # 清洗，除去字符等
-        answer = [ans.text for ans in
-                  self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android'
-                                '.view.View').all()]
-        fuz_title = None
-        fuz_choose = None
-        fuz_answer_num = None
-        fuz_index = None
-        for index, num in enumerate(data_ti_ku):
-            if title in self.duplicate_title and title == num[0] and answer == num[1]:
+        answer = [ans.text for ans in self.pp.xpath('//android.widget.ListView//android.view.View/'
+                                                    'android.view.View/android.view.View').all()]  # 获取答案选项列表
+        fuz_title = None  # 匹配的标题
+        fuz_choose = None  # 匹配的答案选项
+        fuz_answer_num = None  # 匹配的题库中的选项
+        fuz_index = None  # 匹配的题目在题库列表中的索引
+        for index, num in enumerate(data_ti_ku):  # 匹配题库
+            if title in self.duplicate_title and title == num[0] and answer == num[1]:  # 标题在重复列表中的，标题和选项全一样的才能算匹配到
                 fuz_index = index
                 fuz_title = num[0]
                 fuz_choose = num[1]
                 fuz_answer_num = num[2]
                 break
-            elif title not in self.duplicate_title and title == num[0]:
+            elif title not in self.duplicate_title and title == num[0]:  # 标题不在重复列表中的，标题一样就算匹配到了
                 fuz_index = index
                 fuz_title = num[0]
                 fuz_choose = num[1]
                 fuz_answer_num = num[2]
                 break
-        new_title_sign = 0
+        new_title_sign = 0  # 新标题标记
         if fuz_title is None:  # 没有匹配到
             print('*****没有匹配到题目', title, answer, '记录下来，答案预先设为ABCD')
             data_ti_ku.append([title, answer, 'ABCD'])
-            with open('ti_ku_verify.json', 'w', encoding='UTF-8') as f2:
-                json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
         elif fuz_choose != answer:  # 找到了和原来题目一样，但是选项不一样的题
             print(f'*****找到题目和存储的一样***{title}-{fuz_title}***，但是选项{fuz_choose}-{answer}不一样')
             data_ti_ku.append([title, answer, 'ABCD'])
-            self.duplicate_title = list(set(self.duplicate_title.append(fuz_title)))
-            with open('ti_ku_verify.json', 'w', encoding='UTF-8') as f2:
-                json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
+            self.duplicate_title.append(fuz_title)
+            self.duplicate_title = list(set(self.duplicate_title))
         else:  # 匹配到了
             # print('匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
             if len(fuz_answer_num) > 1:
                 new_title_sign = 1
-                self.duplicate_title = list(set(self.duplicate_title.append(fuz_title)))
                 print('新加入的题匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
             if 'A' in fuz_answer_num:
-                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[
-                    0] \
-                    .click()
+                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                              'android.view.View').all()[0].click()
                 if fuz_answer_num == 'ABCD':
-                    img_a = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
-                                          'android.view.View').all()[0].screenshot()
-                    r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
-                    if 230 > g > 150 > b > 100 > r > 50:
-                        fuz_answer_num = 'A'
-                        print(title, answer, 'A')
-                time.sleep(1)
-                # if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
-                #     fuz_answer_num = fuz_answer_num.replace('A', '')
-                # else:
-                #     fuz_answer_num = fuz_answer_num.replace('B', '').replace('C', '').replace('D', '')
+                    for k in range(4):
+                        img_a = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                              'android.view.View').all()[k].screenshot()
+                        r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
+                        if 230 > g > 150 > b > 100 > r > 50:
+                            fuz_answer_num = 'ABCD'[k]
+                            print(title, answer, fuz_answer_num)
+                            break
             elif 'B' in fuz_answer_num:
-                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[
-                    1] \
-                    .click()
+                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                              'android.view.View').all()[1].click()
                 if fuz_answer_num == 'ABCD':
-                    img_b = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
-                                          'android.view.View').all()[0].screenshot()
-                    r, g, b = img_b.resize((1, 1)).getpixel((0, 0))
-                    if 230 > g > 150 > b > 100 > r > 50:
-                        fuz_answer_num = 'B'
-                        print(title, answer, 'B')
-                time.sleep(1)
-                # if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
-                #     fuz_answer_num = fuz_answer_num.replace('B', '')
-                # else:
-                #     fuz_answer_num = fuz_answer_num.replace('A', '').replace('C', '').replace('D', '')
+                    for k in range(4):
+                        img_a = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                              'android.view.View').all()[k].screenshot()
+                        r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
+                        if 230 > g > 150 > b > 100 > r > 50:
+                            fuz_answer_num = 'ABCD'[k]
+                            print(title, answer, fuz_answer_num)
+                            break
             elif 'C' in fuz_answer_num:
-                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[
-                    2] \
-                    .click()
+                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                              'android.view.View').all()[2].click()
                 if fuz_answer_num == 'ABCD':
-                    img_c = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
-                                          'android.view.View').all()[0].screenshot()
-                    r, g, b = img_c.resize((1, 1)).getpixel((0, 0))
-                    if 230 > g > 150 > b > 100 > r > 50:
-                        fuz_answer_num = 'C'
-                        print(title, answer, 'C')
-                time.sleep(1)
-                # if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
-                #     fuz_answer_num = fuz_answer_num.replace('C', '')
-                # else:
-                #     fuz_answer_num = fuz_answer_num.replace('B', '').replace('A', '').replace('D', '')
+                    for k in range(4):
+                        img_a = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                              'android.view.View').all()[k].screenshot()
+                        r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
+                        if 230 > g > 150 > b > 100 > r > 50:
+                            fuz_answer_num = 'ABCD'[k]
+                            print(title, answer, fuz_answer_num)
+                            break
             elif 'D' in fuz_answer_num:
-                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all()[
-                    3] \
-                    .click()
+                self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                              'android.view.View').all()[3].click()
                 if fuz_answer_num == 'ABCD':
-                    img_d = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
-                                          'android.view.View').all()[0].screenshot()
-                    r, g, b = img_d.resize((1, 1)).getpixel((0, 0))
-                    if 230 > g > 150 > b > 100 > r > 50:
-                        fuz_answer_num = 'D'
-                        print(title, answer, 'D')
-                time.sleep(1)
-                # if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
-                #     fuz_answer_num = fuz_answer_num.replace('D', '')
-                # else:
-                #     fuz_answer_num = fuz_answer_num.replace('B', '').replace('C', '').replace('A', '')
+                    for k in range(4):
+                        img_a = self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
+                                              'android.view.View').all()[k].screenshot()
+                        r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
+                        if 230 > g > 150 > b > 100 > r > 50:
+                            fuz_answer_num = 'ABCD'[k]
+                            print(title, answer, fuz_answer_num)
+                            break
             else:
                 print(f'{fuz_title}在记录中没有正确答案,')
                 fuz_answer_num = 'ABCD'
             data_ti_ku[fuz_index] = [fuz_title, fuz_choose, fuz_answer_num]
-            if new_title_sign == 1:
+            if new_title_sign == 1:  # 如果是新标题的题，就保存一下
                 with open('ti_ku_verify.json', 'w', encoding='UTF-8') as f2:
                     json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
+            time.sleep(1)
             if not (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists):
                 return True
             else:
@@ -569,6 +553,8 @@ class FuckQiangGuo(object):
             time.sleep(1)  # 每个视频学习
             if self.pp(text='继续播放').exists:
                 self.pp(text='继续播放').click()
+            if self.pp(text='点击播放').exists:
+                self.pp(text='点击播放').click()
             t1 = time.time()
             while True:
                 if time.time() - t1 > 180:
@@ -593,19 +579,16 @@ class FuckQiangGuo(object):
         self.pp(text='添加').wait()
         self.pp(text='添加').click()
         time.sleep(1)
-        for i in self.pp.xpath(f'//android.widget.ListView//android.widget.FrameLayout'
-                               f'/android.widget.LinearLayout[2]/android.widget.ImageView[1]').all():
-            if i.attrib['content-desc'] == '订阅':
-                i.click()
+        while True:
+            if self.pp(description="订阅").count <= 1:
+                self.pp(scrollable=True).scroll.to(description="订阅")
                 time.sleep(1)
-                i.click()
             else:
-                i.click()
-                time.sleep(1)
-                i.click()
-                time.sleep(1)
-                i.click()
-            time.sleep(1)
+                break
+        self.pp(description="订阅").click()
+        time.sleep(1)
+        self.pp(description="订阅").click()
+        time.sleep(1)
         print('已完成订阅')
         self.pp.press("back")
         self.pp(text='我的订阅').wait()
@@ -643,36 +626,37 @@ class FuckQiangGuo(object):
         time.sleep(1)
         return job_status1
 
+    def get_learn_num(self):
+        self.pp(description='我的信息').wait()
+        self.pp(description='我的信息').click()
+        time.sleep(1)
+        learn_num = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
+                                  '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
+                                  '/android.widget.TextView[2]').get_text()
+        print('这个手机学习强国的学号是', self.learn_num)
+        self.pp.press('back')
+        time.sleep(1)
+        return learn_num
+
     def main_do(self):  # 主运行程序
-        pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
         self.pp.unlock()
         # print(self.pp.dump_hierarchy())
         # run_everyday_ti()
-        # self.run_tiao_zhan(ti_num=9999)
-        # raise ()
+        self.run_tiao_zhan(ti_num=9999)
+        raise ()
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
         self.pp(text='我的').wait()
         self.pp(text='我的').click()
         time.sleep(1)
-        self.pp(description='我的信息').wait()
-        self.pp(description='我的信息').click()
-        time.sleep(1)
-        self.learn_num = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
-                                       '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
-                                       '/android.widget.TextView[2]').get_text()
-        print('这个手机学习强国的学号是', self.learn_num)
-        self.pp.press('back')
-        time.sleep(1)
+        self.learn_num = self.get_learn_num()
         self.pp(text='学习积分').wait()
         self.pp(text='学习积分').click()
         self.pp(text='积分规则').wait()
         job_stat = self.job_status()
         self.pp(text='我的').wait()
         print(job_stat)
-        # look_tel()
-        # raise ()
         if job_stat[1] != '已完成':
             self.read_issue(job_stat)
         else:
@@ -681,10 +665,6 @@ class FuckQiangGuo(object):
             self.read_video()
         else:
             print('已完成视频观看')
-        if job_stat[4] != '已完成':
-            self.look_tel()
-        else:
-            print('已完成视听时长学习')
         if job_stat[5] != '已完成':
             self.run_everyday_ti()
         else:
@@ -701,6 +681,10 @@ class FuckQiangGuo(object):
             self.ben_di()
         else:
             print('已完成本地频道')
+        if job_stat[4] != '已完成':
+            self.look_tel()
+        else:
+            print('已完成视听时长学习')
         self.pp(text='学习积分').click()
 
 

@@ -1,15 +1,10 @@
 from fuzzywuzzy import fuzz, process
-from tiaozhantiku import *
 import json
 
 all_title = []
 all_answer = []
 new_question = [1]
 new_answer = [1]
-for i in range(len(all_tiaozhan)):
-    all_title.append(all_tiaozhan[i]["title"])
-    all_answer.append(all_tiaozhan[i]["answer"])
-
 
 print(len(all_title))
 print(len(all_answer))
@@ -41,8 +36,6 @@ with open('data.json', 'w', encoding='utf-8') as f:
 # Reading data back
 # with open('data.json', 'r') as f:
 #     data = json.load(f)
-
-
 
 
 # find_title = process.extractOne(str1, all_title)
