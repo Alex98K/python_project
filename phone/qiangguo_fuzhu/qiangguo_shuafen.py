@@ -11,6 +11,7 @@ from fuzzywuzzy import fuzz, process
 class QiangGuoFuZhu(object):
     def __init__(self, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
+        self.path = os.path.abspath(os.path.dirname(__file__))
         pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
         self.pp = self.connect_phone_usb()
         # self.pp = uiautomator2.connect_wifi('192.168.1.218')
@@ -156,7 +157,7 @@ class QiangGuoFuZhu(object):
                 pass
             data_ti_ku[fuz_index] = [fuz_title, fuz_choose, fuz_answer_num]  # 只要匹配到题了，就更新下题目和答案以及选项
             if new_title_sign == 1:  # 如果是新标题的题，就保存一下
-                with open('ti_ku_verify.json', 'w', encoding='UTF-8') as f2:
+                with open(os.path.join(self.path, 'ti_ku_verify.json'), 'w', encoding='UTF-8') as f2:
                     json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
             time.sleep(1)
             if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
@@ -169,7 +170,7 @@ class QiangGuoFuZhu(object):
         self.pp(text='我要答题').click()
         self.pp(text='挑战答题').wait()
         self.pp(text='挑战答题').click()
-        with open('ti_ku_verify.json', 'r', encoding="UTF-8") as f1:
+        with open(os.path.join(self.path, 'ti_ku_verify.json'), 'r', encoding="UTF-8") as f1:
             data_ti_ku = json.load(f1)
         for ij, j1 in enumerate(data_ti_ku):
             for ik, k in enumerate(data_ti_ku):
@@ -364,7 +365,7 @@ class QiangGuoFuZhu(object):
 
     def read_issue(self, job_temp, test=False):
         try:
-            with open(f'data_issue_{self.learn_num}.json', 'r', encoding="UTF-8") as f1:
+            with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'), 'r', encoding="UTF-8") as f1:
                 data_issue = json.load(f1)
         except FileNotFoundError:
             data_issue = []
@@ -401,7 +402,7 @@ class QiangGuoFuZhu(object):
                         continue
                     print('正在看', t.text, title)
                     data_issue.append(title)
-                    with open(f'data_issue_{self.learn_num}.json', 'w', encoding='UTF-8') as f2:
+                    with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'), 'w', encoding='UTF-8') as f2:
                         json.dump(data_issue, f2, ensure_ascii=False, indent=2)
                     time.sleep(10)  # 每个文章学习七秒
                     if job_temp[3] != '已完成':  # 如果没有完成文章学习时长任务，就开始
@@ -469,7 +470,7 @@ class QiangGuoFuZhu(object):
 
     def read_video(self, test=False):
         try:
-            with open(f'data_video_{self.learn_num}.json', 'r', encoding="UTF-8") as f1:
+            with open(os.path.join(self.path, f'data_video_{self.learn_num}.json'), 'r', encoding="UTF-8") as f1:
                 data_video = json.load(f1)
         except FileNotFoundError:
             data_video = []
@@ -507,7 +508,7 @@ class QiangGuoFuZhu(object):
                         continue
                     print('正在看', t.text, title)
                     data_video.append(title)
-                    with open(f'data_video_{self.learn_num}.json', 'w', encoding='UTF-8') as f2:
+                    with open(os.path.join(self.path, f'data_video_{self.learn_num}.json'), 'w', encoding='UTF-8') as f2:
                         json.dump(data_video, f2, ensure_ascii=False, indent=2)
                     time.sleep(1)  # 每个视频学习10秒
                     if self.pp(text='继续播放').exists:
