@@ -8,9 +8,9 @@ import uiautomator2
 from fuzzywuzzy import fuzz, process
 
 
-class FuckQiangGuo(object):
+class QiangGuoFuZhu(object):
     def __init__(self):
-        super(FuckQiangGuo, self).__init__()
+        super(QiangGuoFuZhu, self).__init__()
         pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
         self.pp = self.connect_phone_usb()
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
@@ -144,15 +144,24 @@ class FuckQiangGuo(object):
             else:
                 print(f'{fuz_title}在记录中没有正确答案,')
                 fuz_answer_num = 'ABCD'
-            data_ti_ku[fuz_index] = [fuz_title, fuz_choose, fuz_answer_num]
+            dui_num = 0
+            try:  # 获取连续做对题的数目，然后返回结果
+                dui_num = self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/'
+                                        'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                        'android.view.View[1]/android.view.View').get(timeout=0.1)
+                dui_num = re.search(r'连续答对X(\d*)', dui_num.text).group(1)
+            except uiautomator2.exceptions.XPathElementNotFoundError:
+                pass
+            data_ti_ku[fuz_index] = [fuz_title, fuz_choose, fuz_answer_num]  # 只要匹配到题了，就更新下题目和答案以及选项
             if new_title_sign == 1:  # 如果是新标题的题，就保存一下
                 with open('ti_ku_verify.json', 'w', encoding='UTF-8') as f2:
                     json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
             time.sleep(1)
             if not (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists):
-                return True
+                return dui_num
             else:
-                return False
+                print(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到题了，但是答错了，请核实答案')
+                return dui_num
 
     def run_tiao_zhan(self, ti_num=10):
         time.sleep(1)
@@ -169,18 +178,16 @@ class FuckQiangGuo(object):
         self.duplicate_title = list(set(self.duplicate_title))
         dui_num = 0
         while True:
-            res = None
             try:
-                res = self.do_tiao_zhan_ti(data_ti_ku)
+                dui_num = self.do_tiao_zhan_ti(data_ti_ku)
+                print('已经连续做对{}道题'.format(dui_num))
             except uiautomator2.exceptions.UiObjectNotFoundError:
                 pass
-            except Exception as e:
-                print(e)
-            if res:
-                dui_num += 1
-            else:
-                dui_num = 0
-            if dui_num == ti_num:
+            except uiautomator2.exceptions.XPathElementNotFoundError:
+                pass
+            # except Exception as e:
+            #     print(e)
+            if dui_num >= ti_num:
                 time.sleep(30)
                 self.pp(text='结束本局').wait()
                 self.pp(text='结束本局').click()
@@ -689,5 +696,5 @@ class FuckQiangGuo(object):
 
 
 if __name__ == '__main__':
-    do = FuckQiangGuo()
+    do = QiangGuoFuZhu()
     do.main_do()
