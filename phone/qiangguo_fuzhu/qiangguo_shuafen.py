@@ -9,13 +9,15 @@ from fuzzywuzzy import fuzz, process
 
 
 class QiangGuoFuZhu(object):
-    def __init__(self):
+    def __init__(self, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
-        pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
+        pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
         self.pp = self.connect_phone_usb()
+        # self.pp = uiautomator2.connect_wifi('192.168.1.218')
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
         self.duplicate_title = []
         self.learn_num = None
+        # 注册watcher，如果顶部的快捷栏被无意间滑下来了，就自动返回，划上去
         self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
                                                    "/notification_container_parent']").press('back')
         self.pp.watcher.start(0.2)
@@ -149,7 +151,7 @@ class QiangGuoFuZhu(object):
                 dui_num = self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/'
                                         'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
                                         'android.view.View[1]/android.view.View').get(timeout=0.1)
-                dui_num = re.search(r'连续答对X(\d*)', dui_num.text).group(1)
+                dui_num = int(re.search(r'连续答对X(\d*)', dui_num.text).group(1))
             except uiautomator2.exceptions.XPathElementNotFoundError:
                 pass
             data_ti_ku[fuz_index] = [fuz_title, fuz_choose, fuz_answer_num]  # 只要匹配到题了，就更新下题目和答案以及选项
@@ -157,11 +159,9 @@ class QiangGuoFuZhu(object):
                 with open('ti_ku_verify.json', 'w', encoding='UTF-8') as f2:
                     json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
             time.sleep(1)
-            if not (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists):
-                return dui_num
-            else:
+            if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
                 print(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到题了，但是答错了，请核实答案')
-                return dui_num
+            return dui_num
 
     def run_tiao_zhan(self, ti_num=10):
         time.sleep(1)
@@ -180,7 +180,7 @@ class QiangGuoFuZhu(object):
         while True:
             try:
                 dui_num = self.do_tiao_zhan_ti(data_ti_ku)
-                print('已经连续做对{}道题'.format(dui_num))
+                print('已经连续做对{}道挑战答题的题'.format(dui_num))
             except uiautomator2.exceptions.UiObjectNotFoundError:
                 pass
             except uiautomator2.exceptions.XPathElementNotFoundError:
@@ -640,7 +640,7 @@ class QiangGuoFuZhu(object):
         learn_num = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
                                   '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
                                   '/android.widget.TextView[2]').get_text()
-        print('这个手机学习强国的学号是', self.learn_num)
+        print('这个手机学习强国的学号是', learn_num)
         self.pp.press('back')
         time.sleep(1)
         return learn_num
@@ -648,10 +648,7 @@ class QiangGuoFuZhu(object):
     def main_do(self, test=False):  # 主运行程序
         self.pp.unlock()
         if test:
-            # print(self.pp.dump_hierarchy())
-            # run_everyday_ti()
-            self.run_tiao_zhan(ti_num=9999)
-            raise ()
+            self.test_pro()
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
@@ -695,7 +692,16 @@ class QiangGuoFuZhu(object):
             print('已完成视听时长学习')
         self.pp(text='学习积分').click()
 
+    def test_pro(self):  # 测试专用程序
+        # print(self.pp.dump_hierarchy())
+        # run_everyday_ti()
+        self.run_tiao_zhan(ti_num=9999)
+        raise ()
+
 
 if __name__ == '__main__':
+    # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
+    # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    do.main_do(test=True)
+    # do.main_do(test=True)
+    do.main_do()
