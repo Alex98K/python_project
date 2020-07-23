@@ -20,8 +20,11 @@ class QiangGuoFuZhu(object):
         self.learn_num = None
         # 注册watcher，如果顶部的快捷栏被无意间滑下来了，就自动返回，划上去
         self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
-                                                   "/notification_container_parent']").press('back')
+                                                   "/notification_container_parent']").call(self.call_back)
         self.pp.watcher.start(0.2)
+
+    def call_back(self):
+        self.pp(resourceId="com.android.systemui:id/notification_container_parent").scroll.vert.forward(steps=10)
 
     @staticmethod
     def connect_phone_usb():
@@ -181,7 +184,7 @@ class QiangGuoFuZhu(object):
         while True:
             try:
                 dui_num = self.do_tiao_zhan_ti(data_ti_ku)
-                print('已经连续做对{}道挑战答题的题'.format(dui_num))
+                # print('已经连续做对{}道挑战答题的题'.format(dui_num))
             except uiautomator2.exceptions.UiObjectNotFoundError:
                 pass
             except uiautomator2.exceptions.XPathElementNotFoundError:
@@ -716,5 +719,5 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    # do.main_do(test=True)
-    do.main_do()
+    do.main_do(test=True)
+    # do.main_do()
