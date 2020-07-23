@@ -40,10 +40,10 @@ class QiangGuoFuZhu(object):
             phone = uiautomator2.connect_usb(phone_serial)
             return phone
         except ConnectionError:
-            print('连接手机失败')
+            print('连接手机失败, 请拔了USB线，重新插入')
             raise ()
         except RuntimeError:
-            print('连接手机失败')
+            print('连接手机失败, 请拔了USB线，重新插入')
             raise ()
 
     def do_tiao_zhan_ti(self, data_ti_ku):  # 挑战答题主程序，用来做一个题
@@ -402,7 +402,8 @@ class QiangGuoFuZhu(object):
                         continue
                     print('正在看', t.text, title)
                     data_issue.append(title)
-                    with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'), 'w', encoding='UTF-8') as f2:
+                    with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'),
+                              'w', encoding='UTF-8') as f2:
                         json.dump(data_issue, f2, ensure_ascii=False, indent=2)
                     time.sleep(10)  # 每个文章学习七秒
                     if job_temp[3] != '已完成':  # 如果没有完成文章学习时长任务，就开始
@@ -508,7 +509,8 @@ class QiangGuoFuZhu(object):
                         continue
                     print('正在看', t.text, title)
                     data_video.append(title)
-                    with open(os.path.join(self.path, f'data_video_{self.learn_num}.json'), 'w', encoding='UTF-8') as f2:
+                    with open(os.path.join(self.path, f'data_video_{self.learn_num}.json'),
+                              'w', encoding='UTF-8') as f2:
                         json.dump(data_video, f2, ensure_ascii=False, indent=2)
                     time.sleep(1)  # 每个视频学习10秒
                     if self.pp(text='继续播放').exists:
@@ -579,7 +581,7 @@ class QiangGuoFuZhu(object):
                 print('看视频任务已完成')
                 return
 
-    def ding_yue(self):
+    def do_ding_yue(self):
         time.sleep(1)
         self.pp(text='订阅').wait()
         self.pp(text='订阅').click()
@@ -588,8 +590,8 @@ class QiangGuoFuZhu(object):
         self.pp(text='添加').click()
         time.sleep(1)
         while True:
-            if self.pp(description="订阅").count <= 1:
-                self.pp(scrollable=True).scroll.to(description="订阅")
+            if self.pp(description="订阅").count <= 3:
+                self.pp(scrollable=True).scroll(steps=150)
                 time.sleep(1)
             else:
                 break
@@ -601,6 +603,17 @@ class QiangGuoFuZhu(object):
         self.pp.press("back")
         self.pp(text='我的订阅').wait()
         self.pp.press("back")
+
+    def run_ding_yue(self, job_stat):
+        while True:
+            if job_stat[9] != '已完成':
+                self.do_ding_yue()
+                time.sleep(1)
+                self.pp(text='学习积分').wait()
+                self.pp(text='学习积分').click()
+                job_stat = self.job_status()
+            else:
+                break
 
     def ben_di(self):
         time.sleep(1)
@@ -662,7 +675,14 @@ class QiangGuoFuZhu(object):
         self.pp(text='积分规则').wait()
         job_stat = self.job_status()
         self.pp(text='我的').wait()
-        # print(job_stat)
+        if job_stat[9] != '已完成':
+            self.run_ding_yue(job_stat)
+        else:
+            print('已完成订阅')
+        if job_stat[13] != '已完成':
+            self.ben_di()
+        else:
+            print('已完成本地频道')
         if job_stat[1] != '已完成':
             self.read_issue(job_stat)
         else:
@@ -679,14 +699,6 @@ class QiangGuoFuZhu(object):
             self.run_tiao_zhan()
         else:
             print('已完成挑战答题')
-        if job_stat[9] != '已完成':
-            self.ding_yue()
-        else:
-            print('已完成订阅')
-        if job_stat[13] != '已完成':
-            self.ben_di()
-        else:
-            print('已完成本地频道')
         if job_stat[4] != '已完成':
             self.look_tel()
         else:
