@@ -645,12 +645,13 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         return learn_num
 
-    def main_do(self):  # 主运行程序
+    def main_do(self, test=False):  # 主运行程序
         self.pp.unlock()
-        # print(self.pp.dump_hierarchy())
-        # run_everyday_ti()
-        self.run_tiao_zhan(ti_num=9999)
-        raise ()
+        if test:
+            # print(self.pp.dump_hierarchy())
+            # run_everyday_ti()
+            self.run_tiao_zhan(ti_num=9999)
+            raise ()
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
@@ -663,7 +664,7 @@ class QiangGuoFuZhu(object):
         self.pp(text='积分规则').wait()
         job_stat = self.job_status()
         self.pp(text='我的').wait()
-        print(job_stat)
+        # print(job_stat)
         if job_stat[1] != '已完成':
             self.read_issue(job_stat)
         else:
@@ -697,4 +698,4 @@ class QiangGuoFuZhu(object):
 
 if __name__ == '__main__':
     do = QiangGuoFuZhu()
-    do.main_do()
+    do.main_do(test=True)
