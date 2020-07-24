@@ -706,7 +706,9 @@ class QiangGuoFuZhu(object):
             self.look_tel()
         else:
             print('已完成视听时长学习')
-        self.pp(text='学习积分').click()
+        # self.pp(text='学习积分').click()
+        if 'cn.xuexi.android' in self.pp.app_list_running():
+            self.pp.app_stop('cn.xuexi.android')
 
     def test_pro(self):  # 测试专用程序
         # print(self.pp.dump_hierarchy())
