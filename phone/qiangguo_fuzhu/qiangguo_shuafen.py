@@ -719,5 +719,5 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    do.main_do(test=True)
-    # do.main_do()
+    # do.main_do(test=True)
+    do.main_do()
