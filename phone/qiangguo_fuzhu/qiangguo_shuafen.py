@@ -231,12 +231,17 @@ class QiangGuoFuZhu(object):
                 for h in range(int(height / pic_text_num)):
                     color = img.getpixel((w, h))
                     if color[0] > 150 and color[1] < 140 and color[2] < 140:
-                        pass
+                        img.putpixel((w, h), (0, 0, 0))
                     else:
                         img.putpixel((w, h), (255, 255, 255))
+            # img.resize((img.size[0]*5, img.size[1]*5))
             # img.show()
+            # print(img.size)
             pic_str = pytesseract.image_to_string(img, lang='chi_sim')
+            # pic_str = pytesseract.image_to_boxes(img, lang='chi_sim')
+            # print(pic_str)
             pic_str = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(pic_str).replace('\xa0', '').replace('_', ''))
+            # print(pic_str)
             # if not pic_str:
             #     img.save(f'{split_height} {kuai_num}.png')
             # print(pic_str)
@@ -258,15 +263,17 @@ class QiangGuoFuZhu(object):
         self.pp(text='查看提示').wait()
         self.pp(text='查看提示').click()
         time.sleep(1)
-        # ti_shi = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
-        #                   '/android.view.View[2]/android.view.View').get_text()
-        # ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
+        ti_shi = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
+                          '/android.view.View[2]/android.view.View').get_text()
+        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
         ti_shi_pic = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
                                    '/android.view.View[2]/android.view.View').screenshot()
         if video:
             ti_shi_word = self.video_to_text()
         else:
             ti_shi_word = self.pic_to_text(ti_shi_pic)
+            if ti_shi_word not in ti_shi:
+                print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
         # print('提示中获取到的关键词是 ', ti_shi_word)
         # raise
         self.pp.press('back')
@@ -706,14 +713,12 @@ class QiangGuoFuZhu(object):
             self.look_tel()
         else:
             print('已完成视听时长学习')
-        # self.pp(text='学习积分').click()
-        if 'cn.xuexi.android' in self.pp.app_list_running():
-            self.pp.app_stop('cn.xuexi.android')
+        self.pp(text='学习积分').click()
 
     def test_pro(self):  # 测试专用程序
         # print(self.pp.dump_hierarchy())
-        # run_everyday_ti()
-        self.run_tiao_zhan(ti_num=9999)
+        self.run_everyday_ti()
+        # self.run_tiao_zhan(ti_num=9999)
         raise ()
 
 
@@ -721,5 +726,5 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    # do.main_do(test=True)
-    do.main_do()
+    do.main_do(test=True)
+    # do.main_do()
