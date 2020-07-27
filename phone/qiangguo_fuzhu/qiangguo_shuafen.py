@@ -23,6 +23,12 @@ class QiangGuoFuZhu(object):
                                                    "/notification_container_parent']").call(self.call_back)
         self.pp.watcher.start(0.2)
 
+    def __del__(self):
+        try:
+            self.pp.watcher.stop()
+        except AttributeError:
+            pass
+
     def call_back(self):
         self.pp(resourceId="com.android.systemui:id/notification_container_parent").scroll.vert.forward(steps=10)
 
@@ -409,7 +415,7 @@ class QiangGuoFuZhu(object):
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
-                        print(f'{t.text} 第{isu}个文章标题获取出错，跳过')
+                        print(f'{t.text} 第{isu+1}个文章标题获取出错，跳过')
                         continue
                     if title in data_issue:
                         self.pp.press('back')
@@ -422,7 +428,7 @@ class QiangGuoFuZhu(object):
                               'w', encoding='UTF-8') as f2:
                         json.dump(data_issue, f2, ensure_ascii=False, indent=2)
                     time.sleep(10)  # 每个文章学习七秒
-                    if job_temp[3][0] != '已完成':  # 如果没有完成文章学习时长任务，就开始
+                    if job_temp[3][0] != '已完成' and need_time_num > 0:  # 如果没有完成文章学习时长任务，就开始
                         t1 = time.time()
                         while True:
                             if time.time() - t1 > 110:
@@ -432,7 +438,7 @@ class QiangGuoFuZhu(object):
                             self.pp(scrollable=True).scroll.vert.backward(steps=random.randint(110, 130))
                             time.sleep(1)
                         need_time_num -= 1
-                    if job_temp[10][0] != '已完成':  # 如果没有完成收藏任务，就开始
+                    if job_temp[10][0] != '已完成' and need_collection_num > 0:  # 如果没有完成收藏任务，就开始
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
                                       f'/android.widget.ImageView[1]').wait()  # 收藏
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
@@ -442,7 +448,7 @@ class QiangGuoFuZhu(object):
                             self.pp(text='我知道了').click()
                             time.sleep(1)
                         need_collection_num -= 1
-                    if job_temp[11][0] != '已完成':  # 如果没有完成分享任务，就分享及返回
+                    if job_temp[11][0] != '已完成' and need_share_num > 0:  # 如果没有完成分享任务，就分享及返回
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
                                       f'/android.widget.ImageView[2]').wait()  # 分享
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
@@ -457,7 +463,7 @@ class QiangGuoFuZhu(object):
                             time.sleep(1)
                         time.sleep(1)
                         need_share_num -= 1
-                    if job_temp[12][0] != '已完成':  # 如果没有完成评论任务，就开始评论，之后删除评论
+                    if job_temp[12][0] != '已完成' and need_comment_num > 0:  # 如果没有完成评论任务，就开始评论，之后删除评论
                         self.pp(text="欢迎发表你的观点").click()  # 评论
                         self.pp(text="好观点将会被优先展示").wait()  # 评论
                         self.pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
@@ -737,7 +743,8 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         # print(self.pp.dump_hierarchy())
-        self.run_everyday_ti()
+        self.pp(resourceId="com.android.systemui:id/backgroundNormal").scroll.vert.forward(steps=10)
+        # self.run_everyday_ti()
         # self.run_tiao_zhan(ti_num=9999)
         raise ()
 
@@ -748,3 +755,4 @@ if __name__ == '__main__':
     do = QiangGuoFuZhu()
     # do.main_do(test=True)
     do.main_do()
+    do.__del__()
