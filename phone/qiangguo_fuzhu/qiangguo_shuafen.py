@@ -3,9 +3,10 @@ import os
 import random
 import re
 import time
+
 import pytesseract
 import uiautomator2
-from fuzzywuzzy import fuzz, process
+from fuzzywuzzy import process
 
 
 class QiangGuoFuZhu(object):
@@ -319,12 +320,13 @@ class QiangGuoFuZhu(object):
                         self.pp(text='下一题').click()
                     elif self.pp(text='完成').exists:
                         self.pp(text='完成').click()
-        else:
+        else:  # 选择题
+            ti_shi_word = ti_shi
             answer = []
             for choose in self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View[1]'
                                         '/android.view.View[2]').all():
-                answer.append(choose.text)
-                if choose.text in ti_shi_word or fuzz.partial_ratio(choose.text, ti_shi_word) > 90:
+                answer.append(re.sub(r'[^\w\u4e00-\u9fa5]', '', str(choose.text).replace('\xa0', '').replace('_', '')))
+                if choose.text in ti_shi_word:
                     choose.click()
             time.sleep(1)
             if self.pp(text='确定').exists:
@@ -740,11 +742,12 @@ class QiangGuoFuZhu(object):
         else:
             print('已完成视听时长学习')
         self.pp(text='学习积分').click()
+        self.__del__()
 
     def test_pro(self):  # 测试专用程序
         # print(self.pp.dump_hierarchy())
-        self.pp(resourceId="com.android.systemui:id/backgroundNormal").scroll.vert.forward(steps=10)
-        # self.run_everyday_ti()
+        # self.pp(resourceId="com.android.systemui:id/backgroundNormal").scroll.vert.forward(steps=10)
+        self.run_everyday_ti()
         # self.run_tiao_zhan(ti_num=9999)
         raise ()
 
@@ -753,6 +756,5 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    # do.main_do(test=True)
-    do.main_do()
-    do.__del__()
+    do.main_do(test=True)
+    # do.main_do()
