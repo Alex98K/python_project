@@ -320,7 +320,7 @@ class QiangGuoFuZhu(object):
                         self.pp(text='下一题').click()
                     elif self.pp(text='完成').exists:
                         self.pp(text='完成').click()
-        else:  # 选择题12
+        else:  # 选择题1
             ti_shi_word = ti_shi
             answer = []
             for choose in self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View[1]'
