@@ -190,7 +190,9 @@ class QiangGuoFuZhu(object):
         dui_num = 0
         while True:
             try:
-                dui_num = self.do_tiao_zhan_ti(data_ti_ku)
+                temp = self.do_tiao_zhan_ti(data_ti_ku)
+                if temp:
+                    dui_num = temp
                 # print('已经连续做对{}道挑战答题的题'.format(dui_num))
             except uiautomator2.exceptions.UiObjectNotFoundError:
                 pass
@@ -232,6 +234,8 @@ class QiangGuoFuZhu(object):
                 pass
         # raise
         ti_shi_word = ''
+        # ti_shi_pic.show()
+        # ti_shi_pic.save(f'{random.random()}.png')
         for p in range(pic_text_num):  # 识别，把不是红色的地方都变白色。
             img = ti_shi_pic.crop((0, int(height / pic_text_num * p), width, int(height / pic_text_num * (p + 1))))
             for w in range(width):
@@ -243,6 +247,7 @@ class QiangGuoFuZhu(object):
                         img.putpixel((w, h), (255, 255, 255))
             # img.resize((img.size[0]*5, img.size[1]*5))
             # img.show()
+            # img.save(f'{random.random()}.png')
             # print(img.size)
             pic_str = pytesseract.image_to_string(img, lang='chi_sim')
             # pic_str = pytesseract.image_to_boxes(img, lang='chi_sim')
@@ -260,12 +265,11 @@ class QiangGuoFuZhu(object):
         return 'wwo le qu ge ren a ha ah'
 
     def do_everyday_ti(self):
+        # 获取题的类型
         self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[1]'
                       '/android.view.View[1]/android.view.View[1]/android.view.View').wait()
         ti_type = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[1]'
                                 '/android.view.View[1]/android.view.View[1]/android.view.View').get_text()
-        video = self.pp.xpath('//android.widget.Image').exists
-        # print(ti_type)
         self.pp(scrollable=True).scroll.toEnd()
         self.pp(text='查看提示').wait()
         self.pp(text='查看提示').click()
@@ -275,18 +279,17 @@ class QiangGuoFuZhu(object):
         ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
         ti_shi_pic = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
                                    '/android.view.View[2]/android.view.View').screenshot()
-        if video:
-            ti_shi_word = self.video_to_text()
-        else:
-            ti_shi_word = self.pic_to_text(ti_shi_pic)
-            if ti_shi_word not in ti_shi:
-                print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
-        # print('提示中获取到的关键词是 ', ti_shi_word)
-        # raise
         self.pp.press('back')
         time.sleep(1)
         self.pp(scrollable=True).scroll.toBeginning()
         if ti_type == '填空题':
+            # 看下是不是视频题
+            if not self.pp.xpath('//android.widget.Image').exists:
+                ti_shi_word = self.pic_to_text(ti_shi_pic)
+            else:  # 是视频题
+                ti_shi_word = 'salkdjf;alksdjf'
+            if ti_shi_word not in ti_shi:
+                print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
             if self.pp(className='android.widget.EditText').count == 1:
                 self.pp(className='android.widget.EditText').set_text(ti_shi_word)
             else:
@@ -320,13 +323,14 @@ class QiangGuoFuZhu(object):
                         self.pp(text='下一题').click()
                     elif self.pp(text='完成').exists:
                         self.pp(text='完成').click()
-        else:  # 选择题1
+        else:  # 选择题
             ti_shi_word = ti_shi
             answer = []
             for choose in self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View[1]'
                                         '/android.view.View[2]').all():
-                answer.append(re.sub(r'[^\w\u4e00-\u9fa5]', '', str(choose.text).replace('\xa0', '').replace('_', '')))
-                if choose.text in ti_shi_word:
+                answer_clean = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(choose.text).replace('\xa0', '').replace('_', ''))
+                answer.append(choose.text)
+                if answer_clean in ti_shi_word:
                     choose.click()
             time.sleep(1)
             if self.pp(text='确定').exists:
@@ -626,24 +630,30 @@ class QiangGuoFuZhu(object):
         self.pp(text='添加').click()
         time.sleep(1)
         while True:
-            if self.pp(description="订阅").count <= 3:
+            if self.pp(description="订阅").count < 2:
                 self.pp(scrollable=True).scroll(steps=150)
                 time.sleep(1)
             else:
                 break
-        self.pp(description="订阅").click()
-        time.sleep(1)
-        self.pp(description="订阅").click()
-        time.sleep(1)
-        print('已完成订阅')
+            if self.pp(text='你已经看到我的底线了').exists:
+                break
+        for i in range(2):
+            if self.pp(description="订阅").exists:
+                self.pp(description="订阅").click()
+            time.sleep(1)
+        if self.pp(text='你已经看到我的底线了').exists:
+            return False
         self.pp.press("back")
         self.pp(text='我的订阅').wait()
         self.pp.press("back")
+        return True
 
     def run_ding_yue(self, job_stat):
         while True:
             if job_stat[9][0] != '已完成':
-                self.do_ding_yue()
+                res = self.do_ding_yue()
+                if not res:
+                    break
                 time.sleep(1)
                 self.pp(text='学习积分').wait()
                 self.pp(text='学习积分').click()
@@ -746,7 +756,6 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         # print(self.pp.dump_hierarchy())
-        # self.pp(resourceId="com.android.systemui:id/backgroundNormal").scroll.vert.forward(steps=10)
         self.run_everyday_ti()
         # self.run_tiao_zhan(ti_num=9999)
         raise ()
@@ -756,5 +765,5 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    do.main_do(test=True)
-    # do.main_do()
+    # do.main_do(test=True)
+    do.main_do()
