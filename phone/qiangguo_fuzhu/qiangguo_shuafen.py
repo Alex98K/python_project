@@ -3,7 +3,6 @@ import os
 import random
 import re
 import time
-
 import pytesseract
 import uiautomator2
 from fuzzywuzzy import process
@@ -621,6 +620,53 @@ class QiangGuoFuZhu(object):
                 print('看视频任务已完成')
                 return
 
+    def listen_tai_start(self):  # 听电台的音频开始程序，主要是用来弥补视频学习时长
+        time.sleep(1)
+        self.pp.press('back')  # 从我的界面回到app首页
+        time.sleep(1)
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').wait()  # 点击首页下面的电台按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').click()
+        time.sleep(1)
+        self.pp(text='听新闻广播').wait()
+        self.pp(text='听新闻广播').click()
+        time.sleep(1)
+        if not self.pp.xpath('//android.support.v4.view.ViewPager[1]/android.support.v7.widget.RecyclerView[1]'
+                             '/android.widget.FrameLayout[1]').exists:
+            self.pp(scrollable=True).scroll(steps=90)
+            time.sleep(1)
+        try:
+            self.pp.xpath('//android.support.v4.view.ViewPager[1]/android.support.v7.widget.RecyclerView[1]'
+                          '/android.widget.FrameLayout[1]').click()
+        except uiautomator2.exceptions.XPathElementNotFoundError:
+            print('找不到中国之声电台，不能播放')
+            return
+        time.sleep(1)
+        return time.time()
+
+    def listen_tai_end(self, job_temp, t):  # 听电台的音频结束程序，主要是用来弥补视频学习时长
+        t2 = time.time()
+        if t2 - t > 180 * (int(job_temp[4][2]) - int(job_temp[4][1])):
+            pass
+        else:
+            while True:
+                if time.time() - t > 180 * (int(job_temp[4][2]) - int(job_temp[4][1])):
+                    break
+                time.sleep(1)
+                self.pp.screen_on()
+        if self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                         'android.widget.FrameLayout[1]').exists:
+            self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                          'android.widget.FrameLayout[1]').click()
+            time.sleep(1)
+            self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                          'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click()
+        else:
+            print('就没有打开收听电台的小栏目，只能重新看了')
+            return
+        if self.pp(text='我的').exists:
+            self.pp(text='我的').click()
+        time.sleep(1)
+
     def do_ding_yue(self):
         time.sleep(1)
         self.pp(text='订阅').wait()
@@ -723,6 +769,11 @@ class QiangGuoFuZhu(object):
         self.pp(text='积分规则').wait()
         job_stat = self.job_status()
         self.pp(text='我的').wait()
+        t = 0
+        if job_stat[4][0] != '已完成':
+            t = self.listen_tai_start()
+        else:
+            print('已完成视听时长学习')
         if job_stat[9][0] != '已完成':
             self.run_ding_yue(job_stat)
         else:
@@ -747,17 +798,28 @@ class QiangGuoFuZhu(object):
             self.run_tiao_zhan()
         else:
             print('已完成挑战答题')
-        if job_stat[4][0] != '已完成':
-            self.look_tel(job_stat)
+        if job_stat[4][0] != '已完成' and t:
+            self.listen_tai_end(job_stat, t)
         else:
             print('已完成视听时长学习')
+        # if job_stat[4][0] != '已完成':
+        #     self.look_tel(job_stat)
+        # else:
+        #     print('已完成视听时长学习')
         self.pp(text='学习积分').click()
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
+        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                      'android.widget.FrameLayout[1]').click()
+        time.sleep(1)
+        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                      'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click()
         # print(self.pp.dump_hierarchy())
-        self.run_everyday_ti()
+        # self.run_everyday_ti()
         # self.run_tiao_zhan(ti_num=9999)
+        # self.listen_tai_start()
+        # self.listen_tai_end()
         raise ()
 
 
