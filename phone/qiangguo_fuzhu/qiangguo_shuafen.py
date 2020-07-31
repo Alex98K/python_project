@@ -641,6 +641,8 @@ class QiangGuoFuZhu(object):
             print('找不到中国之声电台，不能播放')
             return
         time.sleep(1)
+        self.pp(text='我的').wait()
+        self.pp(text='我的').click()
         return time.time()
 
     def listen_tai_end(self, job_temp, t):  # 听电台的音频结束程序，主要是用来弥补视频学习时长
@@ -711,6 +713,9 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         self.pp.press("back")
         time.sleep(1)
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').wait()  # 点击首页下面的学习按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click()
+        time.sleep(1)
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
                       '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
                       '1]/android.widget.LinearLayout[4]').wait()
@@ -769,10 +774,14 @@ class QiangGuoFuZhu(object):
         self.pp(text='积分规则').wait()
         job_stat = self.job_status()
         self.pp(text='我的').wait()
-        t = 0
+        if job_stat[2][0] != '已完成':
+            self.read_video(job_stat)
+        else:
+            print('已完成视频观看')
         if job_stat[4][0] != '已完成':
             t = self.listen_tai_start()
         else:
+            t = 0
             print('已完成视听时长学习')
         if job_stat[9][0] != '已完成':
             self.run_ding_yue(job_stat)
@@ -786,10 +795,6 @@ class QiangGuoFuZhu(object):
             self.read_issue(job_stat)
         else:
             print('已完成文章阅读')
-        if job_stat[2][0] != '已完成':
-            self.read_video(job_stat)
-        else:
-            print('已完成视频观看')
         if job_stat[5][0] != '已完成':
             self.run_everyday_ti()
         else:
