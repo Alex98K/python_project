@@ -11,8 +11,8 @@ def get_dir_size(path):  # 计算文件夹大小
     return sum_1
 
 
-path_ore = r"F:/D/"
-path_des = r"D:/工作/D/"
+path_ore = r"N:/D/"
+path_des = r"D:/"
 
 # 是否要源文件夹和目标文件夹交换再拷贝
 # path_ore, path_des = path_des, path_ore

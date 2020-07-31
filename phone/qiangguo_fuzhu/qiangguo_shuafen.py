@@ -55,22 +55,17 @@ class QiangGuoFuZhu(object):
             print('连接手机失败, 请拔了USB线，重新插入')
             raise ()
 
-    def do_tiao_zhan_ti(self, data_ti_ku):  # 挑战答题主程序，用来做一个题
-        if self.pp(text="结束本局").exists:
-            self.pp(text="结束本局").click()
-            time.sleep(1)
-            self.pp(text='再来一局').wait()
-            time.sleep(1)
-            self.pp(text='再来一局').click()
-        if self.pp(text="再来一局").exists:
-            self.pp(text='再来一局').click()
+    def do_challenge_ti(self, data_ti_ku):  # 挑战答题主程序，用来做一个题
+        if self.pp(text="结束本局").click_exists():
+            self.pp(text='再来一局').click(timeout=2)
+        self.pp(text='再来一局').click_exists()
         if self.pp(text="选择联系人").exists:
             self.pp(description="返回").click()
-        self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/android.view.View['
-                      '1]/android.view.View[1]/android.view.View[1]').wait()
+        # self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/android.view.View['
+        #               '1]/android.view.View[1]/android.view.View[1]').wait()
         title = self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/'
                               'android.view.View[1]/android.view.View[2]/android.view.View[1]/'
-                              'android.view.View[1]').get_text()  # 匹配标题
+                              'android.view.View[1]').get(timeout=20).text  # 匹配标题
         title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(title).replace('\xa0', '').replace('_', ''))  # 清洗，除去字符等
         answer = [ans.text for ans in self.pp.xpath('//android.widget.ListView//android.view.View/'
                                                     'android.view.View/android.view.View').all()]  # 获取答案选项列表
@@ -169,16 +164,13 @@ class QiangGuoFuZhu(object):
                 with open(os.path.join(self.path, 'ti_ku_verify.json'), 'w', encoding='UTF-8') as f2:
                     json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
             time.sleep(1)
-            if self.pp(text="结束本局").exists or self.pp(text="再来一局").exists:
-                print(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到题了，但是答错了，请核实答案')
+            if (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists) and new_title_sign == 0:
+                print(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到旧题了，但是答错了，请核实答案')
             return dui_num
 
-    def run_tiao_zhan(self, ti_num=10):
-        time.sleep(1)
-        self.pp(text='我要答题').wait()
-        self.pp(text='我要答题').click()
-        self.pp(text='挑战答题').wait()
-        self.pp(text='挑战答题').click()
+    def run_challenge(self, ti_num=10):
+        self.pp(text='我要答题').click(timeout=20)
+        self.pp(text='挑战答题').click(timeout=20)
         with open(os.path.join(self.path, 'ti_ku_verify.json'), 'r', encoding="UTF-8") as f1:
             data_ti_ku = json.load(f1)
         for ij, j1 in enumerate(data_ti_ku):
@@ -189,7 +181,7 @@ class QiangGuoFuZhu(object):
         dui_num = 0
         while True:
             try:
-                temp = self.do_tiao_zhan_ti(data_ti_ku)
+                temp = self.do_challenge_ti(data_ti_ku)
                 if temp:
                     dui_num = temp
                 # print('已经连续做对{}道挑战答题的题'.format(dui_num))
@@ -200,9 +192,7 @@ class QiangGuoFuZhu(object):
             # except Exception as e:
             #     print(e)
             if dui_num >= ti_num:
-                time.sleep(30)
-                self.pp(text='结束本局').wait()
-                self.pp(text='结束本局').click()
+                self.pp(text='结束本局').click(timeout=40)
                 break
         time.sleep(1)
         self.pp.press('back')
@@ -265,16 +255,13 @@ class QiangGuoFuZhu(object):
 
     def do_everyday_ti(self):
         # 获取题的类型
-        self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[1]'
-                      '/android.view.View[1]/android.view.View[1]/android.view.View').wait()
         ti_type = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[1]'
-                                '/android.view.View[1]/android.view.View[1]/android.view.View').get_text()
+                                '/android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=20).text
         self.pp(scrollable=True).scroll.toEnd()
-        self.pp(text='查看提示').wait()
-        self.pp(text='查看提示').click()
+        self.pp(text='查看提示').click(timeout=20)
         time.sleep(1)
         ti_shi = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
-                               '/android.view.View[2]/android.view.View').get_text()
+                               '/android.view.View[2]/android.view.View').get(timeout=20).text
         ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
         ti_shi_pic = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
                                    '/android.view.View[2]/android.view.View').screenshot()
@@ -302,10 +289,8 @@ class QiangGuoFuZhu(object):
             if self.pp(text='确定').exists:
                 self.pp(text='确定').click()
                 time.sleep(1)
-                if self.pp(text='下一题').exists:
-                    self.pp(text='下一题').click()
-                elif self.pp(text='完成').exists:
-                    self.pp(text='完成').click()
+                self.pp(text='下一题').click_exists()
+                self.pp(text='完成').click_exists()
             else:
                 # print('没找到完全匹配的答案，随便填写了')
                 for self.pp2 in self.pp(className='android.widget.EditText'):
@@ -315,13 +300,10 @@ class QiangGuoFuZhu(object):
                     print('这个填空题没法自动答题，手动答题吧')
                     raise
                 else:
-                    self.pp(text='确定').wait()
-                    self.pp(text='确定').click()
+                    self.pp(text='确定').click(timeout=20)
                     time.sleep(1)
-                    if self.pp(text='下一题').exists:
-                        self.pp(text='下一题').click()
-                    elif self.pp(text='完成').exists:
-                        self.pp(text='完成').click()
+                    self.pp(text='下一题').click_exists()
+                    self.pp(text='完成').click_exists()
         else:  # 选择题
             ti_shi_word = ti_shi
             answer = []
@@ -335,10 +317,8 @@ class QiangGuoFuZhu(object):
             if self.pp(text='确定').exists:
                 self.pp(text='确定').click()
                 time.sleep(1)
-                if self.pp(text='下一题').exists:
-                    self.pp(text='下一题').click()
-                elif self.pp(text='完成').exists:
-                    self.pp(text='完成').click()
+                self.pp(text='下一题').click_exists()
+                self.pp(text='完成').click_exists()
             else:
                 # print('没找到完全匹配的答案，找个最合适的')
                 da_an = str(process.extractOne(ti_shi_word, answer)[0])
@@ -351,17 +331,13 @@ class QiangGuoFuZhu(object):
                     self.pp(text='确定').wait()
                     self.pp(text='确定').click()
                     time.sleep(1)
-                    if self.pp(text='下一题').exists:
-                        self.pp(text='下一题').click()
-                    elif self.pp(text='完成').exists:
-                        self.pp(text='完成').click()
+                    self.pp(text='下一题').click_exists()
+                    self.pp(text='完成').click_exists()
 
     def run_everyday_ti(self):
         time.sleep(1)
-        self.pp(text='我要答题').wait()
-        self.pp(text='我要答题').click()
-        self.pp(text='每日答题').wait()
-        self.pp(text='每日答题').click()
+        self.pp(text='我要答题').click(timeout=20)
+        self.pp(text='每日答题').click(timeout=20)
         time.sleep(1)
         while True:
             self.do_everyday_ti()
@@ -371,17 +347,14 @@ class QiangGuoFuZhu(object):
                 time.sleep(1)
                 self.pp.press('back')
                 time.sleep(1)
-                self.pp(text='学习积分').wait()
-                self.pp(text='学习积分').click()
+                self.pp(text='学习积分').click(timeout=20)
                 time.sleep(1)
                 job_sta = self.job_status()
                 if job_sta[5][0] == '已完成':
                     break
                 time.sleep(1)
-                self.pp(text='我要答题').wait()
-                self.pp(text='我要答题').click()
-                self.pp(text='每日答题').wait()
-                self.pp(text='每日答题').click()
+                self.pp(text='我要答题').click(timeout=20)
+                self.pp(text='每日答题').click(timeout=20)
                 time.sleep(1)
 
     def read_issue(self, job_temp, test=False):
@@ -397,8 +370,8 @@ class QiangGuoFuZhu(object):
             data_issue = []
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').wait()  # 点击首页下面的中间学习按钮
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click()
+        # 点击首页下面的中间学习按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
         for it, t in enumerate(
                 self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
                               '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
@@ -420,7 +393,7 @@ class QiangGuoFuZhu(object):
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
-                        print(f'{t.text} 第{isu+1}个文章标题获取出错，跳过')
+                        print(f'{t.text} 第{isu + 1}个文章标题获取出错，跳过')
                         continue
                     if title in data_issue:
                         self.pp.press('back')
@@ -445,21 +418,13 @@ class QiangGuoFuZhu(object):
                         need_time_num -= 1
                     if job_temp[10][0] != '已完成' and need_collection_num > 0:  # 如果没有完成收藏任务，就开始
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
-                                      f'/android.widget.ImageView[1]').wait()  # 收藏
-                        self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
-                                      f'/android.widget.ImageView[1]').click()  # 收藏
-                        time.sleep(1)
-                        if self.pp(text='我知道了').exists:
-                            self.pp(text='我知道了').click()
-                            time.sleep(1)
+                                      f'/android.widget.ImageView[1]').click(timeout=20)  # 收藏
+                        self.pp(text='我知道了').click_exists(timeout=1)
                         need_collection_num -= 1
                     if job_temp[11][0] != '已完成' and need_share_num > 0:  # 如果没有完成分享任务，就分享及返回
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
-                                      f'/android.widget.ImageView[2]').wait()  # 分享
-                        self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
-                                      f'/android.widget.ImageView[2]').click()  # 分享
-                        self.pp(text="分享到短信").wait()
-                        self.pp(text="分享到短信").click()
+                                      f'/android.widget.ImageView[2]').click(timeout=20)  # 分享
+                        self.pp(text="分享到短信").click(timeout=20)
                         time.sleep(1)
                         while not self.pp.xpath(
                                 f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
@@ -472,21 +437,19 @@ class QiangGuoFuZhu(object):
                         self.pp(text="欢迎发表你的观点").click()  # 评论
                         self.pp(text="好观点将会被优先展示").wait()  # 评论
                         self.pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
-                        self.pp(text="发布").wait()  # 评论
-                        self.pp(text="发布").click()  # 评论
+                        self.pp(text="发布").click(timeout=20)  # 评论
                         self.pp(text="删除").wait()  # 评论
                         while self.pp(text="删除").exists:
                             self.pp(text="删除").click()  # 评论
-                            self.pp.xpath('//*[@resource-id="android:id/button1"]').wait()
-                            self.pp.xpath('//*[@resource-id="android:id/button1"]').click()
+                            self.pp.xpath('//*[@resource-id="android:id/button1"]').click(timeout=20)
                             time.sleep(1)
                         need_comment_num -= 1
                     self.pp.press('back')  # 学习完每一篇文章后返回
                     time.sleep(1)
                     if not test and need_issue_num <= 0:
                         self.pp(text='我的').must_wait()
-                        self.pp.xpath(
-                            '//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click()  # 点击积分,查一下积分完成情况
+                        # 点击积分,查一下积分完成情况
+                        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click(timeout=20)
                         job_temp = self.job_status()  # 查一下积分完成情况
                         need_issue_num = int(job_temp[2][2]) - int(job_temp[2][1])
                         need_share_num = 2 - int(job_temp[11][1])
@@ -515,8 +478,8 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').wait()  # 点击首页下面的电视台按钮
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click()
+        # 点击首页下面的电视台按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click(timeout=20)
         for it, t in enumerate(
                 self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
                               '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
@@ -550,10 +513,8 @@ class QiangGuoFuZhu(object):
                     with open(os.path.join(self.path, f'data_video_{self.learn_num}.json'),
                               'w', encoding='UTF-8') as f2:
                         json.dump(data_video, f2, ensure_ascii=False, indent=2)
-                    time.sleep(1)  # 每个视频学习10秒
-                    if self.pp(text='继续播放').exists:
-                        self.pp(text='继续播放').click()
-                    time.sleep(9)  # 每个视频学习10秒
+                    self.pp(text='继续播放').click_exists(timeout=1)
+                    time.sleep(10)  # 每个视频学习10秒
                     # if job_temp[4][0] != '已完成':  # 如果没有完成视频学习时长任务，就开始，改成学习视频时长用看电视的方法，
                     #     t1 = time.time()
                     #     while True:
@@ -565,15 +526,14 @@ class QiangGuoFuZhu(object):
                     time.sleep(1)
                     if not test and need_video_num <= 0:
                         self.pp(text='我的').wait()
-                        self.pp.xpath(
-                            '//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click()  # 点击积分,查一下积分完成情况
+                        # 点击积分,查一下积分完成情况
+                        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click(timeout=20)
                         job_temp = self.job_status()  # 查一下积分完成情况
                         need_video_num = int(job_temp[2][2]) - int(job_temp[2][1])
                         time.sleep(1)
                         if job_temp[2][0] == '已完成':  # 如果学习视频没完成，就开始学习
                             time.sleep(1)
-                            self.pp(text='我的').wait()
-                            self.pp(text='我的').click()
+                            self.pp(text='我的').click(timeout=20)
                             print('看视频任务已完成')
                             return
                 time.sleep(1)
@@ -584,11 +544,10 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').wait()  # 点击首页下面的电视台按钮
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click()
+        # 点击首页下面的电视台按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click(timeout=20)
         time.sleep(1)
-        self.pp(text='看电视').wait()
-        self.pp(text='看电视').click()
+        self.pp(text='看电视').click(timeout=20)
         time.sleep(1)
         while True:
             if not self.pp.xpath(f'//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]').exists:
@@ -600,10 +559,8 @@ class QiangGuoFuZhu(object):
                 print('找不到CCTV-2电视台，不能播放，不看电视了')
                 return
             time.sleep(1)  # 每个视频学习
-            if self.pp(text='继续播放').exists:
-                self.pp(text='继续播放').click()
-            if self.pp(text='点击播放').exists:
-                self.pp(text='点击播放').click()
+            self.pp(text='继续播放').click_exists()
+            self.pp(text='点击播放').click_exists()
             t1 = time.time()
             while True:
                 if time.time() - t1 > 180 * (int(job_temp[4][2]) - int(job_temp[4][1])):
@@ -615,20 +572,40 @@ class QiangGuoFuZhu(object):
             job_temp = self.job_status()  # 查一下积分完成情况
             time.sleep(1)
             if job_temp[4][0] == '已完成':  # 如果视频学习时长任务没完成，就开始学习
-                self.pp(text='我的').wait()
-                self.pp(text='我的').click()
+                self.pp(text='我的').click(timeout=20)
                 print('看视频任务已完成')
                 return
+
+    def read_issue_time(self, job_temp):
+        time.sleep(1)
+        self.pp.press('back')  # 从我的界面回到app首页
+        time.sleep(1)
+        # 点击首页下面的中间学习按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
+        self.pp.xpath('//android.widget.ListView/android.widget.FrameLayout[1]').click_exists()
+        self.pp.xpath('//android.widget.ListView/android.widget.FrameLayout[2]').click_exists()
+        self.pp.xpath('//android.widget.ListView/android.widget.FrameLayout[3]').click_exists()
+        t = time.time()
+        while True:
+            if time.time() - t > 120 * (int(job_temp[3][2]) - int(job_temp[3][1])):
+                break
+            self.pp(scrollable=True).scroll.vert.forward(steps=random.randint(130, 150))
+            time.sleep(1)
+            self.pp(scrollable=True).scroll.vert.backward(steps=random.randint(110, 130))
+            time.sleep(1)
+        time.sleep(1)
+        self.pp.press('back')  # 从我的界面回到app首页
+        time.sleep(1)
+        self.pp(text='我的').click(timeout=20)
 
     def listen_tai_start(self):  # 听电台的音频开始程序，主要是用来弥补视频学习时长
         time.sleep(1)
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').wait()  # 点击首页下面的电台按钮
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').click()
+        # 点击首页下面的电台按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').click(timeout=20)
         time.sleep(1)
-        self.pp(text='听新闻广播').wait()
-        self.pp(text='听新闻广播').click()
+        self.pp(text='听新闻广播').click(timeout=20)
         time.sleep(1)
         if not self.pp.xpath('//android.support.v4.view.ViewPager[1]/android.support.v7.widget.RecyclerView[1]'
                              '/android.widget.FrameLayout[1]').exists:
@@ -641,8 +618,7 @@ class QiangGuoFuZhu(object):
             print('找不到中国之声电台，不能播放')
             return
         time.sleep(1)
-        self.pp(text='我的').wait()
-        self.pp(text='我的').click()
+        self.pp(text='我的').click(timeout=20)
         return time.time()
 
     def listen_tai_end(self, job_temp, t):  # 听电台的音频结束程序，主要是用来弥补视频学习时长
@@ -656,26 +632,21 @@ class QiangGuoFuZhu(object):
                 time.sleep(1)
                 self.pp.screen_on()
         if self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                         'android.widget.FrameLayout[1]').exists:
-            self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                          'android.widget.FrameLayout[1]').click()
-            time.sleep(1)
+                         'android.widget.FrameLayout[1]').click_exists():
             self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                          'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click()
+                          'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click(timeout=20)
         else:
             print('就没有打开收听电台的小栏目，只能重新看了')
-            return
-        if self.pp(text='我的').exists:
-            self.pp(text='我的').click()
+            return False
+        self.pp(text='我的').click_exists()
         time.sleep(1)
+        return True
 
     def do_ding_yue(self):
         time.sleep(1)
-        self.pp(text='订阅').wait()
-        self.pp(text='订阅').click()
+        self.pp(text='订阅').click(timeout=20)
         time.sleep(1)
-        self.pp(text='添加').wait()
-        self.pp(text='添加').click()
+        self.pp(text='添加').click(timeout=20)
         time.sleep(1)
         while True:
             if self.pp(description="订阅").count < 2:
@@ -686,9 +657,7 @@ class QiangGuoFuZhu(object):
             if self.pp(text='你已经看到我的底线了').exists:
                 break
         for i in range(2):
-            if self.pp(description="订阅").exists:
-                self.pp(description="订阅").click()
-            time.sleep(1)
+            self.pp(description="订阅").click_exists(timeout=1)
         if self.pp(text='你已经看到我的底线了').exists:
             return False
         self.pp.press("back")
@@ -703,8 +672,7 @@ class QiangGuoFuZhu(object):
                 if not res:
                     break
                 time.sleep(1)
-                self.pp(text='学习积分').wait()
-                self.pp(text='学习积分').click()
+                self.pp(text='学习积分').click(timeout=20)
                 job_stat = self.job_status()
             else:
                 break
@@ -713,42 +681,40 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         self.pp.press("back")
         time.sleep(1)
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').wait()  # 点击首页下面的学习按钮
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click()
+        # 点击首页下面的学习按钮
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
         time.sleep(1)
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
                       '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
-                      '1]/android.widget.LinearLayout[4]').wait()
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
-                      '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
-                      '1]/android.widget.LinearLayout[4]').click()
+                      '1]/android.widget.LinearLayout[4]').click(timeout=20)
         time.sleep(1)
-        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait()
-        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click()
+        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click(timeout=20)
         print('已完成本地频道')
         time.sleep(1)
         self.pp.press('back')
-        self.pp(text='我的').wait()
-        self.pp(text='我的').click()
+        self.pp(text='我的').click(timeout=20)
 
     def job_status(self):
         time.sleep(1)
+        self.pp(text='登录').wait(timeout=20)
+        if not self.pp(text='登录').exists:
+            print('网络有问题，请确保联网后重试')
+            raise
         job_status1 = []
         for j in range(1, 15):
-            while not self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').exists:
+            while not self.pp(className='android.widget.ListView').child()[j].child()[4].exists:
                 self.pp(scrollable=True).scroll(steps=100)
                 time.sleep(1)
-            com = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[3]').get_text()
+            com = self.pp(className='android.widget.ListView').child()[j].child()[3].get_text()
             com1, com2 = re.search(r'已获(\d*)分/每日上限(\d*)分', com).groups()
-            sta = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').get_text()
+            sta = self.pp(className='android.widget.ListView').child()[j].child()[4].get_text()
             job_status1.append((sta, com1, com2))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
         return job_status1
 
     def get_learn_num(self):
-        self.pp(description='我的信息').wait()
-        self.pp(description='我的信息').click()
+        self.pp(description='我的信息').click(timeout=20)
         time.sleep(1)
         learn_num = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
                                   '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
@@ -765,23 +731,32 @@ class QiangGuoFuZhu(object):
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
-        self.pp(text='我的').wait()
-        self.pp(text='我的').click()
+        time.sleep(3)  # 这个不能删，否则下面的语句不能等待控件消失
+        self.pp(resourceId='cn.xuexi.android:id/tvv_video_render').wait_gone()
+        # 检测是否登陆，如果没有登录就进行登录
+        if self.pp(text='登录').exists:
+            self.pp(resourceId='cn.xuexi.android:id/et_phone_input').set_text('18810810611')
+            time.sleep(1)
+            self.pp(resourceId='cn.xuexi.android:id/et_pwd_login').set_text('jiajia0611')
+            self.pp.xpath('//*[@resource-id="com.huawei.secime:id/char_keyboard_hide_btn"]').click_exists(timeout=1)
+            self.pp(text='登录').click(timeout=2)
+        self.pp(text='我的').click_exists(timeout=20)
         time.sleep(1)
         self.learn_num = self.get_learn_num()
-        self.pp(text='学习积分').wait()
-        self.pp(text='学习积分').click()
+        self.pp(text='学习积分').click_exists(timeout=20)
         self.pp(text='积分规则').wait()
+        t = time.time()
         job_stat = self.job_status()
+        print(time.time() - t)
         self.pp(text='我的').wait()
         if job_stat[2][0] != '已完成':
             self.read_video(job_stat)
         else:
             print('已完成视频观看')
         if job_stat[4][0] != '已完成':
-            t = self.listen_tai_start()
+            t1 = self.listen_tai_start()
         else:
-            t = 0
+            t1 = 0
             print('已完成视听时长学习')
         if job_stat[9][0] != '已完成':
             self.run_ding_yue(job_stat)
@@ -800,29 +775,31 @@ class QiangGuoFuZhu(object):
         else:
             print('已完成每日答题任务')
         if job_stat[8][0] != '已完成':
-            self.run_tiao_zhan()
+            self.run_challenge()
         else:
             print('已完成挑战答题')
-        if job_stat[4][0] != '已完成' and t:
-            self.listen_tai_end(job_stat, t)
+        if job_stat[4][0] != '已完成' and t1:
+            self.listen_tai_end(job_stat, t1)
         else:
             print('已完成视听时长学习')
-        # if job_stat[4][0] != '已完成':
-        #     self.look_tel(job_stat)
-        # else:
-        #     print('已完成视听时长学习')
+        self.pp(text='学习积分').click()
+        job_stat = self.job_status()
+        time.sleep(1)
+        if job_stat[3][0] != '已完成':
+            self.read_issue_time(job_stat)
+        else:
+            print('已完成文章时长学习')
+        if job_stat[4][0] != '已完成':
+            self.look_tel(job_stat)
+        else:
+            print('已完成视听时长学习')
         self.pp(text='学习积分').click()
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
-        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                      'android.widget.FrameLayout[1]').click()
-        time.sleep(1)
-        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                      'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click()
-        # print(self.pp.dump_hierarchy())
+        print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
-        # self.run_tiao_zhan(ti_num=9999)
+        # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
         # self.listen_tai_end()
         raise ()
@@ -832,5 +809,12 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    # do.main_do(test=True)
-    do.main_do()
+    do.main_do(test=True)
+    # do.main_do()
+    # while True:
+    #     try:
+    #         do.main_do()
+    #         break
+    #     except Exception as e:
+    #         print(e)
+    #         pass
