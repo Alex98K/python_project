@@ -269,7 +269,7 @@ class QiangGuoFuZhu(object):
             if not self.pp.xpath('//android.widget.Image').exists:
                 ti_shi_word = self.pic_to_text(ti_shi_pic)
             else:  # 是视频题
-                ti_shi_word = '重大决策中国共产党'
+                ti_shi_word = '重大决策保障机制'
             if ti_shi_word not in ti_shi:
                 print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
             if self.pp(className='android.widget.EditText').count == 1:
@@ -290,7 +290,7 @@ class QiangGuoFuZhu(object):
             else:
                 # print('没找到完全匹配的答案，随便填写了')
                 for self.pp2 in self.pp(className='android.widget.EditText'):
-                    self.pp2.set_text('重大机制中国共产党')
+                    self.pp2.set_text('重大机制保障机制')
                 time.sleep(1)
                 if not self.pp(text='确定').exists:
                     print('这个填空题没法自动答题，手动答题吧')
