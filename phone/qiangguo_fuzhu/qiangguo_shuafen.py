@@ -702,15 +702,16 @@ class QiangGuoFuZhu(object):
             raise
         job_status1 = []
         for j in range(1, 15):
-            while not self.pp(className='android.widget.ListView').child()[j].child()[4].exists:
+            while not self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').exists:
                 self.pp(scrollable=True).scroll(steps=100)
                 time.sleep(1)
-            com = self.pp(className='android.widget.ListView').child()[j].child()[3].get_text()
+            com = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[3]').get_text()
             com1, com2 = re.search(r'已获(\d*)分/每日上限(\d*)分', com).groups()
-            sta = self.pp(className='android.widget.ListView').child()[j].child()[4].get_text()
+            sta = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').get_text()
             job_status1.append((sta, com1, com2))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
+        print(job_status1)
         return job_status1
 
     def get_learn_num(self):
@@ -793,11 +794,12 @@ class QiangGuoFuZhu(object):
             self.look_tel(job_stat)
         else:
             print('已完成视听时长学习')
-        self.pp(text='学习积分').click()
+        self.pp.app_stop('cn.xuexi.android')
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
-        print(self.pp.dump_hierarchy())
+        # ht = self.pp.dump_hierarchy()
+        # print(ht)
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
@@ -809,8 +811,8 @@ if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     do = QiangGuoFuZhu()
-    do.main_do(test=True)
-    # do.main_do()
+    # do.main_do(test=True)
+    do.main_do()
     # while True:
     #     try:
     #         do.main_do()
