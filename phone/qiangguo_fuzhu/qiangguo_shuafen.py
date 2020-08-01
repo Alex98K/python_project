@@ -736,7 +736,6 @@ class QiangGuoFuZhu(object):
             self.pp(text='输入密码').wait_gone()
         if test:
             self.test_pro()
-            raise
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
