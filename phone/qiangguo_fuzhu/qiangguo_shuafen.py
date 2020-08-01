@@ -9,7 +9,7 @@ from fuzzywuzzy import process
 
 
 class QiangGuoFuZhu(object):
-    def __init__(self, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
+    def __init__(self, username=None, password=None, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
         pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
@@ -18,9 +18,12 @@ class QiangGuoFuZhu(object):
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
         self.duplicate_title = []
         self.learn_num = None
+        self.username = username
+        self.password = password
         # 注册watcher，如果顶部的快捷栏被无意间滑下来了，就自动返回，划上去
         self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
                                                    "/notification_container_parent']").call(self.call_back)
+        self.pp.watcher('fresh').when('刷新').click()
         self.pp.watcher.start(0.2)
 
     def __del__(self):
@@ -99,7 +102,7 @@ class QiangGuoFuZhu(object):
             # print('匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
             if len(fuz_answer_num) > 1:
                 new_title_sign = 1
-                print('新加入的题匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
+                # print('新加入的题匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
             if 'A' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
                               'android.view.View').all()[0].click()
@@ -110,7 +113,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            print(title, answer, fuz_answer_num)
+                            print(title, answer, '正确答案是', fuz_answer_num)
                             break
             elif 'B' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
@@ -122,7 +125,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            print(title, answer, fuz_answer_num)
+                            print(title, answer, '正确答案是', fuz_answer_num)
                             break
             elif 'C' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
@@ -134,7 +137,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            print(title, answer, fuz_answer_num)
+                            print(title, answer, '正确答案是', fuz_answer_num)
                             break
             elif 'D' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
@@ -146,7 +149,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            print(title, answer, fuz_answer_num)
+                            print(title, answer, '正确答案是', fuz_answer_num)
                             break
             else:
                 print(f'{fuz_title}在记录中没有正确答案,')
@@ -221,7 +224,6 @@ class QiangGuoFuZhu(object):
                     pic_text_num += 1
             except IndexError:
                 pass
-        # raise
         ti_shi_word = ''
         # ti_shi_pic.show()
         # ti_shi_pic.save(f'{random.random()}.png')
@@ -239,13 +241,7 @@ class QiangGuoFuZhu(object):
             # img.save(f'{random.random()}.png')
             # print(img.size)
             pic_str = pytesseract.image_to_string(img, lang='chi_sim')
-            # pic_str = pytesseract.image_to_boxes(img, lang='chi_sim')
-            # print(pic_str)
             pic_str = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(pic_str).replace('\xa0', '').replace('_', ''))
-            # print(pic_str)
-            # if not pic_str:
-            #     img.save(f'{split_height} {kuai_num}.png')
-            # print(pic_str)
             ti_shi_word += pic_str
         return ti_shi_word
 
@@ -273,7 +269,7 @@ class QiangGuoFuZhu(object):
             if not self.pp.xpath('//android.widget.Image').exists:
                 ti_shi_word = self.pic_to_text(ti_shi_pic)
             else:  # 是视频题
-                ti_shi_word = 'salkdjf;alksdjf'
+                ti_shi_word = '重大决策中国共产党'
             if ti_shi_word not in ti_shi:
                 print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
             if self.pp(className='android.widget.EditText').count == 1:
@@ -294,7 +290,7 @@ class QiangGuoFuZhu(object):
             else:
                 # print('没找到完全匹配的答案，随便填写了')
                 for self.pp2 in self.pp(className='android.widget.EditText'):
-                    self.pp2.set_text('wolegequashoubuliaole')
+                    self.pp2.set_text('重大机制中国共产党')
                 time.sleep(1)
                 if not self.pp(text='确定').exists:
                     print('这个填空题没法自动答题，手动答题吧')
@@ -632,9 +628,18 @@ class QiangGuoFuZhu(object):
                 time.sleep(1)
                 self.pp.screen_on()
         if self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                         'android.widget.FrameLayout[1]').click_exists():
+                         'android.widget.FrameLayout[1]').click_exists():  # 点击电台按钮，打开电台控制栏
+            # 点击关闭按钮
+            try:
+                self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                              'android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                              'android.widget.ImageView[4]').click(timeout=1)
+            except uiautomator2.exceptions.XPathElementNotFoundError:
+                self.pp.xpath('//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/'
+                              'android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                              'android.widget.ImageView[4]').click(timeout=1)
             self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                          'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click(timeout=20)
+                          'android.widget.FrameLayout[1]/android.widget.ImageView[4]').wait_gone()
         else:
             print('就没有打开收听电台的小栏目，只能重新看了')
             return False
@@ -645,7 +650,6 @@ class QiangGuoFuZhu(object):
     def do_ding_yue(self):
         time.sleep(1)
         self.pp(text='订阅').click(timeout=20)
-        time.sleep(1)
         self.pp(text='添加').click(timeout=20)
         time.sleep(1)
         while True:
@@ -657,7 +661,8 @@ class QiangGuoFuZhu(object):
             if self.pp(text='你已经看到我的底线了').exists:
                 break
         for i in range(2):
-            self.pp(description="订阅").click_exists(timeout=1)
+            self.pp(description="订阅").click_exists()
+            time.sleep(1)
         if self.pp(text='你已经看到我的底线了').exists:
             return False
         self.pp.press("back")
@@ -671,7 +676,6 @@ class QiangGuoFuZhu(object):
                 res = self.do_ding_yue()
                 if not res:
                     break
-                time.sleep(1)
                 self.pp(text='学习积分').click(timeout=20)
                 job_stat = self.job_status()
             else:
@@ -728,26 +732,33 @@ class QiangGuoFuZhu(object):
         self.pp.unlock()
         if test:
             self.test_pro()
+            raise
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
         time.sleep(3)  # 这个不能删，否则下面的语句不能等待控件消失
         self.pp(resourceId='cn.xuexi.android:id/tvv_video_render').wait_gone()
         # 检测是否登陆，如果没有登录就进行登录
-        if self.pp(text='登录').exists:
-            self.pp(resourceId='cn.xuexi.android:id/et_phone_input').set_text('18810810611')
-            time.sleep(1)
-            self.pp(resourceId='cn.xuexi.android:id/et_pwd_login').set_text('jiajia0611')
-            self.pp.xpath('//*[@resource-id="com.huawei.secime:id/char_keyboard_hide_btn"]').click_exists(timeout=1)
-            self.pp(text='登录').click(timeout=2)
+        if self.pp(text='我的').click_exists(timeout=3):
+            self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
+            self.pp(text='退出登录').click_exists(timeout=3)
+            self.pp(text='确认').click_exists(timeout=3)
+        self.pp(text='登录').wait()
+        self.pp(resourceId='cn.xuexi.android:id/et_phone_input').set_text(self.username)
+        time.sleep(1)
+        self.pp(resourceId='cn.xuexi.android:id/et_pwd_login').set_text(self.password)
+        self.pp.xpath('//*[@resource-id="com.huawei.secime:id/char_keyboard_hide_btn"]').click_exists(timeout=1)
+        self.pp(text='登录').click(timeout=2)
+        self.pp(text='登录').wait_gone(timeout=5)
+        if self.pp(text='连接失败，请检查你的网络后重试!').exists:
+            print('网络不好，请重新连接网络')
+            raise
         self.pp(text='我的').click_exists(timeout=20)
         time.sleep(1)
         self.learn_num = self.get_learn_num()
         self.pp(text='学习积分').click_exists(timeout=20)
         self.pp(text='积分规则').wait()
-        t = time.time()
         job_stat = self.job_status()
-        print(time.time() - t)
         self.pp(text='我的').wait()
         if job_stat[2][0] != '已完成':
             self.read_video(job_stat)
@@ -793,28 +804,41 @@ class QiangGuoFuZhu(object):
             self.look_tel(job_stat)
         else:
             print('已完成视听时长学习')
+        self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
+        self.pp(text='退出登录').click_exists(timeout=3)
+        self.pp(text='确认').click_exists(timeout=3)
+        self.pp(text='登录').wait(timeout=20)
         self.pp.app_stop('cn.xuexi.android')
+        time.sleep(1)
+        self.pp.press('home')
         self.__del__()
 
+    def recycle_main_do(self):
+        while True:
+            try:
+                self.main_do()
+                break
+            except Exception as e:
+                print(e)
+                pass
+
     def test_pro(self):  # 测试专用程序
+            # 点击关闭按钮
+        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                      'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click(timeout=1)
         # ht = self.pp.dump_hierarchy()
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
         # self.listen_tai_end()
-        raise ()
+        raise
 
 
 if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
-    do = QiangGuoFuZhu()
-    # do.main_do(test=True)
-    do.main_do()
-    # while True:
-    #     try:
-    #         do.main_do()
-    #         break
-    #     except Exception as e:
-    #         print(e)
-    #         pass
+    # do = QiangGuoFuZhu(username='18810810611', password='jiajia0611')
+    do = QiangGuoFuZhu(username='18611001824', password='nopass.123')
+    do.main_do(test=True)
+    # do.main_do()
+
