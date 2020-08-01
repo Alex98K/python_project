@@ -9,7 +9,8 @@ from fuzzywuzzy import process
 
 
 class QiangGuoFuZhu(object):
-    def __init__(self, username=None, password=None, unlock_password=None, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
+    def __init__(self, username=None, password=None, unlock_password=None,
+                 tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
         pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
@@ -844,9 +845,9 @@ if __name__ == '__main__':
         ['18810810611', 'jiajia0611'],
         ['18611001824', 'nopass.123'],
     ]
-    for index, user in enumerate(user_list):
+    for index_u, user in enumerate(user_list):
         close_screen = 0
-        if index == len(user_list) - 1:
+        if index_u == len(user_list) - 1:
             close_screen = 1
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
         # do.main_do(test=True)
