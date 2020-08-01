@@ -711,7 +711,6 @@ class QiangGuoFuZhu(object):
             job_status1.append((sta, com1, com2))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
-        print(job_status1)
         return job_status1
 
     def get_learn_num(self):
@@ -799,7 +798,6 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         # ht = self.pp.dump_hierarchy()
-        # print(ht)
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
