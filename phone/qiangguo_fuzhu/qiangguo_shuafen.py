@@ -9,7 +9,7 @@ from fuzzywuzzy import process
 
 
 class QiangGuoFuZhu(object):
-    def __init__(self, username=None, password=None, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
+    def __init__(self, username=None, password=None, unlock_password=None, tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
         pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
@@ -20,6 +20,7 @@ class QiangGuoFuZhu(object):
         self.learn_num = None
         self.username = username
         self.password = password
+        self.unlock_password = unlock_password
         # 注册watcher，如果顶部的快捷栏被无意间滑下来了，就自动返回，划上去
         self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
                                                    "/notification_container_parent']").call(self.call_back)
@@ -727,6 +728,11 @@ class QiangGuoFuZhu(object):
 
     def main_do(self, test=False):  # 主运行程序
         self.pp.unlock()
+        if self.unlock_password and self.pp(text='输入密码').exists(timeout=3):
+            for k in self.unlock_password:
+                self.pp(description=k).click()
+                time.sleep(0.1)
+            self.pp(text='输入密码').wait_gone()
         if test:
             self.test_pro()
             raise
@@ -809,7 +815,7 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         self.pp.press('home')
 
-    def recycle_main_do(self):
+    def recycle_main_do(self, cl_screen=0):
         while True:
             try:
                 self.main_do()
@@ -817,6 +823,8 @@ class QiangGuoFuZhu(object):
             except Exception as e:
                 print(e)
                 pass
+        if cl_screen == 1:
+            self.pp.screen_off()
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
@@ -831,7 +839,15 @@ class QiangGuoFuZhu(object):
 if __name__ == '__main__':
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
-    # do = QiangGuoFuZhu(username='18810810611', password='jiajia0611')
-    do = QiangGuoFuZhu(username='18611001824', password='nopass.123')
-    # do.main_do(test=True)
-    do.recycle_main_do()
+    phone_unlock_password = '850611'
+    user_list = [
+        ['18810810611', 'jiajia0611'],
+        ['18611001824', 'nopass.123'],
+    ]
+    for index, user in enumerate(user_list):
+        close_screen = 0
+        if index == len(user_list) - 1:
+            close_screen = 1
+        do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
+        # do.main_do(test=True)
+        do.recycle_main_do(close_screen)
