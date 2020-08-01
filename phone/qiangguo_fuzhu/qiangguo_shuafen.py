@@ -324,11 +324,9 @@ class QiangGuoFuZhu(object):
                     print('这个选择题没法自动答题，手动答题吧')
                     raise
                 else:
-                    self.pp(text='确定').wait()
-                    self.pp(text='确定').click()
-                    time.sleep(1)
-                    self.pp(text='下一题').click_exists()
-                    self.pp(text='完成').click_exists()
+                    self.pp(text='确定').click_exists(timeout=20)
+                    self.pp(text='下一题').click_exists(timeout=2)
+                    self.pp(text='完成').click_exists(timeout=2)
 
     def run_everyday_ti(self):
         time.sleep(1)
@@ -339,8 +337,7 @@ class QiangGuoFuZhu(object):
             self.do_everyday_ti()
             time.sleep(1)
             if self.pp(text='再来一组').exists:
-                self.pp(text='返回').click()
-                time.sleep(1)
+                self.pp(text='返回').click_gone()
                 self.pp.press('back')
                 time.sleep(1)
                 self.pp(text='学习积分').click(timeout=20)
@@ -811,7 +808,6 @@ class QiangGuoFuZhu(object):
         self.pp.app_stop('cn.xuexi.android')
         time.sleep(1)
         self.pp.press('home')
-        self.__del__()
 
     def recycle_main_do(self):
         while True:
@@ -821,11 +817,9 @@ class QiangGuoFuZhu(object):
             except Exception as e:
                 print(e)
                 pass
+        self.__del__()
 
     def test_pro(self):  # 测试专用程序
-            # 点击关闭按钮
-        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                      'android.widget.FrameLayout[1]/android.widget.ImageView[4]').click(timeout=1)
         # ht = self.pp.dump_hierarchy()
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
@@ -839,6 +833,5 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     # do = QiangGuoFuZhu(username='18810810611', password='jiajia0611')
     do = QiangGuoFuZhu(username='18611001824', password='nopass.123')
-    do.main_do(test=True)
-    # do.main_do()
-
+    # do.main_do(test=True)
+    do.recycle_main_do()
