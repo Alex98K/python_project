@@ -816,7 +816,7 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         self.pp.press('home')
 
-    def recycle_main_do(self, cl_screen=0):
+    def recycle_main_do(self, cl_screen=False):
         while True:
             try:
                 self.main_do()
@@ -846,9 +846,9 @@ if __name__ == '__main__':
         ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
-        close_screen = 0
-        if index_u == len(user_list) - 1:
-            close_screen = 1
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
+        if index_u == len(user_list) - 1:
+            do.recycle_main_do(cl_screen=True)
+        else:
+            do.recycle_main_do(cl_screen=False)
         # do.main_do(test=True)
-        do.recycle_main_do(close_screen)
