@@ -65,7 +65,7 @@ class QiangGuoFuZhu(object):
             self.pp(text='再来一局').click(timeout=2)
         self.pp(text='再来一局').click_exists()
         if self.pp(text="选择联系人").exists:
-            self.pp(description="返回").click()
+            self.pp(description="返回").click_exists()
         # self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/android.view.View['
         #               '1]/android.view.View[1]/android.view.View[1]').wait()
         title = self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/'
@@ -728,6 +728,7 @@ class QiangGuoFuZhu(object):
         return learn_num
 
     def main_do(self, test=False):  # 主运行程序
+        # self.pp.screen_on()
         self.pp.unlock()
         if self.unlock_password and self.pp(text='输入密码').exists(timeout=3):
             for k in self.unlock_password:
@@ -739,10 +740,11 @@ class QiangGuoFuZhu(object):
         if 'cn.xuexi.android' in self.pp.app_list_running():
             self.pp.app_stop('cn.xuexi.android')
         self.pp.app_start('cn.xuexi.android')
-        time.sleep(3)  # 这个不能删，否则下面的语句不能等待控件消失
+        # 这个不能删，等待控件出现后再消失
+        self.pp(resourceId='cn.xuexi.android:id/tvv_video_render').wait()
         self.pp(resourceId='cn.xuexi.android:id/tvv_video_render').wait_gone()
         # 检测是否登陆，如果没有登录就进行登录
-        if self.pp(text='我的').click_exists(timeout=3):
+        if self.pp(text='我的').click_exists(timeout=5):
             self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
             self.pp(text='退出登录').click_exists(timeout=3)
             self.pp(text='确认').click_exists(timeout=3)

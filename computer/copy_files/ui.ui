@@ -18,21 +18,17 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>130</y>
+      <y>90</y>
       <width>521</width>
-      <height>91</height>
+      <height>225</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>目标文件夹地址</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QTextBrowser" name="textBrowser_2"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QTextBrowser" name="textBrowser_1"/>
      </item>
      <item row="0" column="0" rowspan="2">
       <widget class="QPushButton" name="pushButton_1">
@@ -41,31 +37,22 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QTextBrowser" name="textBrowser_1"/>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>目标文件夹地址</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>270</y>
-      <width>129</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>开始拷贝文件</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>330</y>
+      <y>390</y>
       <width>521</width>
-      <height>71</height>
+      <height>119</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -76,6 +63,45 @@
       <widget class="QProgressBar" name="progressBar">
        <property name="value">
         <number>24</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>340</y>
+      <width>421</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>交换文件夹地址</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>开始拷贝文件</string>
        </property>
       </widget>
      </item>
