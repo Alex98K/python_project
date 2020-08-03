@@ -13,7 +13,7 @@ class QiangGuoFuZhu(object):
                  tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
-        pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
+        # pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
         self.pp = self.connect_phone_usb()
         # self.pp = uiautomator2.connect_wifi('192.168.1.218')
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
@@ -363,28 +363,35 @@ class QiangGuoFuZhu(object):
                 data_issue = json.load(f1)
         except FileNotFoundError:
             data_issue = []
+        time.sleep(1)
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
         # 点击首页下面的中间学习按钮
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
-        for it, t in enumerate(
-                self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
-                              '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
-                              '/android.view.ViewGroup[1]//android.widget.LinearLayout'
-                              '/android.widget.TextView').all()):  # 获取文章分类列表
+        if issue_pin_dao := self.pp.xpath(
+                '//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
+                '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
+                '//android.widget.LinearLayout/android.widget.TextView').all():  # 获取文章分类列表
+            pass
+        else:
+            print('获取文章频道列表失败，请修改程序')
+            raise
+        for it, t in enumerate(issue_pin_dao):
             t.click()
             time.sleep(1)
             for ci_shu in range(8):  # 每个栏目下滑8次页面找文章看
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
-                    loc = issue.center()
-                    self.pp.click(*loc)
-                    time.sleep(1)
+                    if issue.child(className='android.widget.FrameLayout').count > 1:
+                        continue
+                    self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
+                    self.pp(text='我的').wait_gone(timeout=5)
                     if self.pp(text='我的').exists:
                         continue
                     try:
-                        title = self.pp.xpath(f'//*[@resource-id="xxqg-article-header"]/android.view.View[1]') \
-                            .get(timeout=1).text
+                        title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                                              'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                              'android.view.View[2]').get(timeout=5).text
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
@@ -426,6 +433,7 @@ class QiangGuoFuZhu(object):
                                 f'/android.widget.ImageView[1]').exists:
                             self.pp.press('back')
                             time.sleep(1)
+                            self.pp(text="放弃").click_exists()
                         time.sleep(1)
                         need_share_num -= 1
                     if job_temp[12][0] != '已完成' and need_comment_num > 0:  # 如果没有完成评论任务，就开始评论，之后删除评论
@@ -475,24 +483,28 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         # 点击首页下面的电视台按钮
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click(timeout=20)
-        for it, t in enumerate(
-                self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
-                              '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
-                              'android.view.ViewGroup[1]//android.widget.LinearLayout/'
-                              'android.widget.TextView').all()):  # 获取视频分类列表
+        if video_pin_dao := self.pp.xpath(
+                '//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
+                '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
+                '//android.widget.LinearLayout/android.widget.TextView').all():  # 获取视频分类列表
+            pass
+        else:
+            print('获取视频频道列表失败，请修改程序')
+            raise
+        for it, t in enumerate(video_pin_dao):
             t.click()
             time.sleep(1)
             for ci_shu in range(8):  # 向下滑动8次页面
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
-                    loc = issue.center()
-                    self.pp.click(*loc)
-                    time.sleep(1)
+                    self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
+                    self.pp(text='我的').wait_gone(timeout=5)
                     if self.pp(text='我的').exists:
                         continue
                     try:
-                        title = self.pp.xpath(f'//*[@resource-id="xxqg-article-body"]/android.view.View[2]') \
-                            .get(timeout=1).text
+                        title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                                              'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                              'android.view.View[2]').get(timeout=5).text  # 获取标题
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
@@ -688,8 +700,8 @@ class QiangGuoFuZhu(object):
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
         time.sleep(1)
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
-                      '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.view.ViewGroup['
-                      '1]/android.widget.LinearLayout[4]').click(timeout=20)
+                      '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]//android.widget.LinearLayout[4]'
+                      ).click(timeout=20)
         time.sleep(1)
         self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click(timeout=20)
         print('已完成本地频道')
@@ -711,9 +723,12 @@ class QiangGuoFuZhu(object):
             com = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[3]').get_text()
             com1, com2 = re.search(r'已获(\d*)分/每日上限(\d*)分', com).groups()
             sta = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').get_text()
-            job_status1.append((sta, com1, com2))
+            title = self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[1]/'
+                                  f'android.view.View').get_text()
+            job_status1.append((sta, com1, com2, title))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
+        print(job_status1)
         return job_status1
 
     def get_learn_num(self):
@@ -830,6 +845,17 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
+        for isu, issue in enumerate(
+                self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
+            # print(issue.parent())
+            if issue.child(className='android.widget.FrameLayout').count > 1:
+                print('haha')
+                continue
+            print(issue)
+            issue.click()
+            self.pp.press('back')
+        # for j in video_pin_dao_2:
+        #     print(j)
         # ht = self.pp.dump_hierarchy()
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
@@ -848,8 +874,9 @@ if __name__ == '__main__':
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        if index_u == len(user_list) - 1:
-            do.recycle_main_do(cl_screen=True)
-        else:
-            do.recycle_main_do(cl_screen=False)
-        # do.main_do(test=True)
+        # do.main_do()
+        do.main_do(test=True)
+        # if index_u == len(user_list) - 1:
+        #     do.recycle_main_do(cl_screen=True)
+        # else:
+        #     do.recycle_main_do(cl_screen=False)
