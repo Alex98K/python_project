@@ -362,7 +362,7 @@ class QiangGuoFuZhu(object):
                 time.sleep(1)
 
     def read_issue(self, job_temp, test=False):
-        need_issue_num = int(job_temp[2][2]) - int(job_temp[2][1])
+        need_issue_num = int(job_temp[1][2]) - int(job_temp[1][1])
         need_share_num = 2 - int(job_temp[11][1])
         need_collection_num = 2 - int(job_temp[10][1])
         need_comment_num = int(job_temp[12][2]) - int(job_temp[12][1])
@@ -473,7 +473,7 @@ class QiangGuoFuZhu(object):
                         # 点击积分,查一下积分完成情况
                         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click(timeout=20)
                         job_temp = self.job_status()  # 查一下积分完成情况
-                        need_issue_num = int(job_temp[2][2]) - int(job_temp[2][1])
+                        need_issue_num = int(job_temp[1][2]) - int(job_temp[1][1])
                         need_share_num = 2 - int(job_temp[11][1])
                         need_collection_num = 2 - int(job_temp[10][1])
                         need_comment_num = int(job_temp[12][2]) - int(job_temp[12][1])
@@ -864,6 +864,7 @@ class QiangGuoFuZhu(object):
         self.pp.press('home')
 
     def recycle_main_do(self, cl_screen=False):
+        t = time.time()
         while True:
             try:
                 self.main_do()
@@ -871,17 +872,15 @@ class QiangGuoFuZhu(object):
             except Exception as e:
                 print(e)
                 pass
+            if time.time() - t > 3600:
+                print('程序存在错误，试了一个小时都不行，请修改程序')
+                self.pp.app_stop('cn.xuexi.android')
+                break
         if cl_screen == 1:
             self.pp.screen_off()
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
-        title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
-                              'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
-                              'android.view.View[1]').get(timeout=5).text
-        # // android.webkit.WebView / android.view.View[1] / android.view.View[1] / android.view.View[1] / \
-        #    android.view.View[1] / android.view.View[1] / android.view.View[3]
-        print(title)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
