@@ -276,14 +276,18 @@ class QiangGuoFuZhu(object):
                 ti_shi_word = '重大决策保障机制'
             if ti_shi_word not in ti_shi:
                 print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
+            # 根据有多少个填空区域进行填空
             if self.pp(className='android.widget.EditText').count == 1:
-                self.pp(className='android.widget.EditText').set_text(ti_shi_word)
+                self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text(ti_shi_word)
             else:
-                for pp1 in self.pp(className='android.widget.EditText'):
-                    text_len = pp1.sibling(className="android.view.View").count
-                    ti_shi_word_temp = ti_shi_word[:text_len]
-                    pp1.set_text(ti_shi_word_temp)
-                    ti_shi_word = ti_shi_word.replace(ti_shi_word_temp, '')
+                # 遍历每个填空区域
+                for pp1 in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
+                    # 获取每个填空区域有几个空格
+                    text_len = len(self.pp.xpath(str(pp1.get_xpath()) + '/..//android.view.View').all())
+                    # 给每个填空区域填空
+                    self.pp.xpath(pp1.get_xpath()).set_text(ti_shi_word)
+                    # 删除已经填了空的
+                    ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
                     # print(ti_shi_word, ti_shi_word_temp)
             time.sleep(1)
             if self.pp(text='确定').exists:
@@ -293,8 +297,10 @@ class QiangGuoFuZhu(object):
                 self.pp(text='完成').click_exists()
             else:
                 # print('没找到完全匹配的答案，随便填写了')
-                for pp2 in self.pp(className='android.widget.EditText'):
-                    pp2.set_text('重大机制保障机制')
+                for j in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
+                    self.pp.xpath(j.get_xpath()).set_text('重大机制保障机制')
+                # for pp2 in self.pp(className='android.widget.EditText'):
+                #     pp2.set_text('重大机制保障机制')
                 time.sleep(1)
                 if not self.pp(text='确定').exists:
                     print('这个填空题没法自动答题，手动答题吧')
@@ -370,12 +376,16 @@ class QiangGuoFuZhu(object):
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
         # 点击首页下面的中间学习按钮
+        down_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]')\
+            .get(timeout=20).bounds
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
         if issue_pin_dao := self.pp.xpath(
                 '//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
                 '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
                 '//android.widget.LinearLayout/android.widget.TextView').all():  # 获取文章分类列表
-            pass
+            top_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/'
+                                       'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/'
+                                       'android.widget.LinearLayout[1]/android.view.View[1]').get(timeout=3).bounds
         else:
             print('获取文章频道列表失败，请修改程序')
             raise
@@ -385,16 +395,21 @@ class QiangGuoFuZhu(object):
             for ci_shu in range(8):  # 每个栏目下滑8次页面找文章看
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
+                    if down_bounds[1] > issue.bounds[1] > top_bounds[3]:
+                        self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
+                    elif down_bounds[1] > issue.bounds[3] > top_bounds[3]:
+                        self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[3])
+                    else:
+                        continue
                     # if issue.child(className='android.widget.FrameLayout').count > 1:
                     #     continue
-                    self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
                     self.pp(text='我的').wait_gone(timeout=5)
                     if self.pp(text='我的').exists:
                         continue
                     try:
                         title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                               'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
-                                              'android.view.View[1]').get(timeout=5).text
+                                              'android.view.View[1]').get(timeout=10).text
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
@@ -436,13 +451,14 @@ class QiangGuoFuZhu(object):
                                 f'/android.widget.ImageView[1]').exists:
                             self.pp.press('back')
                             time.sleep(1)
-                            self.pp(text="放弃").click_exists()
+                            self.pp(resourceId="android:id/button1").click_exists()  # 点击放弃保存短信按钮
                         time.sleep(1)
                         need_share_num -= 1
                     if job_temp[12][0] != '已完成' and need_comment_num > 0:  # 如果没有完成评论任务，就开始评论，之后删除评论
                         self.pp(text="欢迎发表你的观点").click()  # 评论
                         self.pp(text="好观点将会被优先展示").wait()  # 评论
-                        self.pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
+                        # self.pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
+                        self.pp.xpath('//*[@text="好观点将会被优先展示"]').set_text('支持，有希望了，加油，厉害了')
                         self.pp(text="发布").click(timeout=20)  # 评论
                         self.pp(text="删除").wait()  # 评论
                         while self.pp(text="删除").exists:
@@ -469,6 +485,7 @@ class QiangGuoFuZhu(object):
                             return
                 time.sleep(1)
                 if it == 0:  # 为了跳过推荐频道里的本地新闻栏目，避免错误点击到
+                    # continue
                     self.pp(scrollable=True).scroll.toEnd(steps=90, max_swipes=4)
                 else:
                     self.pp(scrollable=True).scroll(steps=90)
@@ -485,12 +502,16 @@ class QiangGuoFuZhu(object):
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
         # 点击首页下面的电视台按钮
+        down_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]') \
+            .get(timeout=20).bounds
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_contact"]').click(timeout=20)
         if video_pin_dao := self.pp.xpath(
                 '//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
                 '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
                 '//android.widget.LinearLayout/android.widget.TextView').all():  # 获取视频分类列表
-            pass
+            top_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/'
+                                       'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/'
+                                       'android.widget.LinearLayout[1]/android.view.View[1]').get(timeout=3).bounds
         else:
             print('获取视频频道列表失败，请修改程序')
             raise
@@ -500,14 +521,19 @@ class QiangGuoFuZhu(object):
             for ci_shu in range(8):  # 向下滑动8次页面
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
-                    self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
+                    if down_bounds[1] > issue.bounds[1] > top_bounds[3]:
+                        self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
+                    elif down_bounds[1] > issue.bounds[3] > top_bounds[3]:
+                        self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[3])
+                    else:
+                        continue
                     self.pp(text='我的').wait_gone(timeout=5)
                     if self.pp(text='我的').exists:
                         continue
                     try:
                         title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                               'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                              'android.view.View[2]').get(timeout=5).text  # 获取标题
+                                              'android.view.View[2]').get(timeout=10).text  # 获取标题
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
@@ -641,22 +667,28 @@ class QiangGuoFuZhu(object):
                     break
                 time.sleep(1)
                 self.pp.screen_on()
-        if self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                         'android.widget.FrameLayout[1]').click_exists():  # 点击电台按钮，打开电台控制栏
-            # 点击关闭按钮
-            try:
-                self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                              'android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                              'android.widget.ImageView[4]').click(timeout=1)
-            except uiautomator2.exceptions.XPathElementNotFoundError:
-                self.pp.xpath('//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/'
-                              'android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                              'android.widget.ImageView[4]').click(timeout=1)
+        try:  # 点击电台按钮，打开电台控制栏
             self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
-                          'android.widget.FrameLayout[1]/android.widget.ImageView[4]').wait_gone()
-        else:
-            print('就没有打开收听电台的小栏目，只能重新看了')
+                          'android.widget.FrameLayout[1]/android.widget.ImageView[1]').click(timeout=3)
+        except uiautomator2.exceptions.XPathElementNotFoundError:
+            self.pp.xpath('//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                          'android.widget.FrameLayout[1]/android.widget.ImageView[1]').click(timeout=3)
+        except Exception as e:
+            print('就没有打开收听电台的小栏目，只能重新看了', e)
             return False
+        # 点击关闭按钮
+        try:
+            self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                          'android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                          'android.widget.ImageView[4]').click(timeout=1)
+        except uiautomator2.exceptions.XPathElementNotFoundError:
+            self.pp.xpath('//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/'
+                          'android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                          'android.widget.ImageView[4]').click(timeout=1)
+        self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                      'android.widget.FrameLayout[1]/android.widget.ImageView[4]').wait_gone()
+        self.pp.xpath('//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+                      'android.widget.FrameLayout[1]/android.widget.ImageView[4]').wait_gone()
         self.pp(text='我的').click_exists()
         time.sleep(1)
         return True
@@ -848,37 +880,18 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
-        # print(self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text('saf'))
-        # for j in self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
-        #                        'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
-        #                        'android.view.View[4]/android.widget.EditText[1]').all():
-        print(self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
-                            'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
-                            'android.view.View[4]/android.view.View[1]').info)
-
-        # for pp2 in self.pp(className='android.widget.EditText'):
-        # for k in pp2:
-        # k.sibling(className="android.view.View").sen('重大机制保障机制')
-        # pp3 = pp2.sibling(className="android.view.View")
-        # print(pp3.info)
-        # pp3.click()
-        # pp3.send_keys("重大机制保障机制")
-        # pp3.set_text("重大机制保障机制")
-        # print(self.pp.xpath('//android.widget.EditText[2]/../android.view.View').info)
-        # length = len(self.pp.xpath('//android.widget.EditText').all())
-        # self.pp.xpath('//android.widget.EditText[2]/../android.view.View[1]').set_text('saf')
-        # for j in range(length):
-        #     self.pp.xpath(f'//android.widget.EditText[{j+1}]//..//android.view.View').set_text('重da')
-        # for pp2 in self.pp.xpath('//android.widget.EditText//..//android.view.View').all():
-        #     print(pp2.attrib)
-        # print(self.pp(NAF='true'))
-        # self.pp.xpath('//android.widget.EditText/../android.view.View').set_text('safdasdf')
-        # self.pp.xpath('//android.widget.EditText').set_text('safdasdf')
+        title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                              'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
+                              'android.view.View[1]').get(timeout=5).text
+        # // android.webkit.WebView / android.view.View[1] / android.view.View[1] / android.view.View[1] / \
+        #    android.view.View[1] / android.view.View[1] / android.view.View[3]
+        print(title)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
-        # self.listen_tai_end()
+        # job = self.job_status()
+        # self.read_issue(job)
         raise
 
 
@@ -892,8 +905,8 @@ if __name__ == '__main__':
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        do.main_do()
-        # do.main_do(test=True)
+        # do.main_do()
+        do.main_do(test=True)
         # if index_u == len(user_list) - 1:
         #     do.recycle_main_do(cl_screen=True)
         # else:
