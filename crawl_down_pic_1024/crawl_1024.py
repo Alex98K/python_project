@@ -217,14 +217,14 @@ def url_head_new(headers2):
     :param headers2:通用请求头
     :return:获取到的地址
     """
-    url_start = 'https://haibabo.com/'
+    url_start = 'https://rr567.net/'
     headers2['cookie'] = '__cfduid=d8820278eebccdea98714721a2976fa7b1569319655; _ga=GA1.2.829357220.1569319655; ' \
                          'page=http%3A%2F%2Frvedc.com; _gid=GA1.2.334072831.1590379178; fuck1=yes '
     print("准备获取新地址")
     res = requests.get(url_start, headers=headers1, timeout=30).text
     try:
         head = re.search(r"href='h.*?'", res).group()[6:-1]
-        print("获取新地址成功", head)
+        print("获取新地址成功")
         return head
     except TypeError:
         print('在首页获取1024网址出错')
@@ -362,9 +362,9 @@ if __name__ == '__main__':
     PASS_TITLE = ['上传图片发布', '各类图片上传的图床', '删',
                   '自拍区发帖前必读', '新手必學', '官方客戶',
                   '为什么你的帖子没有得到评分', '图区禁止使用下列图床', '發圖貼會員&訪客須知']
-    total_pages = 50  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
+    total_pages = 5  # 计划获取多少个标题页的信息，如果以前page_data.json没有存储，可设为100，如果存储过，依据更新频率确定。
     INTERVAL_TIME_PIC = 0  # 下载图片的请求间隔时间，太短容易被图片所在网站禁IP或者封UA
-    INTERVAL_TIME_DETAIL = 10  # 详情页请求间隔时间，太短容易被1024网站禁IP
+    INTERVAL_TIME_DETAIL = 0  # 详情页请求间隔时间，太短容易被1024网站禁IP
     WORKER_NUM_PIC = 60  # 下载图片时候的线程数
     WORKER_NUM_PAGE = 1  # 下载页面时候的线程数
     # 请求头信息，用于下载器的get请求
@@ -410,7 +410,7 @@ if __name__ == '__main__':
         print('没有可用网址，可能被禁IP了，跳过网站获取详细页信息，直接从原来存储的page_data中获取地址，下载图片')
     thread1.shutdown(wait=True)
     # 开始按照字典中信息，下载图片
-    # for n in range(5):
-    #     thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
-    #     page_down(pic_dir, thread2)
-    #     thread2.shutdown(wait=True)
+    for n in range(5):
+        thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
+        page_down(pic_dir, thread2)
+        thread2.shutdown(wait=True)

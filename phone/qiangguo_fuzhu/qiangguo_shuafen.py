@@ -13,7 +13,7 @@ class QiangGuoFuZhu(object):
                  tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
-        # pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
+        pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
         self.pp = self.connect_phone_usb()
         # self.pp = uiautomator2.connect_wifi('192.168.1.218')
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
@@ -66,9 +66,9 @@ class QiangGuoFuZhu(object):
         self.pp(text='再来一局').click_exists()
         if self.pp(text="选择联系人").exists:
             self.pp(description="返回").click_exists()
-        # self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/android.view.View['
+        # self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/android.view.View[3]/android.view.View['
         #               '1]/android.view.View[1]/android.view.View[1]').wait()
-        title = self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/'
+        title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/android.view.View[3]/'
                               'android.view.View[1]/android.view.View[2]/android.view.View[1]/'
                               'android.view.View[1]').get(timeout=20).text  # 匹配标题
         title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(title).replace('\xa0', '').replace('_', ''))  # 清洗，除去字符等
@@ -158,9 +158,9 @@ class QiangGuoFuZhu(object):
                 fuz_answer_num = 'ABCD'
             dui_num = 0
             try:  # 获取连续做对题的数目，然后返回结果
-                dui_num = self.pp.xpath('//*[@resource-id="app"]/android.view.View[1]/android.view.View[3]/'
-                                        'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                        'android.view.View[1]/android.view.View').get(timeout=0.1)
+                dui_num = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                                        'android.view.View[3]/android.view.View[1]/android.view.View[1]/'
+                                        'android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=0.1)
                 dui_num = int(re.search(r'连续答对X(\d*)', dui_num.text).group(1))
             except uiautomator2.exceptions.XPathElementNotFoundError:
                 pass
@@ -253,16 +253,17 @@ class QiangGuoFuZhu(object):
 
     def do_everyday_ti(self):
         # 获取题的类型
-        ti_type = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[1]'
-                                '/android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=20).text
+        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                'android.view.View').get(timeout=20).text
         self.pp(scrollable=True).scroll.toEnd()
         self.pp(text='查看提示').click(timeout=20)
         time.sleep(1)
-        ti_shi = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
+        ti_shi = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/android.view.View[3]'
                                '/android.view.View[2]/android.view.View').get(timeout=20).text
         ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
-        ti_shi_pic = self.pp.xpath('//*[@resource-id="app"]/android.view.View[2]/android.view.View[3]'
-                                   '/android.view.View[2]/android.view.View').screenshot()
+        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
         self.pp.press('back')
         time.sleep(1)
         self.pp(scrollable=True).scroll.toBeginning()
@@ -277,10 +278,10 @@ class QiangGuoFuZhu(object):
             if self.pp(className='android.widget.EditText').count == 1:
                 self.pp(className='android.widget.EditText').set_text(ti_shi_word)
             else:
-                for self.pp1 in self.pp(className='android.widget.EditText'):
-                    text_len = self.pp1.sibling(className="android.view.View").count
+                for pp1 in self.pp(className='android.widget.EditText'):
+                    text_len = pp1.sibling(className="android.view.View").count
                     ti_shi_word_temp = ti_shi_word[:text_len]
-                    self.pp1.set_text(ti_shi_word_temp)
+                    pp1.set_text(ti_shi_word_temp)
                     ti_shi_word = ti_shi_word.replace(ti_shi_word_temp, '')
                     # print(ti_shi_word, ti_shi_word_temp)
             time.sleep(1)
@@ -291,8 +292,8 @@ class QiangGuoFuZhu(object):
                 self.pp(text='完成').click_exists()
             else:
                 # print('没找到完全匹配的答案，随便填写了')
-                for self.pp2 in self.pp(className='android.widget.EditText'):
-                    self.pp2.set_text('重大机制保障机制')
+                for pp2 in self.pp(className='android.widget.EditText'):
+                    pp2.set_text('重大机制保障机制')
                 time.sleep(1)
                 if not self.pp(text='确定').exists:
                     print('这个填空题没法自动答题，手动答题吧')
@@ -333,6 +334,7 @@ class QiangGuoFuZhu(object):
     def run_everyday_ti(self):
         time.sleep(1)
         self.pp(text='我要答题').click(timeout=20)
+        self.pp(text='知道了').click_exists(timeout=5)
         self.pp(text='每日答题').click(timeout=20)
         time.sleep(1)
         while True:
@@ -845,18 +847,19 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
-        for isu, issue in enumerate(
-                self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
-            # print(issue.parent())
-            if issue.child(className='android.widget.FrameLayout').count > 1:
-                print('haha')
-                continue
-            print(issue)
-            issue.click()
-            self.pp.press('back')
-        # for j in video_pin_dao_2:
-        #     print(j)
-        # ht = self.pp.dump_hierarchy()
+        # for pp2 in self.pp(className='android.widget.EditText'):
+        #     for k in pp2:
+        #         k.sibling(className="android.view.View").set_text('重大机制保障机制')
+        #     print(pp2)
+        #     pp2.set_text('重大机制保障机制')
+        self.pp.xpath('//android.widget.EditText//..//android.view.View').set_text('重大机制保障机制')
+        # for pp2 in self.pp.xpath('//android.widget.EditText//..//android.view.View').all():
+        #     print(pp2.attrib)
+        # print(self.pp(NAF='true'))
+            # pp2.set_text('重大机制保障机制')
+        # self.pp.xpath('//android.widget.EditText/../android.view.View').set_text('safdasdf')
+        # self.pp.xpath('//android.widget.EditText').set_text('safdasdf')
+        # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
@@ -869,7 +872,7 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'
     user_list = [
-        ['18810810611', 'jiajia0611'],
+        # ['18810810611', 'jiajia0611'],
         ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
