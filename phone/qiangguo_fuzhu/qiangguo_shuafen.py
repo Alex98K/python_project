@@ -384,16 +384,16 @@ class QiangGuoFuZhu(object):
             for ci_shu in range(8):  # 每个栏目下滑8次页面找文章看
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
-                    if issue.child(className='android.widget.FrameLayout').count > 1:
-                        continue
+                    # if issue.child(className='android.widget.FrameLayout').count > 1:
+                    #     continue
                     self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
                     self.pp(text='我的').wait_gone(timeout=5)
                     if self.pp(text='我的').exists:
                         continue
                     try:
                         title = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
-                                              'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                              'android.view.View[2]').get(timeout=5).text
+                                              'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
+                                              'android.view.View[1]').get(timeout=5).text
                     except uiautomator2.exceptions.XPathElementNotFoundError:
                         if not self.pp(text='我的').exists:
                             self.pp.press('back')
@@ -847,17 +847,27 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
+        # print(self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text('saf'))
+        # for j in self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+        #                        'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
+        #                        'android.view.View[4]/android.widget.EditText[1]').all():
+        print(self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                            'android.view.View[1]/android.view.View[1]/android.view.View[2]/'
+                            'android.view.View[4]/android.view.View[1]').info)
+
         # for pp2 in self.pp(className='android.widget.EditText'):
-            # for k in pp2:
-                # k.sibling(className="android.view.View").sen('重大机制保障机制')
-            # pp3 = pp2.sibling(className="android.view.View")
-            # print(pp3.info)
-            # pp3.click()
-            # pp3.send_keys("重大机制保障机制")
-            # pp3.set_text("重大机制保障机制")
-        print(self.pp.xpath('//android.widget.EditText//..//android.view.View[2]').info)
-        self.pp.xpath('//android.widget.EditText//..//android.view.View[2]')\
-            .set_text('重1大机制保障机制')
+        # for k in pp2:
+        # k.sibling(className="android.view.View").sen('重大机制保障机制')
+        # pp3 = pp2.sibling(className="android.view.View")
+        # print(pp3.info)
+        # pp3.click()
+        # pp3.send_keys("重大机制保障机制")
+        # pp3.set_text("重大机制保障机制")
+        # print(self.pp.xpath('//android.widget.EditText[2]/../android.view.View').info)
+        # length = len(self.pp.xpath('//android.widget.EditText').all())
+        # self.pp.xpath('//android.widget.EditText[2]/../android.view.View[1]').set_text('saf')
+        # for j in range(length):
+        #     self.pp.xpath(f'//android.widget.EditText[{j+1}]//..//android.view.View').set_text('重da')
         # for pp2 in self.pp.xpath('//android.widget.EditText//..//android.view.View').all():
         #     print(pp2.attrib)
         # print(self.pp(NAF='true'))
@@ -881,8 +891,8 @@ if __name__ == '__main__':
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        # do.main_do()
-        do.main_do(test=True)
+        do.main_do()
+        # do.main_do(test=True)
         # if index_u == len(user_list) - 1:
         #     do.recycle_main_do(cl_screen=True)
         # else:
