@@ -848,15 +848,19 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         # for pp2 in self.pp(className='android.widget.EditText'):
-        #     for k in pp2:
-        #         k.sibling(className="android.view.View").set_text('重大机制保障机制')
-        #     print(pp2)
-        #     pp2.set_text('重大机制保障机制')
-        self.pp.xpath('//android.widget.EditText//..//android.view.View').set_text('重大机制保障机制')
+            # for k in pp2:
+                # k.sibling(className="android.view.View").sen('重大机制保障机制')
+            # pp3 = pp2.sibling(className="android.view.View")
+            # print(pp3.info)
+            # pp3.click()
+            # pp3.send_keys("重大机制保障机制")
+            # pp3.set_text("重大机制保障机制")
+        print(self.pp.xpath('//android.widget.EditText//..//android.view.View[2]').info)
+        self.pp.xpath('//android.widget.EditText//..//android.view.View[2]')\
+            .set_text('重1大机制保障机制')
         # for pp2 in self.pp.xpath('//android.widget.EditText//..//android.view.View').all():
         #     print(pp2.attrib)
         # print(self.pp(NAF='true'))
-            # pp2.set_text('重大机制保障机制')
         # self.pp.xpath('//android.widget.EditText/../android.view.View').set_text('safdasdf')
         # self.pp.xpath('//android.widget.EditText').set_text('safdasdf')
         # print(self.pp.dump_hierarchy())

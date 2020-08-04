@@ -217,18 +217,20 @@ def url_head_new(headers2):
     :param headers2:通用请求头
     :return:获取到的地址
     """
-    url_start = 'https://rr567.net/'
+    url_start = 'https://haibabo.com/'
     headers2['cookie'] = '__cfduid=d8820278eebccdea98714721a2976fa7b1569319655; _ga=GA1.2.829357220.1569319655; ' \
                          'page=http%3A%2F%2Frvedc.com; _gid=GA1.2.334072831.1590379178; fuck1=yes '
     print("准备获取新地址")
-    res = requests.get(url_start, headers=headers1, timeout=30).text
     try:
+        res = requests.get(url_start, headers=headers1, timeout=30).text
         head = re.search(r"href='h.*?'", res).group()[6:-1]
-        print("获取新地址成功")
+        print("获取新地址成功", head)
         return head
     except TypeError:
         print('在首页获取1024网址出错')
     except AttributeError:
+        print('在首页获取1024网址出错')
+    except requests.exceptions.ConnectionError:
         print('在首页获取1024网址出错')
 
 
@@ -246,7 +248,7 @@ def store_return_url(url2=None, headers_ve=None):
             head_list = json.load(f3)
         except json.decoder.JSONDecodeError:
             head_list = []
-        if verify_url(url2, host=url2[8:-10], headers_ver=headers_ve):
+        if url2 and verify_url(url2, host=url2[8:-10], headers_ver=headers_ve):
             print(f"新获取的地址可以使用：{url2}")
             url_temp = url2
             if url2 not in head_list:
