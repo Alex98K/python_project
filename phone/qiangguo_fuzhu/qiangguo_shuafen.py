@@ -853,12 +853,8 @@ class QiangGuoFuZhu(object):
         time.sleep(1)
         if job_stat[3][0] != '已完成':
             self.read_issue_time(job_stat)
-        else:
-            print('已完成文章时长学习')
         if job_stat[4][0] != '已完成':
             self.look_tel(job_stat)
-        else:
-            print('已完成视听时长学习')
         self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
         self.pp(text='退出登录').click_exists(timeout=3)
         self.pp(text='确认').click_exists(timeout=3)
@@ -905,8 +901,8 @@ if __name__ == '__main__':
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        # do.main_do()
-        do.main_do(test=True)
+        do.main_do()
+        # do.main_do(test=True)
         # if index_u == len(user_list) - 1:
         #     do.recycle_main_do(cl_screen=True)
         # else:
