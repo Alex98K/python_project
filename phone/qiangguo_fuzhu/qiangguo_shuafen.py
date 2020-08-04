@@ -901,9 +901,9 @@ if __name__ == '__main__':
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        do.main_do()
+        # do.main_do()
         # do.main_do(test=True)
-        # if index_u == len(user_list) - 1:
-        #     do.recycle_main_do(cl_screen=True)
-        # else:
-        #     do.recycle_main_do(cl_screen=False)
+        if index_u == len(user_list) - 1:
+            do.recycle_main_do(cl_screen=True)
+        else:
+            do.recycle_main_do(cl_screen=False)
