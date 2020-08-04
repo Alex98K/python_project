@@ -870,12 +870,12 @@ class QiangGuoFuZhu(object):
                 self.main_do()
                 break
             except Exception as e:
+                if time.time() - t > 3600:
+                    print('程序存在错误，试了一个小时都不行，请修改程序')
+                    self.pp.app_stop('cn.xuexi.android')
+                    break
                 print(e)
                 pass
-            if time.time() - t > 3600:
-                print('程序存在错误，试了一个小时都不行，请修改程序')
-                self.pp.app_stop('cn.xuexi.android')
-                break
         if cl_screen == 1:
             self.pp.screen_off()
         self.__del__()
