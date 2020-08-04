@@ -13,7 +13,8 @@ class QiangGuoFuZhu(object):
                  tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
-        pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
+        if os.name != 'posix':
+            pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
         self.pp = self.connect_phone_usb()
         # self.pp = uiautomator2.connect_wifi('192.168.1.218')
         # self.pp = uiautomator2.connect('127.0.0.1:62001')
