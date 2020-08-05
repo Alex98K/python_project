@@ -384,8 +384,8 @@ class QiangGuoFuZhu(object):
                 '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
                 '//android.widget.LinearLayout/android.widget.TextView').all():  # 获取文章分类列表
             top_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/'
-                                       'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/'
-                                       'android.widget.LinearLayout[1]/android.view.View[1]').get(timeout=3).bounds
+                                       'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]//'
+                                       'android.widget.LinearLayout[1]').get(timeout=3).bounds
         else:
             print('获取文章频道列表失败，请修改程序')
             raise
@@ -510,8 +510,8 @@ class QiangGuoFuZhu(object):
                 '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
                 '//android.widget.LinearLayout/android.widget.TextView').all():  # 获取视频分类列表
             top_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/'
-                                       'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/'
-                                       'android.widget.LinearLayout[1]/android.view.View[1]').get(timeout=3).bounds
+                                       'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]//'
+                                       'android.widget.LinearLayout[1]').get(timeout=3).bounds
         else:
             print('获取视频频道列表失败，请修改程序')
             raise
@@ -881,6 +881,14 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
+        video_pin_dao = self.pp.xpath(
+            '//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
+            '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
+            '//android.widget.LinearLayout/android.widget.TextView').all()
+        top_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/'
+                                   'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]//'
+                                   'android.widget.LinearLayout[1]').get(timeout=3).bounds
+        print(top_bounds)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
@@ -895,14 +903,14 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'
     user_list = [
-        # ['18810810611', 'jiajia0611'],
-        ['18611001824', 'nopass.123'],
+        ['18810810611', 'jiajia0611'],
+        # ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        # do.main_do()
+        do.main_do()
         # do.main_do(test=True)
-        if index_u == len(user_list) - 1:
-            do.recycle_main_do(cl_screen=True)
-        else:
-            do.recycle_main_do(cl_screen=False)
+        # if index_u == len(user_list) - 1:
+        #     do.recycle_main_do(cl_screen=True)
+        # else:
+        #     do.recycle_main_do(cl_screen=False)
