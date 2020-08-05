@@ -763,7 +763,10 @@ class QiangGuoFuZhu(object):
             job_status1.append((sta, com1, com2, title))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
-        print(job_status1)
+        for k in job_status1:
+            if k[0] != '已完成':
+                print(f'{k[3]}  还没有完成，需要{k[2]}积分，只完成了{k[1]}积分')
+        # print(job_status1)
         return job_status1
 
     def get_learn_num(self):
