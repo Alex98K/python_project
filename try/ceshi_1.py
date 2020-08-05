@@ -17,3 +17,4 @@ pp.watcher.remove()
 
 # img2.show()
 # pp.screen_off()
+//android.widget.ListView/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]

@@ -396,14 +396,18 @@ class QiangGuoFuZhu(object):
             for ci_shu in range(8):  # 每个栏目下滑8次页面找文章看
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
+                    # 跳过推荐栏目的全国学习平台以及包含打开文字的文章，不看
+                    if self.pp.xpath(issue.get_xpath()+'//*[text="打开"]').exists:
+                        continue
+                    # 跳过推荐频道里的本地新闻栏目,该功能还不稳定，需要测试，如果不行就要把下面跳过的功能开启
+                    # if not self.pp.xpath(issue.get_xpath() + '//android.widget.TextView').exists:
+                    #     continue
                     if down_bounds[1] > issue.bounds[1] > top_bounds[3]:
                         self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[1])
                     elif down_bounds[1] > issue.bounds[3] > top_bounds[3]:
                         self.pp.click((issue.bounds[0] + issue.bounds[2]) / 2, issue.bounds[3])
                     else:
                         continue
-                    # if issue.child(className='android.widget.FrameLayout').count > 1:
-                    #     continue
                     self.pp(text='我的').wait_gone(timeout=5)
                     if self.pp(text='我的').exists:
                         continue
@@ -485,7 +489,7 @@ class QiangGuoFuZhu(object):
                             print('阅读文章任务已完成')
                             return
                 time.sleep(1)
-                if it == 0:  # 为了跳过推荐频道里的本地新闻栏目，避免错误点击到
+                if it == 0 and ci_shu == 0:  # 为了跳过推荐频道里的本地新闻栏目，避免错误点击到
                     # continue
                     self.pp(scrollable=True).scroll.toEnd(steps=90, max_swipes=4)
                 else:
@@ -885,20 +889,16 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
-        video_pin_dao = self.pp.xpath(
-            '//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout[1]'
-            '/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]'
-            '//android.widget.LinearLayout/android.widget.TextView').all()
-        top_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/'
-                                   'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]//'
-                                   'android.widget.LinearLayout[1]').get(timeout=3).bounds
-        print(top_bounds)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
-        # job = self.job_status()
-        # self.read_issue(job)
+        job = [('已完成', '1', '1', '登录'), ('已完成', '0', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
+               ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
+               ('已完成', '6', '6', '每日答题'), ('去答题', '0', '5', '每周答题'), ('去看看', '0', '10', '专项答题'),
+               ('已完成', '6', '6', '挑战答题'), ('已完成', '2', '2', '订阅'), ('已完成', '1', '1', '收藏'),
+               ('已完成', '1', '1', '分享'), ('已完成', '2', '2', '发表观点'), ('已完成', '1', '1', '本地频道')]
+        self.read_issue(job)
         raise
 
 
@@ -912,8 +912,8 @@ if __name__ == '__main__':
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
-        do.main_do()
-        # do.main_do(test=True)
+        # do.main_do()
+        do.main_do(test=True)
         # if index_u == len(user_list) - 1:
         #     do.recycle_main_do(cl_screen=True)
         # else:
