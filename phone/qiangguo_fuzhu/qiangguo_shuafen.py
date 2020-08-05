@@ -32,6 +32,7 @@ class QiangGuoFuZhu(object):
     def __del__(self):
         try:
             self.pp.watcher.stop()
+            self.pp.watcher.remove()
         except AttributeError:
             pass
 
