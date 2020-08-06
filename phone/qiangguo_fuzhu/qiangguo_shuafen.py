@@ -362,6 +362,147 @@ class QiangGuoFuZhu(object):
                 self.pp(text='每日答题').click(timeout=20)
                 time.sleep(1)
 
+    def do_week_and_special_ti(self, ti_ku):
+        # 获取题的类型
+        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                'android.view.View').get(timeout=20).text
+        self.pp(scrollable=True).scroll.toEnd()
+        self.pp(text='查看提示').click(timeout=20)
+        time.sleep(1)
+        ti_shi = self.pp.xpath(
+            '//android.webkit.WebView/android.view.View[1]/android.view.View[2]/android.view.View[3]'
+            '/android.view.View[2]/android.view.View').get(timeout=20).text
+        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
+        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
+        self.pp.press('back')
+        time.sleep(1)
+        self.pp(scrollable=True).scroll.toBeginning()
+        if ti_type == '填空题':
+            # 看下是不是视频题
+            if not self.pp.xpath('//android.widget.Image').exists:
+                ti_shi_word = self.pic_to_text(ti_shi_pic)
+            else:  # 是视频题
+                ti_shi_word = '重大决策保障机制'
+            if ti_shi_word not in ti_shi:
+                print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
+            # 根据有多少个填空区域进行填空
+            if self.pp(className='android.widget.EditText').count == 1:
+                self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text(ti_shi_word)
+            else:
+                # 遍历每个填空区域
+                for pp1 in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
+                    # 获取每个填空区域有几个空格
+                    text_len = len(self.pp.xpath(str(pp1.get_xpath()) + '/..//android.view.View').all())
+                    # 给每个填空区域填空
+                    self.pp.xpath(pp1.get_xpath()).set_text(ti_shi_word)
+                    # 删除已经填了空的
+                    ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
+                    # print(ti_shi_word, ti_shi_word_temp)
+            time.sleep(1)
+            if self.pp(text='确定').exists:
+                self.pp(text='确定').click()
+                time.sleep(1)
+                self.pp(text='下一题').click_exists()
+                self.pp(text='完成').click_exists()
+            else:
+                # print('没找到完全匹配的答案，随便填写了')
+                for j in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
+                    self.pp.xpath(j.get_xpath()).set_text('重大机制保障机制')
+                # for pp2 in self.pp(className='android.widget.EditText'):
+                #     pp2.set_text('重大机制保障机制')
+                time.sleep(1)
+                if not self.pp(text='确定').exists:
+                    print('这个填空题没法自动答题，手动答题吧')
+                    raise
+                else:
+                    self.pp(text='确定').click(timeout=20)
+                    time.sleep(1)
+                    self.pp(text='下一题').click_exists()
+                    self.pp(text='完成').click_exists()
+        else:  # 选择题
+            ti_shi_word = ti_shi
+            answer = []
+            for choose in self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View[1]'
+                                        '/android.view.View[2]').all():
+                answer_clean = re.sub(r'[^\w\u4e00-\u9fa5]', '',
+                                      str(choose.text).replace('\xa0', '').replace('_', ''))
+                answer.append(choose.text)
+                if answer_clean in ti_shi_word:
+                    choose.click()
+            time.sleep(1)
+            if self.pp(text='确定').exists:
+                self.pp(text='确定').click()
+                time.sleep(1)
+                self.pp(text='下一题').click_exists()
+                self.pp(text='完成').click_exists()
+            else:
+                # print('没找到完全匹配的答案，找个最合适的')
+                da_an = str(process.extractOne(ti_shi_word, answer)[0])
+                self.pp(text=da_an).click()
+                time.sleep(1)
+                if not self.pp(text='确定').exists:
+                    print('这个选择题没法自动答题，手动答题吧')
+                    raise
+                else:
+                    self.pp(text='确定').click_exists(timeout=20)
+                    self.pp(text='下一题').click_exists(timeout=2)
+                    self.pp(text='完成').click_exists(timeout=2)
+
+    def run_every_week_ti(self):
+        with open(os.path.join(self.path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
+            week_ti_all = json.load(f2)
+        time.sleep(1)
+        self.pp(text='我要答题').click(timeout=20)
+        self.pp(text='知道了').click_exists(timeout=5)
+        self.pp(text='每周答题').click(timeout=20)
+        time.sleep(1)
+        while True:
+            self.do_week_and_special_ti(week_ti_all)
+            time.sleep(1)
+            if self.pp(text='再来一组').exists:
+                self.pp(text='返回').click_gone()
+                self.pp.press('back')
+                time.sleep(1)
+                self.pp(text='学习积分').click(timeout=20)
+                time.sleep(1)
+                job_sta = self.job_status()
+                if job_sta[6][0] == '已完成':
+                    break
+                time.sleep(1)
+                self.pp(text='我要答题').click(timeout=20)
+                self.pp(text='每周答题').click(timeout=20)
+                time.sleep(1)
+
+    def run_special_ti(self):
+        with open(os.path.join(self.path, f'zhuan_xiang.json'), 'r', encoding="UTF-8") as f1:
+            special_ti_all = json.load(f1)
+        time.sleep(1)
+        self.pp(text='我要答题').click(timeout=20)
+        self.pp(text='知道了').click_exists(timeout=5)
+        self.pp(text='专项答题').click(timeout=20)
+        time.sleep(1)
+        while True:
+            self.do_week_and_special_ti()
+            time.sleep(1)
+            if self.pp(text='再来一组').exists:
+                self.pp(text='返回').click_gone()
+                self.pp.press('back')
+                time.sleep(1)
+                self.pp(text='学习积分').click(timeout=20)
+                time.sleep(1)
+                job_sta = self.job_status()
+                if job_sta[7][0] == '已完成':
+                    break
+                time.sleep(1)
+                self.pp(text='我要答题').click(timeout=20)
+                self.pp(text='专项答题').click(timeout=20)
+                time.sleep(1)
+
+
+
+
     def read_issue(self, job_temp, test=False):
         need_issue_num = int(job_temp[1][2]) - int(job_temp[1][1])
         need_share_num = 2 - int(job_temp[11][1])
@@ -377,7 +518,7 @@ class QiangGuoFuZhu(object):
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
         # 点击首页下面的中间学习按钮
-        down_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]')\
+        down_bounds = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]') \
             .get(timeout=20).bounds
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
         if issue_pin_dao := self.pp.xpath(
@@ -397,7 +538,7 @@ class QiangGuoFuZhu(object):
                 for isu, issue in enumerate(
                         self.pp.xpath(f'//android.widget.ListView/android.widget.FrameLayout').all()):
                     # 跳过推荐栏目的全国学习平台以及包含打开文字的文章，不看
-                    if self.pp.xpath(issue.get_xpath()+'//*[text="打开"]').exists:
+                    if self.pp.xpath(issue.get_xpath() + '//*[text="打开"]').exists:
                         continue
                     # 跳过推荐频道里的本地新闻栏目,该功能还不稳定，需要测试，如果不行就要把下面跳过的功能开启
                     # if not self.pp.xpath(issue.get_xpath() + '//android.widget.TextView').exists:
@@ -890,16 +1031,41 @@ class QiangGuoFuZhu(object):
         self.__del__()
 
     def test_pro(self):  # 测试专用程序
+        print('开始测试程序了')
+        time.sleep(1)
+        top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                              'android.view.View[1]').get(timeout=5).bounds[3]
+        down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                               'android.view.View[2]').get(timeout=5).bounds[3]
+        while not (self.pp(text='您已经看到了我的底线').exists and down_y > self.pp(text='您已经看到了我的底线').bounds()[1] > top_y):
+            self.pp(scrollable=True).scroll.toEnd(steps=10)
+            if self.pp(text='您已经看到了我的底线').exists:
+                print(self.pp(text='您已经看到了我的底线').bounds())
+        all_week_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                                          'android.view.View[2]//android.widget.ListView/android.view.View').all()
+        # self.pp(scrollable=True).scroll.toBeginning(steps=10)
+        all_week_ti_xpath.reverse()
+        for j in all_week_ti_xpath:
+            while not down_y > j.bounds[1] > top_y:
+                self.pp(scrollable=True).scroll.forward(steps=90)
+            date_title = self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text()
+            if '年' not in date_title:
+                date_title = '2018年' + date_title
+            status = self.pp.xpath(j.get_xpath() + '/android.view.View[2]').get_text()
+            if status == '未作答':
+                j.click()
+                break
+        print(date_title, status)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
-        job = [('已完成', '1', '1', '登录'), ('已完成', '0', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
-               ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
-               ('已完成', '6', '6', '每日答题'), ('去答题', '0', '5', '每周答题'), ('去看看', '0', '10', '专项答题'),
-               ('已完成', '6', '6', '挑战答题'), ('已完成', '2', '2', '订阅'), ('已完成', '1', '1', '收藏'),
-               ('已完成', '1', '1', '分享'), ('已完成', '2', '2', '发表观点'), ('已完成', '1', '1', '本地频道')]
-        self.read_issue(job)
+        # job = [('已完成', '1', '1', '登录'), ('已完成', '0', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
+        #        ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
+        #        ('已完成', '6', '6', '每日答题'), ('去答题', '0', '5', '每周答题'), ('去看看', '0', '10', '专项答题'),
+        #        ('已完成', '6', '6', '挑战答题'), ('已完成', '2', '2', '订阅'), ('已完成', '1', '1', '收藏'),
+        #        ('已完成', '1', '1', '分享'), ('已完成', '2', '2', '发表观点'), ('已完成', '1', '1', '本地频道')]
+        # self.read_issue(job)
         raise
 
 
@@ -914,8 +1080,8 @@ if __name__ == '__main__':
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
         # do.main_do()
-        # do.main_do(test=True)
-        if index_u == len(user_list) - 1:
-            do.recycle_main_do(cl_screen=True)
-        else:
-            do.recycle_main_do(cl_screen=False)
+        do.main_do(test=True)
+        # if index_u == len(user_list) - 1:
+        #     do.recycle_main_do(cl_screen=True)
+        # else:
+        #     do.recycle_main_do(cl_screen=False)
