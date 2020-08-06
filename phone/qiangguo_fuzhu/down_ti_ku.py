@@ -44,8 +44,7 @@ def get_url_ti(urls):
         ti_ku[title] = answer
     return ti_ku
 
-
-if __name__ == '__main__':
+def down_ti():
     path = os.path.abspath(os.path.dirname(__file__))
     with open(os.path.join(path, f'zhuan_xiang.json'), 'r', encoding="UTF-8") as f1:
         special_ti_all = json.load(f1)
@@ -79,3 +78,7 @@ if __name__ == '__main__':
     if week_ti_all:
         with open(f'mei_zhou.json', 'w', encoding='UTF-8') as f2:
             json.dump(week_ti_all, f2, ensure_ascii=False, indent=2)
+
+
+if __name__ == '__main__':
+    down_ti()
