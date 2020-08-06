@@ -8,7 +8,7 @@ zhuanxiang_url = 'https://124731.cn/post/390.html'
 meizhou_url = 'https://124731.cn/post/391.html'
 ti_url_1 = requests.get('http://www.syiban.com/sou/')
 ti_url_1.encoding = "utf-8"
-ti = etree.HTML(ti_url_1.text).xpath('/html/body/div/div/div[2]/div/div/div/script/text()')
+ti = etree.HTML(ti_url_1.text).xpath('/div[@class=post-page-wrapper-content]')
 data = re.search(r'ti=".*?"', ti[0]).group()
 str_a = data[4:-2]
 res = re.findall(r'(.*?)\|\|', str_a)
