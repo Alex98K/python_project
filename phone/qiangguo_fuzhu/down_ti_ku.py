@@ -3,6 +3,9 @@ import re
 import requests
 from lxml import etree
 
+
+zhuanxiang_url = 'https://124731.cn/post/390.html'
+meizhou_url = 'https://124731.cn/post/391.html'
 ti_url_1 = requests.get('http://www.syiban.com/sou/')
 ti_url_1.encoding = "utf-8"
 ti = etree.HTML(ti_url_1.text).xpath('/html/body/div/div/div[2]/div/div/div/script/text()')
