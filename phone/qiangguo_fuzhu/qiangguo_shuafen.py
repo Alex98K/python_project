@@ -459,9 +459,14 @@ class QiangGuoFuZhu(object):
                                               'android.view.View[2]//android.widget.ListView/android.view.View').all()
             for j in all_week_ti_xpath:
                 j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
+                j_rect = self.pp.xpath(j.get_xpath()).get().rect
                 while not (down_y > j_bounds[1] > top_y and j_bounds[3] - j_bounds[1] > 5):
-                    self.pp(scrollable=True).scroll(steps=130)
+                    if j_bounds[1] < top_y:
+                        self.pp(scrollable=True).scroll.backward(steps=180)
+                    elif j_bounds[1] > down_y:
+                        self.pp(scrollable=True).scroll(steps=180)
                     j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
+                    print(self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text(), j_bounds, top_y, down_y)
                 j_status = self.pp.xpath(j.get_xpath() + '/android.view.View[2]').get_text()
                 if j_status == '未作答':
                     date_title = self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text()
@@ -529,14 +534,15 @@ class QiangGuoFuZhu(object):
         while True:
             break_sign = 0
             all_special_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
-                                                 'android.view.View[2]//android.view.View/android.view.View[last()]') \
-                .all()
+                                                 'android.view.View[2]//android.view.View/'
+                                                 'android.view.View[last()]').all()
             for j in all_special_ti_xpath:
                 j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
                 while not (down_y > j_bounds[1] > top_y and j_bounds[3] - j_bounds[1] > 5):
-                    self.pp(scrollable=True).scroll(steps=130)
+                    self.pp(scrollable=True).scroll(steps=180)
                     j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-                if j.text == '开始答题' or j.text == '继续答题':
+                    print(j_bounds, top_y, down_y)
+                if j.text == '开始答题' or j.text == '继续答题' or j.text == '重新答题':
                     date_title = self.pp.xpath(j.get_xpath() + '/../preceding-sibling::android.view.View[2]').get_text()
                     date_title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(date_title).replace('\xa0', '').replace('_', ''))
                     try:
@@ -1114,8 +1120,25 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         print('开始测试程序了')
-        self.run_every_week_ti(test=True)
-        # self.run_special_ti()
+        top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                              'android.view.View[1]').get(timeout=5).bounds[3]
+        down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                               'android.view.View[2]').get(timeout=5).bounds[3]
+        all_week_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                                          'android.view.View[2]//android.widget.ListView/android.view.View').all()
+        for j in all_week_ti_xpath:
+            j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
+            j_rect = self.pp.xpath(j.get_xpath()).get().rect
+            print(j_rect)
+            while j_bounds[3] - j_bounds[1] != j_rect[3]:
+                if j_bounds[1] < top_y:
+                    self.pp(scrollable=True).scroll.backward(steps=180)
+                elif j_bounds[1] > down_y:
+                    self.pp(scrollable=True).scroll(steps=180)
+                j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
+                print(self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text(), j_bounds, top_y, down_y)
+        # self.run_every_week_ti(test=True)
+        # self.run_special_ti(test=True)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
