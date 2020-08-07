@@ -26,7 +26,8 @@ class QiangGuoFuZhu(object):
         # 注册watcher，如果顶部的快捷栏被无意间滑下来了，就自动返回，划上去
         self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
                                                    "/notification_container_parent']").call(self.call_back)
-        self.pp.watcher('fresh').when('刷新').click()
+        self.pp.watcher('fresh1').when('刷新').click()
+        self.pp.watcher('fresh2').when('网络开小差～请稍后试试').when('确定').click()
         self.pp.watcher.start(0.2)
 
     def __del__(self):
@@ -366,6 +367,7 @@ class QiangGuoFuZhu(object):
 
     def do_week_and_special_ti(self, answer, every_ti_num):
         time.sleep(1)
+        self.pp(text='加载中...').wait_gone()
         # 获取题的序数
         ti_num = -1
         for i in range(10):
@@ -406,14 +408,18 @@ class QiangGuoFuZhu(object):
                 return False
         else:  # 选择题
             self.pp(scrollable=True).scroll.toEnd()
-            if 'A' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
-            if 'B' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
-            if 'C' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
-            if 'D' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
+            try:
+                if 'A' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
+                if 'B' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
+                if 'C' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
+                if 'D' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
+            except uiautomator2.exceptions.XPathElementNotFoundError:
+                print(ti_shi_word, '答案有问题，请查错')
+                return False
             time.sleep(1)
             if self.pp(text='确定').exists:
                 self.pp(text='确定').click()
@@ -479,6 +485,7 @@ class QiangGuoFuZhu(object):
         self.pp(text='知道了').click_exists(timeout=5)
         self.pp(text='每周答题').click(timeout=20)
         time.sleep(1)
+        self.pp(text='加载中...').wait_gone()
         top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                               'android.view.View[1]').get(timeout=5).bounds[3]
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
@@ -513,12 +520,12 @@ class QiangGuoFuZhu(object):
                         date_title = '2018年' + date_title
                     try:
                         answer = week_ti_all[date_title]
-                        self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                        self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
                         print(f'开始做题-{date_title} 答案是 {answer}')
                     except KeyError:
                         print(f'{date_title}  题目在题库里没有答案')
                         if fuck:
-                            self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                            self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
                         else:
                             continue
                     while True:
@@ -564,6 +571,7 @@ class QiangGuoFuZhu(object):
         self.pp(text='知道了').click_exists(timeout=5)
         self.pp(text='专项答题').click(timeout=20)
         time.sleep(1)
+        self.pp(text='加载中...').wait_gone()
         top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                               'android.view.View[1]').get(timeout=5).bounds[3]
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
@@ -596,17 +604,18 @@ class QiangGuoFuZhu(object):
                     date_title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(date_title).replace('\xa0', '').replace('_', ''))
                     try:
                         answer = special_ti_all[date_title]
-                        self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                        self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
                         print(f'开始做题-{date_title} 答案是 {answer}')
                     except KeyError:
                         print(f'{date_title}  题目在题库里没有答案')
                         if fuck:
-                            self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                            self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
                         else:
                             continue
                     while True:
                         time.sleep(1)
                         if answer and not self.do_week_and_special_ti(answer, every_ti_num=10):
+                            answer = []
                             self.do_special_backup(every_ti_num=10)
                         time.sleep(1)
                         if self.pp(text='查看解析').exists:
