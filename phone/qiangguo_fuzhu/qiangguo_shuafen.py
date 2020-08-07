@@ -253,176 +253,7 @@ class QiangGuoFuZhu(object):
     def video_to_text():
         return 'wwo le qu ge ren a ha ah'
 
-    def do_everyday_ti(self):
-        # 获取题的类型
-        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
-                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                'android.view.View').get(timeout=20).text
-        self.pp(scrollable=True).scroll.toEnd()
-        self.pp(text='查看提示').click(timeout=20)
-        time.sleep(1)
-        ti_shi = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/android.view.View[3]'
-                               '/android.view.View[2]/android.view.View').get(timeout=20).text
-        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
-        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
-                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
-        self.pp.press('back')
-        time.sleep(1)
-        self.pp(scrollable=True).scroll.toBeginning()
-        if ti_type == '填空题':
-            # 看下是不是视频题
-            if not self.pp.xpath('//android.widget.Image').exists:
-                ti_shi_word = self.pic_to_text(ti_shi_pic)
-            else:  # 是视频题
-                ti_shi_word = '重大决策保障机制'
-            if ti_shi_word not in ti_shi:
-                print(f'在提示\n{ti_shi}\n中识别出来的红色关键词\n{ti_shi_word}\n不匹配')
-            # 根据有多少个填空区域进行填空
-            if self.pp(className='android.widget.EditText').count == 1:
-                self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text(ti_shi_word)
-            else:
-                # 遍历每个填空区域
-                for pp1 in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
-                    # 获取每个填空区域有几个空格
-                    text_len = len(self.pp.xpath(str(pp1.get_xpath()) + '/..//android.view.View').all())
-                    # 给每个填空区域填空
-                    self.pp.xpath(pp1.get_xpath()).set_text(ti_shi_word)
-                    # 删除已经填了空的
-                    ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
-                    # print(ti_shi_word, ti_shi_word_temp)
-            time.sleep(1)
-            if self.pp(text='确定').exists:
-                self.pp(text='确定').click()
-                time.sleep(1)
-                self.pp(text='下一题').click_exists()
-                self.pp(text='完成').click_exists()
-            else:
-                # print('没找到完全匹配的答案，随便填写了')
-                for j in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
-                    self.pp.xpath(j.get_xpath()).set_text('重大机制保障机制')
-                # for pp2 in self.pp(className='android.widget.EditText'):
-                #     pp2.set_text('重大机制保障机制')
-                time.sleep(1)
-                if not self.pp(text='确定').exists:
-                    print('这个填空题没法自动答题，手动答题吧')
-                    raise
-                else:
-                    self.pp(text='确定').click(timeout=20)
-                    time.sleep(1)
-                    self.pp(text='下一题').click_exists()
-                    self.pp(text='完成').click_exists()
-        else:  # 选择题
-            ti_shi_word = ti_shi
-            answer = []
-            for choose in self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View[1]'
-                                        '/android.view.View[2]').all():
-                answer_clean = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(choose.text).replace('\xa0', '').replace('_', ''))
-                answer.append(choose.text)
-                if answer_clean in ti_shi_word:
-                    choose.click()
-            time.sleep(1)
-            if self.pp(text='确定').exists:
-                self.pp(text='确定').click()
-                time.sleep(1)
-                self.pp(text='下一题').click_exists()
-                self.pp(text='完成').click_exists()
-            else:
-                # print('没找到完全匹配的答案，找个最合适的')
-                da_an = str(process.extractOne(ti_shi_word, answer)[0])
-                self.pp(text=da_an).click()
-                time.sleep(1)
-                if not self.pp(text='确定').exists:
-                    print('这个选择题没法自动答题，手动答题吧')
-                    raise
-                else:
-                    self.pp(text='确定').click_exists(timeout=20)
-                    self.pp(text='下一题').click_exists(timeout=2)
-                    self.pp(text='完成').click_exists(timeout=2)
-
-    def run_everyday_ti(self):
-        time.sleep(1)
-        self.pp(text='我要答题').click(timeout=20)
-        self.pp(text='知道了').click_exists(timeout=5)
-        self.pp(text='每日答题').click(timeout=20)
-        time.sleep(1)
-        while True:
-            self.do_everyday_ti()
-            time.sleep(1)
-            if self.pp(text='再来一组').exists:
-                self.pp(text='返回').click_gone()
-                self.pp.press('back')
-                time.sleep(1)
-                self.pp(text='学习积分').click(timeout=20)
-                time.sleep(1)
-                job_sta = self.job_status()
-                if job_sta[5][0] == '已完成':
-                    break
-                time.sleep(1)
-                self.pp(text='我要答题').click(timeout=20)
-                self.pp(text='每日答题').click(timeout=20)
-                time.sleep(1)
-
-    def do_week_and_special_ti(self, answer):
-        # 获取题的序数
-        ti_num = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
-                               'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                               'android.view.View[2]').get(timeout=20).text
-        ti_num = int(re.search(r'^\d{0,2}', ti_num).group()) - 1
-        ti_shi_word = answer[ti_num]
-        # 获取题的类型
-        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
-                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                'android.view.View').get(timeout=20).text
-        if ti_type == '填空题':
-            if self.pp(className='android.widget.EditText').count == 1:
-                self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text(ti_shi_word)
-            else:
-                # 遍历每个填空区域
-                for pp1 in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
-                    # 获取每个填空区域有几个空格
-                    text_len = len(self.pp.xpath(str(pp1.get_xpath()) + '/..//android.view.View').all())
-                    # 给每个填空区域填空
-                    self.pp.xpath(pp1.get_xpath()).set_text(ti_shi_word)
-                    # 删除已经填了空 的
-                    ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
-                    # print(ti_shi_word, ti_shi_word_temp)
-            time.sleep(1)
-            if self.pp(text='确定').exists:
-                self.pp(text='确定').click()
-                time.sleep(1)
-                self.pp(text='下一题').click_exists()
-                self.pp(text='完成').click_exists()
-            else:
-                print(ti_shi_word, '答案有问题，请查错')
-                return False
-        else:  # 选择题
-            if 'A' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
-            elif 'B' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
-            elif 'C' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
-            elif 'D' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
-            else:
-                print(ti_shi_word, '答案有问题，请查错')
-                return False
-            time.sleep(1)
-            if self.pp(text='确定').exists:
-                self.pp(text='确定').click()
-                time.sleep(1)
-                self.pp(text='下一题').click_exists()
-                self.pp(text='完成').click_exists()
-            else:
-                print(ti_shi_word, '答案有问题，请查错')
-                return False
-        return True
-
-    def do_week_special_backup(self):
-        # 获取题的类型
-        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
-                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                'android.view.View').get(timeout=20).text
+    def _do_day_week_special_backup(self, ti_type):
         self.pp(scrollable=True).scroll.toEnd()
         self.pp(text='查看提示').click(timeout=20)
         time.sleep(1)
@@ -505,6 +336,99 @@ class QiangGuoFuZhu(object):
                     self.pp(text='确定').click_exists(timeout=20)
                     self.pp(text='下一题').click_exists(timeout=2)
                     self.pp(text='完成').click_exists(timeout=2)
+
+    def do_everyday_ti(self):
+        # 获取题的类型
+        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                'android.view.View').get(timeout=20).text
+        self._do_day_week_special_backup(ti_type)
+
+    def run_everyday_ti(self):
+        time.sleep(1)
+        self.pp(text='我要答题').click(timeout=20)
+        self.pp(text='知道了').click_exists(timeout=5)
+        self.pp(text='每日答题').click(timeout=20)
+        time.sleep(1)
+        while True:
+            self.do_everyday_ti()
+            time.sleep(1)
+            if self.pp(text='再来一组').exists:
+                self.pp(text='返回').click_gone()
+                self.pp.press('back')
+                time.sleep(1)
+                self.pp(text='学习积分').click(timeout=20)
+                time.sleep(1)
+                job_sta = self.job_status()
+                if job_sta[5][0] == '已完成':
+                    break
+                time.sleep(1)
+                self.pp(text='我要答题').click(timeout=20)
+                self.pp(text='每日答题').click(timeout=20)
+                time.sleep(1)
+
+    def do_week_and_special_ti(self, answer):
+        # 获取题的序数
+        ti_num = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
+                               'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                               'android.view.View[2]').get(timeout=20).text
+        ti_num = int(re.search(r'^\d{0,2}', ti_num).group()) - 1
+        ti_shi_word = answer[ti_num]
+        # 获取题的类型
+        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
+                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                'android.view.View').get(timeout=20).text
+        if ti_type == '填空题':
+            if self.pp(className='android.widget.EditText').count == 1:
+                self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text(ti_shi_word)
+            else:
+                # 遍历每个填空区域
+                for pp1 in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
+                    # 获取每个填空区域有几个空格
+                    text_len = len(self.pp.xpath(str(pp1.get_xpath()) + '/..//android.view.View').all())
+                    # 给每个填空区域填空
+                    self.pp.xpath(pp1.get_xpath()).set_text(ti_shi_word)
+                    # 删除已经填了空的
+                    ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
+                    # print(ti_shi_word, ti_shi_word_temp)
+            time.sleep(1)
+            if self.pp(text='确定').exists:
+                self.pp(text='确定').click()
+                time.sleep(1)
+                self.pp(text='下一题').click_exists()
+                self.pp(text='完成').click_exists()
+            else:
+                print(ti_shi_word, '答案有问题，请查错')
+                return False
+        else:  # 选择题
+            if 'A' in ti_shi_word:
+                self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
+            elif 'B' in ti_shi_word:
+                self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
+            elif 'C' in ti_shi_word:
+                self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
+            elif 'D' in ti_shi_word:
+                self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
+            else:
+                print(ti_shi_word, '答案有问题，请查错')
+                return False
+            time.sleep(1)
+            if self.pp(text='确定').exists:
+                self.pp(text='确定').click()
+                time.sleep(1)
+                self.pp(text='下一题').click_exists()
+                self.pp(text='完成').click_exists()
+            else:
+                print(ti_shi_word, '答案有问题，请查错')
+                return False
+        return True
+
+    def do_week_special_backup(self):
+        # 获取题的类型
+        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
+                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
+                                'android.view.View').get(timeout=20).text
+        self._do_day_week_special_backup(ti_type)
 
     def run_every_week_ti(self):
         with open(os.path.join(self.path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
