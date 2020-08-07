@@ -18,7 +18,7 @@ def fix_answer(answer_list, answer_num):
     return res_li
 
 
-def get_url_ti(urls):
+def get_url_ti(urls, ti_all):
     url = urls[0]
     answer_num = urls[1]
     try:
@@ -36,6 +36,9 @@ def get_url_ti(urls):
     for i in temp:
         title = list(map(lambda t: re.sub(r'[^\w\u4e00-\u9fa5]', '', str(t).replace('\xa0', '').replace('_', '')),
                          i.xpath('.//text()')))[0]
+        title = re.sub(r'第\d{0,4}期', '', title)
+        if title in ti_all.keys():
+            continue
         answer = list(map(lambda t: re.sub(r'[^\w\u4e00-\u9fa5.]', '', str(t).replace('\xa0', '').replace('_', '')),
                           i.xpath(f'./following-sibling::p[position()<{answer_num+2}]/text()')))
         # print(title)
@@ -44,12 +47,19 @@ def get_url_ti(urls):
         ti_ku[title] = answer
     return ti_ku
 
+
 def down_ti():
     path = os.path.abspath(os.path.dirname(__file__))
-    with open(os.path.join(path, f'zhuan_xiang.json'), 'r', encoding="UTF-8") as f1:
-        special_ti_all = json.load(f1)
-    with open(os.path.join(path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
-        week_ti_all = json.load(f2)
+    try:
+        with open(os.path.join(path, f'zhuan_xiang.json'), 'r', encoding="UTF-8") as f1:
+            special_ti_all = json.load(f1)
+    except FileNotFoundError:
+        special_ti_all = {}
+    try:
+        with open(os.path.join(path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
+            week_ti_all = json.load(f2)
+    except FileNotFoundError:
+        week_ti_all = {}
     special_url_list = [
         ['https://124731.cn/post/390.html', 10],
         ['https://124731.cn/post/392.html', 10],
@@ -61,7 +71,7 @@ def down_ti():
         ['https://124731.cn/post/393.html', 5],
     ]
     for j_special in special_url_list:
-        special = get_url_ti(j_special)
+        special = get_url_ti(j_special, special_ti_all)
         if not special:
             continue
         else:
@@ -70,7 +80,7 @@ def down_ti():
         with open(f'zhuan_xiang.json', 'w', encoding='UTF-8') as f2:
             json.dump(special_ti_all, f2, ensure_ascii=False, indent=2)
     for j_week in week_url_list:
-        week = get_url_ti(j_week)
+        week = get_url_ti(j_week, week_ti_all)
         if not week:
             continue
         else:
