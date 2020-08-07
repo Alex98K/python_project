@@ -383,7 +383,7 @@ class QiangGuoFuZhu(object):
                     text_len = len(self.pp.xpath(str(pp1.get_xpath()) + '/..//android.view.View').all())
                     # 给每个填空区域填空
                     self.pp.xpath(pp1.get_xpath()).set_text(ti_shi_word)
-                    # 删除已经填了空的
+                    # 删除已经填了空 的
                     ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
                     # print(ti_shi_word, ti_shi_word_temp)
             time.sleep(1)
