@@ -504,7 +504,6 @@ class QiangGuoFuZhu(object):
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                'android.view.View[2]').get(timeout=5).bounds[3]
         date_title = ''
-        answer = None
         while True:
             all_week_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                               'android.view.View[2]//android.view.View/android.view.View[last()]').all()
@@ -517,8 +516,17 @@ class QiangGuoFuZhu(object):
                     try:
                         answer = special_ti_all[date_title]
                         j.click()
+                        break
+                    except KeyError:
+                        print(f'{date_title}  题目在题库里没有答案')
+                        answer = []
+                        if fuck:
+                            j.click()
+                        else:
+                            continue
+                    while True:
                         time.sleep(1)
-                        if not self.do_week_and_special_ti(answer):
+                        if answer and not self.do_week_and_special_ti(answer):
                             self.do_week_special_backup()
                         time.sleep(1)
                         if self.pp(text='返回').exists:
@@ -531,35 +539,11 @@ class QiangGuoFuZhu(object):
                             time.sleep(1)
                             job_sta = self.job_status()
                             if job_sta[7][0] == '已完成':
-                                break
+                                return
                             time.sleep(1)
                             self.pp(text='我要答题').click(timeout=20)
                             self.pp(text='专项答题').click(timeout=20)
                             time.sleep(1)
-                        break
-                    except KeyError:
-                        print(f'{date_title}  题目在题库里没有答案')
-                        if fuck:
-                            j.click()
-                            time.sleep(1)
-                            self.do_week_special_backup()
-                            time.sleep(1)
-                            if self.pp(text='返回').exists:
-                                self.pp(text='返回').click_gone()
-                                self.pp.press('back')
-                                time.sleep(1)
-                                self.pp.press('back')
-                                time.sleep(1)
-                                self.pp(text='学习积分').click(timeout=20)
-                                time.sleep(1)
-                                job_sta = self.job_status()
-                                if job_sta[7][0] == '已完成':
-                                    break
-                                time.sleep(1)
-                                self.pp(text='我要答题').click(timeout=20)
-                                self.pp(text='专项答题').click(timeout=20)
-                                time.sleep(1)
-                        continue
             self.pp(scrollable=True).scroll(steps=90)
             if (self.pp(text='您已经看到了我的底线').exists and
                     down_y > self.pp(text='您已经看到了我的底线').bounds()[1] > top_y and
