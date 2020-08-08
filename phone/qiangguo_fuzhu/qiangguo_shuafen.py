@@ -6,6 +6,7 @@ import time
 import pytesseract
 import uiautomator2
 from fuzzywuzzy import process
+from down_ti_ku import DownTiKu
 
 
 class QiangGuoFuZhu(object):
@@ -287,19 +288,18 @@ class QiangGuoFuZhu(object):
                     # 删除已经填了空的
                     ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
                     # print(ti_shi_word, ti_shi_word_temp)
-            time.sleep(1)
+            time.sleep(2)
             if self.pp(text='确定').exists or self.pp(text='下一题').exists or self.pp(text='完成').exists:
                 self.pp(text='确定').click_exists(timeout=2)
                 self.pp(text='下一题').click_exists(timeout=2)
                 self.pp(text='完成').click_exists(timeout=2)
             else:
-                # print('没找到完全匹配的答案，随便填写了')
+                print('没找到完全匹配的答案，随便填写了')
                 for j in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
                     self.pp.xpath(j.get_xpath()).set_text('重大机制保障机制')
-                # for pp2 in self.pp(className='android.widget.EditText'):
-                #     pp2.set_text('重大机制保障机制')
-                time.sleep(1)
-                if not (self.pp(text='确定').exists and self.pp(text='下一题').exists and self.pp(text='完成').exists):
+                time.sleep(2)
+                if not (self.pp(text='确定').exists or self.pp(text='下一题').exists or self.pp(text='完成').exists
+                        or self.pp(text='再来一次').exists):
                     print('这个填空题没法自动答题，手动答题吧')
                     raise
                 else:
@@ -326,7 +326,8 @@ class QiangGuoFuZhu(object):
                 da_an = str(process.extractOne(ti_shi_word, answer)[0])
                 self.pp(text=da_an).click()
                 time.sleep(1)
-                if not (self.pp(text='确定').exists and self.pp(text='下一题').exists and self.pp(text='完成').exists):
+                if not (self.pp(text='确定').exists or self.pp(text='下一题').exists or self.pp(text='完成').exists
+                        or self.pp(text='再来一次').exists):
                     print('这个选择题没法自动答题，手动答题吧')
                     raise
                 else:
@@ -1010,20 +1011,27 @@ class QiangGuoFuZhu(object):
 
     def ben_di(self):
         time.sleep(1)
-        self.pp.press("back")
-        time.sleep(1)
+        while True:
+            self.pp.press("back")
+            time.sleep(1)
+            if self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').exists:
+                break
+            time.sleep(1)
         # 点击首页下面的学习按钮
-        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click(timeout=20)
+        self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]').click_exists()
         time.sleep(1)
+        # 点击第四个标签栏，一般是北京频道
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/view_pager"]/android.widget.FrameLayout['
                       '1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]//android.widget.LinearLayout[4]'
                       ).click(timeout=20)
-        time.sleep(1)
-        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click(timeout=20)
+        # 点击第一个学习平台，北京学习平台
+        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait(timeout=10)
+        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').click_exists()
         print('已完成本地频道')
         time.sleep(1)
         self.pp.press('back')
-        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait_gone()
+        if self.pp.app_current()['package'] != 'cn.xuexi.android':
+            self.pp.app_start('cn.xuexi.android')
         time.sleep(1)
         self.pp(text='我的').click(timeout=20)
         time.sleep(1)
@@ -1047,9 +1055,11 @@ class QiangGuoFuZhu(object):
             job_status1.append((sta, com1, com2, title))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
+        print('****************************************************')
         for k in job_status1:
             if k[0] != '已完成':
                 print(f'{k[3]}  还没有完成，需要{k[2]}积分，只完成了{k[1]}积分')
+        print('****************************************************')
         # print(job_status1)
         return job_status1
 
@@ -1123,6 +1133,10 @@ class QiangGuoFuZhu(object):
             self.run_everyday_ti()
         else:
             print('已完成每日答题任务')
+        if job_stat[6][0] != '已完成':
+            self.run_every_week_ti()
+        else:
+            print('已完成每周答题任务')
         if job_stat[8][0] != '已完成':
             self.run_challenge()
         else:
@@ -1142,6 +1156,10 @@ class QiangGuoFuZhu(object):
             self.read_issue_time(job_stat)
         if job_stat[4][0] != '已完成':
             self.look_tel(job_stat)
+        if job_stat[7][0] != '已完成':
+            self.run_special_ti()
+        else:
+            print('已完成专项答题任务')
         self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
         self.pp(text='退出登录').click_exists(timeout=3)
         self.pp(text='确认').click_exists(timeout=3)
@@ -1171,7 +1189,9 @@ class QiangGuoFuZhu(object):
     def test_pro(self):  # 测试专用程序
         print('开始测试程序了')
         # self.run_every_week_ti(test=True)
-        self.run_special_ti(test=True)
+        # self.run_special_ti(test=True)
+        while True:
+            self.ben_di()
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
@@ -1186,18 +1206,19 @@ class QiangGuoFuZhu(object):
 
 
 if __name__ == '__main__':
+    DownTiKu().down_ti()
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'
     user_list = [
-        # ['18810810611', 'jiajia0611'],
+        ['18810810611', 'jiajia0611'],
         ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
         # do.main_do()
-        do.main_do(test=True)
-        # if index_u == len(user_list) - 1:
-        #     do.recycle_main_do(cl_screen=True)
-        # else:
-        #     do.recycle_main_do(cl_screen=False)
+        # do.main_do(test=True)
+        if index_u == len(user_list) - 1:
+            do.recycle_main_do(cl_screen=True)
+        else:
+            do.recycle_main_do(cl_screen=False)
