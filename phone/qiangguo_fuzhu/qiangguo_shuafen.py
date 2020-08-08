@@ -254,7 +254,15 @@ class QiangGuoFuZhu(object):
     def video_to_text():
         return 'wwo le qu ge ren a ha ah'
 
-    def _do_day_week_special_backup(self, ti_type, ti_shi, ti_shi_pic):
+    def _do_day_week_special_backup(self, ti_type):
+        self.pp(scrollable=True).scroll.toEnd()
+        self.pp(text='查看提示').click(timeout=20)
+        time.sleep(1)
+        ti_shi = self.pp.xpath('//*[@text="提示"]/../following-sibling::android.view.View/android.view.View').get(
+            timeout=20).text
+        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
+        ti_shi_pic = self.pp.xpath(
+            '//*[@text="提示"]/../following-sibling::android.view.View/android.view.View').screenshot()
         self.pp.press('back')
         time.sleep(1)
         self.pp(scrollable=True).scroll.toBeginning()
@@ -331,16 +339,7 @@ class QiangGuoFuZhu(object):
         ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
                                 'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
                                 'android.view.View').get(timeout=20).text
-        self.pp(scrollable=True).scroll.toEnd()
-        self.pp(text='查看提示').click(timeout=20)
-        time.sleep(1)
-        ti_shi = self.pp.xpath(
-            '//android.webkit.WebView/android.view.View[1]/android.view.View[2]/android.view.View[3]'
-            '/android.view.View[2]/android.view.View').get(timeout=20).text
-        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
-        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
-                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
-        self._do_day_week_special_backup(ti_type, ti_shi, ti_shi_pic)
+        self._do_day_week_special_backup(ti_type)
 
     def run_everyday_ti(self):
         time.sleep(1)
@@ -380,6 +379,20 @@ class QiangGuoFuZhu(object):
         if not ti_type:
             print('没有找到题目类型，出错')
             raise
+        if (ti_type == '多选题' or ti_type == '单选题' or ti_type == '判断题') and (('A' in ti_shi_word and not self.pp.xpath(
+                '//android.widget.ListView/android.view.View[1]/android.view.View[1]').exists
+                or 'B' in ti_shi_word and not self.pp.xpath('//android.widget.ListView/android.view.View[2]/'
+                                                            'android.view.View[1]').exists
+                or 'C' in ti_shi_word and not self.pp.xpath('//android.widget.ListView/android.view.View[3]/'
+                                                            'android.view.View[1]').exists
+                or 'D' in ti_shi_word and not self.pp.xpath('//android.widget.ListView/android.view.View[4]/'
+                                                            'android.view.View[1]').exists)
+                or ('A' not in ti_shi_word and 'B' not in ti_shi_word and 'C' not in ti_shi_word
+                    and 'D' not in ti_shi_word)) \
+                or (ti_type == '填空题' and ('A' in ti_shi_word or 'B' in ti_shi_word
+                                          or 'C' in ti_shi_word or 'D' in ti_shi_word)):
+            print(ti_shi_word, '答案有问题，请查错')
+            return False
         if ti_type == '填空题':
             if self.pp(className='android.widget.EditText').count == 1:
                 self.pp.xpath('//android.widget.EditText/../android.view.View[1]').set_text(ti_shi_word)
@@ -410,13 +423,17 @@ class QiangGuoFuZhu(object):
             self.pp(scrollable=True).scroll.toEnd()
             try:
                 if 'A' in ti_shi_word:
-                    self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
+                    self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]')\
+                        .click(timeout=1)
                 if 'B' in ti_shi_word:
-                    self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
+                    self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]')\
+                        .click(timeout=1)
                 if 'C' in ti_shi_word:
-                    self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
+                    self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]')\
+                        .click(timeout=1)
                 if 'D' in ti_shi_word:
-                    self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
+                    self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]')\
+                        .click(timeout=1)
             except uiautomator2.exceptions.XPathElementNotFoundError:
                 print(ti_shi_word, '答案有问题，请查错')
                 return False
@@ -435,7 +452,7 @@ class QiangGuoFuZhu(object):
                 return False
         return True
 
-    def do_week_backup(self, every_ti_num):
+    def do_week_special_backup(self, every_ti_num):
         time.sleep(1)
         # 获取题的序数
         ti_num = -1
@@ -445,37 +462,7 @@ class QiangGuoFuZhu(object):
                 break
         # 获取题的类型
         ti_type = self.pp(text=f'{ti_num + 1} /{every_ti_num}').sibling(className='android.view.View').get_text()[:3]
-        self.pp(scrollable=True).scroll.toEnd()
-        self.pp(text='查看提示').click(timeout=20)
-        time.sleep(1)
-        ti_shi = self.pp.xpath(
-            '//android.webkit.WebView/android.view.View[1]/android.view.View[3]/android.view.View[3]'
-            '/android.view.View[2]/android.view.View').get(timeout=20).text
-        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
-        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
-                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
-        self._do_day_week_special_backup(ti_type, ti_shi, ti_shi_pic)
-
-    def do_special_backup(self, every_ti_num):
-        time.sleep(1)
-        # 获取题的序数
-        ti_num = -1
-        for i in range(10):
-            if self.pp(text=f'{i + 1} /{every_ti_num}').exists:
-                ti_num = i
-                break
-        # 获取题的类型
-        ti_type = self.pp(text=f'{ti_num + 1} /{every_ti_num}').sibling(className='android.view.View').get_text()[:3]
-        self.pp(scrollable=True).scroll.toEnd()
-        self.pp(text='查看提示').click(timeout=20)
-        time.sleep(1)
-        ti_shi = self.pp.xpath(
-            '//android.webkit.WebView/android.view.View[1]/android.view.View[5]/android.view.View[2]'
-            '/android.view.View').get(timeout=20).text
-        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
-        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[5]/'
-                                   'android.view.View[2]/android.view.View').screenshot()
-        self._do_day_week_special_backup(ti_type, ti_shi, ti_shi_pic)
+        self._do_day_week_special_backup(ti_type)
 
     def run_every_week_ti(self, fuck=False, test=False):
         with open(os.path.join(self.path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
@@ -505,7 +492,7 @@ class QiangGuoFuZhu(object):
                 j_xpath = j.get_xpath()
                 j_bounds = self.pp.xpath(j_xpath).get().bounds
                 j_rect = self.pp.xpath(j_xpath).get().rect
-                while j_rect[3] < 20:
+                while j_rect[3] < 20 or j_bounds[1] < top_y:
                     if j_bounds[1] < top_y:
                         self.pp(scrollable=True).scroll.backward(steps=180)
                     elif j_bounds[1] > down_y - j_rect[3] - 1:
@@ -530,8 +517,9 @@ class QiangGuoFuZhu(object):
                             continue
                     while True:
                         time.sleep(1)
-                        if answer and not self.do_week_and_special_ti(answer, every_ti_num=5):
-                            self.do_week_backup(every_ti_num=5)
+                        if not (answer and self.do_week_and_special_ti(answer, every_ti_num=5)):
+                            answer = []
+                            self.do_week_special_backup(every_ti_num=5)
                         time.sleep(1)
                         if self.pp(text='返回').exists:
                             self.pp(text='返回').click_gone()
@@ -592,7 +580,7 @@ class QiangGuoFuZhu(object):
                 j_xpath = j.get_xpath()
                 j_bounds = self.pp.xpath(j_xpath).get().bounds
                 j_rect = self.pp.xpath(j_xpath).get().rect
-                while j_rect[3] < 20:
+                while j_rect[3] < 20 or j_bounds[1] < top_y:
                     if j_bounds[1] < top_y:
                         self.pp(scrollable=True).scroll.backward(steps=180)
                     elif j_bounds[1] > down_y - j_rect[3] - 1:
@@ -614,9 +602,9 @@ class QiangGuoFuZhu(object):
                             continue
                     while True:
                         time.sleep(1)
-                        if answer and not self.do_week_and_special_ti(answer, every_ti_num=10):
+                        if not (answer and self.do_week_and_special_ti(answer, every_ti_num=10)):
                             answer = []
-                            self.do_special_backup(every_ti_num=10)
+                            self.do_week_special_backup(every_ti_num=10)
                         time.sleep(1)
                         if self.pp(text='查看解析').exists:
                             self.pp.press('back')
@@ -1035,7 +1023,10 @@ class QiangGuoFuZhu(object):
         print('已完成本地频道')
         time.sleep(1)
         self.pp.press('back')
+        self.pp.xpath('//android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]').wait_gone()
+        time.sleep(1)
         self.pp(text='我的').click(timeout=20)
+        time.sleep(1)
 
     def job_status(self):
         time.sleep(1)
@@ -1063,15 +1054,15 @@ class QiangGuoFuZhu(object):
         return job_status1
 
     def get_learn_num(self):
+        time.sleep(1)
         self.pp(description='我的信息').click(timeout=20)
         time.sleep(1)
-        learn_num = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
-                                  '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
-                                  '/android.widget.TextView[2]').get_text()
-        print('这个手机学习强国的学号是', learn_num)
+        self.learn_num = self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/user_info_fragment_container"]'
+                                       '/android.widget.LinearLayout[3]/android.widget.LinearLayout[1]'
+                                       '/android.widget.TextView[2]').get_text()
+        print('这个手机学习强国的学号是', self.learn_num)
         self.pp.press('back')
         time.sleep(1)
-        return learn_num
 
     def main_do(self, test=False):  # 主运行程序
         # self.pp.screen_on()
@@ -1106,7 +1097,7 @@ class QiangGuoFuZhu(object):
             raise
         self.pp(text='我的').click_exists(timeout=20)
         time.sleep(1)
-        self.learn_num = self.get_learn_num()
+        self.get_learn_num()
         self.pp(text='学习积分').click_exists(timeout=20)
         self.pp(text='积分规则').wait()
         job_stat = self.job_status()
@@ -1124,10 +1115,6 @@ class QiangGuoFuZhu(object):
             self.run_ding_yue(job_stat)
         else:
             print('已完成订阅')
-        if job_stat[13][0] != '已完成':
-            self.ben_di()
-        else:
-            print('已完成本地频道')
         if job_stat[1][0] != '已完成':
             self.read_issue(job_stat)
         else:
@@ -1144,6 +1131,10 @@ class QiangGuoFuZhu(object):
             self.listen_tai_end(job_stat, t1)
         else:
             print('已完成视听时长学习')
+        if job_stat[13][0] != '已完成':
+            self.ben_di()
+        else:
+            print('已完成本地频道')
         self.pp(text='学习积分').click()
         job_stat = self.job_status()
         time.sleep(1)
