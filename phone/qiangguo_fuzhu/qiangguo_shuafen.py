@@ -26,7 +26,8 @@ class QiangGuoFuZhu(object):
         # 注册watcher，如果顶部的快捷栏被无意间滑下来了，就自动返回，划上去
         self.pp.watcher('notification').when(xpath="//*[@resource-id='com.android.systemui:id"
                                                    "/notification_container_parent']").call(self.call_back)
-        self.pp.watcher('fresh').when('刷新').click()
+        self.pp.watcher('fresh1').when('刷新').click()
+        self.pp.watcher('fresh2').when('网络开小差～请稍后试试').when('确定').click()
         self.pp.watcher.start(0.2)
 
     def __del__(self):
@@ -253,16 +254,7 @@ class QiangGuoFuZhu(object):
     def video_to_text():
         return 'wwo le qu ge ren a ha ah'
 
-    def _do_day_week_special_backup(self, ti_type):
-        self.pp(scrollable=True).scroll.toEnd()
-        self.pp(text='查看提示').click(timeout=20)
-        time.sleep(1)
-        ti_shi = self.pp.xpath(
-            '//android.webkit.WebView/android.view.View[1]/android.view.View[2]/android.view.View[3]'
-            '/android.view.View[2]/android.view.View').get(timeout=20).text
-        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
-        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
-                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
+    def _do_day_week_special_backup(self, ti_type, ti_shi, ti_shi_pic):
         self.pp.press('back')
         time.sleep(1)
         self.pp(scrollable=True).scroll.toBeginning()
@@ -288,11 +280,10 @@ class QiangGuoFuZhu(object):
                     ti_shi_word = ti_shi_word.replace(ti_shi_word[:text_len], '')
                     # print(ti_shi_word, ti_shi_word_temp)
             time.sleep(1)
-            if self.pp(text='确定').exists:
-                self.pp(text='确定').click()
-                time.sleep(1)
-                self.pp(text='下一题').click_exists()
-                self.pp(text='完成').click_exists()
+            if self.pp(text='确定').exists or self.pp(text='下一题').exists or self.pp(text='完成').exists:
+                self.pp(text='确定').click_exists(timeout=2)
+                self.pp(text='下一题').click_exists(timeout=2)
+                self.pp(text='完成').click_exists(timeout=2)
             else:
                 # print('没找到完全匹配的答案，随便填写了')
                 for j in self.pp.xpath('//android.widget.EditText/../android.view.View[1]').all():
@@ -300,14 +291,13 @@ class QiangGuoFuZhu(object):
                 # for pp2 in self.pp(className='android.widget.EditText'):
                 #     pp2.set_text('重大机制保障机制')
                 time.sleep(1)
-                if not self.pp(text='确定').exists:
+                if not (self.pp(text='确定').exists and self.pp(text='下一题').exists and self.pp(text='完成').exists):
                     print('这个填空题没法自动答题，手动答题吧')
                     raise
                 else:
-                    self.pp(text='确定').click(timeout=20)
-                    time.sleep(1)
-                    self.pp(text='下一题').click_exists()
-                    self.pp(text='完成').click_exists()
+                    self.pp(text='确定').click_exists(timeout=2)
+                    self.pp(text='下一题').click_exists(timeout=2)
+                    self.pp(text='完成').click_exists(timeout=2)
         else:  # 选择题
             ti_shi_word = ti_shi
             answer = []
@@ -319,21 +309,20 @@ class QiangGuoFuZhu(object):
                 if answer_clean in ti_shi_word:
                     choose.click()
             time.sleep(1)
-            if self.pp(text='确定').exists:
-                self.pp(text='确定').click()
-                time.sleep(1)
-                self.pp(text='下一题').click_exists()
-                self.pp(text='完成').click_exists()
+            if self.pp(text='确定').exists or self.pp(text='下一题').exists or self.pp(text='完成').exists:
+                self.pp(text='确定').click_exists(timeout=2)
+                self.pp(text='下一题').click_exists(timeout=2)
+                self.pp(text='完成').click_exists(timeout=2)
             else:
                 # print('没找到完全匹配的答案，找个最合适的')
                 da_an = str(process.extractOne(ti_shi_word, answer)[0])
                 self.pp(text=da_an).click()
                 time.sleep(1)
-                if not self.pp(text='确定').exists:
+                if not (self.pp(text='确定').exists and self.pp(text='下一题').exists and self.pp(text='完成').exists):
                     print('这个选择题没法自动答题，手动答题吧')
                     raise
                 else:
-                    self.pp(text='确定').click_exists(timeout=20)
+                    self.pp(text='确定').click_exists(timeout=2)
                     self.pp(text='下一题').click_exists(timeout=2)
                     self.pp(text='完成').click_exists(timeout=2)
 
@@ -342,7 +331,16 @@ class QiangGuoFuZhu(object):
         ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
                                 'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
                                 'android.view.View').get(timeout=20).text
-        self._do_day_week_special_backup(ti_type)
+        self.pp(scrollable=True).scroll.toEnd()
+        self.pp(text='查看提示').click(timeout=20)
+        time.sleep(1)
+        ti_shi = self.pp.xpath(
+            '//android.webkit.WebView/android.view.View[1]/android.view.View[2]/android.view.View[3]'
+            '/android.view.View[2]/android.view.View').get(timeout=20).text
+        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
+        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
+        self._do_day_week_special_backup(ti_type, ti_shi, ti_shi_pic)
 
     def run_everyday_ti(self):
         time.sleep(1)
@@ -369,6 +367,7 @@ class QiangGuoFuZhu(object):
 
     def do_week_and_special_ti(self, answer, every_ti_num):
         time.sleep(1)
+        self.pp(text='加载中...').wait_gone()
         # 获取题的序数
         ti_num = -1
         for i in range(10):
@@ -409,14 +408,18 @@ class QiangGuoFuZhu(object):
                 return False
         else:  # 选择题
             self.pp(scrollable=True).scroll.toEnd()
-            if 'A' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
-            if 'B' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
-            if 'C' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
-            if 'D' in ti_shi_word:
-                self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
+            try:
+                if 'A' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[1]/android.view.View[1]').click()
+                if 'B' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[2]/android.view.View[1]').click()
+                if 'C' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[3]/android.view.View[1]').click()
+                if 'D' in ti_shi_word:
+                    self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]').click()
+            except uiautomator2.exceptions.XPathElementNotFoundError:
+                print(ti_shi_word, '答案有问题，请查错')
+                return False
             time.sleep(1)
             if self.pp(text='确定').exists:
                 self.pp(text='确定').click()
@@ -432,12 +435,47 @@ class QiangGuoFuZhu(object):
                 return False
         return True
 
-    def do_week_special_backup(self):
+    def do_week_backup(self, every_ti_num):
+        time.sleep(1)
+        # 获取题的序数
+        ti_num = -1
+        for i in range(10):
+            if self.pp(text=f'{i + 1} /{every_ti_num}').exists:
+                ti_num = i
+                break
         # 获取题的类型
-        ti_type = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
-                                'android.view.View[1]/android.view.View[1]/android.view.View[1]/'
-                                'android.view.View').get(timeout=20).text
-        self._do_day_week_special_backup(ti_type)
+        ti_type = self.pp(text=f'{ti_num + 1} /{every_ti_num}').sibling(className='android.view.View').get_text()[:3]
+        self.pp(scrollable=True).scroll.toEnd()
+        self.pp(text='查看提示').click(timeout=20)
+        time.sleep(1)
+        ti_shi = self.pp.xpath(
+            '//android.webkit.WebView/android.view.View[1]/android.view.View[3]/android.view.View[3]'
+            '/android.view.View[2]/android.view.View').get(timeout=20).text
+        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
+        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[3]/'
+                                   'android.view.View[3]/android.view.View[2]/android.view.View').screenshot()
+        self._do_day_week_special_backup(ti_type, ti_shi, ti_shi_pic)
+
+    def do_special_backup(self, every_ti_num):
+        time.sleep(1)
+        # 获取题的序数
+        ti_num = -1
+        for i in range(10):
+            if self.pp(text=f'{i + 1} /{every_ti_num}').exists:
+                ti_num = i
+                break
+        # 获取题的类型
+        ti_type = self.pp(text=f'{ti_num + 1} /{every_ti_num}').sibling(className='android.view.View').get_text()[:3]
+        self.pp(scrollable=True).scroll.toEnd()
+        self.pp(text='查看提示').click(timeout=20)
+        time.sleep(1)
+        ti_shi = self.pp.xpath(
+            '//android.webkit.WebView/android.view.View[1]/android.view.View[5]/android.view.View[2]'
+            '/android.view.View').get(timeout=20).text
+        ti_shi = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(ti_shi).replace('\xa0', '').replace('_', ''))
+        ti_shi_pic = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[5]/'
+                                   'android.view.View[2]/android.view.View').screenshot()
+        self._do_day_week_special_backup(ti_type, ti_shi, ti_shi_pic)
 
     def run_every_week_ti(self, fuck=False, test=False):
         with open(os.path.join(self.path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
@@ -447,46 +485,53 @@ class QiangGuoFuZhu(object):
         self.pp(text='知道了').click_exists(timeout=5)
         self.pp(text='每周答题').click(timeout=20)
         time.sleep(1)
+        self.pp(text='加载中...').wait_gone()
         top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                               'android.view.View[1]').get(timeout=5).bounds[3]
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                'android.view.View[2]').get(timeout=5).bounds[3]
         date_title = ''
         answer = []
+        last_j_num = -1
         while True:
             break_sign = 0
             all_week_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                               'android.view.View[2]//android.widget.ListView/android.view.View').all()
-            for j in all_week_ti_xpath:
-                j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-                j_rect = self.pp.xpath(j.get_xpath()).get().rect
-                while not (down_y > j_bounds[1] > top_y and j_bounds[3] - j_bounds[1] > 5):
+            for j_num, j in enumerate(all_week_ti_xpath):
+                if j_num <= last_j_num:
+                    continue
+                else:
+                    last_j_num = j_num
+                j_xpath = j.get_xpath()
+                j_bounds = self.pp.xpath(j_xpath).get().bounds
+                j_rect = self.pp.xpath(j_xpath).get().rect
+                while j_rect[3] < 20:
                     if j_bounds[1] < top_y:
                         self.pp(scrollable=True).scroll.backward(steps=180)
-                    elif j_bounds[1] > down_y:
+                    elif j_bounds[1] > down_y - j_rect[3] - 1:
                         self.pp(scrollable=True).scroll(steps=180)
-                    j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-                    print(self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text(), j_bounds, top_y, down_y)
-                j_status = self.pp.xpath(j.get_xpath() + '/android.view.View[2]').get_text()
+                    j_bounds = self.pp.xpath(j_xpath).get().bounds
+                    j_rect = self.pp.xpath(j_xpath).get().rect
+                j_status = self.pp.xpath(j_xpath + '/android.view.View[2]').get_text()
                 if j_status == '未作答':
-                    date_title = self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text()
+                    date_title = self.pp.xpath(j_xpath + '/android.view.View[1]').get_text()
                     date_title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(date_title).replace('\xa0', '').replace('_', ''))
                     if '年' not in date_title:
                         date_title = '2018年' + date_title
                     try:
                         answer = week_ti_all[date_title]
-                        # print(f'开始做题-{date_title} 答案是 {answer}')
-                        self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                        self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
+                        print(f'开始做题-{date_title} 答案是 {answer}')
                     except KeyError:
                         print(f'{date_title}  题目在题库里没有答案')
                         if fuck:
-                            self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                            self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
                         else:
                             continue
                     while True:
                         time.sleep(1)
                         if answer and not self.do_week_and_special_ti(answer, every_ti_num=5):
-                            self.do_week_special_backup()
+                            self.do_week_backup(every_ti_num=5)
                         time.sleep(1)
                         if self.pp(text='返回').exists:
                             self.pp(text='返回').click_gone()
@@ -508,6 +553,7 @@ class QiangGuoFuZhu(object):
                 if break_sign == 1:
                     break
             self.pp(scrollable=True).scroll(steps=90)
+            print('下滑一次，打开下面的题目')
             if (self.pp(text='您已经看到了我的底线').exists and
                     down_y > self.pp(text='您已经看到了我的底线').bounds()[1] > top_y and
                     self.pp(text='您已经看到了我的底线').bounds()[3] - self.pp(text='您已经看到了我的底线').bounds()[1] > 5):
@@ -525,40 +571,52 @@ class QiangGuoFuZhu(object):
         self.pp(text='知道了').click_exists(timeout=5)
         self.pp(text='专项答题').click(timeout=20)
         time.sleep(1)
+        self.pp(text='加载中...').wait_gone()
         top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                               'android.view.View[1]').get(timeout=5).bounds[3]
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                'android.view.View[2]').get(timeout=5).bounds[3]
         date_title = ''
         answer = []
+        last_j_num = -1
         while True:
             break_sign = 0
             all_special_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                                  'android.view.View[2]//android.view.View/'
                                                  'android.view.View[last()]').all()
-            for j in all_special_ti_xpath:
-                j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-                while not (down_y > j_bounds[1] > top_y and j_bounds[3] - j_bounds[1] > 5):
-                    self.pp(scrollable=True).scroll(steps=180)
-                    j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-                    print(j_bounds, top_y, down_y)
+            for j_num, j in enumerate(all_special_ti_xpath):
+                if j_num <= last_j_num:
+                    continue
+                else:
+                    last_j_num = j_num
+                j_xpath = j.get_xpath()
+                j_bounds = self.pp.xpath(j_xpath).get().bounds
+                j_rect = self.pp.xpath(j_xpath).get().rect
+                while j_rect[3] < 20:
+                    if j_bounds[1] < top_y:
+                        self.pp(scrollable=True).scroll.backward(steps=180)
+                    elif j_bounds[1] > down_y - j_rect[3] - 1:
+                        self.pp(scrollable=True).scroll(steps=180)
+                    j_bounds = self.pp.xpath(j_xpath).get().bounds
+                    j_rect = self.pp.xpath(j_xpath).get().rect
                 if j.text == '开始答题' or j.text == '继续答题' or j.text == '重新答题':
-                    date_title = self.pp.xpath(j.get_xpath() + '/../preceding-sibling::android.view.View[2]').get_text()
+                    date_title = self.pp.xpath(j_xpath + '/../preceding-sibling::android.view.View[2]').get_text()
                     date_title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(date_title).replace('\xa0', '').replace('_', ''))
                     try:
                         answer = special_ti_all[date_title]
-                        # print(f'开始做题-{date_title} 答案是 {answer}')
-                        self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                        self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
+                        print(f'开始做题-{date_title} 答案是 {answer}')
                     except KeyError:
                         print(f'{date_title}  题目在题库里没有答案')
                         if fuck:
-                            self.pp.click(j_bounds[0] + 1, j_bounds[1] + 1)
+                            self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
                         else:
                             continue
                     while True:
                         time.sleep(1)
                         if answer and not self.do_week_and_special_ti(answer, every_ti_num=10):
-                            self.do_week_special_backup()
+                            answer = []
+                            self.do_special_backup(every_ti_num=10)
                         time.sleep(1)
                         if self.pp(text='查看解析').exists:
                             self.pp.press('back')
@@ -582,6 +640,7 @@ class QiangGuoFuZhu(object):
                 if break_sign == 1:
                     break
             self.pp(scrollable=True).scroll(steps=90)
+            print('下滑一次，打开下面的题目')
             if (self.pp(text='您已经看到了我的底线').exists and
                     down_y > self.pp(text='您已经看到了我的底线').bounds()[1] > top_y and
                     self.pp(text='您已经看到了我的底线').bounds()[3] - self.pp(text='您已经看到了我的底线').bounds()[1] > 5):
@@ -1120,25 +1179,8 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         print('开始测试程序了')
-        top_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
-                              'android.view.View[1]').get(timeout=5).bounds[3]
-        down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
-                               'android.view.View[2]').get(timeout=5).bounds[3]
-        all_week_ti_xpath = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
-                                          'android.view.View[2]//android.widget.ListView/android.view.View').all()
-        for j in all_week_ti_xpath:
-            j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-            j_rect = self.pp.xpath(j.get_xpath()).get().rect
-            print(j_rect)
-            while j_bounds[3] - j_bounds[1] != j_rect[3]:
-                if j_bounds[1] < top_y:
-                    self.pp(scrollable=True).scroll.backward(steps=180)
-                elif j_bounds[1] > down_y:
-                    self.pp(scrollable=True).scroll(steps=180)
-                j_bounds = self.pp.xpath(j.get_xpath()).get().bounds
-                print(self.pp.xpath(j.get_xpath() + '/android.view.View[1]').get_text(), j_bounds, top_y, down_y)
         # self.run_every_week_ti(test=True)
-        # self.run_special_ti(test=True)
+        self.run_special_ti(test=True)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
