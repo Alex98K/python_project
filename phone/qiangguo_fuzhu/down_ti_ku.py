@@ -52,12 +52,12 @@ class DownTiKu(object):
     def down_ti(self):
         path = os.path.abspath(os.path.dirname(__file__))
         try:
-            with open(os.path.join(path, f'zhuan_xiang.json'), 'r', encoding="UTF-8") as f1:
+            with open(os.path.join(path, f'special_ti.json'), 'r', encoding="UTF-8") as f1:
                 special_ti_all = json.load(f1)
         except FileNotFoundError:
             special_ti_all = {}
         try:
-            with open(os.path.join(path, f'mei_zhou.json'), 'r', encoding="UTF-8") as f2:
+            with open(os.path.join(path, f'week_ti.json'), 'r', encoding="UTF-8") as f2:
                 week_ti_all = json.load(f2)
         except FileNotFoundError:
             week_ti_all = {}
@@ -78,7 +78,7 @@ class DownTiKu(object):
             else:
                 special_ti_all = dict(special_ti_all, **special)
         if special_ti_all:
-            with open(f'zhuan_xiang.json', 'w', encoding='UTF-8') as f2:
+            with open(f'special_ti.json', 'w', encoding='UTF-8') as f2:
                 json.dump(special_ti_all, f2, ensure_ascii=False, indent=2)
         for j_week in week_url_list:
             week = self.get_url_ti(j_week, week_ti_all)
@@ -87,7 +87,7 @@ class DownTiKu(object):
             else:
                 week_ti_all = dict(week_ti_all, **week)
         if week_ti_all:
-            with open(f'mei_zhou.json', 'w', encoding='UTF-8') as f2:
+            with open(f'week_ti.json', 'w', encoding='UTF-8') as f2:
                 json.dump(week_ti_all, f2, ensure_ascii=False, indent=2)
 
 
