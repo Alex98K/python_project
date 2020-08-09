@@ -3,6 +3,7 @@ import os
 import random
 import re
 import time
+import traceback
 import pytesseract
 import uiautomator2
 from fuzzywuzzy import process
@@ -1192,9 +1193,11 @@ class QiangGuoFuZhu(object):
                 self.main_do()
                 break
             except Exception as e:
-                with open(f'error_log.json', 'w+', encoding='UTF-8') as f3:
-                    f3.write(f'{e}\n')
-                self.pp.screenshot(f'出错啦，这是截图-error-错误码{e}-{random.random()}.jpg')
+                with open('error_log.txt', 'a+', encoding='UTF-8') as f3:
+                    f3.write(f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}\n'
+                             f'{traceback.print_exc(file={f3})}\n')
+                self.pp.screenshot(f'出错啦，这是截图-error-错误码{e}-'
+                                   f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}.jpg')
                 if time.time() - t > 3600:
                     print('程序存在错误，试了一个小时都不行，请修改程序')
                     self.pp.app_stop('cn.xuexi.android')
