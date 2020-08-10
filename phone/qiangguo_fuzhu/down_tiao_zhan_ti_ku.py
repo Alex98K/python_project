@@ -42,8 +42,8 @@ class DownTiaoZhanTiKu(QiangGuoFuZhu):
         try:
             self.run_challenge(ti_num=1300)
         except Exception as e:
-            self.pp.screenshot(os.path.join(self.path, 'error.jpg'))
-            with open('error_log.txt', 'a+', encoding='UTF-8') as f3:
+            self.pp.screenshot(os.path.join(self.path, f'{e}-error.jpg'))
+            with open(os.path.join(self.path, 'error_log.txt'), 'a+', encoding='UTF-8') as f3:
                 f3.write(f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}\n'
                          f'{traceback.print_exc(file=f3)}\n\n')
         self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)

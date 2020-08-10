@@ -1196,11 +1196,11 @@ class QiangGuoFuZhu(object):
                 self.main_do()
                 break
             except Exception as e:
-                with open('error_log.txt', 'a+', encoding='UTF-8') as f3:
+                with open(os.path.join(self.path, 'error_log.txt'), 'a+', encoding='UTF-8') as f3:
                     f3.write(f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}\n'
                              f'{traceback.print_exc(file=f3)}\n\n')
-                self.pp.screenshot(f'出错啦，这是截图-error-错误码{e}-'
-                                   f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}.jpg')
+                self.pp.screenshot(os.path.join(self.path, f'出错啦，这是截图-error-错误码{e}-'
+                                   f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}.jpg'))
                 if time.time() - t > 3600:
                     print('程序存在错误，试了一个小时都不行，请修改程序')
                     self.pp.app_stop('cn.xuexi.android')
