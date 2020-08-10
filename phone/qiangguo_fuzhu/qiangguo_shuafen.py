@@ -1233,14 +1233,14 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'  # 手机锁屏的解锁码
     user_list = [
-        ['18810810611', 'jiajia0611'],
-        # ['18611001824', 'nopass.123'],
+        # ['18810810611', 'jiajia0611'],
+        ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
         # do.main_do()
-        do.main_do(test=True)
-        # if index_u == len(user_list) - 1:
-        #     do.recycle_main_do(cl_screen=True)
-        # else:
-        #     do.recycle_main_do(cl_screen=False)
+        # do.main_do(test=True)
+        if index_u == len(user_list) - 1:
+            do.recycle_main_do(cl_screen=True)
+        else:
+            do.recycle_main_do(cl_screen=False)

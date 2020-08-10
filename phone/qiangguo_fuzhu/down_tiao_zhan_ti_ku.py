@@ -37,7 +37,17 @@ class DownTiaoZhanTiKu(QiangGuoFuZhu):
         self.pp(text='我的').click_exists(timeout=20)
         time.sleep(1)
         print('开始获取题库了')
-        self.run_challenge(ti_num=1300)
+        try:
+            self.run_challenge(ti_num=1300)
+        except Exception:
+            self.pp.screenshot('error.jpg')
+        self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
+        self.pp(text='退出登录').click_exists(timeout=3)
+        self.pp(text='确认').click_exists(timeout=3)
+        self.pp(text='登录').wait(timeout=20)
+        self.pp.app_stop('cn.xuexi.android')
+        time.sleep(1)
+        self.pp.press('home')
 
 
 if __name__ == '__main__':
