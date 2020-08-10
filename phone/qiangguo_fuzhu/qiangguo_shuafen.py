@@ -177,7 +177,7 @@ class QiangGuoFuZhu(object):
             time.sleep(1)
             if (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists) and new_title_sign == 0:
                 print(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到旧题了，但是答错了，请核实答案')
-            time.sleep(2)
+            time.sleep(1)
             return dui_num
 
     def run_challenge(self, ti_num=10):
