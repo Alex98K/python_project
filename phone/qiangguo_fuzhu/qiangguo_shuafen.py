@@ -1187,6 +1187,8 @@ class QiangGuoFuZhu(object):
         self.pp.press('home')
 
     def recycle_main_do(self, cl_screen=False):
+        # 调用另外程序，下载每周和专项的题库
+        DownTiKu().down_ti()
         t = time.time()
         while True:
             try:
@@ -1227,10 +1229,9 @@ class QiangGuoFuZhu(object):
 
 
 if __name__ == '__main__':
-    DownTiKu().down_ti()
     # 要在对象创建时传入参数tesseract_path，表示pytesseract.pytesseract.tesseract_cmd的路径，
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
-    phone_unlock_password = '850611'
+    phone_unlock_password = '850611'  # 手机锁屏的解锁码
     user_list = [
         ['18810810611', 'jiajia0611'],
         # ['18611001824', 'nopass.123'],
