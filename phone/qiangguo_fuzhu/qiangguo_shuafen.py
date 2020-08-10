@@ -102,7 +102,7 @@ class QiangGuoFuZhu(object):
             print('*****没有匹配到题目', title, answer, '记录下来，答案预先设为ABCD')
             data_ti_ku.append([title, answer, 'ABCD'])
         elif fuz_choose != answer:  # 找到了和原来题目一样，但是选项不一样的题
-            print(f'*****找到题目和存储的一样***{title}-{fuz_title}***，但是选项{fuz_choose}-{answer}不一样')
+            print(f'*****找到题目和存储的一样***{title}***，但是选项{fuz_choose}-{answer}不一样')
             data_ti_ku.append([title, answer, 'ABCD'])
             self.duplicate_title.append(fuz_title)
             self.duplicate_title = list(set(self.duplicate_title))
@@ -166,7 +166,7 @@ class QiangGuoFuZhu(object):
             try:  # 获取连续做对题的数目，然后返回结果
                 dui_num = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                         'android.view.View[3]/android.view.View[1]/android.view.View[1]/'
-                                        'android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=3)
+                                        'android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=0.5)
                 dui_num = int(re.search(r'连续答对X(\d*)', dui_num.text).group(1))
             except uiautomator2.exceptions.XPathElementNotFoundError:
                 pass
@@ -177,6 +177,7 @@ class QiangGuoFuZhu(object):
             time.sleep(1)
             if (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists) and new_title_sign == 0:
                 print(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到旧题了，但是答错了，请核实答案')
+            time.sleep(2)
             return dui_num
 
     def run_challenge(self, ti_num=10):
