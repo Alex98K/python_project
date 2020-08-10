@@ -4,6 +4,7 @@ import random
 import re
 import time
 import traceback
+import logging
 import pytesseract
 import uiautomator2
 from fuzzywuzzy import process
@@ -15,6 +16,9 @@ class QiangGuoFuZhu(object):
                  tesseract_path=r'C:/Program Files/Tesseract-OCR/tesseract.exe'):
         super(QiangGuoFuZhu, self).__init__()
         self.path = os.path.abspath(os.path.dirname(__file__))
+        logging.basicConfig(filename=os.path.join(self.path, 'log.txt'), filemode='a',
+                            format="%(asctime)s - %(levelname)s  - %(lineno)d - %(module)s - %(message)s",
+                            )
         if os.name != 'posix':
             pytesseract.pytesseract.tesseract_cmd = tesseract_path  # tesseract可执行文件的路径
         self.pp = self.connect_phone_usb()
