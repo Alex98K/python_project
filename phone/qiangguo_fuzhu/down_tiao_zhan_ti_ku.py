@@ -43,9 +43,7 @@ class DownTiaoZhanTiKu(QiangGuoFuZhu):
             self.run_challenge(ti_num=1300)
         except Exception as e:
             self.pp.screenshot(os.path.join(self.path, f'{e}-error.jpg'))
-            with open(os.path.join(self.path, 'error_log.txt'), 'a+', encoding='UTF-8') as f3:
-                f3.write(f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}\n'
-                         f'{traceback.print_exc(file=f3)}\n\n')
+            self.logger.critical(os.path.join(self.path, 'down_tiao_zhan_ti_ku_log.txt'), exc_info=True)
         self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
         self.pp(text='退出登录').click_exists(timeout=3)
         self.pp(text='确认').click_exists(timeout=3)
