@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "D:/python_project/try/ceshi_1.py", line 16, in <module>
-    ok()
-  File "D:/python_project/try/ceshi_1.py", line 14, in ok
-    had()
-  File "D:/python_project/try/ceshi_1.py", line 11, in had
-    b = a[5]
-IndexError: list index out of range

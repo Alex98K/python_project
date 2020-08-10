@@ -166,7 +166,7 @@ class QiangGuoFuZhu(object):
             try:  # 获取连续做对题的数目，然后返回结果
                 dui_num = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                         'android.view.View[3]/android.view.View[1]/android.view.View[1]/'
-                                        'android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=0.1)
+                                        'android.view.View[1]/android.view.View[1]/android.view.View').get(timeout=3)
                 dui_num = int(re.search(r'连续答对X(\d*)', dui_num.text).group(1))
             except uiautomator2.exceptions.XPathElementNotFoundError:
                 pass
@@ -1195,7 +1195,7 @@ class QiangGuoFuZhu(object):
             except Exception as e:
                 with open('error_log.txt', 'a+', encoding='UTF-8') as f3:
                     f3.write(f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}\n'
-                             f'{traceback.print_exc(file={f3})}\n')
+                             f'{traceback.print_exc(file=f3)}\n\n')
                 self.pp.screenshot(f'出错啦，这是截图-error-错误码{e}-'
                                    f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}.jpg')
                 if time.time() - t > 3600:
@@ -1211,10 +1211,10 @@ class QiangGuoFuZhu(object):
     def test_pro(self):  # 测试专用程序
         print('开始测试程序了')
         # self.run_every_week_ti(test=True)
-        self.run_special_ti(test=True)
+        # self.run_special_ti(test=True)
         # print(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
-        # self.run_challenge(ti_num=9999)
+        self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
         # while True:
         #     job = [('已完成', '1', '1', '登录'), ('已完成', '6', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
@@ -1232,14 +1232,14 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'
     user_list = [
-        # ['18810810611', 'jiajia0611'],
-        ['18611001824', 'nopass.123'],
+        ['18810810611', 'jiajia0611'],
+        # ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
         # do.main_do()
-        # do.main_do(test=True)
-        if index_u == len(user_list) - 1:
-            do.recycle_main_do(cl_screen=True)
-        else:
-            do.recycle_main_do(cl_screen=False)
+        do.main_do(test=True)
+        # if index_u == len(user_list) - 1:
+        #     do.recycle_main_do(cl_screen=True)
+        # else:
+        #     do.recycle_main_do(cl_screen=False)
