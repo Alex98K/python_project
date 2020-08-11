@@ -934,11 +934,17 @@ class QiangGuoFuZhu(object):
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
         self.pp(text='我的').click(timeout=20)
+        time.sleep(1)
 
     def listen_tai_start(self):  # 听电台的音频开始程序，主要是用来弥补视频学习时长
         time.sleep(1)
-        self.pp.press('back')  # 从我的界面回到app首页
-        time.sleep(1)
+        while True:
+            self.pp.press('back')  # 从我的界面回到app首页
+            time.sleep(1)
+            if self.pp.app_current()['package'] != 'cn.xuexi.android':
+                self.pp.app_start('cn.xuexi.android')
+            if self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').exists:
+                break
         # 点击首页下面的电台按钮
         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').click(timeout=20)
         time.sleep(1)
@@ -1077,11 +1083,11 @@ class QiangGuoFuZhu(object):
             job_status1.append((sta, com1, com2, title))
         self.pp.press('back')  # 查一下积分完成情况
         time.sleep(1)
-        self.logger.warning('****************************************************')
+        self.logger.debug('****************************************************')
         for k in job_status1:
             if k[0] != '已完成':
-                self.logger.warning(f'{k[3]}  还没有完成，需要{k[2]}积分，只完成了{k[1]}积分')
-        self.logger.warning('****************************************************')
+                self.logger.debug(f'{k[3]}  还没有完成，需要{k[2]}积分，只完成了{k[1]}积分')
+        self.logger.debug('****************************************************')
         if test:
             job_status1 = [('已完成', '1', '1', '登录'), ('已完成', '6', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
                            ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
@@ -1188,6 +1194,9 @@ class QiangGuoFuZhu(object):
             self.run_special_ti()
         else:
             self.logger.warning('已完成专项答题任务')
+        self.pp(text='学习积分').click()
+        job_stat = self.job_status()
+        time.sleep(1)
         self.pp(resourceId='cn.xuexi.android:id/my_setting').click_exists(timeout=3)
         self.pp(text='退出登录').click_exists(timeout=3)
         self.pp(text='确认').click_exists(timeout=3)
@@ -1195,6 +1204,7 @@ class QiangGuoFuZhu(object):
         self.pp.app_stop('cn.xuexi.android')
         time.sleep(1)
         self.pp.press('home')
+        return job_stat
 
     def recycle_main_do(self, cl_screen=False):
         # 调用另外程序，下载每周和专项的题库
@@ -1202,12 +1212,15 @@ class QiangGuoFuZhu(object):
         t = time.time()
         while True:
             try:
-                self.main_do()
+                job_stat = self.main_do()
+                for i, k in enumerate(job_stat):
+                    if k[0] != '已完成' and i not in [6, 7]:
+                        continue
                 break
             except Exception as e:
                 self.logger.critical('出严重错误啦，以下是错误信息', exc_info=True)
-                self.pp.screenshot(os.path.join(self.path, f'出错啦，这是截图-error-错误码{e}-'
-                                   f'{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}.jpg'))
+                self.pp.screenshot(os.path.join(self.path, f'出错啦,错误码{e}'
+                                   f'{time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())}.jpg'))
                 if time.time() - t > 3600:
                     self.logger.critical('程序存在错误，试了一个小时都不行，请修改程序')
                     self.pp.app_stop('cn.xuexi.android')
@@ -1218,11 +1231,12 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         self.logger.warning('开始测试程序了')
+        # self.listen_tai_start()
         # self.run_every_week_ti(test=True)
         # self.run_special_ti(test=True)
         # self.logger.warning(self.pp.dump_hierarchy())
         # self.run_everyday_ti()
-        self.run_challenge(ti_num=9999)
+        # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
         # while True:
         #     job = [('已完成', '1', '1', '登录'), ('已完成', '6', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
@@ -1239,8 +1253,8 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'  # 手机锁屏的解锁码
     user_list = [
-        # ['18810810611', 'jiajia0611'],
-        ['18611001824', 'nopass.123'],
+        ['18810810611', 'jiajia0611'],
+        # ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)

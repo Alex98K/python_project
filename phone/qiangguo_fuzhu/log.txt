@@ -88,3 +88,363 @@
 2020/08/11 07:59:27 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
 2020/08/11 07:59:27 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
 2020/08/11 07:59:28 - WARNING - 1190 - qiangguo_shuafen - 已完成专项答题任务
+2020/08/11 08:55:49 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 08:55:51 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 08:56:43 - WARNING - 1101 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/11 08:57:18 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 阅读文章  还没有完成，需要6积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 视听学习  还没有完成，需要6积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 文章学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 视听学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 订阅  还没有完成，需要2积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 收藏  还没有完成，需要1积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 分享  还没有完成，需要1积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 发表观点  还没有完成，需要2积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1083 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 08:57:18 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
+2020/08/11 08:57:29 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平就原越共中央总书记黎可漂逝世向阮富仲致唁电  已经看过了，跳过
+2020/08/11 08:57:32 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平对“十四五”规划编制工作作出重要指示  已经看过了，跳过
+2020/08/11 08:57:41 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平就黎巴嫩贝鲁特发生重大爆炸事件向黎巴嫩总统致慰问电  已经看过了，跳过
+2020/08/11 08:57:44 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平就黎巴嫩贝鲁特发生重大爆炸事件向黎巴嫩总统致慰问电  已经看过了，跳过
+2020/08/11 08:57:59 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平同尼泊尔总统就中尼建交65周年互致贺电  已经看过了，跳过
+2020/08/11 08:58:02 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平同尼泊尔总统就中尼建交65周年互致贺电  已经看过了，跳过
+2020/08/11 08:58:05 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平：统一思想坚定信心鼓足干劲抓紧工作 奋力推进国防和军队现代化建设  已经看过了，跳过
+2020/08/11 08:58:17 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平出席北斗三号全球卫星导航系统建成暨开通仪式并宣布正式开通  已经看过了，跳过
+2020/08/11 08:58:21 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平出席北斗三号全球卫星导航系统建成暨开通仪式并宣布正式开通  已经看过了，跳过
+2020/08/11 08:58:36 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平主持中共中央政治局会议 决定10月召开党的十九届五中全会  已经看过了，跳过
+2020/08/11 08:58:44 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平主持党外人士座谈会并发表重要讲话  已经看过了，跳过
+2020/08/11 08:58:59 - WARNING - 844 - qiangguo_shuafen - 第一频道 中央军委主席习近平签署通令给3个单位 5名个人记功  已经看过了，跳过
+2020/08/11 08:59:02 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平对研究生教育工作作出重要指示  已经看过了，跳过
+2020/08/11 08:59:16 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平在亚投行第五届理事会年会视频会议开幕式上致辞  已经看过了，跳过
+2020/08/11 08:59:19 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平向国际热核聚变实验堆计划重大工程安装启动仪式致贺信  已经看过了，跳过
+2020/08/11 08:59:28 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平：坚持新发展理念深入实施东北振兴战略 加快推动新时代吉林全面振兴全方位振兴  已经看过了，跳过
+2020/08/11 08:59:32 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平：坚持新发展理念深入实施东北振兴战略 加快推动新时代吉林全面振兴全方位振兴  已经看过了，跳过
+2020/08/11 08:59:45 - WARNING - 840 - qiangguo_shuafen - 第一频道 第2个视频标题获取出错，跳过
+2020/08/11 08:59:55 - WARNING - 844 - qiangguo_shuafen - 学习视频 没有全民健康 就没有全面小康  已经看过了，跳过
+2020/08/11 08:59:58 - WARNING - 844 - qiangguo_shuafen - 学习视频 习近平讲述的故事｜小叶子·大使命  已经看过了，跳过
+2020/08/11 09:00:07 - WARNING - 844 - qiangguo_shuafen - 学习视频 总书记的一周（7月27日—8月2日）  已经看过了，跳过
+2020/08/11 09:00:10 - WARNING - 844 - qiangguo_shuafen - 学习视频 总书记的一周（7月27日—8月2日）  已经看过了，跳过
+2020/08/11 09:00:13 - WARNING - 844 - qiangguo_shuafen - 学习视频 央视新闻  已经看过了，跳过
+2020/08/11 09:00:21 - WARNING - 846 - qiangguo_shuafen - 正在看, 学习视频, 新华社
+2020/08/11 09:00:37 - WARNING - 844 - qiangguo_shuafen - 学习视频 新华社  已经看过了，跳过
+2020/08/11 09:00:40 - WARNING - 846 - qiangguo_shuafen - 正在看, 学习视频, 央广网
+2020/08/11 09:01:03 - WARNING - 844 - qiangguo_shuafen - 学习视频 统帅之心  已经看过了，跳过
+2020/08/11 09:01:06 - WARNING - 844 - qiangguo_shuafen - 学习视频 统帅之心  已经看过了，跳过
+2020/08/11 09:01:09 - WARNING - 844 - qiangguo_shuafen - 学习视频 人民子弟兵  已经看过了，跳过
+2020/08/11 09:01:25 - WARNING - 844 - qiangguo_shuafen - 学习视频 钢铁长城四重奏  已经看过了，跳过
+2020/08/11 09:01:28 - WARNING - 844 - qiangguo_shuafen - 学习视频 钢铁长城四重奏  已经看过了，跳过
+2020/08/11 09:01:31 - WARNING - 844 - qiangguo_shuafen - 学习视频 总书记亲自宣布的这个消息非同寻常  已经看过了，跳过
+2020/08/11 09:01:44 - WARNING - 844 - qiangguo_shuafen - 学习视频 闪耀吧 中国人的北斗星辰  已经看过了，跳过
+2020/08/11 09:01:48 - WARNING - 844 - qiangguo_shuafen - 学习视频 93载，人民军队永向前  已经看过了，跳过
+2020/08/11 09:01:58 - WARNING - 844 - qiangguo_shuafen - 学习视频 鉴往知来 跟着习主席学军史  已经看过了，跳过
+2020/08/11 09:02:01 - WARNING - 844 - qiangguo_shuafen - 学习视频 鉴往知来 跟着习主席学军史  已经看过了，跳过
+2020/08/11 09:02:16 - WARNING - 844 - qiangguo_shuafen - 学习视频 联通未来  已经看过了，跳过
+2020/08/11 09:02:20 - WARNING - 844 - qiangguo_shuafen - 学习视频 抗洪一线 党旗飞扬  已经看过了，跳过
+2020/08/11 09:02:44 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 习近平致电祝贺卢卡申科当选白俄罗斯总统
+2020/08/11 09:02:59 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 【走向我们的小康生活】民生为先 探索资源枯竭型城市转型之路
+2020/08/11 09:03:20 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 十三届全国人大常委会第二十一次会议举行第二次全体会议
+2020/08/11 09:03:36 - WARNING - 844 - qiangguo_shuafen - 联播频道 十三届全国人大常委会第二十一次会议举行第二次全体会议  已经看过了，跳过
+2020/08/11 09:03:39 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 【权威访谈·乘势而上 奋勇前进】郝鹏：力争央企总体效益实现正增长
+2020/08/11 09:04:26 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 阅读文章  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 视听学习  还没有完成，需要6积分，只完成了5积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 文章学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 视听学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 订阅  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 收藏  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 分享  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 发表观点  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1083 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:04:26 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:04:30 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 7月物价总体平稳 市场运行有序
+2020/08/11 09:05:16 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 阅读文章  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 文章学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 视听学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 订阅  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 收藏  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 分享  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 发表观点  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1083 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:05:16 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:05:18 - WARNING - 874 - qiangguo_shuafen - 看视频任务已完成
+2020/08/11 09:05:41 - CRITICAL - 1208 - qiangguo_shuafen - 出严重错误啦，以下是错误信息
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1205, in recycle_main_do
+    self.main_do()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1148, in main_do
+    t1 = self.listen_tai_start()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 943, in listen_tai_start
+    self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]').click(timeout=20)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 580, in click
+    el = self.get(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_mine"]']
+2020/08/11 09:09:08 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 09:09:10 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 09:09:17 - WARNING - 1220 - qiangguo_shuafen - 开始测试程序了
+2020/08/11 09:10:53 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 09:10:55 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 09:11:01 - WARNING - 1223 - qiangguo_shuafen - 开始测试程序了
+2020/08/11 09:11:41 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 09:11:43 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 09:11:47 - WARNING - 1223 - qiangguo_shuafen - 开始测试程序了
+2020/08/11 09:16:26 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 09:16:28 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 09:16:34 - WARNING - 1230 - qiangguo_shuafen - 开始测试程序了
+2020/08/11 09:16:46 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 09:16:48 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 09:17:47 - WARNING - 1111 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/11 09:18:26 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 阅读文章  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 文章学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 视听学习时长  还没有完成，需要6积分，只完成了2积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 订阅  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 收藏  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 分享  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 发表观点  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:18:26 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:18:26 - WARNING - 1156 - qiangguo_shuafen - 已完成视频观看
+2020/08/11 09:19:47 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 阅读文章  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 文章学习时长  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 视听学习时长  还没有完成，需要6积分，只完成了2积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 收藏  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 分享  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 发表观点  还没有完成，需要2积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:19:47 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:20:01 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 习近平致电祝贺卢卡申科当选白俄罗斯总统
+2020/08/11 09:22:37 - WARNING - 717 - qiangguo_shuafen - 推荐 习近平致电祝贺卢卡申科当选白俄罗斯总统  已经看过了，跳过
+2020/08/11 09:22:50 - WARNING - 713 - qiangguo_shuafen - 推荐 第3个文章标题获取出错，跳过
+2020/08/11 09:22:53 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 习近平和老乡们说的“贴心话”
+2020/08/11 09:25:49 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 诗中的爱国情怀（孙瑞铭 中学生）
+2020/08/11 09:27:56 - WARNING - 717 - qiangguo_shuafen - 推荐 诗中的爱国情怀（孙瑞铭 中学生）  已经看过了，跳过
+2020/08/11 09:28:01 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 有国，才有家（郑何欣益 小学生）
+2020/08/11 09:30:34 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 教师风采 | 赵兴洲：为高原的孩子筑起音乐梦
+2020/08/11 09:33:16 - WARNING - 713 - qiangguo_shuafen - 推荐 第3个文章标题获取出错，跳过
+2020/08/11 09:33:39 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 辽宁：出台支持贫困地区农副产品采购政策
+2020/08/11 09:36:23 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:36:23 - WARNING - 1093 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:36:23 - WARNING - 1093 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:36:23 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:36:23 - WARNING - 1093 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:36:23 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:36:23 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:36:24 - WARNING - 782 - qiangguo_shuafen - 阅读文章任务已完成
+2020/08/11 09:37:10 - ERROR - 291 - qiangguo_shuafen - 在提示
+中国是一个发展中国家多年来中国在致力于自身发展的同时始终坚持向经济困难的其他发展中国家提供力所能及的援助承担相应国际义务
+中识别出来的红色关键词
+叉义力
+不匹配
+2020/08/11 09:39:26 - ERROR - 291 - qiangguo_shuafen - 在提示
+马善祥重庆市江北区观音桥街道人民调解委员会老马工作室负责人他总结出民为本义致和六字理念遵循情理法事十三要则依托3441保障制度老马三十六策等一整套老马工作法他热爱群众工作对群众充满感情被称为基层社会治理创新的优秀人民调解员
+中识别出来的红色关键词
+去亘lE菩丰J
+不匹配
+2020/08/11 09:40:18 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:40:18 - WARNING - 1093 - qiangguo_shuafen - 每日答题  还没有完成，需要6积分，只完成了4积分
+2020/08/11 09:40:18 - WARNING - 1093 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:40:18 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:40:18 - WARNING - 1093 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:40:18 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:40:18 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:44:02 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:44:02 - WARNING - 1093 - qiangguo_shuafen - 每周答题  还没有完成，需要5积分，只完成了0积分
+2020/08/11 09:44:02 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:44:02 - WARNING - 1093 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:44:02 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:44:02 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:44:13 - WARNING - 525 - qiangguo_shuafen - 开始做题-2020年8月第二周答题 答案是 ['北斗三号', 'AB', 'ABCD', 'C', 'B']
+2020/08/11 09:45:42 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:45:42 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:45:42 - WARNING - 1093 - qiangguo_shuafen - 挑战答题  还没有完成，需要6积分，只完成了0积分
+2020/08/11 09:45:42 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:45:42 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:45:53 - ERROR - 190 - qiangguo_shuafen - 挑战答题没有找到连续作对的题目数量
+2020/08/11 09:45:55 - INFO - 217 - qiangguo_shuafen - 已经连续做对0道挑战答题的题
+2020/08/11 09:45:59 - INFO - 217 - qiangguo_shuafen - 已经连续做对2道挑战答题的题
+2020/08/11 09:46:03 - INFO - 217 - qiangguo_shuafen - 已经连续做对3道挑战答题的题
+2020/08/11 09:46:04 - ERROR - 190 - qiangguo_shuafen - 挑战答题没有找到连续作对的题目数量
+2020/08/11 09:46:07 - INFO - 217 - qiangguo_shuafen - 已经连续做对3道挑战答题的题
+2020/08/11 09:46:11 - INFO - 217 - qiangguo_shuafen - 已经连续做对5道挑战答题的题
+2020/08/11 09:46:14 - INFO - 217 - qiangguo_shuafen - 已经连续做对6道挑战答题的题
+2020/08/11 09:46:18 - INFO - 217 - qiangguo_shuafen - 已经连续做对7道挑战答题的题
+2020/08/11 09:46:22 - INFO - 217 - qiangguo_shuafen - 已经连续做对8道挑战答题的题
+2020/08/11 09:46:26 - INFO - 217 - qiangguo_shuafen - 已经连续做对9道挑战答题的题
+2020/08/11 09:46:30 - INFO - 217 - qiangguo_shuafen - 已经连续做对10道挑战答题的题
+2020/08/11 09:47:18 - WARNING - 1067 - qiangguo_shuafen - 已完成本地频道
+2020/08/11 09:47:54 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:47:54 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:47:54 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:47:54 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:48:26 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 09:48:34 - WARNING - 610 - qiangguo_shuafen - 开始做题-中华人民共和国香港特别行政区维护国家安全法相关法律知识专项答题 答案是 ['ABCD', '国家安全法', 'ABC', 'ABC', 'ABC', '法治原则', '共同义务', 'AB', 'AB', 'ABC']
+2020/08/11 09:48:38 - ERROR - 409 - qiangguo_shuafen - ABCD, 答案有问题，请查错
+2020/08/11 09:49:22 - ERROR - 291 - qiangguo_shuafen - 在提示
+中华人民共和国香港特别行政区维护国家安全法第十三条规定香港特别行政区维护国家安全委员会下设秘书处由秘书长领导秘书长由行政长官提名报中央人民政府任命
+中识别出来的红色关键词
+申中人尾耐府PvJ
+不匹配
+2020/08/11 09:50:48 - ERROR - 291 - qiangguo_shuafen - 在提示
+中华人民共和国香港特别行政区维护国家安全法第十九条规定经行政长官批准香港特别行政区政府财政司长应当从政府一般收入中拨出专门款项支付关于维护国家安全的开支并核准所涉及的人员编制不受香港特别行政区现行有关法律规定的限制财政司长须每年就该款项的控制和管理向立法会提交报告
+中识别出来的红色关键词
+专门款工
+不匹配
+2020/08/11 09:52:18 - ERROR - 291 - qiangguo_shuafen - 在提示
+中华人民共和国香港特别行政区维护国家安全法第六十五条规定本法的解释权属于全国人民代表大会常务委员会
+中识别出来的红色关键词
+N有口吊务委贝衣
+不匹配
+2020/08/11 09:53:10 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:53:10 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 09:53:10 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 09:53:10 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 09:53:19 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 09:53:22 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 09:53:32 - WARNING - 610 - qiangguo_shuafen - 开始做题-学习习近平谈治国理政第三卷专项答题 答案是 ['党章宪法', 'ABCD', 'ABC', 'ABC', 'ABCD', 'ABC', 'ABCD', 'ABCD', 'ABCD', 'ABCD']
+2020/08/11 09:53:34 - ERROR - 409 - qiangguo_shuafen - 党章宪法, 答案有问题，请查错
+2020/08/11 09:55:48 - ERROR - 291 - qiangguo_shuafen - 在提示
+2019年4月28日习近平在2019年中国北京世界园艺博览会开幕式上指出地球是全人类赖以生存的唯一家园我们要像保护自己的眼睛一样保护生态环境像对待生命一样对待生态环境同筑生态文明之基同走绿色发展之路
+中识别出来的红色关键词
+瞩晴牛合n黟口
+不匹配
+2020/08/11 09:57:05 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/11 11:57:45 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 11:57:45 - WARNING - 1093 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 11:57:45 - WARNING - 1093 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 11:57:45 - WARNING - 1094 - qiangguo_shuafen - ****************************************************
+2020/08/11 11:58:06 - CRITICAL - 1218 - qiangguo_shuafen - 出严重错误啦，以下是错误信息
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1215, in recycle_main_do
+    self.pp.screenshot(os.path.join(self.path, f'出错啦，这是截图-error-错误码{e}-'
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1198, in main_do
+    self.pp(text='退出登录').click_exists(timeout=3)
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 637, in run_special_ti
+    self.pp(text='我要答题').click(timeout=20)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='我要答题'], method: None
+2020/08/11 12:00:09 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 12:00:11 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 12:01:14 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/11 12:01:50 - WARNING - 1086 - qiangguo_shuafen - 
+****************************************************
+2020/08/11 12:01:50 - WARNING - 1089 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 12:01:50 - WARNING - 1089 - qiangguo_shuafen - 本地频道  还没有完成，需要1积分，只完成了0积分
+2020/08/11 12:01:50 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+
+2020/08/11 12:01:50 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/11 12:01:50 - WARNING - 1157 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/11 12:01:50 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/11 12:01:50 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/11 12:01:50 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/11 12:01:50 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/11 12:01:50 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/11 12:01:50 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/11 12:02:03 - WARNING - 1063 - qiangguo_shuafen - 已完成本地频道
+2020/08/11 12:02:37 - WARNING - 1086 - qiangguo_shuafen - 
+****************************************************
+2020/08/11 12:02:37 - WARNING - 1089 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 12:02:37 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+
+2020/08/11 12:03:07 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 12:03:17 - WARNING - 610 - qiangguo_shuafen - 开始做题-中华人民共和国香港特别行政区维护国家安全法相关法律知识专项答题 答案是 ['ABCD', '国家安全法', 'ABC', 'ABC', 'ABC', '法治原则', '共同义务', 'AB', 'AB', 'ABC']
+2020/08/11 12:03:20 - ERROR - 409 - qiangguo_shuafen - ABCD, 答案有问题，请查错
+2020/08/11 12:04:07 - ERROR - 291 - qiangguo_shuafen - 在提示
+中华人民共和国香港特别行政区维护国家安全法第十三条规定香港特别行政区维护国家安全委员会下设秘书处由秘书长领导秘书长由行政长官提名报中央人民政府任命
+中识别出来的红色关键词
+申中人尾耐府PvJ
+不匹配
+2020/08/11 12:05:32 - ERROR - 291 - qiangguo_shuafen - 在提示
+中华人民共和国香港特别行政区维护国家安全法第十九条规定经行政长官批准香港特别行政区政府财政司长应当从政府一般收入中拨出专门款项支付关于维护国家安全的开支并核准所涉及的人员编制不受香港特别行政区现行有关法律规定的限制财政司长须每年就该款项的控制和管理向立法会提交报告
+中识别出来的红色关键词
+专门款工
+不匹配
+2020/08/11 12:07:02 - ERROR - 291 - qiangguo_shuafen - 在提示
+中华人民共和国香港特别行政区维护国家安全法第六十五条规定本法的解释权属于全国人民代表大会常务委员会
+中识别出来的红色关键词
+N有口吊务委贝衣
+不匹配
+2020/08/11 12:07:55 - WARNING - 1086 - qiangguo_shuafen - 
+****************************************************
+2020/08/11 12:07:55 - WARNING - 1089 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 12:07:55 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+
+2020/08/11 12:08:04 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 12:08:07 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 12:08:16 - WARNING - 610 - qiangguo_shuafen - 开始做题-学习习近平谈治国理政第三卷专项答题 答案是 ['党章宪法', 'ABCD', 'ABC', 'ABC', 'ABCD', 'ABC', 'ABCD', 'ABCD', 'ABCD', 'ABCD']
+2020/08/11 12:08:19 - ERROR - 409 - qiangguo_shuafen - 党章宪法, 答案有问题，请查错
+2020/08/11 12:10:31 - ERROR - 291 - qiangguo_shuafen - 在提示
+2019年4月28日习近平在2019年中国北京世界园艺博览会开幕式上指出地球是全人类赖以生存的唯一家园我们要像保护自己的眼睛一样保护生态环境像对待生命一样对待生态环境同筑生态文明之基同走绿色发展之路
+中识别出来的红色关键词
+瞩晴牛合n黟口
+不匹配
+2020/08/11 12:11:48 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/11 12:12:38 - WARNING - 1086 - qiangguo_shuafen - 
+****************************************************
+2020/08/11 12:12:38 - WARNING - 1089 - qiangguo_shuafen - 专项答题  还没有完成，需要10积分，只完成了0积分
+2020/08/11 12:12:38 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+
+2020/08/11 12:12:46 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 12:12:49 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 12:12:52 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/11 12:13:01 - WARNING - 610 - qiangguo_shuafen - 开始做题-学习贯彻中央全面深化改革委员会第十四次会议精神专项答题 答案是 ['ABCD', '国有企业', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABCD', '大卫生大健康', 'ABCD']
+2020/08/11 12:15:20 - WARNING - 1086 - qiangguo_shuafen - 
+****************************************************
+2020/08/11 12:15:20 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+
+2020/08/11 12:53:14 - WARNING - 77 - qiangguo_shuafen - 
+
+手机的序列号是 F7R0214305002612
+2020/08/11 12:53:16 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 12:54:05 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/11 12:54:41 - WARNING - 1086 - qiangguo_shuafen - ****************************************************
+2020/08/11 12:54:41 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 12:54:41 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/11 12:54:41 - WARNING - 1157 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/11 12:54:41 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/11 12:54:41 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/11 12:54:41 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/11 12:54:41 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/11 12:54:41 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/11 12:54:41 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/11 12:54:41 - WARNING - 1185 - qiangguo_shuafen - 已完成本地频道
+2020/08/11 12:55:13 - WARNING - 1086 - qiangguo_shuafen - ****************************************************
+2020/08/11 12:55:13 - WARNING - 1090 - qiangguo_shuafen - ****************************************************
+2020/08/11 12:55:14 - WARNING - 1196 - qiangguo_shuafen - 已完成专项答题任务
+2020/08/11 12:55:45 - CRITICAL - 1071 - qiangguo_shuafen - 网络有问题，请确保联网后重试
+2020/08/11 12:55:45 - CRITICAL - 1217 - qiangguo_shuafen - 出严重错误啦，以下是错误信息
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1212, in recycle_main_do
+    break
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1072, in job_status
+    raise
+RuntimeError: No active exception to reraise
+2020/08/11 13:12:47 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/08/11 13:12:49 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
+2020/08/11 13:13:38 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
