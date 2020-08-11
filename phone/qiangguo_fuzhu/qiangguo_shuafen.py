@@ -117,7 +117,7 @@ class QiangGuoFuZhu(object):
                 break
         new_title_sign = 0  # 新标题标记
         if fuz_title is None:  # 没有匹配到
-            self.logger.warning('*****没有匹配到题目', title, answer, '记录下来，答案预先设为ABCD')
+            self.logger.warning(f'*****没有匹配到题目 {title, answer}, 记录下来，答案预先设为ABCD')
             data_ti_ku.append([title, answer, 'ABCD'])
         elif fuz_choose != answer:  # 找到了和原来题目一样，但是选项不一样的题
             self.logger.warning(f'*****找到题目和存储的一样***{title}***，但是选项{fuz_choose}-{answer}不一样')
@@ -125,10 +125,10 @@ class QiangGuoFuZhu(object):
             self.duplicate_title.append(fuz_title)
             self.duplicate_title = list(set(self.duplicate_title))
         else:  # 匹配到了
-            self.logger.debug('匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
+            self.logger.debug(f'匹配到了, {fuz_title}, {answer}, 匹配的答案是 {fuz_answer_num}')
             if len(fuz_answer_num) > 1:
                 new_title_sign = 1
-                self.logger.info('新加入的题匹配到了', fuz_title, answer, '匹配的答案是', fuz_answer_num)
+                self.logger.info(f'新加入的题匹配到了, {fuz_title}, {answer}, 匹配的答案是 {fuz_answer_num}')
             if 'A' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
                               'android.view.View').all()[0].click()
@@ -139,7 +139,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            self.logger.warning(title, answer, '正确答案是', fuz_answer_num)
+                            self.logger.warning(f'{title}, {answer}, 正确答案是 {fuz_answer_num}')
                             break
             elif 'B' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
@@ -151,7 +151,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            self.logger.warning(title, answer, '正确答案是', fuz_answer_num)
+                            self.logger.warning(f'{title}, {answer}, 正确答案是 {fuz_answer_num}')
                             break
             elif 'C' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
@@ -163,7 +163,7 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            self.logger.warning(title, answer, '正确答案是', fuz_answer_num)
+                            self.logger.warning(f'{title}, {answer}, 正确答案是 {fuz_answer_num}')
                             break
             elif 'D' in fuz_answer_num:
                 self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/'
@@ -175,10 +175,10 @@ class QiangGuoFuZhu(object):
                         r, g, b = img_a.resize((1, 1)).getpixel((0, 0))
                         if 230 > g > 150 > b > 100 > r > 50:
                             fuz_answer_num = 'ABCD'[k]
-                            self.logger.warning(title, answer, '正确答案是', fuz_answer_num)
+                            self.logger.warning(f'{title}, {answer}, 正确答案是, {fuz_answer_num}')
                             break
             else:
-                self.logger.error(f'{fuz_title}在记录中没有正确答案,')
+                self.logger.error(f'{fuz_title}在记录中没有正确答案')
                 fuz_answer_num = 'ABCD'
             dui_num = 0
             try:  # 获取连续做对题的数目，然后返回结果
@@ -194,7 +194,7 @@ class QiangGuoFuZhu(object):
                     json.dump(data_ti_ku, f2, ensure_ascii=False, indent=2)
             time.sleep(1)
             if (self.pp(text="结束本局").exists or self.pp(text="再来一局").exists) and new_title_sign == 0:
-                self.logger.error(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}', '找到旧题了，但是答错了，请核实答案')
+                self.logger.error(f'{fuz_title}, {fuz_choose}, {fuz_answer_num}, 找到旧题了，但是答错了，请核实答案')
             time.sleep(1)
             return dui_num
 
@@ -214,7 +214,7 @@ class QiangGuoFuZhu(object):
                 temp = self.do_challenge_ti(data_ti_ku)
                 if temp:
                     dui_num = temp
-                self.logger.info('已经连续做对{}道挑战答题的题'.format(dui_num))
+                self.logger.info(f'已经连续做对{dui_num}道挑战答题的题')
             except uiautomator2.exceptions.UiObjectNotFoundError:
                 pass
             except uiautomator2.exceptions.XPathElementNotFoundError:
@@ -406,7 +406,7 @@ class QiangGuoFuZhu(object):
                     and 'D' not in ti_shi_word)) \
                 or (ti_type == '填空题' and ('A' in ti_shi_word or 'B' in ti_shi_word
                                           or 'C' in ti_shi_word or 'D' in ti_shi_word)):
-            self.logger.error(ti_shi_word, '答案有问题，请查错')
+            self.logger.error(f'{ti_shi_word}, 答案有问题，请查错')
             return False
         if ti_type == '填空题':
             if self.pp(className='android.widget.EditText').count == 1:
@@ -431,7 +431,7 @@ class QiangGuoFuZhu(object):
             elif self.pp(text='完成').exists:
                 self.pp(text='完成').click()
             else:
-                self.logger.error(ti_shi_word, '答案有问题，请查错')
+                self.logger.error(f'{ti_shi_word}, 答案有问题，请查错')
                 return False
         else:  # 选择题
             self.pp(scrollable=True).scroll.toEnd()
@@ -449,7 +449,7 @@ class QiangGuoFuZhu(object):
                     self.pp.xpath('//android.widget.ListView/android.view.View[4]/android.view.View[1]') \
                         .click(timeout=1)
             except uiautomator2.exceptions.XPathElementNotFoundError:
-                self.logger.error(ti_shi_word, '答案有问题，请查错')
+                self.logger.error(f'{ti_shi_word}, 答案有问题，请查错')
                 return False
             time.sleep(1)
             if self.pp(text='确定').exists:
@@ -462,7 +462,7 @@ class QiangGuoFuZhu(object):
             elif self.pp(text='完成').exists:
                 self.pp(text='完成').click()
             else:
-                self.logger.error(ti_shi_word, '答案有问题，请查错')
+                self.logger.error(f'{ti_shi_word}, 答案有问题，请查错')
                 return False
         return True
 
@@ -716,7 +716,7 @@ class QiangGuoFuZhu(object):
                         self.pp.press('back')
                         self.logger.warning(f'{t.text} {title}  已经看过了，跳过')
                         continue
-                    self.logger.warning('正在看', t.text, title)
+                    self.logger.warning(f'正在看, {t.text}, {title}')
                     need_issue_num -= 1
                     data_issue.append(title)
                     if not test:
@@ -843,7 +843,7 @@ class QiangGuoFuZhu(object):
                         self.pp.press('back')
                         self.logger.warning(f'{t.text} {title}  已经看过了，跳过')
                         continue
-                    self.logger.warning('正在看', t.text, title)
+                    self.logger.warning(f'正在看, {t.text}, {title}', )
                     need_video_num -= 1
                     data_video.append(title)
                     if not test:
@@ -952,7 +952,7 @@ class QiangGuoFuZhu(object):
             self.pp.xpath('//android.support.v4.view.ViewPager[1]/android.support.v7.widget.RecyclerView[1]'
                           '/android.widget.FrameLayout[1]').click()
         except uiautomator2.exceptions.XPathElementNotFoundError:
-            self.logger.critical('找不到中国之声电台，不能播放')
+            self.logger.error('找不到中国之声电台，不能播放')
             return
         time.sleep(1)
         self.pp(text='我的').click(timeout=20)
