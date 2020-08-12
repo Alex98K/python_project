@@ -448,3 +448,13 @@ RuntimeError: No active exception to reraise
 2020/08/11 13:12:47 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
 2020/08/11 13:12:49 - WARNING - 25 - qiangguo_shuafen - http://localhost:12906
 2020/08/11 13:13:38 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/11 13:14:15 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/11 13:14:15 - WARNING - 1157 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/11 13:14:15 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/11 13:14:15 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/11 13:14:15 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/11 13:14:15 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/11 13:14:15 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/11 13:14:15 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/11 13:14:15 - WARNING - 1185 - qiangguo_shuafen - 已完成本地频道
+2020/08/11 13:14:49 - WARNING - 1196 - qiangguo_shuafen - 已完成专项答题任务

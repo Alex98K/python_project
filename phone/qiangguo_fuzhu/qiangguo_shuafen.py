@@ -1218,9 +1218,8 @@ class QiangGuoFuZhu(object):
                         continue
                 break
             except Exception as e:
-                self.logger.critical('出严重错误啦，以下是错误信息', exc_info=True)
-                self.pp.screenshot(os.path.join(self.path, f'出错啦,错误码{e}'
-                                   f'{time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())}.jpg'))
+                self.logger.critical(f'出严重错误啦，以下是错误信息{e}', exc_info=True)
+                self.pp.screenshot(os.path.join(self.path, f'出错啦{random.random()}.jpg'))
                 if time.time() - t > 3600:
                     self.logger.critical('程序存在错误，试了一个小时都不行，请修改程序')
                     self.pp.app_stop('cn.xuexi.android')
@@ -1253,8 +1252,8 @@ if __name__ == '__main__':
     # 否则使用默认值r'C:/Program Files/Tesseract-OCR/tesseract.exe'
     phone_unlock_password = '850611'  # 手机锁屏的解锁码
     user_list = [
-        ['18810810611', 'jiajia0611'],
-        # ['18611001824', 'nopass.123'],
+        # ['18810810611', 'jiajia0611'],
+        ['18611001824', 'nopass.123'],
     ]
     for index_u, user in enumerate(user_list):
         do = QiangGuoFuZhu(username=user[0], password=user[1], unlock_password=phone_unlock_password)
