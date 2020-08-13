@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow, QFileDialog
 from PyQt5.QtCore import pyqtSignal, QObject
-from ui import Ui_MainWindow    #上面的界面文件
+from ui import Ui_MainWindow
 from PyQt5.QtGui import QTextCursor
 from copy_file import CopyFile
 
