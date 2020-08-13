@@ -4,9 +4,10 @@ import PyPDF2
 # 每两页分割为一个单独的pdf，然后保存
 pdfFile = open('1.pdf', 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFile,  strict=False)
-print(pdfReader.getNumPages())
-for j in range(12, pdfReader.getNumPages()+1, 2):
-    print(j)
+start_page = 1  # 从第一页开始
+end_page = pdfReader.getNumPages() + 1  # 到文件最后一页
+every_pages = 2  # 每两页生成一个新文件
+for j in range(start_page, end_page, every_pages):
     page = pdfReader.getPage(j-1)  # 获取第0页
     page2 = pdfReader.getPage(j)  # 获取第0页
     # page3 = pdfReader.getPage(j+1)  # 获取第0页
