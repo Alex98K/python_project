@@ -1211,11 +1211,15 @@ class QiangGuoFuZhu(object):
         DownTiKu().down_ti()
         t = time.time()
         while True:
+            repeat_sign = 0
             try:
                 job_stat = self.main_do()
                 for i, k in enumerate(job_stat):
                     if k[0] != '已完成' and i not in [6, 7]:
-                        continue
+                        repeat_sign = 1
+                        break
+                if repeat_sign == 1:
+                    continue
                 break
             except Exception as e:
                 self.logger.critical(f'出严重错误啦，以下是错误信息{e}', exc_info=True)

@@ -458,3 +458,173 @@ RuntimeError: No active exception to reraise
 2020/08/11 13:14:15 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
 2020/08/11 13:14:15 - WARNING - 1185 - qiangguo_shuafen - 已完成本地频道
 2020/08/11 13:14:49 - WARNING - 1196 - qiangguo_shuafen - 已完成专项答题任务
+2020/08/13 12:19:13 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 None
+2020/08/13 12:19:15 - WARNING - 25 - qiangguo_shuafen - http://localhost:51507
+2020/08/13 12:20:11 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/13 12:20:34 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/13 12:20:34 - WARNING - 1157 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/13 12:20:34 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/13 12:20:34 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/13 12:20:34 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/13 12:20:34 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/13 12:20:34 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/13 12:20:34 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/13 12:20:34 - WARNING - 1185 - qiangguo_shuafen - 已完成本地频道
+2020/08/13 12:20:55 - WARNING - 1196 - qiangguo_shuafen - 已完成专项答题任务
+2020/08/13 12:21:58 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/13 12:22:00 - WARNING - 25 - qiangguo_shuafen - http://localhost:51507
+2020/08/13 12:22:32 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/13 12:22:56 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/13 12:22:56 - WARNING - 1157 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/13 12:22:56 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/13 12:22:56 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/13 12:22:56 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/13 12:22:56 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/13 12:22:56 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/13 12:22:56 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/13 12:22:56 - WARNING - 1185 - qiangguo_shuafen - 已完成本地频道
+2020/08/13 12:23:15 - WARNING - 1196 - qiangguo_shuafen - 已完成专项答题任务
+2020/08/13 12:24:26 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/13 12:24:28 - WARNING - 25 - qiangguo_shuafen - http://localhost:51507
+2020/08/13 12:24:58 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/13 12:25:27 - WARNING - 846 - qiangguo_shuafen - 正在看, 第一频道, 习近平对制止餐饮浪费行为作出重要指示
+2020/08/13 12:25:42 - WARNING - 846 - qiangguo_shuafen - 正在看, 第一频道, 习近平签署第五十一号、五十二号、五十三号、五十四号主席令
+2020/08/13 12:26:01 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平致电祝贺卢卡申科当选白俄罗斯总统  已经看过了，跳过
+2020/08/13 12:26:09 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平就原越共中央总书记黎可漂逝世向阮富仲致唁电  已经看过了，跳过
+2020/08/13 12:26:24 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平就黎巴嫩贝鲁特发生重大爆炸事件向黎巴嫩总统致慰问电  已经看过了，跳过
+2020/08/13 12:26:32 - WARNING - 844 - qiangguo_shuafen - 第一频道 统帅的深情牵挂——习近平主席关心基层部队官兵纪实  已经看过了，跳过
+2020/08/13 12:26:39 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平同尼泊尔总统就中尼建交65周年互致贺电  已经看过了，跳过
+2020/08/13 12:26:47 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平：统一思想坚定信心鼓足干劲抓紧工作 奋力推进国防和军队现代化建设  已经看过了，跳过
+2020/08/13 12:26:55 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平出席北斗三号全球卫星导航系统建成暨开通仪式并宣布正式开通  已经看过了，跳过
+2020/08/13 12:27:03 - WARNING - 844 - qiangguo_shuafen - 第一频道 《求是》杂志发表习近平总书记重要文章  已经看过了，跳过
+2020/08/13 12:27:13 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平主持中共中央政治局会议 决定10月召开党的十九届五中全会  已经看过了，跳过
+2020/08/13 12:27:22 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平主持党外人士座谈会并发表重要讲话  已经看过了，跳过
+2020/08/13 12:27:35 - WARNING - 844 - qiangguo_shuafen - 第一频道 中央军委主席习近平签署通令给3个单位 5名个人记功  已经看过了，跳过
+2020/08/13 12:27:43 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平对研究生教育工作作出重要指示  已经看过了，跳过
+2020/08/13 12:27:58 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平在亚投行第五届理事会年会视频会议开幕式上致辞  已经看过了，跳过
+2020/08/13 12:28:06 - WARNING - 844 - qiangguo_shuafen - 第一频道 习近平向国际热核聚变实验堆计划重大工程安装启动仪式致贺信  已经看过了，跳过
+2020/08/13 12:28:21 - WARNING - 846 - qiangguo_shuafen - 正在看, 学习视频, 中国话·小康
+2020/08/13 12:28:36 - WARNING - 844 - qiangguo_shuafen - 学习视频 没有全民健康 就没有全面小康  已经看过了，跳过
+2020/08/13 12:28:49 - WARNING - 844 - qiangguo_shuafen - 学习视频 总书记的一周（7月27日—8月2日）  已经看过了，跳过
+2020/08/13 12:28:57 - WARNING - 844 - qiangguo_shuafen - 学习视频 他们是军营里最闪亮的星  已经看过了，跳过
+2020/08/13 12:29:12 - WARNING - 844 - qiangguo_shuafen - 学习视频   已经看过了，跳过
+2020/08/13 12:29:21 - WARNING - 844 - qiangguo_shuafen - 学习视频   已经看过了，跳过
+2020/08/13 12:29:34 - WARNING - 844 - qiangguo_shuafen - 学习视频 统帅之心  已经看过了，跳过
+2020/08/13 12:29:42 - WARNING - 844 - qiangguo_shuafen - 学习视频 人民子弟兵  已经看过了，跳过
+2020/08/13 12:29:55 - WARNING - 844 - qiangguo_shuafen - 学习视频 钢铁长城四重奏  已经看过了，跳过
+2020/08/13 12:30:03 - WARNING - 844 - qiangguo_shuafen - 学习视频 总书记亲自宣布的这个消息非同寻常  已经看过了，跳过
+2020/08/13 12:30:17 - WARNING - 844 - qiangguo_shuafen - 学习视频 闪耀吧 中国人的北斗星辰  已经看过了，跳过
+2020/08/13 12:30:25 - WARNING - 844 - qiangguo_shuafen - 学习视频 93载，人民军队永向前  已经看过了，跳过
+2020/08/13 12:30:38 - WARNING - 844 - qiangguo_shuafen - 学习视频 鉴往知来 跟着习主席学军史  已经看过了，跳过
+2020/08/13 12:30:47 - WARNING - 844 - qiangguo_shuafen - 学习视频 人民军队的担当  已经看过了，跳过
+2020/08/13 12:31:00 - WARNING - 844 - qiangguo_shuafen - 学习视频 联通未来  已经看过了，跳过
+2020/08/13 12:31:08 - WARNING - 844 - qiangguo_shuafen - 学习视频 抗洪一线 党旗飞扬  已经看过了，跳过
+2020/08/13 12:31:23 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 《新闻联播》 20200812 21:00
+2020/08/13 12:31:39 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 【走向我们的小康生活】社区“居家养老”托起幸福“夕阳红”
+2020/08/13 12:31:54 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 国务院办公厅印发《关于进一步做好稳外贸稳外资工作的意见》
+2020/08/13 12:32:34 - WARNING - 846 - qiangguo_shuafen - 正在看, 联播频道, 【权威访谈·乘势而上 奋勇前进】王军：落实减税降费 激发市场主体活力
+2020/08/13 12:33:06 - WARNING - 874 - qiangguo_shuafen - 看视频任务已完成
+2020/08/13 12:34:20 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 微视频《遇见》
+2020/08/13 12:36:48 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 知识点！《习近平谈治国理政》第三卷两次提到这部伟大著作
+2020/08/13 12:39:07 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 跟着总书记一起拒绝“舌尖上的浪费”
+2020/08/13 12:41:25 - WARNING - 717 - qiangguo_shuafen - 推荐 “学习强国”开展“爱国心·报国情·强国志”主题征文启事  已经看过了，跳过
+2020/08/13 12:41:27 - WARNING - 717 - qiangguo_shuafen - 推荐 “学习强国”开展“爱国心·报国情·强国志”主题征文启事  已经看过了，跳过
+2020/08/13 12:41:28 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 愿以吾辈之青春护卫盛世之中华（徐菲儿）
+2020/08/13 12:43:35 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 新时代的长征从这里开启（项当当）
+2020/08/13 12:45:48 - WARNING - 717 - qiangguo_shuafen - 推荐 新时代的长征从这里开启（项当当）  已经看过了，跳过
+2020/08/13 12:45:50 - WARNING - 717 - qiangguo_shuafen - 推荐 新时代的长征从这里开启（项当当）  已经看过了，跳过
+2020/08/13 12:45:58 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 
+2020/08/13 12:48:29 - WARNING - 717 - qiangguo_shuafen - 推荐   已经看过了，跳过
+2020/08/13 12:48:31 - WARNING - 717 - qiangguo_shuafen - 推荐   已经看过了，跳过
+2020/08/13 12:48:32 - WARNING - 719 - qiangguo_shuafen - 正在看, 推荐, 什么是火星冲日，为何难得一见？
+2020/08/13 12:50:57 - WARNING - 782 - qiangguo_shuafen - 阅读文章任务已完成
+2020/08/13 12:52:14 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/13 12:54:46 - ERROR - 291 - qiangguo_shuafen - 在提示
+1958年9月27日中国第一座重水反应堆和第一台回旋加速器简称为一堆一器正式移交生产这是我国首次建成的重大核科学设施奠定了中国核科学事业的基础标志着我国跨进了原子能时代
+中识别出来的红色关键词
+羞丑目匕
+不匹配
+2020/08/13 12:55:28 - ERROR - 291 - qiangguo_shuafen - 在提示
+国家发改委公布关于北京新机场工程可行性研究报告的批复显示统筹建设五纵两横的综合交通网络与北京新机场同步建成五纵1京台高速公路2新机场高速公路南五环至新机场段3轨道交通新机场线4京雄城际铁路5京开高速公路拓宽两横1新机场北线高速公路2城际铁路联络线一期
+中识别出来的红色关键词
+交综愤
+不匹配
+2020/08/13 12:56:11 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/13 12:57:22 - INFO - 338 - qiangguo_shuafen - 没找到完全匹配的答案，找个最合适的
+2020/08/13 12:58:31 - INFO - 558 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 12:58:55 - INFO - 558 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 12:59:12 - WARNING - 525 - qiangguo_shuafen - 开始做题-2020年2月第二周答题 答案是 ['ABC', '优惠利率', 'ABCD', '检疫', 'ABCD']
+2020/08/13 13:00:29 - ERROR - 190 - qiangguo_shuafen - 挑战答题没有找到连续作对的题目数量
+2020/08/13 13:00:32 - INFO - 217 - qiangguo_shuafen - 已经连续做对0道挑战答题的题
+2020/08/13 13:00:35 - INFO - 217 - qiangguo_shuafen - 已经连续做对2道挑战答题的题
+2020/08/13 13:00:39 - INFO - 217 - qiangguo_shuafen - 已经连续做对3道挑战答题的题
+2020/08/13 13:00:42 - INFO - 217 - qiangguo_shuafen - 已经连续做对4道挑战答题的题
+2020/08/13 13:00:46 - INFO - 217 - qiangguo_shuafen - 已经连续做对5道挑战答题的题
+2020/08/13 13:00:50 - INFO - 217 - qiangguo_shuafen - 已经连续做对6道挑战答题的题
+2020/08/13 13:00:54 - INFO - 217 - qiangguo_shuafen - 已经连续做对7道挑战答题的题
+2020/08/13 13:00:57 - INFO - 217 - qiangguo_shuafen - 已经连续做对8道挑战答题的题
+2020/08/13 13:01:01 - INFO - 217 - qiangguo_shuafen - 已经连续做对9道挑战答题的题
+2020/08/13 13:01:05 - INFO - 217 - qiangguo_shuafen - 已经连续做对10道挑战答题的题
+2020/08/13 13:01:44 - CRITICAL - 1221 - qiangguo_shuafen - 出严重错误啦，以下是错误信息['//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]']
+Traceback (most recent call last):
+  File "F:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 978, in listen_tai_end
+    self.pp.xpath('//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 580, in click
+    el = self.get(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]']
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1215, in recycle_main_do
+    job_stat = self.main_do()
+  File "F:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1179, in main_do
+    self.listen_tai_end(job_stat, t1)
+  File "F:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 981, in listen_tai_end
+    self.pp.xpath('//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 580, in click
+    el = self.get(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.widget.FrameLayout[3]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]']
+2020/08/13 13:02:14 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/13 13:02:34 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/13 13:02:42 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/13 13:02:42 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/13 13:02:42 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/13 13:02:42 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/13 13:02:42 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/13 13:06:01 - WARNING - 1063 - qiangguo_shuafen - 已完成本地频道
+2020/08/13 13:06:46 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 13:06:52 - WARNING - 610 - qiangguo_shuafen - 开始做题-中华人民共和国香港特别行政区维护国家安全法相关法律知识专项答题 答案是 ['ABCD', '国家安全法', 'ABC', 'ABC', 'ABC', '法治原则', '共同义务', 'AB', 'AB', 'ABC']
+2020/08/13 13:06:55 - ERROR - 409 - qiangguo_shuafen - ABCD, 答案有问题，请查错
+2020/08/13 13:10:07 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/13 13:10:35 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/13 13:11:14 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 13:11:17 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 13:11:25 - WARNING - 610 - qiangguo_shuafen - 开始做题-学习习近平谈治国理政第三卷专项答题 答案是 ['党章宪法', 'ABCD', 'ABC', 'ABC', 'ABCD', 'ABC', 'ABCD', 'ABCD', 'ABCD', 'ABCD']
+2020/08/13 13:11:27 - ERROR - 409 - qiangguo_shuafen - 党章宪法, 答案有问题，请查错
+2020/08/13 13:13:44 - ERROR - 291 - qiangguo_shuafen - 在提示
+2019年4月28日习近平在2019年中国北京世界园艺博览会开幕式上指出地球是全人类赖以生存的唯一家园我们要像保护自己的眼睛一样保护生态环境像对待生命一样对待生态环境同筑生态文明之基同走绿色发展之路
+中识别出来的红色关键词
+眼睛生命口
+不匹配
+2020/08/13 13:14:53 - INFO - 310 - qiangguo_shuafen - 没找到完全匹配的答案，随便填写了
+2020/08/13 13:15:34 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 13:15:37 - INFO - 645 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/13 13:15:50 - WARNING - 610 - qiangguo_shuafen - 开始做题-十九届中共中央政治局第二十一次集体学习专项答题 答案是 ['ABCD', 'ABC', 'ABCD', '科学理论', '组织体系', 'ABCD', 'ABCD', 'ABC', 'ABCD', 'ABCD']
+2020/08/13 13:35:17 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/13 13:35:19 - WARNING - 25 - qiangguo_shuafen - http://localhost:51507
+2020/08/13 13:35:49 - WARNING - 1107 - qiangguo_shuafen - 这个手机学习强国的学号是 90556282
+2020/08/13 13:36:11 - WARNING - 1152 - qiangguo_shuafen - 已完成视频观看
+2020/08/13 13:36:11 - WARNING - 1157 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/13 13:36:11 - WARNING - 1161 - qiangguo_shuafen - 已完成订阅
+2020/08/13 13:36:11 - WARNING - 1165 - qiangguo_shuafen - 已完成文章阅读
+2020/08/13 13:36:11 - WARNING - 1169 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/13 13:36:11 - WARNING - 1173 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/13 13:36:11 - WARNING - 1177 - qiangguo_shuafen - 已完成挑战答题
+2020/08/13 13:36:11 - WARNING - 1181 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/13 13:36:20 - WARNING - 1063 - qiangguo_shuafen - 已完成本地频道
+2020/08/13 13:36:43 - WARNING - 1196 - qiangguo_shuafen - 已完成专项答题任务
