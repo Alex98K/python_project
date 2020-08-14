@@ -51,8 +51,8 @@ class CopyFile(object):
 
 
 if __name__ == '__main__':
-    path_ore = r"E:/"
-    path_des = r"N:/E/"
+    path_ore = r"D:/工作/e/"
+    path_des = r"F:/e/"
     # do = CopyFile(path_ore, path_des, exchange=False)
     do = CopyFile(path_ore, path_des, exchange=True)
     do.main()

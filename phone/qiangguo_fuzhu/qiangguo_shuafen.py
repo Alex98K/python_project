@@ -198,7 +198,7 @@ class QiangGuoFuZhu(object):
             time.sleep(1)
             return dui_num
 
-    def run_challenge(self, ti_num=10):
+    def run_challenge(self, ti_num=5):
         self.pp(text='我要答题').click(timeout=20)
         self.pp(text='挑战答题').click(timeout=20)
         with open(os.path.join(self.path, 'tiao_zhan_ti.json'), 'r', encoding="UTF-8") as f1:
@@ -222,12 +222,13 @@ class QiangGuoFuZhu(object):
             # except Exception as e:
             #     self.logger.warning(e)
             if dui_num >= ti_num:
-                self.pp(text='结束本局').click(timeout=40)
+                self.pp(text='结束本局').click(timeout=120)
                 break
         time.sleep(1)
         self.pp.press('back')
         time.sleep(1)
         self.pp.press('back')
+        time.sleep(1)
 
     @staticmethod
     def pic_to_text(ti_shi_pic):
@@ -370,8 +371,8 @@ class QiangGuoFuZhu(object):
                 time.sleep(1)
                 self.pp(text='学习积分').click(timeout=20)
                 time.sleep(1)
-                job_sta = self.job_status()
-                if job_sta[5][0] == '已完成':
+                job_stat = self.job_status()
+                if job_stat[4][0] == '已完成':
                     break
                 time.sleep(1)
                 self.pp(text='我要答题').click(timeout=20)
@@ -543,8 +544,8 @@ class QiangGuoFuZhu(object):
                             time.sleep(1)
                             self.pp(text='学习积分').click(timeout=20)
                             time.sleep(1)
-                            job_sta = self.job_status()
-                            if job_sta[6][0] == '已完成' and not test:
+                            job_stat = self.job_status()
+                            if job_stat[5][0] == '已完成' and not test:
                                 return
                             else:
                                 time.sleep(1)
@@ -629,8 +630,8 @@ class QiangGuoFuZhu(object):
                             time.sleep(1)
                             self.pp(text='学习积分').click(timeout=20)
                             time.sleep(1)
-                            job_sta = self.job_status()
-                            if job_sta[7][0] == '已完成' and not test:
+                            job_stat = self.job_status()
+                            if job_stat[6][0] == '已完成' and not test:
                                 return
                             else:
                                 time.sleep(1)
@@ -652,12 +653,13 @@ class QiangGuoFuZhu(object):
             self.logger.critical('没有获取到题目名称')
             raise
 
-    def read_issue(self, job_temp, test=False):
-        need_issue_num = int(job_temp[1][2]) - int(job_temp[1][1])
-        need_share_num = 2 - int(job_temp[11][1])
-        need_collection_num = 2 - int(job_temp[10][1])
-        need_comment_num = int(job_temp[12][2]) - int(job_temp[12][1])
-        need_time_num = int(job_temp[3][2]) - int(job_temp[3][1])
+    def read_issue(self, job_stat, test=False):
+        # need_issue_num = int(job_stat[1][2]) - int(job_stat[1][1])
+        need_issue_num = 6 - int(job_stat[1][1])//2
+        need_share_num = 2 - int(job_stat[9][1])
+        # need_collection_num = 2 - int(job_stat[10][1])
+        need_comment_num = int(job_stat[10][2]) - int(job_stat[10][1])
+        need_time_num = 6 - int(job_stat[1][1])//2
         try:
             with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'), 'r', encoding="UTF-8") as f1:
                 data_issue = json.load(f1)
@@ -723,23 +725,23 @@ class QiangGuoFuZhu(object):
                         with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'),
                                   'w', encoding='UTF-8') as f2:
                             json.dump(data_issue, f2, ensure_ascii=False, indent=2)
-                    time.sleep(10)  # 每个文章学习七秒
-                    if job_temp[3][0] != '已完成' and need_time_num > 0:  # 如果没有完成文章学习时长任务，就开始
+                    # time.sleep(10)  # 每个文章学习七秒
+                    if job_stat[1][0] != '已完成' and need_time_num > 0:  # 如果没有完成文章学习时长任务，就开始
                         t1 = time.time()
                         while True:
-                            if time.time() - t1 > 110 if not test else 1:
+                            if time.time() - t1 > 60 if not test else 1:
                                 break
                             self.pp(scrollable=True).scroll.vert.forward(steps=random.randint(130, 150))
                             time.sleep(1)
                             self.pp(scrollable=True).scroll.vert.backward(steps=random.randint(110, 130))
                             time.sleep(1)
                         need_time_num -= 1
-                    if job_temp[10][0] != '已完成' and need_collection_num > 0:  # 如果没有完成收藏任务，就开始
-                        self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
-                                      f'/android.widget.ImageView[1]').click(timeout=20)  # 收藏
-                        self.pp(text='我知道了').click_exists(timeout=1)
-                        need_collection_num -= 1
-                    if job_temp[11][0] != '已完成' and need_share_num > 0:  # 如果没有完成分享任务，就分享及返回
+                    # if job_stat[10][0] != '已完成' and need_collection_num > 0:  # 如果没有完成收藏任务，就开始
+                    #     self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
+                    #                   f'/android.widget.ImageView[1]').click(timeout=20)  # 收藏
+                    #     self.pp(text='我知道了').click_exists(timeout=1)
+                    #     need_collection_num -= 1
+                    if job_stat[9][0] != '已完成' and need_share_num > 0:  # 如果没有完成分享任务，就分享及返回
                         self.pp.xpath(f'//*[@resource-id="cn.xuexi.android:id/BOTTOM_LAYER_VIEW_ID"]'
                                       f'/android.widget.ImageView[2]').click(timeout=20)  # 分享
                         self.pp(text="分享到短信").click(timeout=20)
@@ -752,7 +754,7 @@ class QiangGuoFuZhu(object):
                             self.pp(resourceId="android:id/button1").click_exists()  # 点击放弃保存短信按钮
                         time.sleep(1)
                         need_share_num -= 1
-                    if job_temp[12][0] != '已完成' and need_comment_num > 0:  # 如果没有完成评论任务，就开始评论，之后删除评论
+                    if job_stat[10][0] != '已完成' and need_comment_num > 0:  # 如果没有完成评论任务，就开始评论，之后删除评论
                         self.pp(text="欢迎发表你的观点").click()  # 评论
                         self.pp(text="好观点将会被优先展示").wait()  # 评论
                         # self.pp(text="好观点将会被优先展示").set_text('支持，有希望了，加油，厉害了')  # 评论
@@ -770,13 +772,13 @@ class QiangGuoFuZhu(object):
                         self.pp(text='我的').wait()
                         # 点击积分,查一下积分完成情况
                         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click(timeout=20)
-                        job_temp = self.job_status(test)  # 查一下积分完成情况
-                        need_issue_num = int(job_temp[1][2]) - int(job_temp[1][1])
-                        need_share_num = 2 - int(job_temp[11][1])
-                        need_collection_num = 2 - int(job_temp[10][1])
-                        need_comment_num = int(job_temp[12][2]) - int(job_temp[12][1])
-                        need_time_num = int(job_temp[3][2]) - int(job_temp[3][1])
-                        if job_temp[1][0] == '已完成':  # 如果学习文章没完成，就开始学习
+                        job_stat = self.job_status(test)  # 查一下积分完成情况
+                        need_issue_num = 6 - int(job_stat[1][1]) // 2
+                        need_share_num = 2 - int(job_stat[9][1])
+                        # need_collection_num = 2 - int(job_stat[10][1])
+                        need_comment_num = int(job_stat[10][2]) - int(job_stat[10][1])
+                        need_time_num = 6 - int(job_stat[1][1]) // 2
+                        if job_stat[1][0] == '已完成':  # 如果学习文章没完成，就开始学习
                             self.pp(text='我的').wait()
                             self.pp(text='我的').click()
                             self.logger.warning('阅读文章任务已完成')
@@ -789,8 +791,8 @@ class QiangGuoFuZhu(object):
                     self.pp(scrollable=True).scroll(steps=90)
                 time.sleep(1)
 
-    def read_video(self, job_temp, test=False):
-        need_video_num = int(job_temp[2][2]) - int(job_temp[2][1])
+    def read_video(self, job_stat, test=False):
+        need_video_num = int(job_stat[2][2]) - int(job_stat[2][1])
         try:
             with open(os.path.join(self.path, f'data_video_{self.learn_num}.json'), 'r', encoding="UTF-8") as f1:
                 data_video = json.load(f1)
@@ -852,7 +854,7 @@ class QiangGuoFuZhu(object):
                             json.dump(data_video, f2, ensure_ascii=False, indent=2)
                     self.pp(text='继续播放').click_exists(timeout=1)
                     time.sleep(10)  # 每个视频学习10秒
-                    # if job_temp[4][0] != '已完成':  # 如果没有完成视频学习时长任务，就开始，改成学习视频时长用看电视的方法，
+                    # if job_stat[3][0] != '已完成':  # 如果没有完成视频学习时长任务，就开始，改成学习视频时长用看电视的方法，
                     #     t1 = time.time()
                     #     while True:
                     #         if time.time() - t1 > 180:
@@ -865,10 +867,10 @@ class QiangGuoFuZhu(object):
                         self.pp(text='我的').wait()
                         # 点击积分,查一下积分完成情况
                         self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click(timeout=20)
-                        job_temp = self.job_status(test)  # 查一下积分完成情况
-                        need_video_num = int(job_temp[2][2]) - int(job_temp[2][1])
+                        job_stat = self.job_status(test)  # 查一下积分完成情况
+                        need_video_num = int(job_stat[2][2]) - int(job_stat[2][1])
                         time.sleep(1)
-                        if job_temp[2][0] == '已完成':  # 如果学习视频没完成，就开始学习
+                        if job_stat[2][0] == '已完成':  # 如果学习视频没完成，就开始学习
                             time.sleep(1)
                             self.pp(text='我的').click(timeout=20)
                             self.logger.warning('看视频任务已完成')
@@ -877,7 +879,7 @@ class QiangGuoFuZhu(object):
                 self.pp(scrollable=True).scroll(steps=90)
                 time.sleep(1)
 
-    def look_tel(self, job_temp):  # 看电视台的视频，主要是用来弥补视频学习时长
+    def look_tel(self, job_stat):  # 看电视台的视频，主要是用来弥补视频学习时长
         time.sleep(1)
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
@@ -900,20 +902,20 @@ class QiangGuoFuZhu(object):
             self.pp(text='点击播放').click_exists()
             t1 = time.time()
             while True:
-                if time.time() - t1 > 180 * (int(job_temp[4][2]) - int(job_temp[4][1])):
+                if time.time() - t1 > 60 * (int(job_stat[3][2]) - int(job_stat[3][1])):
                     break
                 self.pp.screen_on()
                 time.sleep(1)
             self.pp(text='我的').wait()
             self.pp.xpath('//*[@resource-id="cn.xuexi.android:id/comm_head_xuexi_score"]').click()  # 点击积分,查一下积分完成情况
-            job_temp = self.job_status()  # 查一下积分完成情况
+            job_stat = self.job_status()  # 查一下积分完成情况
             time.sleep(1)
-            if job_temp[4][0] == '已完成':  # 如果视频学习时长任务没完成，就开始学习
+            if job_stat[3][0] == '已完成':  # 如果视频学习时长任务没完成，就开始学习
                 self.pp(text='我的').click(timeout=20)
                 self.logger.warning('看视频任务已完成')
                 return
 
-    def read_issue_time(self, job_temp):
+    def read_issue_time(self, job_stat):
         time.sleep(1)
         self.pp.press('back')  # 从我的界面回到app首页
         time.sleep(1)
@@ -924,7 +926,7 @@ class QiangGuoFuZhu(object):
         self.pp.xpath('//android.widget.ListView/android.widget.FrameLayout[3]').click_exists()
         t = time.time()
         while True:
-            if time.time() - t > 120 * (int(job_temp[3][2]) - int(job_temp[3][1])):
+            if time.time() - t > 60 * (int(job_stat[1][2]) - int(job_stat[1][1])):
                 break
             self.pp(scrollable=True).scroll.vert.forward(steps=random.randint(130, 150))
             time.sleep(1)
@@ -964,13 +966,13 @@ class QiangGuoFuZhu(object):
         self.pp(text='我的').click(timeout=20)
         return time.time()
 
-    def listen_tai_end(self, job_temp, t):  # 听电台的音频结束程序，主要是用来弥补视频学习时长
+    def listen_tai_end(self, job_stat, t):  # 听电台的音频结束程序，主要是用来弥补视频学习时长
         t2 = time.time()
-        if t2 - t > 180 * (int(job_temp[4][2]) - int(job_temp[4][1])):
+        if t2 - t > 180 * (int(job_stat[3][2]) - int(job_stat[3][1])):
             pass
         else:
             while True:
-                if time.time() - t > 180 * (int(job_temp[4][2]) - int(job_temp[4][1])):
+                if time.time() - t > 60 * (int(job_stat[3][2]) - int(job_stat[3][1])):
                     break
                 time.sleep(1)
                 self.pp.screen_on()
@@ -1025,7 +1027,7 @@ class QiangGuoFuZhu(object):
 
     def run_ding_yue(self, job_stat):
         while True:
-            if job_stat[9][0] != '已完成':
+            if job_stat[8][0] != '已完成':
                 res = self.do_ding_yue()
                 if not res:
                     break
@@ -1071,7 +1073,7 @@ class QiangGuoFuZhu(object):
             self.logger.critical('网络有问题，请确保联网后重试')
             raise
         job_status1 = []
-        for j in range(1, 15):
+        for j in range(1, 13):
             while not self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').exists:
                 self.pp(scrollable=True).scroll(steps=100)
                 time.sleep(1)
@@ -1089,11 +1091,12 @@ class QiangGuoFuZhu(object):
                 self.logger.debug(f'{k[3]}  还没有完成，需要{k[2]}积分，只完成了{k[1]}积分')
         self.logger.debug('****************************************************')
         if test:
-            job_status1 = [('已完成', '1', '1', '登录'), ('已完成', '6', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
-                           ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
-                           ('已完成', '6', '6', '每日答题'), ('去答题', '0', '5', '每周答题'), ('去看看', '0', '10', '专项答题'),
-                           ('已完成', '6', '6', '挑战答题'), ('已完成', '2', '2', '订阅'), ('已完成', '1', '1', '收藏'),
-                           ('已完成', '1', '1', '分享'), ('已完成', '2', '2', '发表观点'), ('已完成', '1', '1', '本地频道')]
+            job_status1 = [('已完成', '1', '1', '登录'), ('去看看', '0', '12', '我要选读文章'),
+                           ('去看看', '0', '6', '视听学习'), ('去学习', '0', '6', '视听学习时长'),
+                           ('去答题', '0', '6', '每日答题'), ('去答题', '0', '5', '每周答题'),
+                           ('去看看', '0', '10', '专项答题'), ('去看看', '0', '6', '挑战答题'),
+                           ('去看看', '0', '2', '订阅'), ('去看看', '0', '1', '分享'), ('去看看', '0', '1', '发表观点'),
+                           ('去看看', '0', '1', '本地频道')]
         # self.logger.warning(job_status1)
         return job_status1
 
@@ -1150,12 +1153,12 @@ class QiangGuoFuZhu(object):
             self.read_video(job_stat)
         else:
             self.logger.warning('已完成视频观看')
-        if job_stat[4][0] != '已完成':
+        if job_stat[3][0] != '已完成':
             t1 = self.listen_tai_start()
         else:
             t1 = 0
             self.logger.warning('已完成视听时长学习')
-        if job_stat[9][0] != '已完成':
+        if job_stat[8][0] != '已完成':
             self.run_ding_yue(job_stat)
         else:
             self.logger.warning('已完成订阅')
@@ -1163,34 +1166,35 @@ class QiangGuoFuZhu(object):
             self.read_issue(job_stat)
         else:
             self.logger.warning('已完成文章阅读')
-        if job_stat[5][0] != '已完成':
+        if job_stat[4][0] != '已完成':
             self.run_everyday_ti()
         else:
             self.logger.warning('已完成每日答题任务')
-        if job_stat[6][0] != '已完成':
+        if job_stat[5][0] != '已完成':
             self.run_every_week_ti()
         else:
             self.logger.warning('已完成每周答题任务')
-        if job_stat[8][0] != '已完成':
+        if job_stat[7][0] != '已完成':
             self.run_challenge()
         else:
             self.logger.warning('已完成挑战答题')
-        if job_stat[4][0] != '已完成' and t1:
+        if job_stat[3][0] != '已完成' and t1:
             self.listen_tai_end(job_stat, t1)
         else:
             self.logger.warning('已完成视听时长学习')
-        if job_stat[13][0] != '已完成':
+        if job_stat[11][0] != '已完成':
             self.ben_di()
         else:
             self.logger.warning('已完成本地频道')
         self.pp(text='学习积分').click()
         job_stat = self.job_status()
         time.sleep(1)
+        # 文章时长已经合并入文章学习里了
+        # if job_stat[3][0] != '已完成':
+        #     self.read_issue_time(job_stat)
         if job_stat[3][0] != '已完成':
-            self.read_issue_time(job_stat)
-        if job_stat[4][0] != '已完成':
             self.look_tel(job_stat)
-        if job_stat[7][0] != '已完成':
+        if job_stat[6][0] != '已完成':
             self.run_special_ti()
         else:
             self.logger.warning('已完成专项答题任务')
@@ -1234,6 +1238,7 @@ class QiangGuoFuZhu(object):
 
     def test_pro(self):  # 测试专用程序
         self.logger.warning('开始测试程序了')
+        self.job_status()
         # self.listen_tai_start()
         # self.run_every_week_ti(test=True)
         # self.run_special_ti(test=True)
