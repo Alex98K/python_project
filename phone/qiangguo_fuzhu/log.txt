@@ -835,3 +835,212 @@ uiautomator2.exceptions.XPathElementNotFoundError: ['//android.widget.FrameLayou
 2020/08/14 11:50:41 - WARNING - 1184 - qiangguo_shuafen - 已完成视听时长学习
 2020/08/14 11:50:41 - WARNING - 1188 - qiangguo_shuafen - 已完成本地频道
 2020/08/14 11:50:56 - WARNING - 1200 - qiangguo_shuafen - 已完成专项答题任务
+2020/08/15 11:09:09 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 11:09:11 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 11:10:00 - WARNING - 1110 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 11:10:23 - WARNING - 1155 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 11:10:23 - WARNING - 1160 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 11:10:23 - WARNING - 1164 - qiangguo_shuafen - 已完成订阅
+2020/08/15 11:10:23 - WARNING - 1168 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 11:10:23 - WARNING - 1172 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 11:10:23 - WARNING - 1176 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 11:10:23 - WARNING - 1180 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 11:10:23 - WARNING - 1184 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 11:10:23 - WARNING - 1188 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 11:11:13 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:11:41 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:12:32 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:13:34 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:14:32 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:15:31 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:16:42 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:18:23 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:20:22 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:23:14 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:28:19 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:32:40 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:36:00 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:41:05 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:45:38 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 11:49:30 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 12:57:37 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 12:57:40 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 12:58:17 - WARNING - 1113 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 12:58:37 - WARNING - 1158 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 12:58:37 - WARNING - 1163 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 12:58:37 - WARNING - 1167 - qiangguo_shuafen - 已完成订阅
+2020/08/15 12:58:37 - WARNING - 1171 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 12:58:37 - WARNING - 1175 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 12:58:37 - WARNING - 1179 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 12:58:37 - WARNING - 1183 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 12:58:37 - WARNING - 1187 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 12:58:37 - WARNING - 1191 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 12:59:25 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 12:59:47 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:00:29 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:01:11 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:01:56 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:02:16 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 13:02:18 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 13:02:50 - WARNING - 1114 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 13:03:12 - WARNING - 1159 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 13:03:12 - WARNING - 1164 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 13:03:12 - WARNING - 1168 - qiangguo_shuafen - 已完成订阅
+2020/08/15 13:03:12 - WARNING - 1172 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 13:03:12 - WARNING - 1176 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 13:03:12 - WARNING - 1180 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 13:03:12 - WARNING - 1184 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 13:03:12 - WARNING - 1188 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 13:03:12 - WARNING - 1192 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 13:03:56 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:04:29 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:05:02 - INFO - 647 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:06:02 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 13:06:04 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 13:06:36 - WARNING - 1113 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 13:06:55 - WARNING - 1158 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 13:06:55 - WARNING - 1163 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 13:06:55 - WARNING - 1167 - qiangguo_shuafen - 已完成订阅
+2020/08/15 13:06:55 - WARNING - 1171 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 13:06:55 - WARNING - 1175 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 13:06:55 - WARNING - 1179 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 13:06:55 - WARNING - 1183 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 13:06:55 - WARNING - 1187 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 13:06:55 - WARNING - 1191 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 13:07:41 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:08:12 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:08:45 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:09:23 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:10:07 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 13:11:03 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:25:58 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 14:26:00 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 14:26:35 - WARNING - 1111 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:26:51 - WARNING - 1156 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 14:26:51 - WARNING - 1161 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:26:51 - WARNING - 1165 - qiangguo_shuafen - 已完成订阅
+2020/08/15 14:26:51 - WARNING - 1169 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 14:26:51 - WARNING - 1173 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 14:26:51 - WARNING - 1177 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 14:26:51 - WARNING - 1181 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 14:26:51 - WARNING - 1185 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:26:51 - WARNING - 1189 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 14:27:33 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:28:02 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:28:33 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:29:10 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:29:11 - ERROR - 651 - qiangguo_shuafen - 到底了，没题目了，跳出
+2020/08/15 14:29:11 - CRITICAL - 654 - qiangguo_shuafen - 没有获取到题目名称
+2020/08/15 14:29:11 - CRITICAL - 1230 - qiangguo_shuafen - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1221, in recycle_main_do
+    job_stat = self.main_do()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1199, in main_do
+    self.run_special_ti()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 655, in run_special_ti
+    raise
+RuntimeError: No active exception to reraise
+2020/08/15 14:29:41 - WARNING - 1111 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:30:11 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 14:30:13 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 14:30:47 - WARNING - 1111 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:31:10 - WARNING - 1156 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 14:31:10 - WARNING - 1161 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:31:10 - WARNING - 1165 - qiangguo_shuafen - 已完成订阅
+2020/08/15 14:31:10 - WARNING - 1169 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 14:31:10 - WARNING - 1173 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 14:31:10 - WARNING - 1177 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 14:31:10 - WARNING - 1181 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 14:31:10 - WARNING - 1185 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:31:10 - WARNING - 1189 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 14:31:54 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:32:26 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:32:59 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:33:36 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:33:37 - ERROR - 651 - qiangguo_shuafen - 到底了，没题目了，跳出
+2020/08/15 14:33:37 - CRITICAL - 654 - qiangguo_shuafen - 没有获取到题目名称
+2020/08/15 14:33:58 - CRITICAL - 1230 - qiangguo_shuafen - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='学习积分'], method: None
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1221, in recycle_main_do
+    job_stat = self.main_do()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1202, in main_do
+    self.pp(text='学习积分').click()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='学习积分'], method: None
+2020/08/15 14:34:29 - WARNING - 1111 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:34:50 - WARNING - 1156 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 14:34:50 - WARNING - 1161 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:34:50 - WARNING - 1165 - qiangguo_shuafen - 已完成订阅
+2020/08/15 14:34:50 - WARNING - 1169 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 14:34:50 - WARNING - 1173 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 14:34:50 - WARNING - 1177 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 14:34:50 - WARNING - 1181 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 14:34:50 - WARNING - 1185 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:34:50 - WARNING - 1189 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 14:35:37 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:36:08 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:36:44 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:37:22 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:37:22 - ERROR - 651 - qiangguo_shuafen - 到底了，没题目了，跳出
+2020/08/15 14:37:22 - CRITICAL - 654 - qiangguo_shuafen - 没有获取到题目名称
+2020/08/15 14:37:36 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 14:37:38 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 14:38:09 - WARNING - 1112 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:38:28 - WARNING - 1157 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 14:38:28 - WARNING - 1162 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:38:28 - WARNING - 1166 - qiangguo_shuafen - 已完成订阅
+2020/08/15 14:38:28 - WARNING - 1170 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 14:38:28 - WARNING - 1174 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 14:38:28 - WARNING - 1178 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 14:38:28 - WARNING - 1182 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 14:38:28 - WARNING - 1186 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:38:28 - WARNING - 1190 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 14:39:15 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:39:48 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:40:26 - INFO - 646 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:41:00 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 14:41:02 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 14:41:34 - WARNING - 1113 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:41:54 - WARNING - 1158 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 14:41:54 - WARNING - 1163 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:41:54 - WARNING - 1167 - qiangguo_shuafen - 已完成订阅
+2020/08/15 14:41:54 - WARNING - 1171 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 14:41:54 - WARNING - 1175 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 14:41:54 - WARNING - 1179 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 14:41:54 - WARNING - 1183 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 14:41:54 - WARNING - 1187 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:41:54 - WARNING - 1191 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 14:42:39 - INFO - 649 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:43:09 - INFO - 649 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:43:43 - INFO - 649 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:43:56 - ERROR - 592 - qiangguo_shuafen - 专项答题所有的题都答完了
+2020/08/15 14:44:17 - CRITICAL - 1232 - qiangguo_shuafen - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='学习积分'], method: None
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1223, in recycle_main_do
+    job_stat = self.main_do()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1204, in main_do
+    self.pp(text='学习积分').click()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='学习积分'], method: None
+2020/08/15 14:47:05 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/15 14:47:07 - WARNING - 25 - qiangguo_shuafen - http://localhost:13102
+2020/08/15 14:47:37 - WARNING - 1125 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/15 14:47:55 - WARNING - 1170 - qiangguo_shuafen - 已完成视频观看
+2020/08/15 14:47:55 - WARNING - 1175 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:47:55 - WARNING - 1179 - qiangguo_shuafen - 已完成订阅
+2020/08/15 14:47:55 - WARNING - 1183 - qiangguo_shuafen - 已完成文章阅读
+2020/08/15 14:47:55 - WARNING - 1187 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/15 14:47:55 - WARNING - 1191 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/15 14:47:55 - WARNING - 1195 - qiangguo_shuafen - 已完成挑战答题
+2020/08/15 14:47:55 - WARNING - 1199 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/15 14:47:55 - WARNING - 1203 - qiangguo_shuafen - 已完成本地频道
+2020/08/15 14:48:38 - INFO - 657 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:49:08 - INFO - 657 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:49:40 - INFO - 657 - qiangguo_shuafen - 下滑一次，打开下面的题目
+2020/08/15 14:49:54 - ERROR - 596 - qiangguo_shuafen - 专项答题所有的题都答完了

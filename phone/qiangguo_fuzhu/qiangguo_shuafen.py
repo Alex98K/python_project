@@ -564,7 +564,11 @@ class QiangGuoFuZhu(object):
                 break
         if not date_title:
             self.logger.critical('没有获取到题目名称')
-            raise
+            self.pp.press('back')
+            time.sleep(1)
+            self.pp.press('back')
+            time.sleep(1)
+            return True
 
     def run_special_ti(self, fuck=False, test=False):
         with open(os.path.join(self.path, f'special_ti.json'), 'r', encoding="UTF-8") as f1:
@@ -588,6 +592,13 @@ class QiangGuoFuZhu(object):
                                                  'android.view.View[2]//android.view.View/'
                                                  'android.view.View[last()]').all()
             for j_num, j in enumerate(all_special_ti_xpath):
+                if j.attrib['clickable'] == 'false':
+                    self.logger.error('专项答题所有的题都答完了')
+                    self.pp.press('back')
+                    time.sleep(1)
+                    self.pp.press('back')
+                    time.sleep(1)
+                    return True
                 if j_num <= last_j_num:
                     continue
                 else:
@@ -651,15 +662,19 @@ class QiangGuoFuZhu(object):
                 break
         if not date_title:
             self.logger.critical('没有获取到题目名称')
-            raise
+            self.pp.press('back')
+            time.sleep(1)
+            self.pp.press('back')
+            time.sleep(1)
+            return True
 
     def read_issue(self, job_stat, test=False):
         # need_issue_num = int(job_stat[1][2]) - int(job_stat[1][1])
-        need_issue_num = 6 - int(job_stat[1][1])//2
+        need_issue_num = 6 - int(job_stat[1][1]) // 2
         need_share_num = 2 - int(job_stat[9][1])
         # need_collection_num = 2 - int(job_stat[10][1])
         need_comment_num = int(job_stat[10][2]) - int(job_stat[10][1])
-        need_time_num = 6 - int(job_stat[1][1])//2
+        need_time_num = 6 - int(job_stat[1][1]) // 2
         try:
             with open(os.path.join(self.path, f'data_issue_{self.learn_num}.json'), 'r', encoding="UTF-8") as f1:
                 data_issue = json.load(f1)
@@ -1246,13 +1261,6 @@ class QiangGuoFuZhu(object):
         # self.run_everyday_ti()
         # self.run_challenge(ti_num=9999)
         # self.listen_tai_start()
-        # while True:
-        #     job = [('已完成', '1', '1', '登录'), ('已完成', '6', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
-        #            ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
-        #            ('已完成', '6', '6', '每日答题'), ('去答题', '0', '5', '每周答题'), ('去看看', '0', '10', '专项答题'),
-        #            ('已完成', '6', '6', '挑战答题'), ('已完成', '2', '2', '订阅'), ('已完成', '1', '1', '收藏'),
-        #            ('已完成', '1', '1', '分享'), ('已完成', '2', '2', '发表观点'), ('已完成', '1', '1', '本地频道')]
-        #     self.read_video(job, test=True)
         raise
 
 

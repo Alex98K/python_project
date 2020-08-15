@@ -1,11 +1,14 @@
-job = [('已完成', '1', '1', '登录'), ('已完成', '6', '6', '阅读文章'), ('已完成', '6', '6', '视听学习'),
-       ('已完成', '6', '6', '文章学习时长'), ('已完成', '6', '6', '视听学习时长'),
-       ('已完成', '6', '6', '每日答题'), ('去答题', '0', '5', '每周答题'), ('去看看', '0', '10', '专项答题'),
-       ('已完成', '6', '6', '挑战答题'), ('已完成', '2', '2', '订阅'), ('已完成', '1', '1', '收藏'),
-       ('已完成', '1', '1', '分享'), ('已完成', '2', '2', '发表观点'), ('已完成1', '1', '1', '本地频道')]
+import uiautomator2
+
+pp = uiautomator2.connect_usb()
+top_y = pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                 'android.view.View[1]').get(timeout=5).bounds[3]
+down_y = pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
+                  'android.view.View[2]').get(timeout=5).bounds[3]
 
 while True:
-    for i, k in enumerate(job):
-        if k[0] != '已完成' and i not in [6, 7]:
-            continue
-    break
+    pp(scrollable=True).scroll(steps=90)
+    print((pp(text='您已经看到了我的底线').exists and
+                    down_y > pp(text='您已经看到了我的底线').bounds()[1] > top_y and
+                    pp(text='您已经看到了我的底线').bounds()[3] - pp(text='您已经看到了我的底线').bounds()[1] > 5))
+# pp(scrollable=True).swipe("up", steps=60)
