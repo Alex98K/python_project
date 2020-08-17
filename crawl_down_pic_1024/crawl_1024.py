@@ -202,7 +202,7 @@ def page_down(pic_dir_adr, thread):
                     suffix = re.search(r'\.\w*$', pic_url_one).group()
                 except AttributeError:
                     suffix = '.jpg'
-                file_name = os.path.join(dir_path, '{}-{}{}'.format(key, index, suffix))
+                file_name = os.path.join(dir_path, '{}-{}{}'.format(key, '%03d' % index, suffix))
                 if not os.path.exists(file_name):
                     time.sleep(INTERVAL_TIME_PIC)
                     thread.submit(down_one_pic, dir_path, pic_url_one, key, index, file_name)
