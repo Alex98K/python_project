@@ -143,7 +143,7 @@ def page_down(pic_dir_adr, thread):
         :param pic_name:图片名字
         :param index1:图片索引排序
         """
-        if len(pic_data := download(url_one1).content) > 1000:
+        if len(pic_data := download(url_one1).content) > 10000:
             print('下载完一个图片 {}-{}'.format(pic_name, index1))
             if not os.path.exists(dir_path_c):
                 try:
