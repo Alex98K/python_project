@@ -412,7 +412,6 @@ if __name__ == '__main__':
         print('没有可用网址，可能被禁IP了，跳过网站获取详细页信息，直接从原来存储的page_data中获取地址，下载图片')
     thread1.shutdown(wait=True)
     # 开始按照字典中信息，下载图片
-    for n in range(5):
-        thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
-        page_down(pic_dir, thread2)
-        thread2.shutdown(wait=True)
+    thread2 = ThreadPoolExecutor(max_workers=WORKER_NUM_PIC)
+    page_down(pic_dir, thread2)
+    thread2.shutdown(wait=True)
