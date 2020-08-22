@@ -492,7 +492,6 @@ class QiangGuoFuZhu(object):
                               'android.view.View[1]').get(timeout=5).bounds[3]
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                'android.view.View[2]').get(timeout=5).bounds[3]
-        date_title = ''
         answer = []
         last_j_num = -1
         while True:
@@ -546,7 +545,7 @@ class QiangGuoFuZhu(object):
                             time.sleep(1)
                             job_stat = self.job_status()
                             if job_stat[5][0] == '已完成' and not test:
-                                return
+                                return True
                             else:
                                 time.sleep(1)
                                 self.pp(text='我要答题').click_exists(timeout=20)
@@ -562,13 +561,12 @@ class QiangGuoFuZhu(object):
                     self.pp(text='您已经看到了我的底线').bounds()[3] - self.pp(text='您已经看到了我的底线').bounds()[1] > 5):
                 self.logger.error('到底了，没题目了，跳出')
                 break
-        if not date_title:
-            self.logger.critical('没有获取到题目名称')
-            self.pp.press('back')
-            time.sleep(1)
-            self.pp.press('back')
-            time.sleep(1)
-            return True
+        self.logger.critical('没有获取到题目名称，返回')
+        self.pp.press('back')
+        time.sleep(1)
+        self.pp.press('back')
+        time.sleep(1)
+        return True
 
     def run_special_ti(self, fuck=False, test=False):
         with open(os.path.join(self.path, f'special_ti.json'), 'r', encoding="UTF-8") as f1:
@@ -583,7 +581,6 @@ class QiangGuoFuZhu(object):
                               'android.view.View[1]').get(timeout=5).bounds[3]
         down_y = self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/'
                                'android.view.View[2]').get(timeout=5).bounds[3]
-        date_title = ''
         answer = []
         last_j_num = -1
         while True:
@@ -643,7 +640,7 @@ class QiangGuoFuZhu(object):
                             time.sleep(1)
                             job_stat = self.job_status()
                             if job_stat[6][0] == '已完成' and not test:
-                                return
+                                return True
                             else:
                                 time.sleep(1)
                                 self.pp(text='我要答题').click(timeout=20)
@@ -660,13 +657,12 @@ class QiangGuoFuZhu(object):
                     self.pp(text='您已经看到了我的底线').bounds()[3] - self.pp(text='您已经看到了我的底线').bounds()[1] > 5):
                 self.logger.error('到底了，没题目了，跳出')
                 break
-        if not date_title:
-            self.logger.critical('没有获取到题目名称')
-            self.pp.press('back')
-            time.sleep(1)
-            self.pp.press('back')
-            time.sleep(1)
-            return True
+        self.logger.critical('没有获取到题目名称，返回')
+        self.pp.press('back')
+        time.sleep(1)
+        self.pp.press('back')
+        time.sleep(1)
+        return True
 
     def read_issue(self, job_stat, test=False):
         # need_issue_num = int(job_stat[1][2]) - int(job_stat[1][1])
