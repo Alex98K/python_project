@@ -22,7 +22,7 @@ class AppReadBase(object):
                 if k in app_list_running:
                     self.pp.app_stop(k)
                 self.pp.app_start(k)
-                break
+                return
         self.logger.error('app名字输入错误，无法启动app')
         raise
 
