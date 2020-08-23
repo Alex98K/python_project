@@ -1230,7 +1230,7 @@ class QiangGuoFuZhu(object):
             try:
                 job_stat = self.main_do()
                 for i, k in enumerate(job_stat):
-                    if k[0] != '已完成' and i not in [6, 7]:
+                    if k[0] != '已完成' and i not in [5, 6]:
                         repeat_sign = 1
                         break
                 if repeat_sign == 1:
