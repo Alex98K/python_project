@@ -19,11 +19,12 @@ class AppReadBase(object):
         for k, v in self.app_info.items():
             if v[1] == app_name:
                 self.package_name = k
-                print(k)
                 if k in app_list_running:
                     self.pp.app_stop(k)
                 self.pp.app_start(k)
                 break
+        self.logger.error('app名字输入错误，无法启动app')
+        raise
 
     def log_config(self, phone_serial):
         # 设置log

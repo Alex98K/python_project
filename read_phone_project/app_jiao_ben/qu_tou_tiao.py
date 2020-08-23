@@ -13,4 +13,5 @@ class QuTouTiao(AppReadBase):
 
     def main_do(self):
         self.app_start('趣头条')
+        self.pp(text=)
 
