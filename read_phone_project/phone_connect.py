@@ -3,6 +3,7 @@ from os import popen
 from threading import Thread
 import pathlib
 import json
+from conf.app_config import store_app_info
 
 
 class PhoneConnect(object):
@@ -59,7 +60,7 @@ class PhoneConnect(object):
                 print('请输出正确的app安装网址')
 
     def app_install_all(self):
-        with open(self.path / 'conf/app_info.json', 'r', encoding='UTF-8') as f:
+        with open(self.path / 'conf' / 'app_info.json', 'r', encoding='UTF-8') as f:
             app_info = json.load(f)
         for name, info in app_info.items():
             url = info[0]
@@ -82,6 +83,7 @@ class PhoneConnect(object):
 
 
 if __name__ == '__main__':
+    store_app_info()
     do = PhoneConnect()
     # do.reboot_all()
     # print(do.serials_connections)
