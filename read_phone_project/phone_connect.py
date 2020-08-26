@@ -10,10 +10,17 @@ class PhoneConnect(object):
     def __init__(self):
         self.path = pathlib.Path().cwd()
         self.phone_connects = {}
-        self.connect()
+        self.phone_connects_serials = []
 
     def one_connect(self, j):
         self.phone_connects[j] = uiautomator2.connect_usb(j)
+
+    def connect_phone_serial(self):
+        fp = popen('adb devices').readlines()
+        for j in fp:
+            if 'device' in j and 'List' not in j:
+                j = j.replace('device', '').strip()
+                self.phone_connects_serials.append(j)
 
     def connect(self):
         fp = popen('adb devices').readlines()
@@ -33,17 +40,21 @@ class PhoneConnect(object):
 
     @property
     def connections(self):
+        self.connect()
         return self.phone_connects.values()
 
     @property
     def serials(self):
-        return self.phone_connects.keys()
+        self.connect_phone_serial()
+        return self.phone_connects_serials
 
     @property
     def serials_connections(self):
+        self.connect()
         return self.phone_connects.items()
 
     def reboot_all(self):
+        self.connect()
         for k, v in self.phone_connects.items():
             try:
                 v.shell('reboot')
@@ -51,6 +62,7 @@ class PhoneConnect(object):
                 pass
 
     def app_install(self, url=''):
+        self.connect()
         for k, v in self.phone_connects.items():
             try:
                 v.app_install(url)
@@ -60,6 +72,7 @@ class PhoneConnect(object):
                 print('请输出正确的app安装网址')
 
     def app_install_all(self):
+        self.connect()
         with open(self.path / 'conf' / 'app_info.json', 'r', encoding='UTF-8') as f:
             app_info = json.load(f)
         for name, info in app_info.items():

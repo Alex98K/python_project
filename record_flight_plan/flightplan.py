@@ -331,7 +331,8 @@ for i_comp, v_comp in enumerate(flight_plan):  # 获取各个公司,i_comp是公
             # 任务性质那行输出
             para_style_input(document, '{xuhao}{job_name}'.format(xuhao=CN_NUM[i_job + 1][1],
                                                                   job_name=CN_NUM[job_name]), font_pos='抄送')
-        for value in v_job[1]:  # 准备输入每一个航班计划
+        hang_ban_num = len(v_job[1])  # 如果航班计划条数大于1，就在航班号前面加上序号
+        for index, value in enumerate(v_job[1]):  # 准备输入每一个航班计划
             # 把航线变成中文，并获取机场抄送管理局、监管局名单
             hangxian, cc_guan_temp_value, cc_jian_temp = eng2chin(value[col_name_num['航线四字码']], 'airport')
             cc_airport.append(hangxian)  # 添加到抄送机场
@@ -339,7 +340,10 @@ for i_comp, v_comp in enumerate(flight_plan):  # 获取各个公司,i_comp是公
             cc_jian.append(cc_jian_temp)  # 添加到抄送监管局
             same_date = value[col_name_num['生效日期']] == value[col_name_num['截止日期']]
             table = document.add_table(rows=4, cols=3, style='Normal Table')  # 准备写入航班计划，新建表格
-            table_para_style_input(table.cell(0, 0), '航班号')
+            if hang_ban_num > 1:  # 如果航班计划条数大于1，就在航班号前面加上序号
+                table_para_style_input(table.cell(0, 0), f'{index+1}、航班号')
+            else:
+                table_para_style_input(table.cell(0, 0), '航班号')
             table_para_style_input(table.cell(0, 1), '机型')
             if not same_date:
                 table_para_style_input(table.cell(0, 2), '班期')
@@ -380,6 +384,7 @@ cc_airport = '、'.join(list(set(temp)))
 
 # 形成正文尾部
 para_style_input(document, '此报告。')
+para_style_input(document, '')
 para_style_input(document, '民航华北地区管理局', font_pos='正文落款')
 nowadays = time.localtime(time.time())
 para_style_input(document, '{}'.format(time.strftime("{}年{}月{}日".format(
