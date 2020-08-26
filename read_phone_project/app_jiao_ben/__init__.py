@@ -2,6 +2,7 @@ import logging
 import sys
 import pathlib
 import json
+import random
 
 
 class AppReadBase(object):
@@ -44,3 +45,12 @@ class AppReadBase(object):
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
         return logger
+
+    def click_random_position(self, xpath_bounds):
+        lx, ly, rx, ry = xpath_bounds
+        x_off, y_off = random.random(), random.random()
+        width, height = rx - lx, ry - ly
+        x = lx + width * x_off
+        y = ly + height * y_off
+        self.pp.click(x, y)
+        return x, y

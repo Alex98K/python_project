@@ -1,0 +1,17 @@
+2020/08/10 23:20:28 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 8DF6R16729018868
+2020/08/10 23:20:30 - WARNING - 25 - qiangguo_shuafen - http://localhost:1407
+2020/08/10 23:21:02 - WARNING - 1101 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/08/10 23:21:24 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
+2020/08/10 23:21:24 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
+2020/08/10 23:21:24 - WARNING - 1146 - qiangguo_shuafen - 已完成视频观看
+2020/08/10 23:21:24 - WARNING - 1151 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/10 23:21:24 - WARNING - 1155 - qiangguo_shuafen - 已完成订阅
+2020/08/10 23:21:24 - WARNING - 1159 - qiangguo_shuafen - 已完成文章阅读
+2020/08/10 23:21:24 - WARNING - 1163 - qiangguo_shuafen - 已完成每日答题任务
+2020/08/10 23:21:24 - WARNING - 1167 - qiangguo_shuafen - 已完成每周答题任务
+2020/08/10 23:21:24 - WARNING - 1171 - qiangguo_shuafen - 已完成挑战答题
+2020/08/10 23:21:24 - WARNING - 1175 - qiangguo_shuafen - 已完成视听时长学习
+2020/08/10 23:21:24 - WARNING - 1179 - qiangguo_shuafen - 已完成本地频道
+2020/08/10 23:21:42 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
+2020/08/10 23:21:42 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
+2020/08/10 23:21:43 - WARNING - 1190 - qiangguo_shuafen - 已完成专项答题任务
