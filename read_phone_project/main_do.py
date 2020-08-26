@@ -8,6 +8,7 @@ import random
 def main_run(phone_serial):
     pp = uiautomator2.connect_usb(phone_serial)
     pp.unlock()
+    pp.screen_on()
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')
     # 设置电池电量
