@@ -12,7 +12,10 @@ class DownTiKu(object):
         res_li = []
         for j in answer_list:
             if '.' not in j:
-                res_li[-1] = res_li[-1] + j
+                try:
+                    res_li[-1] = res_li[-1] + j
+                except IndexError:
+                    pass
             else:
                 res_li.append(re.sub(r'^\d{0,2}\.', '', j))
         if len(res_li) != answer_num:
@@ -43,9 +46,9 @@ class DownTiKu(object):
                 continue
             answer = list(map(lambda t: re.sub(r'[^\w\u4e00-\u9fa5.]', '', str(t).replace('\xa0', '').replace('_', '')),
                               i.xpath(f'./following-sibling::p[position()<{answer_num+2}]/text()')))
-            # print(title)
+            print(answer)
             answer = self.fix_answer(answer, answer_num)
-            # print(answer)
+            print(answer)
             ti_ku[title] = answer
         return ti_ku
 
