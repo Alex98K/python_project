@@ -3,6 +3,7 @@ import sys
 import pathlib
 import json
 import random
+import time
 
 
 class AppReadBase(object):
@@ -11,7 +12,7 @@ class AppReadBase(object):
         self.phone_serial = phone_serial
         self.probability_read_issue = 0.7  # 看视频或文章概率
         self.probability_thumb_up = 0.3  # 点赞概率
-        self.probability_commit = 0.1  # 评论概率
+        self.probability_commit = 0.05  # 评论概率
         self.path = pathlib.Path().cwd()
         self.logger = self.log_config(phone_serial)
         with open(self.path / 'conf' / 'app_info.json', 'r', encoding='UTF-8') as f:
@@ -31,6 +32,9 @@ class AppReadBase(object):
                 return
         self.logger.error('app名字输入错误，无法启动app')
         raise
+
+    def app_end(self):
+        self.pp.app_stop(self.package_name)
 
     def log_config(self, phone_serial):
         # 设置log
@@ -59,3 +63,30 @@ class AppReadBase(object):
         y = ly + height * y_off
         self.pp.click(x, y)
         return x, y
+
+    def main_do(self):
+        pass
+
+    def del_watcher(self):
+        try:
+            self.pp.watcher.stop()
+            self.pp.watcher.remove()
+        except AttributeError:
+            self.logger.error('程序结束调用del注销watcher出错')
+
+    def recycle_main_do(self, cl_screen=False):
+        t = time.time()
+        while True:
+            try:
+                self.main_do()
+                break
+            except Exception as e:
+                self.logger.critical(f'出严重错误啦，以下是错误信息{e}', exc_info=True)
+                self.pp.screenshot(pathlib.Path.cwd() / 'log' / f'出错啦{random.random()}.jpg')
+                if time.time() - t > 3600:
+                    self.logger.critical('程序存在错误，试了一个小时都不行，请修改程序')
+                    self.app_end()
+                    break
+        self.del_watcher()
+        if cl_screen is True:
+            self.pp.screen_off()
