@@ -20,7 +20,7 @@ class QuTouTiao(AppReadBase):
             self.pp(text='同意去开启').click_exists(timeout=10)
             self.pp(text='允许').click_exists(timeout=10)
 
-    def sign_in(self):
+    def log_on(self):
         self.logger.info(f'开始登录')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         if self.pp(text='登录').exists(timeout=5):
@@ -29,7 +29,7 @@ class QuTouTiao(AppReadBase):
             read_time = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ee"]').get_text()
             return read_time
 
-    def qian_dao(self):
+    def sign_in(self):
         self.logger.info(f'开始签到')
         if self.pp(text='签到').exists(timeout=5):
             self.pp(text='签到').click(offset=(random.random(), random.random()))
@@ -100,6 +100,7 @@ class QuTouTiao(AppReadBase):
                             self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/zq"]').wait()
                             self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/zq"]'). \
                                 set_text(random.choice(self.commit))
+                            time.sleep(random.random() + 1)
                             self.pp(text='发布').click(offset=(random.random(), random.random()))
                             time.sleep(random.random() + 1)
                     self.pp.press('back')
@@ -193,12 +194,12 @@ class QuTouTiao(AppReadBase):
     def main_do(self):
         # raise
         self.app_start('趣头条')
-        self.jurisdiction()
+        # self.jurisdiction()
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait()
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait_gone()
         self.pp(text='我的').wait(timeout=30)
-        read_time = self.sign_in()
-        self.qian_dao()
+        read_time = self.log_on()
+        self.sign_in()
         if float(read_time) < 60:
             self.read_issue()
         else:

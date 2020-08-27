@@ -22,3 +22,41 @@
 2020/08/27 20:12:38 - INFO - 124 - qu_tou_tiao - 开始获阅读文章的奖励
 2020/08/27 20:12:45 - INFO - 149 - qu_tou_tiao - 开始看广告获金币
 2020/08/27 20:13:38 - INFO - 174 - qu_tou_tiao - 开始清理缓存
+2020/08/27 22:05:01 - CRITICAL - 84 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 81, in recycle_main_do
+    self.main_do()
+  File "D:\python_project\read_phone_project\app_jiao_ben\dou_yin.py", line 52, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/08/27 22:05:04 - CRITICAL - 84 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 81, in recycle_main_do
+    self.main_do()
+  File "D:\python_project\read_phone_project\app_jiao_ben\dou_yin.py", line 52, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/08/27 22:19:49 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 22:20:50 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 22:21:52 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 23:03:40 - INFO - 42 - dou_yin - 开始阅读文章
+2020/08/27 23:17:39 - INFO - 42 - dou_yin - 开始阅读文章
+2020/08/27 23:31:10 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 23:31:19 - INFO - 33 - dou_yin - 开始签到
+2020/08/27 23:31:20 - INFO - 42 - dou_yin - 开始阅读文章
+2020/08/27 23:31:34 - INFO - 76 - dou_yin - 开始清理缓存
+2020/08/27 23:33:09 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 23:33:17 - INFO - 33 - dou_yin - 开始签到
+2020/08/27 23:33:18 - INFO - 42 - dou_yin - 开始阅读文章
+2020/08/27 23:34:21 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 23:34:30 - INFO - 33 - dou_yin - 开始签到
+2020/08/27 23:34:34 - INFO - 42 - dou_yin - 开始阅读文章
+2020/08/27 23:34:47 - INFO - 76 - dou_yin - 开始清理缓存
+2020/08/27 23:35:59 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 23:36:07 - INFO - 33 - dou_yin - 开始签到
+2020/08/27 23:36:14 - INFO - 43 - dou_yin - 开始阅读文章
+2020/08/27 23:36:31 - INFO - 77 - dou_yin - 开始清理缓存
+2020/08/27 23:37:32 - INFO - 16 - dou_yin - 开始登录
+2020/08/27 23:37:41 - INFO - 33 - dou_yin - 开始签到
+2020/08/27 23:37:50 - INFO - 43 - dou_yin - 开始阅读文章
+2020/08/27 23:38:05 - INFO - 77 - dou_yin - 开始清理缓存

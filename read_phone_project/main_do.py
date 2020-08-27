@@ -1,8 +1,9 @@
 from multiprocessing import Process
 from phone_connect import PhoneConnect
-from app_jiao_ben.qu_tou_tiao import QuTouTiao
 import uiautomator2
 import random
+from app_jiao_ben.qu_tou_tiao import QuTouTiao
+from app_jiao_ben.dou_yin import DouYin
 
 
 def main_run(phone_serial):
@@ -17,7 +18,8 @@ def main_run(phone_serial):
     pp.shell('dumpsys battery set status 1')
     # 查看电池状态
     # print(pp.shell('dumpsys battery').output)
-    QuTouTiao(phone_serial, pp).recycle_main_do()
+    # QuTouTiao(phone_serial, pp).recycle_main_do()
+    DouYin(phone_serial, pp).recycle_main_do(test=True)
     # 设置电池为充电状态
     # pp.shell('dumpsys battery set status 2')
     # 重置电池状态
