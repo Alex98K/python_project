@@ -7,10 +7,10 @@ import time
 class DouYin(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(DouYin, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
-        # self.pp.watcher('tip1').when('知道了').click()
+        # self.pp = uiautomator2.connect_usb()
+        self.pp.watcher('tip1').when('我知道了').click()
         # self.pp.watcher('tip2').when('残忍离开').click()
-        # self.pp.watcher.start(0.5)
+        self.pp.watcher.start(0.5)
 
     def log_on(self):
         self.logger.info(f'开始登录')
@@ -42,13 +42,12 @@ class DouYin(AppReadBase):
     def read_issue(self):
         self.logger.info(f'开始阅读文章')
         self.pp(text='首页').click(offset=(random.random(), random.random()))
-        read_issue_time = 3600  # 看视频总时间
+        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
         while True:
             time.sleep(random.uniform(5, 10))
-            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8),
-                          random.uniform(0.3, 0.6), random.uniform(0.2, 0.3),
-                          random.uniform(0.1, 0.3))
+            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
+                          random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
             time.sleep(1)
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]').exists and \
@@ -66,7 +65,8 @@ class DouYin(AppReadBase):
                 self.pp(text='留下你的精彩评论吧').wait()
                 self.pp(text='留下你的精彩评论吧').set_text(random.choice(self.commit))
                 time.sleep(random.random() + 1)
-                self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/qp').click(offset=(random.random(), random.random()))
+                self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/qp')\
+                    .click(offset=(random.random(), random.random()))
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
