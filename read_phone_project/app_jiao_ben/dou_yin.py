@@ -39,13 +39,11 @@ class DouYin(AppReadBase):
         self.pp.press('back')
         time.sleep(random.random() + 1)
 
-    def read_issue(self):
-        self.logger.info(f'开始阅读文章')
-        self.pp(text='首页').click(offset=(random.random(), random.random()))
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def _read_issue_core(self, time1, time2):
+        read_issue_time = random.randint(time1, time2)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
         while True:
-            time.sleep(random.uniform(5, 10))
+            time.sleep(random.uniform(3, 10))
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
             time.sleep(1)
@@ -54,6 +52,17 @@ class DouYin(AppReadBase):
                     random.random() < self.probability_thumb_up:
                 self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]')
                                            .get().bounds)
+                time.sleep(random.random() + 1)
+            # 按照设定的关注概率，随机关注
+            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]').exists and \
+                    random.random() < self.probability_focus:
+                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]')
+                                           .get().bounds)
+                if self.pp(text='关注').exsits(timeout=3):
+                    self.pp(text='关注').click(offset=(random.random(), random.random()))
+                time.sleep(random.random() + 1)
+                self.pp.press('back')
+                time.sleep(random.random() + 1)
             # 按照设定的评论概率，随机评论
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/qb"]').exists and \
                     random.random() < self.probability_commit:
@@ -65,11 +74,38 @@ class DouYin(AppReadBase):
                 self.pp(text='留下你的精彩评论吧').wait()
                 self.pp(text='留下你的精彩评论吧').set_text(random.choice(self.commit))
                 time.sleep(random.random() + 1)
-                self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/qp')\
+                self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/qp') \
                     .click(offset=(random.random(), random.random()))
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
+            if time.time() - issue_time_start > read_issue_time:
+                break
+
+    def read_issue_first(self):
+        self.logger.info(f'开始阅读首页视频')
+        self.pp(text='首页').click(offset=(random.random(), random.random()))
+        self._read_issue_core(900, 1200)
+
+    def read_issue_city(self):
+        self.logger.info(f'开始阅读同城视频')
+        self.pp(text='同城').click(offset=(random.random(), random.random()))
+        for j in range(random.randint(0, 5)):  # 随机下滑几次
+            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
+                          random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
+                                   f'android.view.ViewGroup[{random.randint(1, 4)}]/android.widget.LinearLayout[1]/'
+                                   f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/'
+                                   f'android.view.View[1]').bounds
+        self.click_random_position(temp_bounds)  # 随机选页面中的视频
+        self._read_issue_core(600, 900)
+
+    def read_issue(self):
+        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+        issue_time_start = time.time()  # 开始计时
+        while True:
+            self.read_issue_first()
+            self.read_issue_city()
             if time.time() - issue_time_start > read_issue_time:
                 break
 

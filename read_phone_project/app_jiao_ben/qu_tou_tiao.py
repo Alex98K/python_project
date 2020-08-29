@@ -7,9 +7,10 @@ import time
 class QuTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(QuTouTiao, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('知道了').click()
         self.pp.watcher('tip2').when('残忍离开').click()
+        self.pp.watcher('tip3').when('恭喜获得').press('back')
         self.pp.watcher.start(0.5)
 
     def jurisdiction(self):
@@ -36,18 +37,44 @@ class QuTouTiao(AppReadBase):
         if self.pp(text='恭喜获得').exists(timeout=3):
             self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/wj"]').click()
 
+    def _adjust_lan_mu(self):
+        self.logger.info(f'开始调整栏目')
+        lan_mu_num_end = self.pp(resourceId="com.jifen.qukan:id/bfn").count - 1
+        if self.pp(resourceId="com.jifen.qukan:id/ada").exists:
+            self.pp(resourceId="com.jifen.qukan:id/ada").click(offset=(random.uniform(0.5, 0.9), random.random()))
+            time.sleep(random.random() + 1)
+            self.pp(text='编辑').wait()
+            self.pp(text='编辑').click(offset=(random.random(), random.random()))
+        lan_mu_num = 0
+        for j in reversed(self.pp(resourceId='com.jifen.qukan:id/aoa')):
+            if j.get_text() in ['小剧场', '小视频', '直播', '好货', '小说', '抗疫', '视频', '北京'] or \
+                    random.random() < 0.7 or lan_mu_num >= lan_mu_num_end:
+                j.sibling(resourceId='com.jifen.qukan:id/aob').click_exists()
+            else:
+                lan_mu_num += 1
+        self.pp(text='完成').wait()
+        self.pp(text='完成').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 1)
+        self.pp.press('back')
+        time.sleep(random.random() + 1)
+
     def read_issue(self):
         self.logger.info(f'开始阅读文章')
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/'
                                                  'android.widget.FrameLayout[1]').get().bounds)
-        if self.pp(text='领取').exists:
+        if self.pp(text='领取').exists(timeout=3):
             self.pp(text='领取').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        # 获取前5个栏目
-        for j in range(5):
-            lan_mu = self.pp.xpath(f'//*[@resource-id="com.jifen.qukan:id/ad_"]/android.widget.LinearLayout[1]/'
-                                   f'android.widget.RelativeLayout[{j+1}]')
-            self.click_random_position(lan_mu.bounds)
+        time.sleep(random.random() + 1)
+        # 看情况调整栏目
+        if self.pp(resourceId="com.jifen.qukan:id/bfn")[-1].bounds()[2] > \
+                self.pp(resourceId="com.jifen.qukan:id/ada").bounds()[1]:
+            self._adjust_lan_mu()
+        # 获取栏目
+        lan_mu_num = self.pp(resourceId="com.jifen.qukan:id/bfn").count
+        random_list = [x for x in range(lan_mu_num)]
+        random.shuffle(random_list)
+        for j in random_list:
+            self.click_random_position(self.pp(resourceId="com.jifen.qukan:id/bfn")[j].bounds())
             time.sleep(random.random() + 1)
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
                 # 每个栏目下的文章标题
@@ -85,6 +112,11 @@ class QuTouTiao(AppReadBase):
                                 random.random() < self.probability_thumb_up:
                             self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/bla"]')
                                                        .get().bounds)
+                            time.sleep(random.random() + 1)
+                        # 按照设定的关注概率，随机关注
+                        if self.pp(description="关注").exists and random.random() < self.probability_focus:
+                            self.pp(description="关注").click(offset=(random.random(), random.random()))
+                            time.sleep(random.random() + 1)
                         # 按照设定的评论概率，随机评论
                         if self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/bku"]').exists and \
                                 random.random() < self.probability_commit:
@@ -105,19 +137,19 @@ class QuTouTiao(AppReadBase):
                             time.sleep(random.random() + 1)
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
-                    self.pp(text='我的').click(offset=(random.random(), random.random()))
-                    read_time = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ee"]').get_text()
-                    if int(read_time) > 60:
-                        return
-                    else:
-                        self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/'
-                                                                 'android.widget.FrameLayout[1]').get().bounds)
-                        time.sleep(random.random() + 1)
                 # 随机下滑2-4次
                 for k in range(random.randint(2, 4)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                                   random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
                     time.sleep(random.random())
+            self.pp(text='我的').click(offset=(random.random(), random.random()))
+            read_time = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ee"]').get_text()
+            if float(read_time) > 60:
+                return
+            else:
+                self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/'
+                                                         'android.widget.FrameLayout[1]').get().bounds)
+                time.sleep(random.random() + 1)
             self.logger.info('看完这个栏目了，换个栏目')
 
     def get_read_reward(self):
@@ -174,6 +206,7 @@ class QuTouTiao(AppReadBase):
         self.logger.info(f'开始清理缓存')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         while True:
+
             if not self.pp(text="设置").exists:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                               random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
@@ -192,6 +225,7 @@ class QuTouTiao(AppReadBase):
         self.pp(description='提现').click(offset=(random.random(), random.random()))
 
     def main_do(self):
+        # print(self.pp(resourceId="com.jifen.qukan:id/bfn")[1].bounds())
         # raise
         self.app_start('趣头条')
         # self.jurisdiction()
