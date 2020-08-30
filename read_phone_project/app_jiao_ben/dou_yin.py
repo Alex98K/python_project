@@ -9,7 +9,7 @@ class DouYin(AppReadBase):
         super(DouYin, self).__init__(phone_serial, pp)
         # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
-        # self.pp.watcher('tip2').when('残忍离开').click()
+        self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
 
     def log_on(self):
@@ -105,13 +105,17 @@ class DouYin(AppReadBase):
         self.logger.info('获取今日金币数量')
         self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
         self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]').wait()
-        coin = self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]').get().attrib['content-desc']
+        coin = self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]') \
+            .get().attrib['content-desc'].replace(',', '')
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
-        temp = int(coin.replace(',', ''))
-        self.logger.info(f'金币已经获取金币 {temp}')
-        return temp
+        if 'w' in coin:
+            coin = int(float(coin.replace('w', '')) * 10000)
+        else:
+            coin = int(coin)
+        self.logger.info(f'金币已经获取金币 {coin}')
+        return coin
 
     def read_issue(self):
         read_issue_time = random.randint(3000, 4000)  # 看视频总时间
@@ -145,11 +149,9 @@ class DouYin(AppReadBase):
     def main_do(self):
         # raise
         self.app_start('抖音极速版')
-        self.logger.info('开始 抖音极速版 APP任务')
         self.pp(text='我').wait(timeout=30)
         self.log_on()
         self.sign_in()
         self.read_issue()
         self.clean_cache()
         self.app_end()
-        self.logger.info('已完成 抖音极速版 APP任务')

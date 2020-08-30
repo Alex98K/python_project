@@ -30,12 +30,14 @@ class AppReadBase(object):
                 if k in app_list_running:
                     self.pp.app_stop(k)
                 self.pp.app_start(k)
+                self.logger.info(f'********开始 {app_name} 的任务********')
                 return
         self.logger.error('app名字输入错误，无法启动app')
         raise
 
     def app_end(self):
         self.pp.app_stop(self.package_name)
+        self.logger.info(f'********结束 APP 任务********')
 
     def log_config(self, phone_serial):
         # 设置log

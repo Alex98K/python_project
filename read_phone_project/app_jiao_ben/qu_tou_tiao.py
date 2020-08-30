@@ -34,8 +34,6 @@ class QuTouTiao(AppReadBase):
         self.logger.info(f'开始签到')
         if self.pp(text='签到').exists(timeout=5):
             self.pp(text='签到').click(offset=(random.random(), random.random()))
-        if self.pp(text='恭喜获得').exists(timeout=3):
-            self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/wj"]').click()
 
     def _adjust_lan_mu(self):
         self.logger.info(f'开始调整栏目')
@@ -93,12 +91,10 @@ class QuTouTiao(AppReadBase):
                         read_video_time = random.randrange(5, 185, 30)  # 看视频的随机时间
                         # 看下是视频还是文章，视频就停着看，文章就下滑看
                         if self.pp.xpath('//com.qukan.media.player.renderview.TextureRenderView').exists:
-                            while True:
-                                if self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time:
-                                    break
+                            while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
                                 time.sleep(1)
                         else:
-                            while True:
+                            while time.time() - issue_time_start <= read_issue_time:
                                 time.sleep(random.uniform(3, 5))
                                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8),
                                               random.uniform(0.3, 0.6), random.uniform(0.2, 0.3),
@@ -106,9 +102,6 @@ class QuTouTiao(AppReadBase):
                                 time.sleep(1)
                                 if not self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/g3"]').exists:
                                     self.pp.press('back')
-                                # self.pp(scrollable=True).scroll(steps=200)
-                                if time.time() - issue_time_start > read_issue_time:
-                                    break
                         # 按照设定的点赞概率，随机点赞
                         if self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/bla"]').exists and \
                                 random.random() < self.probability_thumb_up:
@@ -181,6 +174,9 @@ class QuTouTiao(AppReadBase):
                     self.pp(text='关闭').click(offset=(random.random(), random.random()))
                     time.sleep(random.random() + 1)
                 self.pp.press('back')
+                if self.pp.xpath('com.jifen.qukan:id/tt_video_ad_close_layout').exists:
+                    self.click_random_position(self.pp.xpath('com.jifen.qukan:id/tt_video_ad_close_layout')
+                                               .get().bounds)
                 if self.pp(text='恭喜获得').exists(timeout=3):
                     self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan.taskcenter:id/r"]')
                                                .get().bounds)
@@ -208,6 +204,9 @@ class QuTouTiao(AppReadBase):
                     self.pp(text='关闭').click(offset=(random.random(), random.random()))
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
+                if self.pp.xpath('com.jifen.qukan:id/tt_video_ad_close_layout').exists:
+                    self.click_random_position(self.pp.xpath('com.jifen.qukan:id/tt_video_ad_close_layout')
+                                               .get().bounds)
                 if self.pp(text='恭喜获得').exists(timeout=3):
                     self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan.taskcenter:id/r"]')
                                                .get().bounds)
@@ -240,7 +239,6 @@ class QuTouTiao(AppReadBase):
     def main_do(self):
         # raise
         self.app_start('趣头条')
-        self.logger.info('开始 趣头条 APP任务')
         # self.jurisdiction()
         # 过了开头的广告动画
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait()
@@ -256,4 +254,3 @@ class QuTouTiao(AppReadBase):
         self.get_advertisement_reward()
         self.clean_cache()
         self.app_end()
-        self.logger.info('已完成 趣头条 APP任务')

@@ -7,7 +7,7 @@ import time
 class KuaiShou(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(KuaiShou, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.kuaishou.nebula:id/img_nebula_pull_new_dialog"]') \
             .press('back')
@@ -51,13 +51,16 @@ class KuaiShou(AppReadBase):
         self.pp(description='活动规则').wait()
         coin = self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/webView"]/android.webkit.WebView[1]/'
                              'android.webkit.WebView[1]/android.widget.ListView[1]/android.view.View[1]/'
-                             'android.view.View[1]').get().attrib['content-desc']
+                             'android.view.View[1]').get().attrib['content-desc'].replace(',', '')
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
-        temp = int(coin.replace(',', ''))
-        self.logger.info(f'金币已经获取金币 {temp}')
-        return temp
+        if 'w' in coin:
+            coin = int(float(coin.replace('w', '')) * 10000)
+        else:
+            coin = int(coin)
+        self.logger.info(f'金币已经获取金币 {coin}')
+        return coin
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
@@ -99,7 +102,7 @@ class KuaiShou(AppReadBase):
                                                                   'comment_editor_holder_text').bounds())
                 self.pp(resourceId='com.kuaishou.nebula:id/editor').wait()
                 self.pp(resourceId='com.kuaishou.nebula:id/editor').set_text(random.choice(self.commit))
-                time.sleep(random.random() + 1)
+                time.sleep(random.random() + 2)
                 self.pp(resourceId='com.kuaishou.nebula:id/finish_button') \
                     .click(offset=(random.random(), random.random()))
                 time.sleep(random.random() + 1)
