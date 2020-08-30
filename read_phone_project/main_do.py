@@ -6,6 +6,7 @@ from app_jiao_ben.qu_tou_tiao import QuTouTiao
 from app_jiao_ben.dou_yin import DouYin
 from app_jiao_ben.kuai_shou import KuaiShou
 
+
 def main_run(phone_serial):
     pp = uiautomator2.connect_usb(phone_serial)
     pp.unlock()

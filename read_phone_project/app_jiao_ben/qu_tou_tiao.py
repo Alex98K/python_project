@@ -102,7 +102,7 @@ class QuTouTiao(AppReadBase):
                                 time.sleep(random.uniform(3, 5))
                                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8),
                                               random.uniform(0.3, 0.6), random.uniform(0.2, 0.3),
-                                              random.uniform(0.1, 0.3))
+                                              steps=random.randint(20, 60))
                                 time.sleep(1)
                                 if not self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/g3"]').exists:
                                     self.pp.press('back')
@@ -146,7 +146,7 @@ class QuTouTiao(AppReadBase):
                 # 随机下滑2-4次
                 for k in range(random.randint(2, 4)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                                  random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+                                  random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
             time.sleep(random.random() + 1)
             self.pp(text='我的').click(offset=(random.random(), random.random()))
@@ -170,7 +170,7 @@ class QuTouTiao(AppReadBase):
                 if not self.pp(text="阅读得大额奖励").exists or self.pp(text="阅读得大额奖励").center()[1] > \
                         self.pp.xpath('//*[@resource-id="com.jifen.qukan.taskcenter:id/g5"]').get().bounds[1]:
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                                  random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+                                  random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
                 else:
                     break
@@ -197,7 +197,7 @@ class QuTouTiao(AppReadBase):
                 if not self.pp(text="看广告视频拿金币").exists or self.pp(text="阅读得大额奖励").center()[1] > \
                             self.pp.xpath('//*[@resource-id="com.jifen.qukan.taskcenter:id/g5"]').get().bounds[1]:
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                                  random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+                                  random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
                 else:
                     break
@@ -222,7 +222,7 @@ class QuTouTiao(AppReadBase):
         while time.time() - t <= 60:
             if not self.pp(text="设置").exists:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                              random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+                              random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                 time.sleep(random.random())
             else:
                 break
@@ -255,6 +255,5 @@ class QuTouTiao(AppReadBase):
         self.get_read_reward()
         self.get_advertisement_reward()
         self.clean_cache()
-        # self.coin_info()
         self.app_end()
         self.logger.info('已完成 趣头条 APP任务')

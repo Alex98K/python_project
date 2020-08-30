@@ -25,8 +25,8 @@ class DouYin(AppReadBase):
             self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/b8p"]').set_text('jiajia0611')
             time.sleep(random.random() + 1)
             self.pp(text='登录').click(offset=(random.random(), random.random()))
+            time.sleep(random.random() + 1)
         else:
-            # read_time = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ee"]').get_text()
             return
 
     def sign_in(self):
@@ -44,9 +44,6 @@ class DouYin(AppReadBase):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             time.sleep(random.uniform(3, 10))
-            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                          random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
-            time.sleep(1)
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]').exists and \
                     random.random() < self.probability_thumb_up:
@@ -60,7 +57,7 @@ class DouYin(AppReadBase):
                                            .get().bounds)
                 if self.pp(text='关注').exsits(timeout=3):
                     self.pp(text='关注').click(offset=(random.random(), random.random()))
-                time.sleep(random.random() + 1)
+                time.sleep(random.random() + 3)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
             # 按照设定的评论概率，随机评论
@@ -79,10 +76,14 @@ class DouYin(AppReadBase):
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
+            self.pp.swipe(random.uniform(0.3, 0.7), random.uniform(0.7, 0.8), random.uniform(0.3, 0.7),
+                          random.uniform(0, 0.2), steps=random.randint(20, 60))
 
     def read_issue_first(self):
         self.logger.info(f'开始阅读首页视频')
+        time.sleep(random.random() + 1)
         self.pp(text='首页').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 1)
         self._read_issue_core(900, 1200)
 
     def read_issue_city(self):
@@ -90,12 +91,14 @@ class DouYin(AppReadBase):
         self.pp(text='同城').click(offset=(random.random(), random.random()))
         for j in range(random.randint(0, 5)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                          random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+                          random.uniform(0.2, 0.3), steps=random.randint(20, 60))
+        time.sleep(random.random() + 1)
         temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
                                     f'android.view.ViewGroup[{random.randint(1, 4)}]/android.widget.LinearLayout[1]/'
                                     f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/'
                                     f'android.view.View[1]').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
+        time.sleep(random.random() + 1)
         self._read_issue_core(600, 900)
 
     def today_coin(self):
@@ -130,7 +133,7 @@ class DouYin(AppReadBase):
         while time.time() - t > 60:
             if not self.pp(text="清理缓存").exists:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                              random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
+                              random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                 time.sleep(random.random())
             else:
                 break
