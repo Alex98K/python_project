@@ -87,7 +87,7 @@ class WeiShi(AppReadBase):
     def read_issue_first(self):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
-        self.pp(text='首页').click(offset=(random.random(), random.random()))
+        self.pp(resourceId='com.tencent.weishi:id/qff').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
         self._read_issue_core(900, 1200)
 
