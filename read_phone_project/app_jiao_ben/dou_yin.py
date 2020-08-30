@@ -42,7 +42,7 @@ class DouYin(AppReadBase):
     def _read_issue_core(self, time1, time2):
         read_issue_time = random.randint(time1, time2)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
-        while True:
+        while time.time() - issue_time_start <= read_issue_time:
             time.sleep(random.uniform(3, 10))
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
@@ -79,8 +79,6 @@ class DouYin(AppReadBase):
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
-            if time.time() - issue_time_start > read_issue_time:
-                break
 
     def read_issue_first(self):
         self.logger.info(f'开始阅读首页视频')
@@ -94,20 +92,32 @@ class DouYin(AppReadBase):
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
         temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
-                                   f'android.view.ViewGroup[{random.randint(1, 4)}]/android.widget.LinearLayout[1]/'
-                                   f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/'
-                                   f'android.view.View[1]').bounds
+                                    f'android.view.ViewGroup[{random.randint(1, 4)}]/android.widget.LinearLayout[1]/'
+                                    f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/'
+                                    f'android.view.View[1]').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         self._read_issue_core(600, 900)
+
+    def today_coin(self):
+        self.logger.info('获取今日金币数量')
+        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
+        self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]').wait()
+        coin = self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]').get().attrib['content-desc']
+        time.sleep(random.random() + 1)
+        self.pp.press('back')
+        time.sleep(random.random() + 1)
+        temp = int(coin.replace(',', ''))
+        self.logger.info(f'金币已经获取金币 {temp}')
+        return temp
 
     def read_issue(self):
         read_issue_time = random.randint(3000, 4000)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
-        while True:
+        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
             self.read_issue_first()
-            self.read_issue_city()
-            if time.time() - issue_time_start > read_issue_time:
+            if self.today_coin() > 10000:
                 break
+            self.read_issue_city()
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
@@ -116,7 +126,8 @@ class DouYin(AppReadBase):
         self.pp(description='更多').click(offset=(random.random(), random.random()))
         self.pp(text="设置").wait()
         self.pp(text="设置").click(offset=(random.random(), random.random()))
-        while True:
+        t = time.time()
+        while time.time() - t > 60:
             if not self.pp(text="清理缓存").exists:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                               random.uniform(0.2, 0.3), random.uniform(0.1, 0.3))
@@ -131,10 +142,11 @@ class DouYin(AppReadBase):
     def main_do(self):
         # raise
         self.app_start('抖音极速版')
+        self.logger.info('开始 抖音极速版 APP任务')
         self.pp(text='我').wait(timeout=30)
         self.log_on()
         self.sign_in()
         self.read_issue()
         self.clean_cache()
-        # self.coin_info()
         self.app_end()
+        self.logger.info('已完成 抖音极速版 APP任务')
