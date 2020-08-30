@@ -59,7 +59,7 @@ class KuaiShou(AppReadBase):
             coin = int(float(coin.replace('w', '')) * 10000)
         else:
             coin = int(coin)
-        self.logger.info(f'金币已经获取金币 {coin}')
+        self.logger.info(f'今日已经获取金币 {coin}')
         return coin
 
     def clean_cache(self):
