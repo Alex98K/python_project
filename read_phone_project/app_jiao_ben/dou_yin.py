@@ -55,7 +55,7 @@ class DouYin(AppReadBase):
                     random.random() < self.probability_focus:
                 self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]')
                                            .get().bounds)
-                if self.pp(text='关注').exsits(timeout=3):
+                if self.pp(text='关注').exists(timeout=3):
                     self.pp(text='关注').click(offset=(random.random(), random.random()))
                 time.sleep(random.random() + 3)
                 self.pp.press('back')
@@ -94,9 +94,9 @@ class DouYin(AppReadBase):
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
         time.sleep(random.random() + 1)
         temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
-                                    f'android.view.ViewGroup[{random.randint(1, 4)}]/android.widget.LinearLayout[1]/'
-                                    f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/'
-                                    f'android.view.View[1]').bounds
+                                    f'android.view.ViewGroup[{random.randint(1, 4)}]/'
+                                    f'android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
+                                    f'android.widget.RelativeLayout[1]/android.view.View[1]').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         time.sleep(random.random() + 1)
         self._read_issue_core(600, 900)
@@ -147,7 +147,9 @@ class DouYin(AppReadBase):
         self.pp(text="清理").click(offset=(random.random(), random.random()))
 
     def main_do(self):
-        # raise
+
+        print(temp_bounds)
+        raise
         self.app_start('抖音极速版')
         self.pp(text='我').wait(timeout=30)
         self.log_on()
