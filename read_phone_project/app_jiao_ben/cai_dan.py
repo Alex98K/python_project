@@ -134,9 +134,9 @@ class CaiDan(AppReadBase):
     def read_issue(self):
         read_issue_time = random.randint(3000, 4000)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
+        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 6000:
             self.read_issue_first()
-            if self.today_coin() > 10000:
+            if self.today_coin() > 6000:
                 break
             self.read_issue_city()
 
