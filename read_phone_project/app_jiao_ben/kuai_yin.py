@@ -7,7 +7,7 @@ import time
 class KuaiYin(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(KuaiYin, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.kuaiyin.player:id/w_v_back"]').click()
         # self.pp.watcher('tip1').when('我知道了').click()
@@ -69,7 +69,8 @@ class KuaiYin(AppReadBase):
                                            .get().bounds)
                 time.sleep(random.random() + 1)
                 if self.pp(resourceId='com.kuaiyin.player:id/submitInput').exists:
-                    self.pp(resourceId='com.kuaiyin.player:id/submitInput').click(offset=(random.random(), random.random()))
+                    self.pp(resourceId='com.kuaiyin.player:id/submitInput')\
+                        .click(offset=(random.random(), random.random()))
                 self.pp(resourceId='com.kuaiyin.player:id/submitInput').wait()
                 self.pp(resourceId='com.kuaiyin.player:id/submitInput').set_text(random.choice(self.commit))
                 time.sleep(random.random() + 1)
@@ -170,7 +171,7 @@ class KuaiYin(AppReadBase):
         self.pp(text="设置").wait()
         self.pp(text="设置").click(offset=(random.random(), random.random()))
         t = time.time()
-        while time.time() - t > 60:
+        while time.time() - t < 60:
             if not self.pp(text="清理缓存").exists:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                               random.uniform(0.2, 0.3), steps=random.randint(20, 60))
