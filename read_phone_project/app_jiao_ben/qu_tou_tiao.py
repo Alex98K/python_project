@@ -60,6 +60,7 @@ class QuTouTiao(AppReadBase):
 
     def read_issue(self):
         self.logger.info(f'开始阅读文章')
+        time.sleep(random.random() + 1)
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/'
                                                  'android.widget.FrameLayout[1]').get().bounds)
         if self.pp(text='领取').exists(timeout=3):
@@ -92,14 +93,13 @@ class QuTouTiao(AppReadBase):
                         # 看下是视频还是文章，视频就停着看，文章就下滑看
                         if self.pp.xpath('//com.qukan.media.player.renderview.TextureRenderView').exists:
                             while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
+                                if self.pp(text='关闭广告').exists:
+                                    self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
                                 time.sleep(1)
                         else:
                             while time.time() - issue_time_start <= read_issue_time:
                                 time.sleep(random.uniform(3, 5))
-                                self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8),
-                                              random.uniform(0.3, 0.6), random.uniform(0.2, 0.3),
-                                              steps=random.randint(20, 60))
-                                time.sleep(1)
+                                self.scroll_read_issue()
                                 if not self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/g3"]').exists:
                                     self.pp.press('back')
                         # 按照设定的点赞概率，随机点赞
@@ -229,7 +229,7 @@ class QuTouTiao(AppReadBase):
         self.pp(text="清除缓存").wait()
         self.pp(text="清除缓存").click(offset=(random.random(), random.random()))
 
-    def coin_info(self):
+    def cash_out(self):
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         self.pp(text='我的金币').wait()
         self.pp(text='我的金币').click(offset=(random.random(), random.random()))

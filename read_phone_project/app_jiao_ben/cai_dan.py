@@ -4,9 +4,9 @@ import uiautomator2
 import time
 
 
-class DouYin(AppReadBase):
+class CaiDan(AppReadBase):
     def __init__(self, phone_serial, pp):
-        super(DouYin, self).__init__(phone_serial, pp)
+        super(CaiDan, self).__init__(phone_serial, pp)
         # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('残忍离开').click()

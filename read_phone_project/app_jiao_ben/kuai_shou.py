@@ -108,8 +108,7 @@ class KuaiShou(AppReadBase):
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
-            self.pp.swipe(random.uniform(0.3, 0.7), random.uniform(0.7, 0.8), random.uniform(0.3, 0.7),
-                          random.uniform(0, 0.2), steps=random.randint(20, 60))
+            self.scroll_read_issue()
 
     def read_issue_first(self):
         self.logger.info(f'开始阅读发现视频')

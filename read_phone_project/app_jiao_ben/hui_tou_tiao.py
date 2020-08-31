@@ -7,11 +7,13 @@ import time
 class HuiTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(HuiTouTiao, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         # self.pp.watcher('tip1').when('知道了').click()
         # self.pp.watcher('tip2').when('残忍离开').click()
         # self.pp.watcher('tip3').when('恭喜获得').press('back')
-        self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
+        self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
+        self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()
+        self.pp.watcher('tip6').when(xpath='//*[@resource-id="com.cashtoutiao:id/tt_video_ad_close_layout"]').click()
         self.pp.watcher.start(0.5)
 
     def jurisdiction(self):
@@ -71,9 +73,11 @@ class HuiTouTiao(AppReadBase):
 
     def read_issue(self):
         self.logger.info(f'开始阅读文章')
+        time.sleep(random.random() + 1)
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/tabs"]/'
-                                                 'android.widget.LinearLayout[1]/'
-                                                 'android.widget.FrameLayout[1]').get().bounds)
+                                                 'android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/'
+                                                 'android.widget.FrameLayout[1]/android.widget.LinearLayout[1]')
+                                   .get().bounds)
         # if self.pp(text='领取').exists(timeout=3):
         #     self.pp(text='领取').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
@@ -113,14 +117,13 @@ class HuiTouTiao(AppReadBase):
                         # 看下是视频还是文章，视频就停着看，文章就下滑看
                         if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/video_container"]').exists:
                             while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
+                                if self.pp(text='关闭广告').exists:
+                                    self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
                                 time.sleep(1)
                         else:
                             while time.time() - issue_time_start <= read_issue_time:
                                 time.sleep(random.uniform(3, 5))
-                                self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8),
-                                              random.uniform(0.3, 0.6), random.uniform(0.2, 0.3),
-                                              steps=random.randint(20, 60))
-                                time.sleep(1)
+                                self.scroll_read_issue()
                                 if self.pp.xpath('//*[@content-desc="展开全文"]').exists:
                                     self.click_random_position(self.pp.xpath('//*[@content-desc="展开全文"]').get().bounds)
                                 # if not self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/g3"]').exists:
@@ -158,7 +161,7 @@ class HuiTouTiao(AppReadBase):
                                   random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
             time.sleep(random.random() + 1)
-            coin_len = self.coin_info()
+            coin_len = self.today_coin()
             if coin_len < 6:
                 self.logger.info(f'已经阅读获得了{coin_len}位数金币')
                 self.click_random_position(self.pp.xpath(
@@ -248,7 +251,7 @@ class HuiTouTiao(AppReadBase):
         time.sleep(random.random())
         self.pp(text="清除中...").wait_gone()
 
-    def coin_info(self):
+    def today_coin(self):
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         self.pp(text='今日收益(金币)').wait()
         return len(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/setting_today_gold"]//'
@@ -263,7 +266,7 @@ class HuiTouTiao(AppReadBase):
         # self.log_on()
         self.pp(text='我的').wait(timeout=30)
         self.sign_in()
-        coin_len = self.coin_info()
+        coin_len = self.today_coin()
         if coin_len < 6:
             self.read_issue()
         else:

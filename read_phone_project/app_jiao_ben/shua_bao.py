@@ -7,7 +7,7 @@ import time
 class ShuaBao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(ShuaBao, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         # self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip1').when('恭喜获得').press('back')
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="送你金元宝 快来看我吧"]').call(self.watcher_call_1)
@@ -90,8 +90,7 @@ class ShuaBao(AppReadBase):
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
-            self.pp.swipe(random.uniform(0.3, 0.7), random.uniform(0.7, 0.8), random.uniform(0.3, 0.7),
-                          random.uniform(0, 0.2), steps=random.randint(20, 60))
+            self.scroll_read_issue()
 
     def read_issue_first(self):
         self.logger.info(f'开始阅读首页视频')

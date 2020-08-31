@@ -8,6 +8,9 @@ from app_jiao_ben.kuai_shou import KuaiShou
 from app_jiao_ben.hui_tou_tiao import HuiTouTiao
 from app_jiao_ben.shua_bao import ShuaBao
 from app_jiao_ben.wei_shi import WeiShi
+from app_jiao_ben.huo_shan import HuoShan
+from app_jiao_ben.kuai_yin import KuaiYin
+from app_jiao_ben.cai_dan import CaiDan
 
 
 def main_run(phone_serial):
@@ -24,8 +27,11 @@ def main_run(phone_serial):
     # print(pp.shell('dumpsys battery').output)
     # QuTouTiao(phone_serial, pp).recycle_main_do(test=True)
     # HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)
+    # KuaiYin(phone_serial, pp).recycle_main_do(test=True)
+    CaiDan(phone_serial, pp).recycle_main_do(test=True)
     # ShuaBao(phone_serial, pp).recycle_main_do(test=True)
-    WeiShi(phone_serial, pp).recycle_main_do(test=True)
+    # WeiShi(phone_serial, pp).recycle_main_do(test=True)
+    # HuoShan(phone_serial, pp).recycle_main_do(test=True)
     # DouYin(phone_serial, pp).recycle_main_do(test=True)
     # KuaiShou(phone_serial, pp).recycle_main_do(test=True)
     # 设置电池为充电状态

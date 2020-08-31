@@ -4,12 +4,12 @@ import uiautomator2
 import time
 
 
-class DouYin(AppReadBase):
+class HuoShan(AppReadBase):
     def __init__(self, phone_serial, pp):
-        super(DouYin, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        super(HuoShan, self).__init__(phone_serial, pp)
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
-        self.pp.watcher('tip2').when('残忍离开').click()
+        # self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
 
     def log_on(self):
@@ -44,39 +44,40 @@ class DouYin(AppReadBase):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             # 如果不小心切换到了关注栏目，就回到推荐栏目
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ax_"]').get().center()[0]\
-                    < self.pp(text='关注').bounds()[2]:
-                self.pp(text='推荐').click(offset=(random.random(), random.random()))
+            # if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ax_"]').get().center()[0]\
+            #         < self.pp(text='关注').bounds()[2]:
+            #     self.pp(text='推荐').click(offset=(random.random(), random.random()))
             time.sleep(random.uniform(3, 10))
             # 按照设定的点赞概率，随机点赞
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]').exists and \
+            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p9"]').exists and \
                     random.random() < self.probability_thumb_up:
-                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]')
+                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p9"]')
                                            .get().bounds)
                 time.sleep(random.random() + 1)
             # 按照设定的关注概率，随机关注
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]').exists and \
+            if self.pp.xpath('com.ss.android.ugc.livelite:id/po').exists and \
                     random.random() < self.probability_focus:
-                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]')
-                                           .get().bounds)
-                if self.pp(text='关注').exists(timeout=3):
-                    self.pp(text='关注').click(offset=(random.random(), random.random()))
-                time.sleep(random.random() + 3)
-                self.pp.press('back')
+                self.click_random_position(self.pp.xpath('com.ss.android.ugc.livelite:id/po').get().bounds)
+                # if self.pp(text='关注').exists(timeout=3):
+                #     self.pp(text='关注').click(offset=(random.random(), random.random()))
+                # time.sleep(random.random() + 3)
+                # self.pp.press('back')
                 time.sleep(random.random() + 1)
             # 按照设定的评论概率，随机评论
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/qb"]').exists and \
+            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p5"]').exists and \
                     random.random() < self.probability_commit:
-                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/qb"]')
+                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p5"]')
                                            .get().bounds)
                 time.sleep(random.random() + 1)
-                if self.pp(text='留下你的精彩评论吧').exists:
-                    self.pp(text='留下你的精彩评论吧').click(offset=(random.random(), random.random()))
-                self.pp(text='留下你的精彩评论吧').wait()
-                self.pp(text='留下你的精彩评论吧').set_text(random.choice(self.commit))
+                if self.pp(resourceId='com.ss.android.ugc.livelite:id/lk').exists:
+                    self.pp(resourceId='com.ss.android.ugc.livelite:id/lk')\
+                        .click(offset=(random.random(), random.random()))
+                self.pp(resourceId='com.ss.android.ugc.livelite:id/lk').wait()
+                self.pp(resourceId='com.ss.android.ugc.livelite:id/lk').set_text(random.choice(self.commit))
                 time.sleep(random.random() + 1)
-                self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/qp') \
-                    .click(offset=(random.random(), random.random()))
+                self.pp(resourceId='com.ss.android.ugc.livelite:id/ln').click(offset=(random.random(), random.random()))
+                time.sleep(random.random() + 1)
+                self.pp.press('back')
                 time.sleep(random.random() + 1)
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
@@ -90,26 +91,26 @@ class DouYin(AppReadBase):
         self._read_issue_core(900, 1200)
 
     def read_issue_city(self):
-        self.logger.info(f'开始阅读同城视频')
-        self.pp(text='同城').click(offset=(random.random(), random.random()))
+        self.logger.info(f'开始阅读推荐视频')
+        self.pp(text='推荐').click(offset=(random.random(), random.random()))
         for j in range(random.randint(0, 5)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
         time.sleep(random.random() + 1)
-        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
-                                    f'android.view.ViewGroup[{random.randint(1, 4)}]/'
-                                    f'android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
-                                    f'android.widget.RelativeLayout[1]/android.view.View[1]').bounds
+        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.livelite:id/w8"]/'
+                                    f'android.widget.RelativeLayout[{random.randint(1, 2)}]').get().bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         time.sleep(random.random() + 1)
         self._read_issue_core(600, 900)
+        time.sleep(random.random() + 1)
+        self.pp.press('back')
+        time.sleep(random.random() + 1)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
-        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
-        self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]').wait()
-        coin = self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]') \
-            .get().attrib['content-desc'].replace(',', '')
+        self.pp(text='我的').click(offset=(random.random(), random.random()))
+        self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/lu"]').wait()
+        coin = self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/lu"]').get_text()
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
@@ -131,31 +132,30 @@ class DouYin(AppReadBase):
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        self.pp(description='更多').wait()
-        self.pp(description='更多').click(offset=(random.random(), random.random()))
-        self.pp(text="设置").wait()
-        self.pp(text="设置").click(offset=(random.random(), random.random()))
+        self.pp(text='我的').click(offset=(random.random(), random.random()))
         t = time.time()
-        while time.time() - t > 60:
-            if not self.pp(text="清理缓存").exists:
+        while time.time() - t <= 60:
+            if not self.pp(text="设置").exists or self.pp(text="设置").bounds()[3] \
+                    > self.pp(resourceId="com.ss.android.ugc.livelite:id/xc").bounds()[1]:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                               random.uniform(0.2, 0.3), steps=random.randint(20, 60))
-                time.sleep(random.random())
+                time.sleep(1)
             else:
                 break
+        self.pp(text="设置").wait()
+        self.pp(text="设置").click(offset=(random.random(), random.random()))
         self.pp(text="清理缓存").wait()
         self.pp(text="清理缓存").click(offset=(random.random(), random.random()))
-        self.pp(text="清理").wait()
-        self.pp(text="清理").click(offset=(random.random(), random.random()))
+        self.pp(text="确定").wait()
+        self.pp(text="确定").click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 3)
 
     def main_do(self):
-        # print(self.pp.dump_hierarchy())
         # raise
-        self.app_start('抖音极速版')
-        self.pp(text='我').wait(timeout=30)
-        self.log_on()
-        self.sign_in()
+        self.app_start('火山极速版')
+        self.pp(text='我的').wait(timeout=30)
+        # self.log_on()
+        # self.sign_in()
         self.read_issue()
         self.clean_cache()
         self.app_end()
