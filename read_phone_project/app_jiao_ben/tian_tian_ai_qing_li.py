@@ -136,8 +136,8 @@ class TianTianAiQingLi(AppReadBase):
                       random.uniform(0.2, 0.3), steps=random.randint(10, 20))
         time.sleep(random.random() + 1)
         self.pp.click(0.87, 0.87)
-        self.pp(description='清除缓存').wait()
-        self.pp(description='清除缓存').click(offset=(random.random(), random.random()))
+        self.pp(text='清除缓存').wait()
+        self.pp(text='清除缓存').click(offset=(random.random(), random.random()))
 
     def main_do(self):
         # print(self.pp.dump_hierarchy())
