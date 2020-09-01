@@ -61,6 +61,7 @@ class QuTouTiao(AppReadBase):
     def read_issue(self):
         self.logger.info(f'开始阅读文章')
         time.sleep(random.random() + 1)
+        self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/android.widget.FrameLayout[1]').wait()
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/'
                                                  'android.widget.FrameLayout[1]').get().bounds)
         if self.pp(text='领取').exists(timeout=3):
