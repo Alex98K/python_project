@@ -33,13 +33,9 @@ class QuLingSheng(AppReadBase):
 
     def sign_in(self):
         self.logger.info(f'开始签到')
-        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
+        self.pp(text='任务').wait()
+        self.pp(text='任务').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 5)
-        if self.pp(text='签到').count > 1:
-            self.pp(text='签到')[1].click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 1)
-        self.pp.press('back')
-        time.sleep(random.random() + 1)
 
     def _read_issue_core(self, time1, time2):
         read_issue_time = random.randint(time1, time2)  # 看视频总时间
@@ -159,7 +155,7 @@ class QuLingSheng(AppReadBase):
         self.app_start('趣铃声')
         self.pp(text='我的').wait(timeout=30)
         # self.log_on()
-        # self.sign_in()
+        self.sign_in()
         self.read_issue()
         self.clean_cache()
         self.app_end()

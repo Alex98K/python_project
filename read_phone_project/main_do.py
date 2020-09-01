@@ -28,7 +28,7 @@ def main_run(phone_serial):
     pp.shell('dumpsys battery set status 1')
 
     # 调用系统应用，清理缓存和垃圾
-    CleanCash(pp).main_do()
+    # CleanCash(pp).main_do()
 
     # 开始APP任务
     # QuTouTiao(phone_serial, pp).recycle_main_do(test=True)
@@ -43,6 +43,8 @@ def main_run(phone_serial):
     # DouYin(phone_serial, pp).recycle_main_do(test=True)
     # KuaiShou(phone_serial, pp).recycle_main_do(test=True)
 
+    # 调用系统应用，清理缓存和垃圾
+    CleanCash(pp).main_do()
     # 重置电池状态
     pp.shell('dumpsys battery reset')
 
