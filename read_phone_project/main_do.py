@@ -28,20 +28,43 @@ def main_run(phone_serial):
     pp.shell('dumpsys battery set status 1')
 
     # 调用系统应用，清理缓存和垃圾
-    CleanCash(pp).main_do()
+    # CleanCash(pp).main_do()
+    # 清理多余占用内存的APP
+    # CleanCash(pp).app_init()
 
     # 开始APP任务
     QuTouTiao(phone_serial, pp).recycle_main_do(test=True)
+    CleanCash(pp).app_init()
+
     # HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # KuaiYin(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # CaiDan(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # QuLingSheng(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # ShuaBao(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # WeiShi(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # HuoShan(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # DouYin(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
+
     # KuaiShou(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
 
     # 调用系统应用，清理缓存和垃圾
     CleanCash(pp).main_do()
