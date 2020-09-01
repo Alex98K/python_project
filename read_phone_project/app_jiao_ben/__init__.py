@@ -11,7 +11,7 @@ class AppReadBase(object):
         self.pp = pp
         self.phone_serial = phone_serial
         self.probability_read_issue = 0.7  # 看视频或文章概率
-        self.probability_scroll_up = 0.3  # 看视频或文章向上滑动（回看）的概率
+        self.probability_scroll_up = 0.15  # 看视频或文章向上滑动（回看）的概率
         self.probability_thumb_up = 0.1  # 点赞概率
         self.probability_commit = 0.03  # 评论概率
         self.probability_focus = 0.02  # 关注概率
