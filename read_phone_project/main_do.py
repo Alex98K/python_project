@@ -15,6 +15,7 @@ from app_jiao_ben.cai_dan import CaiDan
 from app_jiao_ben.xiao_tang_gao import XiaoTangGao
 from app_jiao_ben.qu_ling_sheng import QuLingSheng
 from app_jiao_ben.tian_tian_ai_qing_li import TianTianAiQingLi
+from app_jiao_ben.jin_ri_tou_tiao import JinRiTouTiao
 
 
 def main_run(phone_serial):
@@ -34,8 +35,11 @@ def main_run(phone_serial):
     # CleanCash(pp).app_init()
 
     # 开始APP任务
-    TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)
+    JinRiTouTiao(phone_serial, pp).recycle_main_do(test=True)
     CleanCash(pp).app_init()
+
+    # TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)
+    # CleanCash(pp).app_init()
 
     # QuTouTiao(phone_serial, pp).recycle_main_do(test=True)
     # CleanCash(pp).app_init()
