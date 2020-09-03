@@ -13,14 +13,6 @@ class QuTouTiao(AppReadBase):
         self.pp.watcher('tip3').when('恭喜获得').press('back')
         self.pp.watcher.start(0.5)
 
-    def jurisdiction(self):
-        # 需要获取电话权限、通知权限
-        # 获取app权限，仅首次启动app才会用到
-        if self.pp(text='同意').exists(timeout=3):
-            self.pp(text='同意').click_exists(timeout=3)
-            self.pp(text='同意去开启').click_exists(timeout=10)
-            self.pp(text='允许').click_exists(timeout=10)
-
     def log_on(self):
         self.logger.info(f'开始登录')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
@@ -240,7 +232,6 @@ class QuTouTiao(AppReadBase):
     def main_do(self):
         # raise
         self.app_start('趣头条')
-        # self.jurisdiction()
         # 过了开头的广告动画
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait()
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait_gone()

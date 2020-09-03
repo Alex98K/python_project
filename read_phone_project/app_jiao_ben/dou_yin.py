@@ -12,23 +12,6 @@ class DouYin(AppReadBase):
         self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
 
-    def log_on(self):
-        self.logger.info(f'开始登录')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        if self.pp(text='密码登录').exists(timeout=5):
-            self.pp(text='密码登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").clear_text()
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").click(offset=(random.random(), random.random()))
-            self.input_num('15611895793')
-            time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/b8p"]').set_text('jiajia0611')
-            time.sleep(random.random() + 1)
-            self.pp(text='登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        else:
-            return
-
     def sign_in(self):
         self.logger.info(f'开始签到')
         self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
@@ -151,11 +134,9 @@ class DouYin(AppReadBase):
         self.pp(text="清理").click(offset=(random.random(), random.random()))
 
     def main_do(self):
-        # print(self.pp.dump_hierarchy())
         # raise
         self.app_start('抖音极速版')
         self.pp(text='我').wait(timeout=30)
-        self.log_on()
         self.sign_in()
         self.read_issue()
         self.clean_cache()

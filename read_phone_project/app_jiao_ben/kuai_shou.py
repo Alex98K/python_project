@@ -13,22 +13,6 @@ class KuaiShou(AppReadBase):
             .press('back')
         self.pp.watcher.start(0.5)
 
-    def log_on(self):
-        self.logger.info(f'开始登录')
-        if self.pp(resourceId='com.kuaishou.nebula:id/login_text').exists(timeout=5):
-            self.pp(resourceId='com.kuaishou.nebula:id/login_text').click(offset=(random.random(), random.random()))
-            if self.pp(text='密码登录').exists(timeout=3):
-                self.pp(text='密码登录').click(offset=(random.random(), random.random()))
-                time.sleep(random.random() + 1)
-            self.pp(resourceId="com.kuaishou.nebula:id/user_phone_num_info").set_text('15611895793')
-            time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/user_phone_num_info"]').set_text('jiajia0611')
-            time.sleep(random.random() + 1)
-            self.pp(text='登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        else:
-            return
-
     def sign_in(self):
         self.logger.info(f'开始签到')
         self.pp(resourceId='com.kuaishou.nebula:id/left_btn').click(offset=(random.random(), random.random()))
@@ -150,7 +134,6 @@ class KuaiShou(AppReadBase):
         # raise
         self.app_start('快手极速版')
         self.pp(resourceId='com.kuaishou.nebula:id/thanos_home_top_search').wait(timeout=30)
-        self.log_on()
         self.sign_in()
         self.read_issue()
         self.clean_cache()

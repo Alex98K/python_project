@@ -9,44 +9,12 @@ class HuoShan(AppReadBase):
         super(HuoShan, self).__init__(phone_serial, pp)
         self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
-        # self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
-
-    def log_on(self):
-        self.logger.info(f'开始登录')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        if self.pp(text='密码登录').exists(timeout=5):
-            self.pp(text='密码登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").clear_text()
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").click(offset=(random.random(), random.random()))
-            self.input_num('15611895793')
-            time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/b8p"]').set_text('jiajia0611')
-            time.sleep(random.random() + 1)
-            self.pp(text='登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        else:
-            return
-
-    def sign_in(self):
-        self.logger.info(f'开始签到')
-        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 5)
-        if self.pp(text='签到').count > 1:
-            self.pp(text='签到')[1].click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 1)
-        self.pp.press('back')
-        time.sleep(random.random() + 1)
 
     def _read_issue_core(self, time1, time2):
         read_issue_time = random.randint(time1, time2)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
-            # 如果不小心切换到了关注栏目，就回到推荐栏目
-            # if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ax_"]').get().center()[0]\
-            #         < self.pp(text='关注').bounds()[2]:
-            #     self.pp(text='推荐').click(offset=(random.random(), random.random()))
             time.sleep(random.uniform(3, 10))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p9"]').exists and \
@@ -58,10 +26,6 @@ class HuoShan(AppReadBase):
             if self.pp.xpath('com.ss.android.ugc.livelite:id/po').exists and \
                     random.random() < self.probability_focus:
                 self.click_random_position(self.pp.xpath('com.ss.android.ugc.livelite:id/po').get().bounds)
-                # if self.pp(text='关注').exists(timeout=3):
-                #     self.pp(text='关注').click(offset=(random.random(), random.random()))
-                # time.sleep(random.random() + 3)
-                # self.pp.press('back')
                 time.sleep(random.random() + 1)
             # 按照设定的评论概率，随机评论
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p5"]').exists and \
@@ -154,8 +118,6 @@ class HuoShan(AppReadBase):
         # raise
         self.app_start('火山极速版')
         self.pp(text='我的').wait(timeout=30)
-        # self.log_on()
-        # self.sign_in()
         self.read_issue()
         self.clean_cache()
         self.app_end()

@@ -16,11 +16,6 @@ class ShuaBao(AppReadBase):
     def watcher_call_1(self):
         self.pp.click(0.89, 0.209)
 
-    def log_on(self):
-        # 刷宝的只能通过短信登录
-        self.logger.info(f'开始登录')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-
     def sign_in(self):
         self.logger.info(f'开始签到')
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.jm.video:id/tabLayout"]/'
@@ -39,9 +34,6 @@ class ShuaBao(AppReadBase):
                                    .get().bounds)
         time.sleep(random.random() + 1)
         coin = self.pp.xpath('//*[@resource-id="com.jm.video:id/tv_gold_num"]').get_text()
-        # self.pp(description='当前余额').wait()
-        # coin = self.pp.xpath('//*[@content-desc="我的元宝"]/following-sibling::android.view.View') \
-        #     .get().attrib['content-desc'].replace(',', '')
         time.sleep(random.random() + 1)
         if 'w' in coin:
             coin = int(float(coin.replace('w', '')) * 10000)
@@ -103,38 +95,16 @@ class ShuaBao(AppReadBase):
         time.sleep(random.random() + 1)
         self._read_issue_core(900, 1200)
 
-    def read_issue_city(self):
-        # 直播不得金币，暂时不看
-        self.logger.info(f'开始阅读直播视频')
-        time.sleep(random.random() + 1)
-        self.pp.xpath('//*[@resource-id="com.jm.video:id/tabLayout"]/android.widget.LinearLayout[1]/'
-                      'android.widget.RelativeLayout[2]').wait()
-        self.click_random_position(self.pp.xpath('//*[@resource-id="com.jm.video:id/tabLayout"]/'
-                                                 'android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]')
-                                   .get().bounds)
-        self.pp(description='直播').wait()
-        time.sleep(random.random() + 1)
-        for j in range(random.randint(0, 5)):  # 随机下滑几次
-            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                          random.uniform(0.2, 0.3), steps=random.randint(20, 60))
-        temp_bounds = self.pp.xpath(f'//*[@content-desc="刷宝短视频"]/android.view.View[{random.randint(9, 20)}]').bounds
-        self.click_random_position(temp_bounds)  # 随机选页面中的视频
-        self._read_issue_core(600, 900)
-
     def read_issue(self):
         read_issue_time = random.randint(3000, 4000)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
             self.read_issue_first()
-            # if self.today_coin() > 10000:
-            #     break
-            # self.read_issue_city()
 
     def main_do(self):
         # raise
         self.app_start('刷宝')
         self.pp(text='我').wait(timeout=30)
-        # self.log_on()
         self.sign_in()
         self.read_issue()
         self.clean_cache()

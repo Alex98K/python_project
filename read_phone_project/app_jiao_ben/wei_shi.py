@@ -10,35 +10,7 @@ class WeiShi(AppReadBase):
         # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('知道了').click()
-        # self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
-
-    def log_on(self):
-        self.logger.info(f'开始登录')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        if self.pp(text='密码登录').exists(timeout=5):
-            self.pp(text='密码登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").clear_text()
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").click(offset=(random.random(), random.random()))
-            self.input_num('15611895793')
-            time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/b8p"]').set_text('jiajia0611')
-            time.sleep(random.random() + 1)
-            self.pp(text='登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        else:
-            return
-
-    def sign_in(self):
-        self.logger.info(f'开始签到')
-        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 5)
-        if self.pp(text='签到').count > 1:
-            self.pp(text='签到')[1].click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 1)
-        self.pp.press('back')
-        time.sleep(random.random() + 1)
 
     def _read_issue_core(self, time1, time2):
         read_issue_time = random.randint(time1, time2)  # 看视频总时间
@@ -90,21 +62,6 @@ class WeiShi(AppReadBase):
         time.sleep(random.random() + 1)
         self._read_issue_core(900, 1200)
 
-    def read_issue_city(self):
-        self.logger.info(f'开始阅读同城视频')
-        self.pp(text='同城').click(offset=(random.random(), random.random()))
-        for j in range(random.randint(0, 5)):  # 随机下滑几次
-            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                          random.uniform(0.2, 0.3), steps=random.randint(20, 60))
-        time.sleep(random.random() + 1)
-        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
-                                    f'android.view.ViewGroup[{random.randint(1, 4)}]/'
-                                    f'android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
-                                    f'android.widget.RelativeLayout[1]/android.view.View[1]').bounds
-        self.click_random_position(temp_bounds)  # 随机选页面中的视频
-        time.sleep(random.random() + 1)
-        self._read_issue_core(600, 900)
-
     def today_coin(self):
         self.logger.info('获取今日金钱')
         time.sleep(random.random() + 1)
@@ -136,9 +93,6 @@ class WeiShi(AppReadBase):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 0.5:
             self.read_issue_first()
-            # if self.today_coin() > 10000:
-            #     break
-            # self.read_issue_city()
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
@@ -151,13 +105,9 @@ class WeiShi(AppReadBase):
         self.pp(text="清除缓存").click(offset=(random.random(), random.random()))
 
     def main_do(self):
-        # coin = self.pp.xpath('//*[@text="元"]/preceding-sibling::android.view.View[1]').get_text()
-        # print(coin)
         # raise
         self.app_start('微视')
         self.pp(resourceId='com.tencent.weishi:id/qfh').wait(timeout=30)
-        # self.log_on()
-        # self.sign_in()
         self.read_issue()
         self.clean_cache()
         self.app_end()

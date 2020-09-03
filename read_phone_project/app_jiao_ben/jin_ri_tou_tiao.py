@@ -14,23 +14,6 @@ class JinRiTouTiao(AppReadBase):
         self.pp.watcher('tip4').when(xpath='//*[@text="0x+wcp2R1bM4bU8gAAAABJRU5ErkJggg=="]').click()
         self.pp.watcher.start(0.5)
 
-    def log_on(self):
-        self.logger.info(f'开始登录')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        if self.pp(text='密码登录').exists(timeout=5):
-            self.pp(text='密码登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").clear_text()
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").click(offset=(random.random(), random.random()))
-            self.input_num('15611895793')
-            time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/b8p"]').set_text('jiajia0611')
-            time.sleep(random.random() + 1)
-            self.pp(text='登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        else:
-            return
-
     def sign_in(self):
         self.logger.info(f'开始签到')
         self.pp(text='任务').wait()
@@ -58,12 +41,10 @@ class JinRiTouTiao(AppReadBase):
             j.click_exists()
         time.sleep(random.random() + 1)
         for j in reversed(self.pp(resourceId='com.ss.android.article.lite:id/au5')):
-            if j.get_text()[-2:] not in ['抗议', '视频', '图片', '值点', '小说', '音频'] and \
+            if j.get_text()[-2:] not in ['抗疫', '视频', '图片', '值点', '小说', '音频', '娱乐'] and \
                     random.random() < 0.5 and lan_mu_num < lan_mu_num_end:
                 j.click_exists()
                 lan_mu_num += 1
-            # else:
-            #     lan_mu_num += 1
         time.sleep(random.random() + 1)
         self.pp.click(0.928, 0.107)
         time.sleep(random.random() + 1)
@@ -75,8 +56,6 @@ class JinRiTouTiao(AppReadBase):
         time.sleep(random.random() + 1)
         self.click_random_position(self.pp.xpath('//*[@resource-id="android:id/tabs"]/android.widget.RelativeLayout[1]')
                                    .get().bounds)
-        # if self.pp(text='领取').exists(timeout=3):
-        #     self.pp(text='领取').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
         # 看情况调整栏目
         if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/'
@@ -198,7 +177,6 @@ class JinRiTouTiao(AppReadBase):
         # raise
         self.app_start('今日头条极速版')
         self.pp(text='我的').wait(timeout=30)
-        # self.log_on()
         self.sign_in()
         self.read_issue()
         self.clean_cache()

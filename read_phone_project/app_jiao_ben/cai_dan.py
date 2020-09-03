@@ -7,42 +7,12 @@ import time
 class CaiDan(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(CaiDan, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="加载中"]/android.view.View[1]/android.view.View[2]/'
                                            'android.view.View[2]').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.jifen.dandan:id/close_bottom_button"]').click()
-        # self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
-
-    def log_on(self):
-        self.logger.info(f'开始登录')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        if self.pp(text='密码登录').exists(timeout=5):
-            self.pp(text='密码登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").clear_text()
-            self.pp(resourceId="com.ss.android.ugc.aweme.lite:id/b9k").click(offset=(random.random(), random.random()))
-            self.input_num('15611895793')
-            time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/b8p"]').set_text('jiajia0611')
-            time.sleep(random.random() + 1)
-            self.pp(text='登录').click(offset=(random.random(), random.random()))
-            time.sleep(random.random() + 1)
-        else:
-            return
-
-    def sign_in(self):
-        self.logger.info(f'开始签到')
-        self.pp(resourceId='com.jifen.dandan:id/fl_welfare_task').click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 3)
-        self.pp.xpath('//*[@content-desc="加载中..."]').wait_gone()
-        time.sleep(random.random() + 5)
-        if self.pp(text='签到').count > 1:
-            self.pp(text='签到')[1].click(offset=(random.random(), random.random()))
-        time.sleep(random.random() + 1)
-        self.pp.press('back')
-        time.sleep(random.random() + 1)
 
     def _read_issue_core(self, time1, time2):
         read_issue_time = random.randint(time1, time2)  # 看视频总时间
@@ -141,31 +111,9 @@ class CaiDan(AppReadBase):
                 break
             self.read_issue_city()
 
-    def clean_cache(self):
-        self.logger.info(f'开始清理缓存')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        self.pp(text="设置").wait()
-        self.pp(text="设置").click(offset=(random.random(), random.random()))
-        t = time.time()
-        while time.time() - t > 60:
-            if not self.pp(text="清理缓存").exists:
-                self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                              random.uniform(0.2, 0.3), steps=random.randint(20, 60))
-                time.sleep(random.random())
-            else:
-                break
-        self.pp(text="清理缓存").wait()
-        self.pp(text="清理缓存").click(offset=(random.random(), random.random()))
-        self.pp(text="清理").wait()
-        self.pp(text="清理").click(offset=(random.random(), random.random()))
-
     def main_do(self):
-        # print(self.pp.dump_hierarchy())
         # raise
         self.app_start('彩蛋视频')
         self.pp(text='我').wait(timeout=30)
-        # self.log_on()
-        # self.sign_in()
         self.read_issue()
-        # self.clean_cache()
         self.app_end()
