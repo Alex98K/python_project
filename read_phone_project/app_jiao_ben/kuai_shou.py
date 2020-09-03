@@ -54,8 +54,7 @@ class KuaiShou(AppReadBase):
         self.pp(text='清除缓存').wait()
         self.pp(text='清除缓存').click(offset=(random.random(), random.random()))
 
-    def _read_issue_core(self, time1, time2):
-        read_issue_time = random.randint(time1, time2)  # 看视频总时间
+    def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             time.sleep(random.uniform(3, 10))
@@ -94,7 +93,7 @@ class KuaiShou(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self, time1, time2):
+    def read_issue_first(self, read_issue_time):
         self.logger.info(f'开始阅读发现视频')
         time.sleep(random.random() + 1)
         self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/android.widget.LinearLayout[1]/'
@@ -102,9 +101,9 @@ class KuaiShou(AppReadBase):
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/'
                                                  'android.widget.LinearLayout[1]/android.view.View[3]').get().bounds)
         time.sleep(random.random() + 1)
-        self._read_issue_core(time1, time2)
+        self._read_issue_core(read_issue_time)
 
-    def read_issue_city(self, time1, time2):
+    def read_issue_city(self, read_issue_time):
         self.logger.info(f'开始阅读同城视频')
         time.sleep(random.random() + 1)
         self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/android.widget.LinearLayout[1]/'
@@ -119,15 +118,16 @@ class KuaiShou(AppReadBase):
                                     f'android.widget.RelativeLayout[{random.randint(1, 4)}]/'
                                     f'android.widget.ImageView').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
-        self._read_issue_core(time1, time2)
+        self._read_issue_core(read_issue_time)
 
     def read_issue(self, duration, target_coin):
+        read_issue_time1, read_issue_time2 = random.randint(600, 900), random.randint(300, 600)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
-            self.read_issue_first(600, 900)
+            self.read_issue_first(read_issue_time1)
             if self.today_coin() > target_coin:
                 break
-            self.read_issue_city(300, 600)
+            self.read_issue_city(read_issue_time2)
 
     def main_do(self, duration, target_coin):
         # raise

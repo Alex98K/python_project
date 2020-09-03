@@ -12,14 +12,14 @@ class JinDong(AppReadBase):
         self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
 
-    def read_issue_first(self, time1, time2):
+    def read_issue_first(self, read_issue_time1, read_issue_time2):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
         self.pp(description='我的').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_adv(time1, time2)
+        self._read_adv(read_issue_time1, read_issue_time2)
 
-    def _read_adv(self, time1, time2):
+    def _read_adv(self, read_issue_time1, read_issue_time2):
         for j in self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/card_business_container"]/'
                                'android.support.v7.widget.RecyclerView[1]//android.widget.RelativeLayout').all():
             title = self.pp.xpath(j.get_xpath() + '/android.widget.TextView[1]').get_text()
@@ -28,7 +28,7 @@ class JinDong(AppReadBase):
             time.sleep(random.random() + 1)
             if title in ['逛商品赚金币', '逛活动赚金币']:
                 t = time.time()
-                while time.time() - t < random.uniform(time1, time2):
+                while time.time() - t < read_issue_time1:
                     self.scroll_read_issue()
                     time.sleep(random.random() + 1)
                     if self.pp(resourceId='com.jd.jdlite:id/ll_task_bottom_next').exists:
@@ -39,7 +39,10 @@ class JinDong(AppReadBase):
                 xpath = self.pp.xpath(f'//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[{random.randint(1, 4)}]')
                 xpath.wait()
                 self.click_random_position(xpath.get().bounds)
-                time.sleep(random.uniform(time1, time2))
+                t = time.time()
+                while time.time() - t < read_issue_time2:
+                    time.sleep(1)
+                    self.pp.screen_on()
         t = time.time()
         while time.time() - t < 60 or not self.pp(description='我的').exists:
             time.sleep(1)
@@ -63,9 +66,10 @@ class JinDong(AppReadBase):
         return coin
 
     def read_issue(self, duration, target_coin):
+        read_issue_time1, read_issue_time2 = random.randint(600, 900), random.randint(300, 600)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
-            self.read_issue_first(600, 900)
+            self.read_issue_first(read_issue_time1, read_issue_time2)
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')

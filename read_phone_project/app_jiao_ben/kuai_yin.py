@@ -12,8 +12,7 @@ class KuaiYin(AppReadBase):
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.kuaiyin.player:id/w_v_back"]').click()
         self.pp.watcher.start(0.5)
 
-    def _read_issue_core(self, time1, time2):
-        read_issue_time = random.randint(time1, time2)  # 看视频总时间
+    def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             time.sleep(random.uniform(3, 10))
@@ -104,11 +103,11 @@ class KuaiYin(AppReadBase):
                 time.sleep(random.random() + 1)
             self.logger.info('看完这个栏目了，换个栏目')
 
-    def read_issue_city(self, time1, time2):
+    def read_issue_city(self, read_issue_time):
         self.logger.info(f'开始阅读视频页')
         self.pp(text='视频').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_issue_core(time1, time2)
+        self._read_issue_core(read_issue_time)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
@@ -126,12 +125,13 @@ class KuaiYin(AppReadBase):
         return coin
 
     def read_issue(self, duration, target_coin):
+        read_issue_time = random.randint(300, 600)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
             self.read_issue_first(duration, target_coin)
             if self.today_coin() > 10000:
                 break
-            self.read_issue_city(300, 600)
+            self.read_issue_city(read_issue_time)
 
     def main_do(self, duration, target_coin):
         # raise

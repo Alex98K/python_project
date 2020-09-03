@@ -20,8 +20,7 @@ class QuLingSheng(AppReadBase):
         self.pp(text='任务').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 5)
 
-    def _read_issue_core(self, time1, time2):
-        read_issue_time = random.randint(time1, time2)  # 看视频总时间
+    def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             # 如果不小心切换到了关注栏目，就回到推荐栏目
@@ -36,12 +35,12 @@ class QuLingSheng(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self, time1, time2):
+    def read_issue_first(self, read_issue_time):
         self.logger.info(f'开始阅读小视频')
         time.sleep(random.random() + 1)
         self.pp(text='小视频').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_issue_core(time1, time2)
+        self._read_issue_core(read_issue_time)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
@@ -60,9 +59,10 @@ class QuLingSheng(AppReadBase):
         return coin
 
     def read_issue(self, duration, target_coin):
+        read_issue_time = random.randint(300, 600)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
-            self.read_issue_first(300, 600)
+            self.read_issue_first(read_issue_time)
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')

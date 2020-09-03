@@ -14,8 +14,7 @@ class CaiDan(AppReadBase):
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.jifen.dandan:id/close_bottom_button"]').click()
         self.pp.watcher.start(0.5)
 
-    def _read_issue_core(self, time1, time2):
-        read_issue_time = random.randint(time1, time2)  # 看视频总时间
+    def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             # 如果不小心切换到了关注栏目，就回到推荐栏目
@@ -54,7 +53,7 @@ class CaiDan(AppReadBase):
                 self.pp.press('back')
             self.scroll_read_issue()
 
-    def read_issue_first(self, time1, time2):
+    def read_issue_first(self, read_issue_time):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
         self.pp(text='首页').click(offset=(random.random(), random.random()))
@@ -62,9 +61,9 @@ class CaiDan(AppReadBase):
         self.pp(resourceId='com.jifen.dandan:id/lottie_view_gold')\
             .drag_to(resourceId='com.jifen.dandan:id/iv_ugc_enter', duration=random.uniform(0.25, 0.5))
         time.sleep(random.random() + 1)
-        self._read_issue_core(time1, time2)
+        self._read_issue_core(read_issue_time)
 
-    def read_issue_city(self, time1, time2):
+    def read_issue_city(self, read_issue_time):
         self.logger.info(f'开始阅读发现视频')
         self.pp(text='发现').click(offset=(random.random(), random.random()))
         self.pp(resourceId='com.jifen.dandan:id/title_container').wait()
@@ -79,7 +78,7 @@ class CaiDan(AppReadBase):
                                     f'android.view.ViewGroup[1]').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         time.sleep(random.random() + 1)
-        self._read_issue_core(time1, time2)
+        self._read_issue_core(read_issue_time)
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
@@ -104,12 +103,13 @@ class CaiDan(AppReadBase):
 
     def read_issue(self, duration, target_coin):
         # 看视频总时间
+        read_issue_time1, read_issue_time2 = random.randint(600, 900), random.randint(300, 600)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
-            self.read_issue_first(600, 900)
+            self.read_issue_first(read_issue_time1)
             if self.today_coin() > target_coin:
                 break
-            self.read_issue_city(300, 600)
+            self.read_issue_city(read_issue_time2)
 
     def main_do(self, duration, target_coin):
         # raise
