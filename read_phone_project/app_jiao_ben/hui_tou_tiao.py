@@ -7,7 +7,7 @@ import time
 class HuiTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(HuiTouTiao, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()
         self.pp.watcher('tip6').when(xpath='//*[@resource-id="com.cashtoutiao:id/tt_video_ad_close_layout"]').click()
@@ -41,7 +41,7 @@ class HuiTouTiao(AppReadBase):
         self.pp.press('back')
         time.sleep(random.random() + 1)
 
-    def read_issue(self):
+    def read_issue(self, duration, target_coin):
         self.logger.info(f'开始阅读文章')
         time.sleep(random.random() + 1)
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/tabs"]/'
@@ -60,6 +60,7 @@ class HuiTouTiao(AppReadBase):
                                        'android.widget.RelativeLayout[1]').all())
         random_list = [x for x in range(lan_mu_num)]
         random.shuffle(random_list)
+        t = time.time()
         for j in random_list:
             self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.cashtoutiao:id/tab_news"]/'
                                                      f'android.widget.LinearLayout[1]/android.widget.FrameLayout[{j+1}]'
@@ -120,6 +121,9 @@ class HuiTouTiao(AppReadBase):
                     time.sleep(random.random() + 1)
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
+                    if time.time() - t > duration:
+                        self.logger.info(f'今日阅读时间超过了{duration}秒，不再阅读了')
+                        return
                 if not self.pp(text='我的').exists:
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
@@ -130,14 +134,14 @@ class HuiTouTiao(AppReadBase):
                     time.sleep(random.random())
             time.sleep(random.random() + 1)
             coin_len = self.today_coin()
-            if coin_len < 6:
-                self.logger.info(f'已经阅读获得了{coin_len}位数金币')
+            if coin_len < target_coin:
+                self.logger.info(f'已经阅读获得了 {coin_len} 金币')
                 self.click_random_position(self.pp.xpath(
                     '//*[@resource-id="com.cashtoutiao:id/tabs"]/android.widget.LinearLayout[1]/'
                     'android.widget.FrameLayout[1]').get().bounds)
                 time.sleep(random.random() + 1)
             else:
-                self.logger.info(f' 惠头条 今日已经获取超过10000个金币，不再阅读了')
+                self.logger.info(f'今日已经获取超过10000个金币，不再阅读了')
                 return
             self.logger.info('看完这个栏目了，换个栏目')
 
@@ -160,11 +164,17 @@ class HuiTouTiao(AppReadBase):
 
     def today_coin(self):
         self.pp(text='我的').click(offset=(random.random(), random.random()))
-        self.pp(text='今日收益(金币)').wait()
-        return len(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/setting_today_gold"]//'
-                                 'android.view.View').all())
+        self.pp(text='兑换提现').wait()
+        self.pp(text='兑换提现').click(offset=(random.random(), random.random()))
+        self.pp(text='提现方式').wait()
+        time.sleep(random.random() + 1)
+        coin = self.pp(resourceId='com.cashtoutiao:id/tv_tips_gold_coin').get_text()\
+            .replace(' 金币', '').replace(',', '')
+        self.pp.press('back')
+        time.sleep(random.random() + 1)
+        return coin
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('惠头条')
         # 过了开头的广告动画
@@ -172,9 +182,8 @@ class HuiTouTiao(AppReadBase):
         self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/iv_animate_logo"]').wait_gone()
         self.pp(text='我的').wait(timeout=30)
         self.sign_in()
-        coin_len = self.today_coin()
-        if coin_len < 6:
-            self.read_issue()
+        if self.today_coin() < target_coin:
+            self.read_issue(duration, target_coin)
         else:
             self.logger.info(f' 惠头条 今日已经获取超过10000个金币，不再阅读了')
         self.clean_cache()

@@ -94,7 +94,7 @@ class KuaiShou(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self):
+    def read_issue_first(self, time1, time2):
         self.logger.info(f'开始阅读发现视频')
         time.sleep(random.random() + 1)
         self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/android.widget.LinearLayout[1]/'
@@ -102,9 +102,9 @@ class KuaiShou(AppReadBase):
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/'
                                                  'android.widget.LinearLayout[1]/android.view.View[3]').get().bounds)
         time.sleep(random.random() + 1)
-        self._read_issue_core(900, 1200)
+        self._read_issue_core(time1, time2)
 
-    def read_issue_city(self):
+    def read_issue_city(self, time1, time2):
         self.logger.info(f'开始阅读同城视频')
         time.sleep(random.random() + 1)
         self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/android.widget.LinearLayout[1]/'
@@ -119,22 +119,21 @@ class KuaiShou(AppReadBase):
                                     f'android.widget.RelativeLayout[{random.randint(1, 4)}]/'
                                     f'android.widget.ImageView').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
-        self._read_issue_core(600, 900)
+        self._read_issue_core(time1, time2)
 
-    def read_issue(self):
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def read_issue(self, duration, target_coin):
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
-            self.read_issue_first()
-            if self.today_coin() > 10000:
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+            self.read_issue_first(600, 900)
+            if self.today_coin() > target_coin:
                 break
-            self.read_issue_city()
+            self.read_issue_city(300, 600)
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('快手极速版')
         self.pp(resourceId='com.kuaishou.nebula:id/thanos_home_top_search').wait(timeout=30)
         self.sign_in()
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.clean_cache()
         self.app_end()

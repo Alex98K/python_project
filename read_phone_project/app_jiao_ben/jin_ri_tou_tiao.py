@@ -51,7 +51,7 @@ class JinRiTouTiao(AppReadBase):
         self.pp.press('back')
         time.sleep(random.random() + 1)
 
-    def read_issue(self):
+    def read_issue(self, duration, target_coin):
         self.logger.info(f'开始阅读文章')
         time.sleep(random.random() + 1)
         self.click_random_position(self.pp.xpath('//*[@resource-id="android:id/tabs"]/android.widget.RelativeLayout[1]')
@@ -68,6 +68,7 @@ class JinRiTouTiao(AppReadBase):
         random_list = [x for x in range(1, lan_mu_num)]
         random.shuffle(random_list)
         for j in random_list:
+            t = time.time()
             self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.ss.android.article.lite:id/a4x"]/'
                                        f'android.widget.LinearLayout[1]//android.widget.FrameLayout[{j + 1}]')
                                        .get().bounds)
@@ -129,6 +130,9 @@ class JinRiTouTiao(AppReadBase):
                     time.sleep(random.random() + 1)
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
+                    if time.time() - t > duration:
+                        self.logger.info(f'今日阅读时间超过了{duration}秒，不再阅读了')
+                        return
                 if not self.pp(text='我的').exists:
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
@@ -139,14 +143,13 @@ class JinRiTouTiao(AppReadBase):
                     time.sleep(random.random())
             time.sleep(random.random() + 1)
             coin_len = self.today_coin()
-            if coin_len < 10000:
+            if coin_len < target_coin:
                 self.logger.info(f'已经阅读获得了{coin_len}位数金币')
-                self.click_random_position(self.pp.xpath(
-                    '//*[@resource-id="com.cashtoutiao:id/tabs"]/android.widget.LinearLayout[1]/'
-                    'android.widget.FrameLayout[1]').get().bounds)
+                self.click_random_position(self.pp.xpath('//*[@resource-id="android:id/tabs"]/'
+                                                         'android.widget.RelativeLayout[1]').get().bounds)
                 time.sleep(random.random() + 1)
             else:
-                self.logger.info(f'今日已经获取超过10000个金币，不再阅读了')
+                self.logger.info(f'今日已经获取超过{target_coin}个金币，不再阅读了')
                 return
             self.logger.info('看完这个栏目了，换个栏目')
 
@@ -173,11 +176,11 @@ class JinRiTouTiao(AppReadBase):
         self.pp(text="确认").wait()
         self.pp(text="确认").click(offset=(random.random(), random.random()))
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('今日头条极速版')
         self.pp(text='我的').wait(timeout=30)
         self.sign_in()
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.clean_cache()
         self.app_end()

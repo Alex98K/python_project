@@ -12,12 +12,12 @@ class JinDong(AppReadBase):
         self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher.start(0.5)
 
-    def read_issue_first(self):
+    def read_issue_first(self, time1, time2):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
         self.pp(description='我的').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_adv(600, 900)
+        self._read_adv(time1, time2)
 
     def _read_adv(self, time1, time2):
         for j in self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/card_business_container"]/'
@@ -62,11 +62,10 @@ class JinDong(AppReadBase):
         self.logger.info(f'今日已经获取金币 {coin}')
         return coin
 
-    def read_issue(self):
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def read_issue(self, duration, target_coin):
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
-            self.read_issue_first()
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+            self.read_issue_first(600, 900)
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
@@ -88,10 +87,10 @@ class JinDong(AppReadBase):
         self.pp(text="清理").wait()
         self.pp(text="清理").click(offset=(random.random(), random.random()))
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('京东极速版')
         self.pp(description='我的').wait(timeout=30)
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.clean_cache()
         self.app_end()

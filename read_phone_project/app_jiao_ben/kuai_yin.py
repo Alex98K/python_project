@@ -16,10 +16,6 @@ class KuaiYin(AppReadBase):
         read_issue_time = random.randint(time1, time2)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
-            # 如果不小心切换到了关注栏目，就回到推荐栏目
-            # if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ax_"]').get().center()[0]\
-            #         < self.pp(text='关注').bounds()[2]:
-            #     self.pp(text='推荐').click(offset=(random.random(), random.random()))
             time.sleep(random.uniform(3, 10))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.kuaiyin.player:id/actionLike"]').exists and \
@@ -53,7 +49,7 @@ class KuaiYin(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self):
+    def read_issue_first(self, duration, target_coin):
         self.logger.info(f'开始阅读主页')
         time.sleep(random.random() + 1)
         self.pp(text='主页').click(offset=(random.random(), random.random()))
@@ -63,6 +59,7 @@ class KuaiYin(AppReadBase):
         random_list = [x for x in range(1, lan_mu_num)]
         random.shuffle(random_list)
         for j in random_list:
+            t = time.time()
             self.click_random_position(self.pp(resourceId="com.kuaiyin.player:id/title_container").child()[j].bounds())
             time.sleep(random.random() + 1)
             # 每个栏目下的文章标题
@@ -95,20 +92,23 @@ class KuaiYin(AppReadBase):
                         offset=(random.random(), random.random()))
                     time.sleep(random.random())
                 time.sleep(random.random() + 1)
+            if time.time() - t > duration:
+                self.logger.info(f'今日已经阅读了{duration}秒，不看了')
+                return
             coin = self.today_coin()
             self.logger.info(f'已经获取了 {coin} 金币')
-            if coin > 10000:
+            if coin > target_coin:
                 return
             else:
                 self.click_random_position(self.pp.xpath('//*[@text="主页"]').get().bounds)
                 time.sleep(random.random() + 1)
             self.logger.info('看完这个栏目了，换个栏目')
 
-    def read_issue_city(self):
+    def read_issue_city(self, time1, time2):
         self.logger.info(f'开始阅读视频页')
         self.pp(text='视频').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_issue_core(600, 900)
+        self._read_issue_core(time1, time2)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
@@ -125,18 +125,17 @@ class KuaiYin(AppReadBase):
         self.logger.info(f'今日已经获取金币 {coin}')
         return coin
 
-    def read_issue(self):
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def read_issue(self, duration, target_coin):
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
-            self.read_issue_first()
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+            self.read_issue_first(duration, target_coin)
             if self.today_coin() > 10000:
                 break
-            self.read_issue_city()
+            self.read_issue_city(300, 600)
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('快音')
         self.pp(text='我的').wait(timeout=30)
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.app_end()

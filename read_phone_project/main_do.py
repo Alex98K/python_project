@@ -24,6 +24,7 @@ def main_run(phone_serial):
     pp = uiautomator2.connect_usb(phone_serial)
     pp.unlock()
     pp.screen_on()
+    # raise
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')
     # 设置电池电量
@@ -65,6 +66,7 @@ def main_run(phone_serial):
     CleanCash(pp).main_do()
     # 重置电池状态
     pp.shell('dumpsys battery reset')
+    pp.screen_off()
 
 
 if __name__ == '__main__':

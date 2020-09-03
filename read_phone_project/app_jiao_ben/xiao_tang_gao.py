@@ -26,13 +26,12 @@ class XiaoTangGao(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self):
+    def read_issue_first(self, time1, time2):
         self.logger.info(f'开始阅读小视频')
         time.sleep(random.random() + 1)
         self.pp(text='小视频').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        time.sleep(random.random() + 1)
-        self._read_issue_core(900, 1200)
+        self._read_issue_core(time1, time2)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
@@ -50,15 +49,14 @@ class XiaoTangGao(AppReadBase):
         self.logger.info(f'今日已经获取金币 {coin}')
         return coin
 
-    def read_issue(self):
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def read_issue(self, duration, target_coin):
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 6000:
-            self.read_issue_first()
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+            self.read_issue_first(300, 600)
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('小糖糕')
         self.pp(text='我的').wait(timeout=30)
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.app_end()

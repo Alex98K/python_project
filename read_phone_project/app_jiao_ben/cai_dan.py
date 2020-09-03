@@ -54,7 +54,7 @@ class CaiDan(AppReadBase):
                 self.pp.press('back')
             self.scroll_read_issue()
 
-    def read_issue_first(self):
+    def read_issue_first(self, time1, time2):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
         self.pp(text='首页').click(offset=(random.random(), random.random()))
@@ -62,9 +62,9 @@ class CaiDan(AppReadBase):
         self.pp(resourceId='com.jifen.dandan:id/lottie_view_gold')\
             .drag_to(resourceId='com.jifen.dandan:id/iv_ugc_enter', duration=random.uniform(0.25, 0.5))
         time.sleep(random.random() + 1)
-        self._read_issue_core(900, 1200)
+        self._read_issue_core(time1, time2)
 
-    def read_issue_city(self):
+    def read_issue_city(self, time1, time2):
         self.logger.info(f'开始阅读发现视频')
         self.pp(text='发现').click(offset=(random.random(), random.random()))
         self.pp(resourceId='com.jifen.dandan:id/title_container').wait()
@@ -79,7 +79,7 @@ class CaiDan(AppReadBase):
                                     f'android.view.ViewGroup[1]').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         time.sleep(random.random() + 1)
-        self._read_issue_core(60, 90)
+        self._read_issue_core(time1, time2)
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
@@ -102,18 +102,18 @@ class CaiDan(AppReadBase):
         self.logger.info(f'今日已经获取金币 {coin}')
         return coin
 
-    def read_issue(self):
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def read_issue(self, duration, target_coin):
+        # 看视频总时间
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 6000:
-            self.read_issue_first()
-            if self.today_coin() > 6000:
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+            self.read_issue_first(600, 900)
+            if self.today_coin() > target_coin:
                 break
-            self.read_issue_city()
+            self.read_issue_city(300, 600)
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('彩蛋视频')
         self.pp(text='我').wait(timeout=30)
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.app_end()

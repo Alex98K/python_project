@@ -13,14 +13,11 @@ class QuTouTiao(AppReadBase):
         self.pp.watcher('tip3').when('恭喜获得').press('back')
         self.pp.watcher.start(0.5)
 
-    def log_on(self):
-        self.logger.info(f'开始登录')
+    def today_coin(self):
+        self.logger.info(f'获取今日金币数量')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
-        if self.pp(text='登录').exists(timeout=5):
-            self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/bnl"]').click_exists(timeout=20)
-        else:
-            read_time = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ee"]').get_text()
-            return read_time
+        coin = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ea"]').get_text().replace(' 今日金币', '')
+        return int(coin)
 
     def sign_in(self):
         self.logger.info(f'开始签到')
@@ -50,7 +47,7 @@ class QuTouTiao(AppReadBase):
         self.pp.press('back')
         time.sleep(random.random() + 1)
 
-    def read_issue(self):
+    def read_issue(self, duration, target_coin):
         self.logger.info(f'开始阅读文章')
         time.sleep(random.random() + 1)
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/android.widget.FrameLayout[1]').wait()
@@ -68,6 +65,7 @@ class QuTouTiao(AppReadBase):
         random_list = [x for x in range(lan_mu_num)]
         random.shuffle(random_list)
         for j in random_list:
+            t = time.time()
             self.click_random_position(self.pp(resourceId="com.jifen.qukan:id/bfn")[j].bounds())
             time.sleep(random.random() + 1)
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
@@ -126,6 +124,9 @@ class QuTouTiao(AppReadBase):
                     time.sleep(random.random() + 1)
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
+                if time.time() - t > duration:
+                    self.logger.info(f'已经阅读了 {duration} 秒，不看了')
+                    return
                 if not self.pp(text='我的').exists:
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
@@ -135,10 +136,9 @@ class QuTouTiao(AppReadBase):
                                   random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
             time.sleep(random.random() + 1)
-            self.pp(text='我的').click(offset=(random.random(), random.random()))
-            read_time = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ee"]').get_text()
-            self.logger.info(f'已经阅读了{read_time}分钟')
-            if float(read_time) > 60:
+            coin = self.today_coin()
+            if coin > target_coin:
+                self.logger.info(f'今日已经获取{coin}金币，不再阅读了')
                 return
             else:
                 self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/n9"]/'
@@ -229,19 +229,19 @@ class QuTouTiao(AppReadBase):
         self.pp(description='提现').wait()
         self.pp(description='提现').click(offset=(random.random(), random.random()))
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('趣头条')
         # 过了开头的广告动画
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait()
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait_gone()
         self.pp(text='我的').wait(timeout=30)
-        read_time = self.log_on()
+        coin = self.today_coin()
         self.sign_in()
-        if float(read_time) < 60:
-            self.read_issue()
+        if coin < target_coin:
+            self.read_issue(duration, target_coin)
         else:
-            self.logger.info(f' 趣头条 今日已经获取{read_time}分钟阅读时间，不再阅读了')
+            self.logger.info(f'今日已经获取{coin}金币，不再阅读了')
         self.get_read_reward()
         self.get_advertisement_reward()
         self.clean_cache()

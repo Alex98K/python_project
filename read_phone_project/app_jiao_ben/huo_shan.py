@@ -47,14 +47,14 @@ class HuoShan(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self):
+    def read_issue_first(self, time1, time2):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
         self.pp(text='首页').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_issue_core(900, 1200)
+        self._read_issue_core(time1, time2)
 
-    def read_issue_city(self):
+    def read_issue_city(self, time1, time2):
         self.logger.info(f'开始阅读推荐视频')
         self.pp(text='推荐').click(offset=(random.random(), random.random()))
         for j in range(random.randint(0, 5)):  # 随机下滑几次
@@ -65,7 +65,7 @@ class HuoShan(AppReadBase):
                                     f'android.widget.RelativeLayout[{random.randint(1, 2)}]').get().bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         time.sleep(random.random() + 1)
-        self._read_issue_core(600, 900)
+        self._read_issue_core(time1, time2)
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
@@ -85,14 +85,13 @@ class HuoShan(AppReadBase):
         self.logger.info(f'今日已经获取金币 {coin}')
         return coin
 
-    def read_issue(self):
-        read_issue_time = random.randint(3000, 4000)  # 看视频总时间
+    def read_issue(self, duration, target_coin):
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= read_issue_time and self.today_coin() <= 10000:
-            self.read_issue_first()
-            if self.today_coin() > 10000:
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+            self.read_issue_first(600, 900)
+            if self.today_coin() > target_coin:
                 break
-            self.read_issue_city()
+            self.read_issue_city(300, 600)
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
@@ -114,10 +113,10 @@ class HuoShan(AppReadBase):
         self.pp(text="确定").click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 3)
 
-    def main_do(self):
+    def main_do(self, duration, target_coin):
         # raise
         self.app_start('火山极速版')
         self.pp(text='我的').wait(timeout=30)
-        self.read_issue()
+        self.read_issue(duration, target_coin)
         self.clean_cache()
         self.app_end()
