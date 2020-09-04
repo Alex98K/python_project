@@ -113,7 +113,7 @@ class HuoShan(AppReadBase):
         self.pp(text="确定").click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 3)
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('火山极速版')
         self.pp(text='我的').wait(timeout=30)

@@ -129,7 +129,7 @@ class KuaiShou(AppReadBase):
                 break
             self.read_issue_city(read_issue_time2)
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('快手极速版')
         self.pp(resourceId='com.kuaishou.nebula:id/thanos_home_top_search').wait(timeout=30)

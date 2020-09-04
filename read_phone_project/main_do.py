@@ -18,12 +18,14 @@ from app_jiao_ben.qu_ling_sheng import QuLingSheng
 from app_jiao_ben.tian_tian_ai_qing_li import TianTianAiQingLi
 from app_jiao_ben.jin_ri_tou_tiao import JinRiTouTiao
 from app_jiao_ben.jing_dong import JinDong
+from app_jiao_ben.mi_du import MiDu
 
 
 def main_run(phone_serial):
     pp = uiautomator2.connect_usb(phone_serial)
     pp.unlock()
     pp.screen_on()
+    # print(pp.app_current())
     # raise
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')
@@ -35,16 +37,18 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    CleanCash(pp).app_init()
+    # CleanCash(pp).app_init()
 
     # 开始APP任务
+    MiDu(phone_serial, pp).recycle_main_do(test=True)
+
     job_list = ['JinDong(phone_serial, pp).recycle_main_do(test=True)',
                 'JinRiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
                 'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
                 'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
                 'HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
                 'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
-                'CaiDan(phone_serial, pp).recycle_main_do(test=True)',
+                'CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000, test=True)',
                 'XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)',
                 'QuLingSheng(phone_serial, pp).recycle_main_do(test=True)',
                 'ShuaBao(phone_serial, pp).recycle_main_do(test=True)',

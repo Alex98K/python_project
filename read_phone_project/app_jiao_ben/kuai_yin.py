@@ -133,7 +133,7 @@ class KuaiYin(AppReadBase):
                 break
             self.read_issue_city(read_issue_time)
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('快音')
         self.pp(text='我的').wait(timeout=30)

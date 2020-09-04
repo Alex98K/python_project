@@ -40,7 +40,7 @@ class CaiDan(AppReadBase):
                 self.click_random_position(self.pp.xpath('com.jifen.dandan:id/iv_comment_icon').get().bounds)
                 time.sleep(random.random() + 1)
                 if self.pp(resourceId='com.jifen.dandan:id/text_add_comment').exists:
-                    self.pp(resourceId='com.jifen.dandan:id/text_add_comment')\
+                    self.pp(resourceId='com.jifen.dandan:id/text_add_comment') \
                         .click(offset=(random.random(), random.random()))
                 self.pp(resourceId='com.jifen.dandan:id/et_input').wait()
                 self.pp(resourceId='com.jifen.dandan:id/et_input').set_text(random.choice(self.commit))
@@ -58,7 +58,7 @@ class CaiDan(AppReadBase):
         time.sleep(random.random() + 1)
         self.pp(text='首页').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self.pp(resourceId='com.jifen.dandan:id/lottie_view_gold')\
+        self.pp(resourceId='com.jifen.dandan:id/lottie_view_gold') \
             .drag_to(resourceId='com.jifen.dandan:id/iv_ugc_enter', duration=random.uniform(0.25, 0.5))
         time.sleep(random.random() + 1)
         self._read_issue_core(read_issue_time)
@@ -67,7 +67,7 @@ class CaiDan(AppReadBase):
         self.logger.info(f'开始阅读发现视频')
         self.pp(text='发现').click(offset=(random.random(), random.random()))
         self.pp(resourceId='com.jifen.dandan:id/title_container').wait()
-        self.pp(resourceId='com.jifen.dandan:id/title_container').child()[random.randint(2, 4)]\
+        self.pp(resourceId='com.jifen.dandan:id/title_container').child()[random.randint(2, 4)] \
             .click(offset=(random.random(), random.random()))
         for j in range(random.randint(0, 5)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
@@ -111,9 +111,15 @@ class CaiDan(AppReadBase):
                 break
             self.read_issue_city(read_issue_time2)
 
-    def main_do(self, duration, target_coin):
+    def cash_out(self):
+
+        pass
+
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('彩蛋视频')
         self.pp(text='我').wait(timeout=30)
         self.read_issue(duration, target_coin)
+        if cash_out:
+            self.cash_out()
         self.app_end()

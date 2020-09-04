@@ -132,7 +132,7 @@ class DouYin(AppReadBase):
         self.pp(text="清理").wait()
         self.pp(text="清理").click(offset=(random.random(), random.random()))
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('抖音极速版')
         self.pp(text='我').wait(timeout=30)

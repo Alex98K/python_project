@@ -100,7 +100,7 @@ class ShuaBao(AppReadBase):
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
             self.read_issue_first(read_issue_time)
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('刷宝')
         self.pp(text='我').wait(timeout=30)

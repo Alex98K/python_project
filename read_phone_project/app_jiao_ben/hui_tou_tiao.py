@@ -174,7 +174,7 @@ class HuiTouTiao(AppReadBase):
         time.sleep(random.random() + 1)
         return coin
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('惠头条')
         # 过了开头的广告动画
@@ -185,6 +185,6 @@ class HuiTouTiao(AppReadBase):
         if self.today_coin() < target_coin:
             self.read_issue(duration, target_coin)
         else:
-            self.logger.info(f' 惠头条 今日已经获取超过10000个金币，不再阅读了')
+            self.logger.info(f'今日已经获取超过10000个金币，不再阅读了')
         self.clean_cache()
         self.app_end()

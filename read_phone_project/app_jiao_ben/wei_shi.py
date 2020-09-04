@@ -104,7 +104,7 @@ class WeiShi(AppReadBase):
         self.pp(text="清除缓存").wait()
         self.pp(text="清除缓存").click(offset=(random.random(), random.random()))
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('微视')
         self.pp(resourceId='com.tencent.weishi:id/qfh').wait(timeout=30)

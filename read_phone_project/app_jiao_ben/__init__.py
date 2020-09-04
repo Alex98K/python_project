@@ -73,7 +73,7 @@ class AppReadBase(object):
         for j in num:
             self.pp(description=j).click(offset=(random.random(), random.random()))
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         pass
 
     def del_watcher(self):
@@ -83,14 +83,14 @@ class AppReadBase(object):
         except AttributeError:
             self.logger.error('程序结束调用del注销watcher出错')
 
-    def recycle_main_do(self, duration=random.randint(3000, 4000), target_coin=10000, test=False):
+    def recycle_main_do(self, duration=random.randint(3000, 4000), target_coin=10000, cash_out=False, test=False):
         if test is True:
-            self.main_do(duration, target_coin)
+            self.main_do(duration, target_coin, cash_out)
         else:
             t = time.time()
             while True:
                 try:
-                    self.main_do(duration, target_coin)
+                    self.main_do(duration, target_coin, cash_out)
                     break
                 except Exception as e:
                     self.logger.critical(f'出严重错误啦，以下是错误信息{e}', exc_info=True)
@@ -109,4 +109,11 @@ class AppReadBase(object):
             self.pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25),
                           random.uniform(0.25, 0.7), random.uniform(0.65, 0.8),
                           steps=random.randint(20, 60))
+            time.sleep(random.random() + 1)
+
+    def scroll_read_novel(self):
+        self.pp.click(random.uniform(0.65, 0.9), random.uniform(0.15, 0.85))
+        time.sleep(random.random() + 1)
+        if random.random() < self.probability_scroll_up:
+            self.pp.click(random.uniform(0.1, 0.35), random.uniform(0.15, 0.85))
             time.sleep(random.random() + 1)

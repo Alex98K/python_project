@@ -88,7 +88,7 @@ class QuLingSheng(AppReadBase):
         self.pp(text="清除缓存").wait()
         self.pp(text="清除缓存").click(offset=(random.random(), random.random()))
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('趣铃声')
         self.pp(text='我的').wait(timeout=30)

@@ -229,7 +229,7 @@ class QuTouTiao(AppReadBase):
         self.pp(description='提现').wait()
         self.pp(description='提现').click(offset=(random.random(), random.random()))
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('趣头条')
         # 过了开头的广告动画

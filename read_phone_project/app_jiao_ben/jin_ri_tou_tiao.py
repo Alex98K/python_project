@@ -176,7 +176,7 @@ class JinRiTouTiao(AppReadBase):
         self.pp(text="确认").wait()
         self.pp(text="确认").click(offset=(random.random(), random.random()))
 
-    def main_do(self, duration, target_coin):
+    def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('今日头条极速版')
         self.pp(text='我的').wait(timeout=30)
