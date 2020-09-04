@@ -112,8 +112,12 @@ class AppReadBase(object):
             time.sleep(random.random() + 1)
 
     def scroll_read_novel(self):
-        self.pp.click(random.uniform(0.65, 0.9), random.uniform(0.15, 0.85))
+        self.pp.swipe(random.uniform(0.6, 0.85), random.uniform(0.15, 0.85),
+                      random.uniform(0.15, 0.35), random.uniform(0.15, 0.85),
+                      steps=random.randint(20, 60))
         time.sleep(random.random() + 1)
         if random.random() < self.probability_scroll_up:
-            self.pp.click(random.uniform(0.1, 0.35), random.uniform(0.15, 0.85))
+            self.pp.swipe(random.uniform(0.15, 0.35), random.uniform(0.15, 0.85),
+                          random.uniform(0.6, 0.85), random.uniform(0.15, 0.85),
+                          steps=random.randint(20, 60))
             time.sleep(random.random() + 1)

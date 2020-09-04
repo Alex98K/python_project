@@ -20,7 +20,7 @@ class MiDu(AppReadBase):
         if self.pp(description='去签到').exists(timeout=5):
             self.pp(description='去签到').click(offset=(random.random(), random.random()))
 
-    def read_issue(self, duration, target_coin):
+    def read_issue(self, duration):
         self.logger.info(f'开始阅读文章')
         time.sleep(random.random() + 1)
         self.pp.xpath('//*[@resource-id="com.lechuan.mdwz:id/b3"]').wait()
@@ -33,6 +33,7 @@ class MiDu(AppReadBase):
                 self.pp.xpath('//*[@resource-id="com.lechuan.mdwz:id/a58"]').wait()
                 t = time.time()
                 while time.time() - t < duration:
+                    time.sleep(random.uniform(3, 8))
                     self.scroll_read_novel()
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
@@ -53,6 +54,7 @@ class MiDu(AppReadBase):
                     self.pp.xpath('//*[@resource-id="com.lechuan.mdwz:id/a58"]').wait()
                     t = time.time()
                     while time.time() - t < duration:
+                        time.sleep(random.uniform(3, 8))
                         self.scroll_read_novel()
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
@@ -85,16 +87,13 @@ class MiDu(AppReadBase):
         return int(coin), int(read_time)*60
 
     def main_do(self, duration, target_coin, cash_out):
-        # self.scroll_read_novel()
         # raise
         self.app_start('米读极速版')
         # 过了开头的广告动画
-        time.sleep(random.random() + 5)
         self.pp.xpath('//*[@resource-id="com.lechuan.mdwz:id/km"]').wait()
         self.pp.xpath('//*[@resource-id="com.lechuan.mdwz:id/km"]').wait_gone()
-        print('123')
-        self.pp(text='我的').wait(timeout=10)
-        print('ad')
+        time.sleep(random.random() + 5)
+        self.pp(text='我的').wait(timeout=3)
         if self.pp.xpath('//*[@resource-id="com.lechuan.mdwz:id/a58"]').exists:
             self.pp.press('back')
             self.pp(text='我的').wait(timeout=30)
@@ -102,7 +101,7 @@ class MiDu(AppReadBase):
         self.sign_in()
         coin, read_time = self.today_coin()
         if coin < target_coin and read_time < duration:
-            self.read_issue(duration, target_coin)
+            self.read_issue(duration)
         elif read_time >= duration:
             self.logger.info(f'今日已经获取超过{read_time}秒，不再阅读了')
         else:
