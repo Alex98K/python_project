@@ -9,8 +9,10 @@ class MiDu(AppReadBase):
         super(MiDu, self).__init__(phone_serial, pp)
         self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.lechuan.mdwz:id/t"]').click()
-        # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()
-        # self.pp.watcher('tip6').when(xpath='//*[@resource-id="com.cashtoutiao:id/tt_video_ad_close_layout"]').click()
+        self.pp.watcher('tip2').when('关闭').click()
+        self.pp.watcher('tip4').when('点击重播').press('back')
+        self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.leshi.appstore:id/akt"]').click()
+        self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.lechuan.mdwz:id/tt_titlebar_close"]').click()
         self.pp.watcher.start(0.5)
 
     def sign_in(self):
@@ -84,6 +86,7 @@ class MiDu(AppReadBase):
         time.sleep(random.random() + 1)
         coin = self.pp(resourceId='com.lechuan.mdwz:id/atp').get_text()
         read_time = self.pp(resourceId='com.lechuan.mdwz:id/au0').get_text().replace('今日阅读 ', '').replace('分钟', '')
+        self.logger.info(f'今日已经获取金币 {coin} ，阅读了 {read_time} 分钟')
         return int(coin), int(read_time)*60
 
     def main_do(self, duration, target_coin, cash_out):
@@ -101,7 +104,7 @@ class MiDu(AppReadBase):
         self.sign_in()
         coin, read_time = self.today_coin()
         if coin < target_coin and read_time < duration:
-            self.read_issue(duration)
+            self.read_issue(duration - read_time)
         elif read_time >= duration:
             self.logger.info(f'今日已经获取超过{read_time}秒，不再阅读了')
         else:

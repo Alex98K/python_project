@@ -19,6 +19,7 @@ from app_jiao_ben.tian_tian_ai_qing_li import TianTianAiQingLi
 from app_jiao_ben.jin_ri_tou_tiao import JinRiTouTiao
 from app_jiao_ben.jing_dong import JinDong
 from app_jiao_ben.mi_du import MiDu
+from app_jiao_ben.xiang_kan import XiangKan
 
 
 def main_run(phone_serial):
@@ -37,11 +38,11 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    # CleanCash(pp).app_init()
+    CleanCash(pp).app_init()
 
     # 开始APP任务
-    MiDu(phone_serial, pp).recycle_main_do(test=True)
-
+    XiangKan(phone_serial, pp).recycle_main_do(test=True)
+    raise
     job_list = ['JinDong(phone_serial, pp).recycle_main_do(test=True)',
                 'JinRiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
                 'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
