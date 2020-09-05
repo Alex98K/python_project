@@ -7,7 +7,7 @@ import time
 class KuaiYin(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(KuaiYin, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.kuaiyin.player:id/w_v_back"]').click()
         self.pp.watcher.start(0.5)
@@ -75,16 +75,16 @@ class KuaiYin(AppReadBase):
                     continue
                 time.sleep(random.random() + 1)
                 issue_time_start = time.time()  # 开始计时
-                read_issue_time = random.randrange(5, 125, 30)  # 看文章的随机时间
+                read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
                 while time.time() - issue_time_start <= read_issue_time:
-                    time.sleep(random.uniform(3, 5))
+                    time.sleep(random.random())
                 # 按照设定的点赞概率，随机点赞
                 if self.pp.xpath('//*[@resource-id="com.kuaiyin.player:id/v_like"]').exists and \
                         random.random() < self.probability_thumb_up:
                     self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaiyin.player:id/v_like"]')
                                                .get().bounds)
                     time.sleep(random.random() + 1)
-                time.sleep(random.random() + 1)
+                time.sleep(random.random() + 3)
                 # 随机跳过1-3次
                 for k in range(random.randint(1, 3)):
                     self.pp(resourceId='com.kuaiyin.player:id/v_next').click(

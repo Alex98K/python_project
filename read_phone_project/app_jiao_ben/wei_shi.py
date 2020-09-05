@@ -7,7 +7,7 @@ import time
 class WeiShi(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(WeiShi, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('知道了').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.tencent.weishi:id/rhu"]').click()

@@ -36,24 +36,30 @@ class JinDong(AppReadBase):
                             .click(offset=(random.random(), random.random()))
                         time.sleep(random.random() + 1)
             elif title == '看视频赚金币':
-                xpath = self.pp.xpath(f'//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[{random.randint(1, 4)}]')
+                xpath = self.pp.xpath(f'//android.support.v7.widget.RecyclerView/'
+                                      f'android.widget.FrameLayout[{random.randint(1, 4)}]')
                 xpath.wait()
                 self.click_random_position(xpath.get().bounds)
                 t = time.time()
                 while time.time() - t < read_issue_time2:
                     time.sleep(1)
                     self.pp.screen_on()
-        t = time.time()
-        while time.time() - t < 60 or not self.pp(description='我的').exists:
-            time.sleep(1)
-            self.pp.press('back')
+            t = time.time()
+            while time.time() - t < 60 or not self.pp(description='我的').exists:
+                self.pp(resourceId='com.jd.lib.productdetail:id/title_back').wait()
+                self.pp(resourceId='com.jd.lib.productdetail:id/title_back') \
+                    .click(offset=(random.random(), random.uniform(0.5, 1)))
+                time.sleep(1)
+                self.pp.press('back')
+                time.sleep(1)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
         self.pp(description='我的').wait()
         self.pp(description='我的').click(offset=(random.random(), random.random()))
         self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/'
-                      'android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]').wait()
+                      'android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/'
+                      'android.widget.TextView[1]').wait()
         coin = self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/'
                              'android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/'
                              'android.widget.TextView[1]').get_text().replace(' 个', '')

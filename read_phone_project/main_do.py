@@ -26,8 +26,11 @@ def main_run(phone_serial):
     pp = uiautomator2.connect_usb(phone_serial)
     pp.unlock()
     pp.screen_on()
-    # print(pp.app_current())
+    print(pp.address)
+
+    # 测试代码部分
     # raise
+
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')
     # 设置电池电量
@@ -41,26 +44,29 @@ def main_run(phone_serial):
     CleanCash(pp).app_init()
 
     # 开始APP任务
-    XiangKan(phone_serial, pp).recycle_main_do(test=True)
-    raise
-    job_list = ['JinDong(phone_serial, pp).recycle_main_do(test=True)',
-                'JinRiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-                'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
-                'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-                'HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-                'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
-                'CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000, test=True)',
-                'XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)',
-                'QuLingSheng(phone_serial, pp).recycle_main_do(test=True)',
-                'ShuaBao(phone_serial, pp).recycle_main_do(test=True)',
-                'WeiShi(phone_serial, pp).recycle_main_do(test=True)',
-                'HuoShan(phone_serial, pp).recycle_main_do(test=True)',
-                'DouYin(phone_serial, pp).recycle_main_do(test=True)',
-                'KuaiShou(phone_serial, pp).recycle_main_do(test=True)',
-                ]
+    # XiangKan(phone_serial, pp).recycle_main_do(test=True, target_coin=10000, duration=3600, cash_out=False)
+    # raise
+    job_list = [
+        'JinDong(phone_serial, pp).recycle_main_do(test=True)',
+        'JinRiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
+        'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
+        'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
+        'HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
+        'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
+        'CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000, test=True)',
+        'XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)',
+        'QuLingSheng(phone_serial, pp).recycle_main_do(test=True)',
+        'ShuaBao(phone_serial, pp).recycle_main_do(test=True)',
+        'WeiShi(phone_serial, pp).recycle_main_do(test=True)',
+        'HuoShan(phone_serial, pp).recycle_main_do(test=True)',
+        'DouYin(phone_serial, pp).recycle_main_do(test=True)',
+        'KuaiShou(phone_serial, pp).recycle_main_do(test=True)',
+        'XiangKan(phone_serial, pp).recycle_main_do(test=True)',
+        # 'MiDu(phone_serial, pp).recycle_main_do(test=True)',
+    ]
     # 随机执行
     t = time.time()
-    random.shuffle(job_list)
+    # random.shuffle(job_list)
     for i in job_list:
         exec(i)
         CleanCash(pp).app_init()

@@ -7,7 +7,7 @@ import time
 class QuTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(QuTouTiao, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('知道了').click()
         self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher('tip3').when('恭喜获得').press('back')
