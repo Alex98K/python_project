@@ -22,8 +22,10 @@ class AppReadBase(object):
         with open(self.path / 'conf' / 'commit.json', 'r', encoding='UTF-8') as f:
             self.commit = json.load(f)
         self.package_name = ''
+        self.app_name = ''
 
     def app_start(self, app_name):
+        self.app_name = app_name
         app_list_running = self.pp.app_list_running()
         for k, v in self.app_info.items():
             if v[1] == app_name:
