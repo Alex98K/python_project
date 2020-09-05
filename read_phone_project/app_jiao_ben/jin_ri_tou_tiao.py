@@ -27,7 +27,7 @@ class JinRiTouTiao(AppReadBase):
         self.logger.info(f'开始调整栏目')
         lan_mu_num_end = len(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/'
                                            'android.widget.LinearLayout[1]//android.widget.FrameLayout').all()) - 1
-        if 3 < lan_mu_num_end <= 5:
+        if lan_mu_num_end <= 5:
             return
         if self.pp(resourceId="com.ss.android.article.lite:id/a9k").exists:
             self.pp(resourceId="com.ss.android.article.lite:id/a9k").click(
@@ -70,25 +70,34 @@ class JinRiTouTiao(AppReadBase):
         for j in random_list:
             t = time.time()
             self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.ss.android.article.lite:id/a4x"]/'
-                                       f'android.widget.LinearLayout[1]//android.widget.FrameLayout[{j + 1}]')
-                                       .get().bounds)
+                                                     f'android.widget.LinearLayout[1]//'
+                                                     f'android.widget.FrameLayout[{j + 1}]').get().bounds)
             time.sleep(random.random() + 1)
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
                 # 每个栏目下的文章标题
-                for title in self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/bz" '
-                                           'or @resource-id="com.ss.android.article.lite:id/km"]').all():
+                for title in self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/'
+                                           'bz" or @resource-id="com.ss.android.article.lite:id/km"]').all():
                     # 需要满足看文章概率
                     if random.random() >= self.probability_read_issue:
                         continue
                     self.click_random_position(title.bounds)
                     time.sleep(random.random() + 2)
+                    # 如果是搜索按钮点进去的，那就跳过
+                    if self.pp(description='返回').exists:
+                        self.pp.press('back')
+                        time.sleep(random.random() + 1)
                     # 没有奖励的就跳过不看了
                     if not (self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/aak"]').exists or
-                            self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/l9"]').exists):
+                            self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/l9"]').exists) or \
+                            self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/round_write_button"]').exists or\
+                            self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/'
+                                          'wenda_detail_title_image"]').exists:
+                        self.pp.press('back')
+                        time.sleep(random.random() + 1)
                         continue
                     issue_time_start = time.time()  # 开始计时
-                    read_issue_time = random.randrange(5, 125, 30)  # 看文章的随机时间
-                    read_video_time = random.randrange(5, 185, 30)  # 看视频的随机时间
+                    read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
+                    read_video_time = random.randrange(5, 185)  # 看视频的随机时间
                     # 按照设定的关注概率，随机关注
                     if self.pp(text="关注").exists and random.random() < self.probability_focus:
                         self.pp(text="关注").click(offset=(random.random(), random.random()))
@@ -126,30 +135,43 @@ class JinRiTouTiao(AppReadBase):
                         time.sleep(random.random() + 1)
                         self.pp(text='发布').click(offset=(random.random(), random.random()))
                         time.sleep(random.random() + 1)
-
-                    time.sleep(random.random() + 1)
-                    self.pp.press('back')
+                    # 阅读完看一下今日金币数量，有可能卡住，先不用了
+                    # if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/aak"]').exists:
+                    #     self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/'
+                    #                                              'aak"]').get().bounds)
+                    #     self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a0p"]').wait()
+                    #     coin = self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a0p"]').get_text()
+                    #     self.pp.press('back')
+                    #     time.sleep(random.random() + 1)
+                    #     if int(coin) > target_coin:
+                    #         self.logger.info(f'已经阅读获得了 {coin} 金币')
+                    #         self.pp.press('back')
+                    #         time.sleep(random.random() + 1)
+                    #         return
+                    #     else:
+                    #         self.pp.press('back')
+                    #         time.sleep(random.random() + 1)
+                    # 阅读完文章返回
+                    while not self.pp(text='我的').exists:
+                        self.pp.press('back')
+                        time.sleep(random.random() + 1)
                     time.sleep(random.random() + 1)
                     if time.time() - t > duration:
                         self.logger.info(f'今日阅读时间超过了{duration}秒，不再阅读了')
                         return
-                if not self.pp(text='我的').exists:
-                    self.pp.press('back')
-                    time.sleep(random.random() + 1)
-                # 随机下滑2-4次
-                for k in range(random.randint(2, 4)):
+                # 随机下滑1-4次
+                for k in range(random.randint(1, 4)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                                   random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
             time.sleep(random.random() + 1)
             coin_len = self.today_coin()
             if coin_len < target_coin:
-                self.logger.info(f'已经阅读获得了{coin_len}位数金币')
                 self.click_random_position(self.pp.xpath('//*[@resource-id="android:id/tabs"]/'
                                                          'android.widget.RelativeLayout[1]').get().bounds)
                 time.sleep(random.random() + 1)
             else:
-                self.logger.info(f'今日已经获取超过{target_coin}个金币，不再阅读了')
+                self.logger.info(f'今日已经获取超过 {target_coin} 个金币，不再阅读了')
                 return
             self.logger.info('看完这个栏目了，换个栏目')
 
@@ -181,6 +203,8 @@ class JinRiTouTiao(AppReadBase):
         self.app_start('今日头条极速版')
         self.pp(text='我的').wait(timeout=30)
         self.sign_in()
-        self.read_issue(duration, target_coin)
+        coin = self.today_coin()
+        if coin < target_coin:
+            self.read_issue(duration, target_coin)
         self.clean_cache()
         self.app_end()

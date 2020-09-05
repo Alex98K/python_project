@@ -11,6 +11,7 @@ class TianTianAiQingLi(AppReadBase):
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('暂不领取').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.xiaoqiao.qclean:id/rl_close"]').click()
+        self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.xiaoqiao.qclean:id/iv_close"]').click()
         self.pp.watcher.start(0.5)
 
     def sign_in(self):
@@ -82,10 +83,12 @@ class TianTianAiQingLi(AppReadBase):
         self.logger.info(f'开始清理缓存')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         self.pp(description='我的钱包').wait()
-        self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                      random.uniform(0.2, 0.3), steps=random.randint(10, 20))
-        time.sleep(random.random() + 1)
-        self.pp.click(0.87, 0.87)
+        while not self.pp(text='设置').exists:
+            self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
+                          random.uniform(0.2, 0.3), steps=random.randint(10, 20))
+            time.sleep(random.random() + 1)
+        self.pp(text='设置').wait()
+        self.pp(text='设置').click(offset=(random.random(), random.random()))
         self.pp(text='清除缓存').wait()
         self.pp(text='清除缓存').click(offset=(random.random(), random.random()))
 

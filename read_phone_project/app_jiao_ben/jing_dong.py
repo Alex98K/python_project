@@ -9,7 +9,8 @@ class JinDong(AppReadBase):
         super(JinDong, self).__init__(phone_serial, pp)
         self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
-        self.pp.watcher('tip2').when('残忍离开').click()
+        self.pp.watcher('tip2').when(xpath='//android.webkit.WebView/android.view.View[1]/'
+                                           'android.view.View[2]/android.view.View[3]').click()
         self.pp.watcher.start(0.5)
 
     def read_issue_first(self, read_issue_time1, read_issue_time2):
@@ -24,13 +25,20 @@ class JinDong(AppReadBase):
                                'android.support.v7.widget.RecyclerView[1]//android.widget.RelativeLayout').all():
             title = self.pp.xpath(j.get_xpath() + '/android.widget.TextView[1]').get_text()
             bounds = self.pp.xpath(j.get_xpath() + '/android.widget.Button').get().bounds
+            status = self.pp.xpath(j.get_xpath() + '/android.widget.Button').get_text()
+            if status == '已完成':
+                continue
             self.click_random_position(bounds)
-            time.sleep(random.random() + 1)
+            time.sleep(random.random() + 3)
             if title in ['逛商品赚金币', '逛活动赚金币']:
+                self.pp(resourceId='com.jd.jdlite:id/ll_content').wait()
                 t = time.time()
                 while time.time() - t < read_issue_time1:
                     self.scroll_read_issue()
                     time.sleep(random.random() + 1)
+                    if not self.pp(resourceId='com.jd.jdlite:id/ll_content').exists or \
+                            self.pp(text='今日已完成').exists:
+                        break
                     if self.pp(resourceId='com.jd.jdlite:id/ll_task_bottom_next').exists:
                         self.pp(resourceId='com.jd.jdlite:id/ll_task_bottom_next')\
                             .click(offset=(random.random(), random.random()))
@@ -42,16 +50,22 @@ class JinDong(AppReadBase):
                 self.click_random_position(xpath.get().bounds)
                 t = time.time()
                 while time.time() - t < read_issue_time2:
-                    time.sleep(1)
-                    self.pp.screen_on()
-            t = time.time()
-            while time.time() - t < 60 or not self.pp(description='我的').exists:
-                self.pp(resourceId='com.jd.lib.productdetail:id/title_back').wait()
-                self.pp(resourceId='com.jd.lib.productdetail:id/title_back') \
-                    .click(offset=(random.random(), random.uniform(0.5, 1)))
+                    self.scroll_read_issue()
+                    if not self.pp(resourceId='com.jd.jdlite:id/ll_content').exists or \
+                            self.pp(text='今日已完成').exists:
+                        break
+                    time.sleep(random.randint(3, 5))
+            while not self.pp(description='我的').exists:
+                if self.pp(resourceId='com.jd.lib.productdetail:id/title_back').exists:
+                    self.pp(resourceId='com.jd.lib.productdetail:id/title_back') \
+                        .click(offset=(random.random(), random.uniform(0.5, 1)))
+                elif self.pp(resourceId='com.jd.lib.jdlivelist:id/vi_btn_close').exists:
+                    self.pp(resourceId='com.jd.lib.jdlivelist:id/vi_btn_close') \
+                        .click(offset=(random.random(), random.uniform(0.5, 1)))
+                else:
+                    self.pp.press('back')
                 time.sleep(1)
-                self.pp.press('back')
-                time.sleep(1)
+            self.pp(description='我的').click(offset=(random.random(), random.random()))
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
@@ -79,23 +93,20 @@ class JinDong(AppReadBase):
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        self.pp(description='更多').wait()
-        self.pp(description='更多').click(offset=(random.random(), random.random()))
-        self.pp(text="设置").wait()
-        self.pp(text="设置").click(offset=(random.random(), random.random()))
+        self.pp(description='我的').wait(timeout=30)
+        self.pp(description='我的').click(offset=(random.random(), random.random()))
         t = time.time()
         while time.time() - t < 60:
-            if not self.pp(text="清理缓存").exists:
+            if not self.pp(text="清除本地缓存").exists:
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                               random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                 time.sleep(random.random())
             else:
                 break
-        self.pp(text="清理缓存").wait()
-        self.pp(text="清理缓存").click(offset=(random.random(), random.random()))
-        self.pp(text="清理").wait()
-        self.pp(text="清理").click(offset=(random.random(), random.random()))
+        self.pp(text="清除本地缓存").wait()
+        self.pp(text="清除本地缓存").click(offset=(random.random(), random.random()))
+        self.pp(text="确定").wait()
+        self.pp(text="确定").click(offset=(random.random(), random.random()))
 
     def main_do(self, duration, target_coin, cash_out):
         # raise

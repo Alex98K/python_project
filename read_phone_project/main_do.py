@@ -41,15 +41,16 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    CleanCash(pp).app_init()
+    # CleanCash(pp).app_init()
 
     # 开始APP任务
     # XiangKan(phone_serial, pp).recycle_main_do(test=True, target_coin=10000, duration=3600, cash_out=False)
+    # 天天哎清理收益低，
     # raise
     job_list = [
-        'JinDong(phone_serial, pp).recycle_main_do(test=True)',
-        'JinRiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-        'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
+        # 'JinDong(phone_serial, pp).recycle_main_do(test=True)',
+        # 'JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000, test=True)',
+        # 'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
         'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
         'HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
         'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
@@ -69,9 +70,10 @@ def main_run(phone_serial):
     # random.shuffle(job_list)
     for i in job_list:
         exec(i)
-        CleanCash(pp).app_init()
         if time.time() - t > 50000:
             break
+        pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+        CleanCash(pp).app_init()
 
     # 调用系统应用，清理缓存和垃圾
     CleanCash(pp).main_do()

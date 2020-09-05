@@ -2,6 +2,7 @@ from app_jiao_ben import AppReadBase
 import random
 import uiautomator2
 import time
+import re
 
 
 class QuTouTiao(AppReadBase):
@@ -11,12 +12,15 @@ class QuTouTiao(AppReadBase):
         self.pp.watcher('tip1').when('知道了').click()
         self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher('tip3').when('恭喜获得').press('back')
+        self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.jifen.qukan:id/b6l"]').click()
         self.pp.watcher.start(0.5)
 
     def today_coin(self):
         self.logger.info(f'获取今日金币数量')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
-        coin = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ea"]').get_text().replace(' 今日金币', '')
+        coin = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ea"]').get_text()
+        coin = int(re.search(r'\d*', coin).group())
+        self.logger.info(f'今日获取 {coin} 金币')
         return int(coin)
 
     def sign_in(self):
@@ -27,19 +31,21 @@ class QuTouTiao(AppReadBase):
     def _adjust_lan_mu(self):
         self.logger.info(f'开始调整栏目')
         lan_mu_num_end = self.pp(resourceId="com.jifen.qukan:id/bfn").count - 1
-        if lan_mu_num_end <= 6:
+        if lan_mu_num_end <= 5:
             return
         if self.pp(resourceId="com.jifen.qukan:id/ada").exists:
             self.pp(resourceId="com.jifen.qukan:id/ada").click(offset=(random.uniform(0.5, 0.9), random.random()))
             time.sleep(random.random() + 1)
             self.pp(text='编辑').wait()
             self.pp(text='编辑').click(offset=(random.random(), random.random()))
-        lan_mu_num = 0
-        for j in reversed(self.pp(resourceId='com.jifen.qukan:id/aoa')):
-            if j.get_text() in ['小剧场', '小视频', '直播', '好货', '小说', '抗疫', '视频', '北京'] or \
-                    random.random() < 0.7 or lan_mu_num >= lan_mu_num_end:
-                j.sibling(resourceId='com.jifen.qukan:id/aob').click_exists()
-            else:
+        for i in reversed(self.pp(resourceId='com.jifen.qukan:id/aob')):
+            i.click_exists()
+        time.sleep(random.random() + 1)
+        lan_mu_num = 2
+        for j in reversed(self.pp(resourceId='com.jifen.qukan:id/aoe')):
+            if j.get_text() not in ['小剧场', '小视频', '直播', '好货', '小说', '抗疫', '视频', '北京'] and \
+                    random.random() < 0.2 and lan_mu_num < lan_mu_num_end:
+                j.click(offset=(random.random(), random.random()))
                 lan_mu_num += 1
         self.pp(text='完成').wait()
         self.pp(text='完成').click(offset=(random.random(), random.random()))
@@ -79,8 +85,8 @@ class QuTouTiao(AppReadBase):
                     # 如果有获取金币的图标，才看，没有就返回,
                     if self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/a3_"]').exists:
                         issue_time_start = time.time()  # 开始计时
-                        read_issue_time = random.randrange(5, 125, 30)  # 看文章的随机时间
-                        read_video_time = random.randrange(5, 185, 30)  # 看视频的随机时间
+                        read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
+                        read_video_time = random.randrange(5, 185)  # 看视频的随机时间
                         # 看下是视频还是文章，视频就停着看，文章就下滑看
                         if self.pp.xpath('//com.qukan.media.player.renderview.TextureRenderView').exists:
                             while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
@@ -236,6 +242,8 @@ class QuTouTiao(AppReadBase):
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait()
         self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/pe"]').wait_gone()
         self.pp(text='我的').wait(timeout=30)
+        if self.pp(text='立即更新').exists:
+            self.pp(text='立即更新').click(offset=(random.random(), random.random()))
         coin = self.today_coin()
         self.sign_in()
         if coin < target_coin:
