@@ -33,7 +33,6 @@ class CleanCash(object):
                                    'android.widget.RelativeLayout/com.letv.shared.widget.LeCheckBox[1]').all():
                 img = j.screenshot()
                 r, g, b = img.resize((1, 1)).getpixel((0, 0))
-                print(r, g, b)
                 if r > 200 and g > 200 and b > 200:
                     j.click()
             self.pp.swipe(0.3, 0.7, 0.3, 0.2, steps=60)

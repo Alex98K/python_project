@@ -26,26 +26,22 @@ class DouYin(AppReadBase):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
             # 如果不小心切换到了关注栏目，就回到推荐栏目
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ax_"]').get().center()[0]\
+            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/awj"]').exists and \
+                    self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/awj"]').get().center()[0]\
                     < self.pp(text='关注').bounds()[2]:
                 self.pp(text='推荐').click(offset=(random.random(), random.random()))
-            time.sleep(random.uniform(3, 10))
+            # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]').exists and \
+            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/wf"]').exists and \
                     random.random() < self.probability_thumb_up:
-                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/ww"]')
+                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/wf"]')
                                            .get().bounds)
                 time.sleep(random.random() + 1)
             # 按照设定的关注概率，随机关注
-            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]').exists and \
+            if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/a5w"]').exists and \
                     random.random() < self.probability_focus:
-                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/d14"]')
+                self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/a5w"]')
                                            .get().bounds)
-                if self.pp(text='关注').exists(timeout=3):
-                    self.pp(text='关注').click(offset=(random.random(), random.random()))
-                time.sleep(random.random() + 3)
-                self.pp.press('back')
-                time.sleep(random.random() + 1)
             # 按照设定的评论概率，随机评论
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.aweme.lite:id/qb"]').exists and \
                     random.random() < self.probability_commit:
@@ -77,19 +73,21 @@ class DouYin(AppReadBase):
         for j in range(random.randint(0, 5)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
-        time.sleep(random.random() + 1)
-        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/as7"]/'
-                                    f'android.view.ViewGroup[{random.randint(1, 4)}]/'
-                                    f'android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
-                                    f'android.widget.RelativeLayout[1]/android.view.View[1]').bounds
+        time.sleep(random.random() + 5)
+        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.aweme.lite:id/arm"]/'
+                                    f'android.view.ViewGroup/android.widget.LinearLayout[1]/'
+                                    f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/'
+                                    f'android.view.View[1]').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         time.sleep(random.random() + 1)
         self._read_issue_core(read_issue_time)
+        time.sleep(random.random() + 1)
+        self.pp.press('back')
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
-        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').wait()
-        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/azz').click(offset=(random.random(), random.random()))
+        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/az8').wait()
+        self.pp(resourceId='com.ss.android.ugc.aweme.lite:id/az8').click(offset=(random.random(), random.random()))
         self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]').wait()
         coin = self.pp.xpath('//*[@content-desc="Luckycat"]/android.view.View[2]') \
             .get().attrib['content-desc'].replace(',', '')

@@ -80,18 +80,14 @@ class WeiShi(AppReadBase):
         coin = self.pp.xpath('//*[@text="元"]/preceding-sibling::android.view.View[1]').get_text()
         self.pp.press('back')
         time.sleep(random.random() + 1)
-        if 'w' in coin:
-            coin = int(float(coin.replace('w', '')) * 10000)
-        else:
-            print(coin)
-            coin = float(coin)
+        coin = float(coin)
         self.logger.info(f'今日已经获取金钱 {coin} 元')
         return coin
 
     def read_issue(self, duration, target_coin):
         read_issue_time = random.randint(300, 600)  # 看视频总时间
         issue_time_start = time.time()  # 开始计时
-        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin/20000:
+        while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin/10000:
             self.read_issue_first(read_issue_time)  # 看视频总时间
 
     def clean_cache(self):

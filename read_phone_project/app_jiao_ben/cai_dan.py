@@ -12,6 +12,9 @@ class CaiDan(AppReadBase):
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="加载中"]/android.view.View[1]/android.view.View[2]/'
                                            'android.view.View[2]').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.jifen.dandan:id/close_bottom_button"]').click()
+        # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.jifen.dandan:id/iv_close"]').click()
+        self.pp.watcher('tip4').when(xpath='//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/'
+                                           'android.widget.RelativeLayout[1]/android.widget.ImageView[1]').click()
         self.pp.watcher.start(0.5)
 
     def _read_issue_core(self, read_issue_time):
@@ -111,9 +114,22 @@ class CaiDan(AppReadBase):
                 break
             self.read_issue_city(read_issue_time2)
 
-    def cash_out(self):
-
-        pass
+    def cash_out(self, cash_out):
+        super(CaiDan, self).cash_out(cash_out)
+        self.pp(text='我').wait()
+        self.pp(text='我').click(offset=(random.random(), random.random()))
+        self.pp(resourceId='com.jifen.dandan:id/tv_person_total_gold_title').wait()
+        self.pp(resourceId='com.jifen.dandan:id/tv_person_total_gold_title')\
+            .click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 3)
+        coin = self.pp.xpath('//*[@resource-id="com.jifen.dandan:id/content_view"]/android.widget.RelativeLayout[1]/'
+                             'android.webkit.WebView[1]/android.webkit.WebView[1]/android.view.View[3]/'
+                             'android.view.View[1]/android.view.View').get_text()
+        coin = int(coin)
+        if coin > 300000:
+            self.pp(description='30').click(offset=(random.random(), random.random()))
+            self.pp(description='立即提现').wait()
+            self.pp(description='立即提现').click(offset=(random.random(), random.random()))
 
     def main_do(self, duration, target_coin, cash_out):
         # raise
@@ -121,5 +137,5 @@ class CaiDan(AppReadBase):
         self.pp(text='我').wait(timeout=30)
         self.read_issue(duration, target_coin)
         if cash_out:
-            self.cash_out()
+            self.cash_out(cash_out)
         self.app_end()

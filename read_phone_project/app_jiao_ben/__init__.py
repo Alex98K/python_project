@@ -23,6 +23,9 @@ class AppReadBase(object):
             self.commit = json.load(f)
         self.package_name = ''
         self.app_name = ''
+        # self.pp.watcher('init1').when('我知道了').click()
+        # self.pp.watcher('init2').when('知道了').click()
+        # self.pp.watcher('init3').when(xpath='//*[contains(@resource-id, "close")]').click()
 
     def app_start(self, app_name):
         self.app_name = app_name
@@ -40,7 +43,7 @@ class AppReadBase(object):
 
     def app_end(self):
         self.pp.app_stop(self.package_name)
-        self.logger.info(f'********结束 APP 任务********')
+        self.logger.info(f'********结束 {self.app_name} APP 任务********')
 
     def log_config(self, phone_serial):
         # 设置log
@@ -77,6 +80,10 @@ class AppReadBase(object):
 
     def main_do(self, duration, target_coin, cash_out):
         pass
+
+    def cash_out(self, cash_out):
+        if not cash_out:
+            return
 
     def del_watcher(self):
         try:

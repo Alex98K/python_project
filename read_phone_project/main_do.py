@@ -29,6 +29,7 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
+
     # raise
 
     # 禁用USB充电
@@ -41,27 +42,28 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    # CleanCash(pp).app_init()
+    CleanCash(pp).app_init()
 
     # 开始APP任务
     # XiangKan(phone_serial, pp).recycle_main_do(test=True, target_coin=10000, duration=3600, cash_out=False)
-    # 天天哎清理收益低，
+    # 低收益app： 天天爱清理，米读，快音，小糖糕,
     # raise
+
     job_list = [
         # 'JinDong(phone_serial, pp).recycle_main_do(test=True)',
         # 'JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000, test=True)',
         # 'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
-        'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-        'HuiTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-        'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
-        'CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000, test=True)',
-        'XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)',
-        'QuLingSheng(phone_serial, pp).recycle_main_do(test=True)',
-        'ShuaBao(phone_serial, pp).recycle_main_do(test=True)',
-        'WeiShi(phone_serial, pp).recycle_main_do(test=True)',
-        'HuoShan(phone_serial, pp).recycle_main_do(test=True)',
-        'DouYin(phone_serial, pp).recycle_main_do(test=True)',
-        'KuaiShou(phone_serial, pp).recycle_main_do(test=True)',
+        # 'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
+        # 'HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=70000, test=True)',
+        # 'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
+        # 'CaiDan(phone_serial, pp).recycle_main_do(target_coin=10000, test=True)',
+        # 'XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)',
+        # 'QuLingSheng(phone_serial, pp).recycle_main_do(test=True)',
+        # 'ShuaBao(phone_serial, pp).recycle_main_do(test=True)',
+        # 'WeiShi(phone_serial, pp).recycle_main_do(test=True)',
+        # 'HuoShan(phone_serial, pp).recycle_main_do(test=True)',
+        # 'DouYin(phone_serial, pp).recycle_main_do(test=True)',
+        # 'KuaiShou(phone_serial, pp).recycle_main_do(test=True)',
         'XiangKan(phone_serial, pp).recycle_main_do(test=True)',
         # 'MiDu(phone_serial, pp).recycle_main_do(test=True)',
     ]

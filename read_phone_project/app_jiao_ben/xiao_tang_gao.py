@@ -34,10 +34,15 @@ class XiaoTangGao(AppReadBase):
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
+        self.pp(text='我的').wait()
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.ponycamera:id/main_bottom_layout"]/'
                                                  'android.widget.FrameLayout[5]').get().bounds)
         self.pp.xpath('//*[@content-desc="今日金币"]').wait()
         time.sleep(random.random() + 2)
+        self.pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25), random.uniform(0.25, 0.7),
+                      random.uniform(0.65, 0.8), steps=random.randint(20, 60))
+        time.sleep(random.random() + 2)
+        self.pp.xpath('//*[@content-desc="今日金币"]').wait()
         coin = self.pp.xpath('//*[@content-desc="今日金币"]/preceding-sibling::android.view.View[1]') \
             .get().attrib['content-desc'].replace(',', '')
         time.sleep(random.random() + 1)

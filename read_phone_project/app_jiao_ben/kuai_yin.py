@@ -10,6 +10,7 @@ class KuaiYin(AppReadBase):
         self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.kuaiyin.player:id/w_v_back"]').click()
+        self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.kuaiyin.player:id/ivDismiss"]').click()
         self.pp.watcher.start(0.5)
 
     def _read_issue_core(self, read_issue_time):
@@ -75,7 +76,7 @@ class KuaiYin(AppReadBase):
                     continue
                 time.sleep(random.random() + 1)
                 issue_time_start = time.time()  # 开始计时
-                read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
+                read_issue_time = random.randrange(15, 185)  # 看文章的随机时间
                 while time.time() - issue_time_start <= read_issue_time:
                     time.sleep(random.random())
                 # 按照设定的点赞概率，随机点赞

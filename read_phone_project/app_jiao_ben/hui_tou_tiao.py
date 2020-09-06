@@ -8,6 +8,7 @@ class HuiTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(HuiTouTiao, self).__init__(phone_serial, pp)
         self.pp = uiautomator2.connect_usb()
+        self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.lechuan.mdwz:id/t"]').click()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()
         self.pp.watcher('tip6').when(xpath='//*[@resource-id="com.cashtoutiao:id/tt_video_ad_close_layout"]').click()
@@ -28,12 +29,17 @@ class HuiTouTiao(AppReadBase):
         if self.pp(resourceId="com.cashtoutiao:id/iv_edit").exists:
             self.pp(resourceId="com.cashtoutiao:id/iv_edit").click(offset=(random.uniform(0.5, 0.9), random.random()))
             time.sleep(random.random() + 1)
-        lan_mu_num = 0
-        for j in reversed(self.pp(resourceId='com.cashtoutiao:id/text_channel')):
-            if j.get_text() not in ['三农', '故事', '国外', '星座', '教育', '旅行', '游戏', '关注', '文化', '时尚', '体育', '图片'] or \
-                    random.random() < 0.3 or lan_mu_num >= lan_mu_num_end:
-                j.sibling(resourceId='com.cashtoutiao:id/app_delete_btn').click_exists()
-            else:
+        for i in reversed(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/rv_channel"]/'
+                                        'android.widget.FrameLayout[2]//preceding-sibling::android.widget'
+                                        '.RelativeLayout/android.widget.ImageView').all()):
+            self.click_random_position(i.bounds)
+            time.sleep(random.random() + 0.5)
+        time.sleep(random.random() + 1)
+        lan_mu_num = 2
+        for j in reversed(self.pp(resourceId='com.cashtoutiao:id/app_delete_btn')):
+            if j.get_text() not in ['三农', '故事', '国外', '星座', '教育', '旅行', '游戏', '关注', '文化', '时尚', '体育', '图片'] and \
+                    random.random() < 0.2 and lan_mu_num <= lan_mu_num_end:
+                j.click(offset=(random.random(), random.random()))
                 lan_mu_num += 1
         self.pp(text='完成').wait()
         self.pp(text='完成').click(offset=(random.random(), random.random()))
@@ -63,7 +69,7 @@ class HuiTouTiao(AppReadBase):
         t = time.time()
         for j in random_list:
             self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.cashtoutiao:id/tab_news"]/'
-                                                     f'android.widget.LinearLayout[1]/android.widget.FrameLayout[{j+1}]'
+                                                     f'android.widget.LinearLayout[1]/android.widget.FrameLayout[{j + 1}]'
                                                      f'/android.widget.RelativeLayout[1]').get().bounds)
             time.sleep(random.random() + 1)
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
@@ -72,52 +78,69 @@ class HuiTouTiao(AppReadBase):
                     # 需要满足看文章概率
                     if random.random() >= self.probability_read_issue:
                         continue
+                    # 如果是广告，就跳过
+                    if self.pp.xpath(title.get_xpath() + '/..//*[@resource-id="com.cashtoutiao:id/'
+                                                         'll_ad_container"]').exists:
+                        continue
                     self.click_random_position(title.bounds)
                     time.sleep(random.random() + 2)
                     # 如果有获取金币的图标，才看，没有就返回,
-                    if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/news_income_container"]').exists:
-                        issue_time_start = time.time()  # 开始计时
-                        read_issue_time = random.randrange(5, 125, 30)  # 看文章的随机时间
-                        read_video_time = random.randrange(5, 185, 30)  # 看视频的随机时间
-                        # 按照设定的关注概率，随机关注
-                        if self.pp(description="关注").exists and random.random() < self.probability_focus:
-                            self.pp(description="关注").click(offset=(random.random(), random.random()))
+                    if not self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/news_income_container"]').exists:
+                        while not self.pp(text='我的').exists:
                             time.sleep(random.random() + 1)
-                        # 看下是视频还是文章，视频就停着看，文章就下滑看
-                        if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/video_container"]').exists:
-                            while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
-                                if self.pp(text='关闭广告').exists:
-                                    self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
-                                time.sleep(1)
-                        else:
-                            while time.time() - issue_time_start <= read_issue_time:
-                                time.sleep(random.uniform(3, 5))
-                                self.scroll_read_issue()
-                                if self.pp.xpath('//*[@content-desc="展开全文"]').exists:
-                                    self.click_random_position(self.pp.xpath('//*[@content-desc="展开全文"]').get().bounds)
-                                # if not self.pp.xpath('//*[@resource-id="com.jifen.qukan:id/g3"]').exists:
-                                #     self.pp.press('back')
-                        # 按照设定的点赞概率，随机点赞
-                        if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/iv_collection"]').exists and \
-                                random.random() < self.probability_thumb_up:
-                            self.click_random_position(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/'
-                                                                     'iv_collection"]').get().bounds)
-                            time.sleep(random.random() + 1)
-                        # 按照设定的评论概率，随机评论
-                        if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/rl_comment"]').exists and \
-                                random.random() < self.probability_commit:
-                            self.click_random_position(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/'
-                                                                     'rl_comment"]').get().bounds)
-                            time.sleep(random.random() + 1)
-                            self.pp(resourceId='com.cashtoutiao:id/up_keyboard').wait()
-                            self.pp(resourceId='com.cashtoutiao:id/up_keyboard') \
-                                .click(offset=(random.random(), random.random()))
-                            self.pp(resourceId='com.cashtoutiao:id/comment_editText').wait()
-                            self.pp(resourceId='com.cashtoutiao:id/comment_editText') \
-                                .set_text(random.choice(self.commit))
-                            time.sleep(random.random() + 1)
-                            self.pp(text='发布').click(offset=(random.random(), random.random()))
-                            time.sleep(random.random() + 1)
+                            self.pp.press('back')
+                        continue
+                    # 如果跳转到其他app ，就回来
+                    if (tp := self.pp.app_current()['package']) != self.package_name:
+                        self.pp.app_stop(tp)
+                        time.sleep(random.random() + 1)
+                        self.pp.app_start(self.package_name)
+                        continue
+                    # 如果跳到了安装app的界面，就回来
+                    if self.pp(text="取消").exists:
+                        self.pp(text="取消").click(offset=(random.random(), random.random()))
+                        time.sleep(random.random() + 1)
+                        continue
+                    issue_time_start = time.time()  # 开始计时
+                    read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
+                    read_video_time = random.randrange(5, 185)  # 看视频的随机时间
+                    # 按照设定的关注概率，随机关注
+                    if self.pp(description="关注").exists and random.random() < self.probability_focus:
+                        self.pp(description="关注").click(offset=(random.random(), random.random()))
+                        time.sleep(random.random() + 1)
+                    # 看下是视频还是文章，视频就停着看，文章就下滑看
+                    if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/video_container"]').exists:
+                        while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
+                            if self.pp(text='关闭广告').exists:
+                                self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
+                            time.sleep(1)
+                    else:
+                        while time.time() - issue_time_start <= read_issue_time:
+                            time.sleep(random.uniform(3, 5))
+                            self.scroll_read_issue()
+                            if self.pp.xpath('//*[@content-desc="展开全文"]').exists:
+                                self.click_random_position(self.pp.xpath('//*[@content-desc="展开全文"]').get().bounds)
+                    # 按照设定的点赞概率，随机点赞
+                    if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/iv_collection"]').exists and \
+                            random.random() < self.probability_thumb_up:
+                        self.click_random_position(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/'
+                                                                 'iv_collection"]').get().bounds)
+                        time.sleep(random.random() + 1)
+                    # 按照设定的评论概率，随机评论
+                    if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/rl_comment"]').exists and \
+                            random.random() < self.probability_commit:
+                        self.click_random_position(self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/'
+                                                                 'rl_comment"]').get().bounds)
+                        time.sleep(random.random() + 1)
+                        self.pp(resourceId='com.cashtoutiao:id/up_keyboard').wait()
+                        self.pp(resourceId='com.cashtoutiao:id/up_keyboard') \
+                            .click(offset=(random.random(), random.random()))
+                        self.pp(resourceId='com.cashtoutiao:id/comment_editText').wait()
+                        self.pp(resourceId='com.cashtoutiao:id/comment_editText') \
+                            .set_text(random.choice(self.commit))
+                        time.sleep(random.random() + 1)
+                        self.pp(text='发布').click(offset=(random.random(), random.random()))
+                        time.sleep(random.random() + 1)
                     time.sleep(random.random() + 1)
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
@@ -127,8 +150,8 @@ class HuiTouTiao(AppReadBase):
                 if not self.pp(text='我的').exists:
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
-                # 随机下滑2-4次
-                for k in range(random.randint(2, 4)):
+                # 随机下滑1-4次
+                for k in range(random.randint(1, 4)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                                   random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
@@ -168,11 +191,33 @@ class HuiTouTiao(AppReadBase):
         self.pp(text='兑换提现').click(offset=(random.random(), random.random()))
         self.pp(text='提现方式').wait()
         time.sleep(random.random() + 1)
-        coin = self.pp(resourceId='com.cashtoutiao:id/tv_tips_gold_coin').get_text()\
+        coin = self.pp(resourceId='com.cashtoutiao:id/tv_tips_gold_coin').get_text() \
             .replace(' 金币', '').replace(',', '')
         self.pp.press('back')
         time.sleep(random.random() + 1)
-        return coin
+        self.logger.info(f'已经获取 {coin} 金币')
+        return int(coin)
+
+    def cash_out(self, cash_out):
+        super(HuiTouTiao, self).cash_out(cash_out)
+        self.pp(text='我的').click(offset=(random.random(), random.random()))
+        self.pp(text='兑换提现').wait()
+        self.pp(text='兑换提现').click(offset=(random.random(), random.random()))
+        self.pp(text='提现方式').wait()
+        time.sleep(random.random() + 1)
+        coin = int(self.pp(resourceId='com.cashtoutiao:id/tv_tips_gold_coin').get_text()
+                   .replace(' 金币', '').replace(',', ''))
+        if coin >= 10000:
+            self.pp(resourceId='com.cashtoutiao:id/rl_wechat').wait()
+            self.pp(resourceId='com.cashtoutiao:id/rl_wechat').click(offset=(random.random(), random.random()))
+            time.sleep(random.random() + 1)
+            self.pp(resourceId='com.cashtoutiao:id/item_view').click(offset=(random.random(), random.random()))
+            time.sleep(random.random() + 1)
+            self.pp(resourceId='com.cashtoutiao:id/tv_withdraw').click(offset=(random.random(), random.random()))
+        t = time.time()
+        while not self.pp(text='我的').exists and time.time() - t < 60:
+            self.pp.press('back')
+            time.sleep(random.random() + 1)
 
     def main_do(self, duration, target_coin, cash_out):
         # raise
@@ -186,5 +231,6 @@ class HuiTouTiao(AppReadBase):
             self.read_issue(duration, target_coin)
         else:
             self.logger.info(f'今日已经获取超过10000个金币，不再阅读了')
+        self.cash_out(cash_out)
         self.clean_cache()
         self.app_end()

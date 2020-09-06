@@ -56,7 +56,7 @@ class HuoShan(AppReadBase):
     def read_issue_city(self, read_issue_time):
         self.logger.info(f'开始阅读推荐视频')
         self.pp(text='推荐').click(offset=(random.random(), random.random()))
-        for j in range(random.randint(0, 5)):  # 随机下滑几次
+        for j in range(random.randint(0, 2)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
         time.sleep(random.random() + 1)

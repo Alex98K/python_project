@@ -57,7 +57,7 @@ class KuaiShou(AppReadBase):
     def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
-            time.sleep(random.uniform(3, 10))
+            # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/like_icon"]').exists and \
                     random.random() < self.probability_thumb_up:

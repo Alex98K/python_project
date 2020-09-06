@@ -62,5 +62,15 @@
   "com.lechuan.mdwz": [
     "https://imtt.dd.qq.com/16891/apk/E7506D93D144803F1692B6C9F7EDBF6D.apk?fsname=com.lechuan.mdwz_1.22.0.0903.1200_102200.apk&csr=1bbd",
     "米读极速版"
+  ],
+  "com.coohua.xinwenzhuan":
+  ["https://imtt.dd.qq.com/16891/apk/AFB6803F8A3C10DC68357B01D1335018.apk?fsname=com.coohua.xinwenzhuan_4.4.5.1_40451.apk&csr=1bbd",
+  "淘新闻"
+  ],
+  "com.songheng.eastnews":
+  [
+    "https://imtt.dd.qq.com/16891/apk/D79B05CF2737F3D665CA9E6CCE46D4E4.apk?fsname=com.songheng.eastnews_2.7.0_162.apk&csr=1bbd",
+    "东方头条"
   ]
+
 }
