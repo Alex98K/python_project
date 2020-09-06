@@ -9,6 +9,8 @@ class XiangKan(AppReadBase):
         super(XiangKan, self).__init__(phone_serial, pp)
         self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
+        self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.xiangkan.android:id/iv_close"]').click()
+        self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.xiangkan.android:id/closeIv"]').click()
         self.pp.watcher.start(0.5)
 
     def sign_in(self):

@@ -30,9 +30,13 @@ class AppReadBase(object):
     def app_start(self, app_name):
         self.app_name = app_name
         app_list_running = self.pp.app_list_running()
+        app_install_list = self.pp.app_install()
         for k, v in self.app_info.items():
             if v[1] == app_name:
                 self.package_name = k
+                if k not in app_install_list:
+                    self.logger.info(f'********没有安装 {app_name} 软件，结束********')
+                    return
                 if k in app_list_running:
                     self.pp.app_stop(k)
                 self.pp.app_start(k)

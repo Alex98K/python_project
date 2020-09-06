@@ -20,6 +20,8 @@ class PhoneConnect(object):
         for j in fp:
             if 'device' in j and 'List' not in j:
                 j = j.replace('device', '').strip()
+                if j == 'F7R0214305002612':
+                    continue
                 self.phone_connects_serials.append(j)
 
     def connect(self):
