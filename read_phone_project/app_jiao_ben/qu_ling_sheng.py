@@ -35,12 +35,19 @@ class QuLingSheng(AppReadBase):
                 time.sleep(random.random() + 1)
             self.scroll_read_issue()
 
-    def read_issue_first(self, read_issue_time):
+    def read_issue_first(self, read_issue_time1):
         self.logger.info(f'开始阅读小视频')
         time.sleep(random.random() + 1)
         self.pp(text='小视频').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
-        self._read_issue_core(read_issue_time)
+        self._read_issue_core(read_issue_time1)
+
+    def read_issue_city(self, read_issue_time2):
+        self.logger.info(f'开始阅读铃声视频')
+        time.sleep(random.random() + 1)
+        self.pp(text='铃声').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 1)
+        self._read_issue_core(read_issue_time2)
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
@@ -59,10 +66,13 @@ class QuLingSheng(AppReadBase):
         return coin
 
     def read_issue(self, duration, target_coin):
-        read_issue_time = random.randint(300, 600)
+        read_issue_time1, read_issue_time2 = random.randint(30, 60), random.randint(60, 90)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
-            self.read_issue_first(read_issue_time)
+            self.read_issue_first(read_issue_time1)
+            if self.today_coin() > target_coin:
+                break
+            self.read_issue_city(read_issue_time2)
 
     def clean_cache(self):
         self.logger.info(f'开始清理缓存')
