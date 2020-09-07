@@ -66,7 +66,7 @@ class QuLingSheng(AppReadBase):
         return coin
 
     def read_issue(self, duration, target_coin):
-        read_issue_time1, read_issue_time2 = random.randint(30, 60), random.randint(60, 90)
+        read_issue_time1, read_issue_time2 = random.randint(300, 600), random.randint(600, 900)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
             self.read_issue_first(read_issue_time1)
