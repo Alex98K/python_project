@@ -43,117 +43,69 @@ def main_run(phone_serial):
     # 清理多余占用内存的APP
     CleanCash(pp).app_init()
 
-    # 开始APP任务
-    # XiangKan(phone_serial, pp).recycle_main_do(test=True, target_coin=10000, duration=3600, cash_out=False)
     # 低收益app： 天天爱清理，米读，快音，小糖糕,
-    # raise
 
-    # 随机执行
+    # 程序开始运行，开始APP任务
     t = time.time()
     job_list = [i for i in range(100)]
+    # 随机执行
     # random.shuffle(job_list)
     for k in job_list:
         if k == 0:
             JinDong(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 1:
-            JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
+            JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=8000)
         elif k == 2:
-            QuTouTiao(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
+            QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
         elif k == 3:
             HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 4:
-            CaiDan(phone_serial, pp).recycle_main_do(target_coin=10000)
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
+            CaiDan(phone_serial, pp).recycle_main_do()
         elif k == 5:
             QuLingSheng(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 6:
             ShuaBao(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 7:
             WeiShi(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 8:
             HuoShan(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 9:
             DouYin(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 10:
             KuaiShou(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 11:
             XiangKan(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 12:
-            pass
+            continue
         elif k == 13:
-            pass
+            continue
         elif k == 14:
-            pass
+            continue
         elif k == 15:
-            pass
+            continue
         elif k == 16:
-            pass
+            continue
         elif k == 17:
-            pass
+            continue
         elif k == 18:
-            pass
+            continue
         elif k == 19:
-            pass
+            continue
         elif k == 20:
-            pass
+            continue
         elif k == 21:
             MiDu(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 22:
             XiaoTangGao(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 23:
             KuaiYin(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         elif k == 24:
             TianTianAiQingLi(phone_serial, pp).recycle_main_do()
-            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-            CleanCash(pp).app_init()
-            pass
         else:
-            pass
+            continue
 
+        pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+        CleanCash(pp).app_init()
         if time.time() - t > 50000:
             break
 

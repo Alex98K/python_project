@@ -69,7 +69,7 @@ class HuiTouTiao(AppReadBase):
         t = time.time()
         for j in random_list:
             self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.cashtoutiao:id/tab_news"]/'
-                                                     f'android.widget.LinearLayout[1]/android.widget.FrameLayout[{j + 1}]'
+                                                     f'android.widget.LinearLayout[1]/android.widget.FrameLayout[{j+1}]'
                                                      f'/android.widget.RelativeLayout[1]').get().bounds)
             time.sleep(random.random() + 1)
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
@@ -139,7 +139,8 @@ class HuiTouTiao(AppReadBase):
                         self.pp(resourceId='com.cashtoutiao:id/comment_editText') \
                             .set_text(random.choice(self.commit))
                         time.sleep(random.random() + 1)
-                        self.pp(text='发布').click(offset=(random.random(), random.random()))
+                        self.pp(resourceId='com.cashtoutiao:id/tv_send')\
+                            .click(offset=(random.random(), random.random()))
                         time.sleep(random.random() + 1)
                     time.sleep(random.random() + 1)
                     self.pp.press('back')
@@ -150,6 +151,7 @@ class HuiTouTiao(AppReadBase):
                 if not self.pp(text='我的').exists:
                     self.pp.press('back')
                     time.sleep(random.random() + 1)
+                self.app_switch_current()
                 # 随机下滑1-4次
                 for k in range(random.randint(1, 4)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),

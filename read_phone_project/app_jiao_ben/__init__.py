@@ -48,23 +48,29 @@ class AppReadBase(object):
         self.pp.app_stop(self.package_name)
         self.logger.info(f'********结束 {self.app_name} APP 任务********')
 
+    def app_switch_current(self):
+        if self.pp.app_current() != self.package_name:
+            self.pp.app_start(self.package_name)
+
     def log_config(self, phone_serial):
         # 设置log
-        logger = logging.getLogger(__name__)
-        logger.setLevel(level=logging.DEBUG)
-        # StreamHandler 输出到控制台的logger
-        stream_handler = logging.StreamHandler(sys.stdout)
-        stream_handler.setLevel(level=logging.INFO)
-        logger.addHandler(stream_handler)
-        # FileHandler 输出到文件的logger
-        if not pathlib.Path(self.path / 'log').exists():
-            pathlib.Path.mkdir(self.path / 'log')
-        file_handler = logging.FileHandler(self.path / 'log' / f'{phone_serial}_log.txt', mode='a', encoding='UTF-8')
-        file_handler.setLevel(level=logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(lineno)d - %(module)s - %(message)s',
-                                      datefmt='%Y/%m/%d %H:%M:%S')
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
+        logger = logging.getLogger(f"{phone_serial}_logger")
+        if not logger.handlers:
+            logger.setLevel(level=logging.DEBUG)
+            # StreamHandler 输出到控制台的logger
+            stream_handler = logging.StreamHandler(sys.stdout)
+            stream_handler.setLevel(level=logging.INFO)
+            logger.addHandler(stream_handler)
+            # FileHandler 输出到文件的logger
+            if not pathlib.Path(self.path / 'log').exists():
+                pathlib.Path.mkdir(self.path / 'log')
+            file_handler = logging.FileHandler(self.path / 'log' / f'{phone_serial}_log.txt',
+                                               mode='a', encoding='UTF-8')
+            file_handler.setLevel(level=logging.DEBUG)
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(lineno)d - %(module)s - %(message)s',
+                                          datefmt='%Y/%m/%d %H:%M:%S')
+            file_handler.setFormatter(formatter)
+            logger.addHandler(file_handler)
         return logger
 
     def click_random_position(self, xpath_bounds):
@@ -95,7 +101,7 @@ class AppReadBase(object):
         except AttributeError:
             self.logger.error('程序结束调用del注销watcher出错')
 
-    def recycle_main_do(self, duration=random.randint(3000, 4000), target_coin=10000, cash_out=False, test=False):
+    def recycle_main_do(self, duration=3600, target_coin=10000, cash_out=False, test=False):
         if test is True:
             self.main_do(duration, target_coin, cash_out)
         else:

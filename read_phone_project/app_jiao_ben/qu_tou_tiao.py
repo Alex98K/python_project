@@ -228,7 +228,7 @@ class QuTouTiao(AppReadBase):
         self.pp(text="清除缓存").wait()
         self.pp(text="清除缓存").click(offset=(random.random(), random.random()))
 
-    def cash_out(self):
+    def cash_out(self, cash_out):
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         self.pp(text='我的金币').wait()
         self.pp(text='我的金币').click(offset=(random.random(), random.random()))
