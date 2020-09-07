@@ -73,7 +73,7 @@ class CaiDan(AppReadBase):
         self.pp(resourceId='com.jifen.dandan:id/title_container').wait()
         self.pp(resourceId='com.jifen.dandan:id/title_container').child()[random.randint(2, 4)] \
             .click(offset=(random.random(), random.random()))
-        for j in range(random.randint(0, 5)):  # 随机下滑几次
+        for j in range(random.randint(0, 2)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
         time.sleep(random.random() + 1)
@@ -91,6 +91,10 @@ class CaiDan(AppReadBase):
         self.logger.info('获取今日金币数量')
         self.pp(text='我').wait()
         self.pp(text='我').click(offset=(random.random(), random.random()))
+        # time.sleep(random.random() + 2)
+        self.pp(resourceId='com.jifen.dandan:id/tv_person_today_gold_title').wait()
+        self.pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25), random.uniform(0.25, 0.7),
+                      random.uniform(0.65, 0.8), steps=random.randint(20, 60))
         time.sleep(random.random() + 2)
         self.pp(resourceId='com.jifen.dandan:id/tv_person_today_gold_title').wait()
         coin = self.pp(resourceId='com.jifen.dandan:id/tv_person_today_gold_title').get_text().replace(',', '')

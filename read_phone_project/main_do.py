@@ -64,7 +64,7 @@ def main_run(phone_serial):
         # elif k == 3:
         #     HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
         elif k == 4:
-            CaiDan(phone_serial, pp).recycle_main_do()
+            CaiDan(phone_serial, pp).recycle_main_do(target_coin=5000)
         elif k == 5:
             QuLingSheng(phone_serial, pp).recycle_main_do()
         elif k == 6:
