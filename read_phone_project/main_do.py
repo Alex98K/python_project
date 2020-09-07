@@ -23,9 +23,12 @@ from app_jiao_ben.xiang_kan import XiangKan
 
 
 def main_run(phone_serial):
+    """ 用来测试的乐视X620手机序列号是    LE67A06150003303   """
     pp = uiautomator2.connect_usb(phone_serial)
-    pp.unlock()
-    pp.screen_on()
+    time.sleep(1)
+    for w in range(3):
+        pp.unlock()
+        pp.screen_on()
     print(pp.address)
 
     # 测试代码部分
@@ -52,13 +55,14 @@ def main_run(phone_serial):
     # random.shuffle(job_list)
     for k in job_list:
         if k == 0:
-            JinDong(phone_serial, pp).recycle_main_do()
-        elif k == 1:
-            JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=8000)
-        elif k == 2:
-            QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
-        elif k == 3:
-            HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
+            continue
+        #     JinDong(phone_serial, pp).recycle_main_do()
+        # elif k == 1:
+        #     JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
+        # elif k == 2:
+        #     QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
+        # elif k == 3:
+        #     HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
         elif k == 4:
             CaiDan(phone_serial, pp).recycle_main_do()
         elif k == 5:

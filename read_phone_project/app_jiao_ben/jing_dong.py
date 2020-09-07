@@ -79,6 +79,7 @@ class JinDong(AppReadBase):
         self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/'
                       'android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/'
                       'android.widget.TextView[1]').wait()
+        time.sleep(random.random() + 1)
         coin = self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/'
                              'android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/'
                              'android.widget.TextView[1]').get_text().replace(' 个', '')

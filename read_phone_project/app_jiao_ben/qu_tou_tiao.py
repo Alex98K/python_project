@@ -199,7 +199,9 @@ class QuTouTiao(AppReadBase):
             temp = self.pp.xpath('//*[@text="看广告视频拿金币"]/following-sibling::android.widget.TextView[2]')
             if temp.get_text() == '立即观看':
                 self.click_random_position(temp.get().bounds)
-                if self.pp(text='关闭').exists(timeout=60):
+                if self.pp(resourceId='com.jifen.qukan:id/b').exists(timeout=3):
+                    self.pp(resourceId='com.jifen.qukan:id/b').wait_gone(timeout=60)
+                elif self.pp(text='关闭').exists(timeout=60):
                     self.pp(text='关闭').click(offset=(random.random(), random.random()))
                 time.sleep(random.random() + 1)
                 self.pp.press('back')

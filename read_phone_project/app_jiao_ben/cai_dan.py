@@ -2,12 +2,13 @@ from app_jiao_ben import AppReadBase
 import random
 import uiautomator2
 import time
+import re
 
 
 class CaiDan(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(CaiDan, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="加载中"]/android.view.View[1]/android.view.View[2]/'
                                            'android.view.View[2]').click()
@@ -25,7 +26,7 @@ class CaiDan(AppReadBase):
                 self.click_random_position(self.pp.xpath('//*[@resource-id="com.jifen.dandan:id/title_container"]/'
                                                          'android.widget.FrameLayout[3]/android.widget.TextView[1]')
                                            .get().bounds)
-            time.sleep(random.uniform(3, 10))
+            # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('com.jifen.dandan:id/iv_like_icon').exists and \
                     random.random() < self.probability_thumb_up:
@@ -88,15 +89,12 @@ class CaiDan(AppReadBase):
 
     def today_coin(self):
         self.logger.info('获取今日金币数量')
-        self.pp(resourceId='com.jifen.dandan:id/fl_welfare_task').wait()
-        self.pp(resourceId='com.jifen.dandan:id/fl_welfare_task').click(offset=(random.random(), random.random()))
-        self.pp.xpath('//*[@content-desc="加载中..."]').wait_gone()
-        self.pp.xpath('//*[@resource-id="coins-number"]').wait()
+        self.pp(text='我').wait()
+        self.pp(text='我').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 2)
-        coin = self.pp.xpath('//*[@resource-id="coins-number"]').get().attrib['content-desc'].replace(',', '')
-        time.sleep(random.random() + 1)
-        self.pp.press('back')
-        time.sleep(random.random() + 1)
+        self.pp(resourceId='com.jifen.dandan:id/tv_person_today_gold_title').wait()
+        coin = self.pp(resourceId='com.jifen.dandan:id/tv_person_today_gold_title').get_text().replace(',', '')
+        coin = re.search(r'\d*', coin).group()
         if 'w' in coin:
             coin = int(float(coin.replace('w', '')) * 10000)
         else:

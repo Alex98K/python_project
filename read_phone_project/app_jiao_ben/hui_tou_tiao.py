@@ -166,7 +166,7 @@ class HuiTouTiao(AppReadBase):
                     'android.widget.FrameLayout[1]').get().bounds)
                 time.sleep(random.random() + 1)
             else:
-                self.logger.info(f'今日已经获取超过10000个金币，不再阅读了')
+                self.logger.info(f'今日已经获取超过 {coin_len} 金币，不再阅读了')
                 return
             self.logger.info('看完这个栏目了，换个栏目')
 
