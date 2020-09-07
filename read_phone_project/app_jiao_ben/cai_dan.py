@@ -8,7 +8,7 @@ import re
 class CaiDan(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(CaiDan, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="加载中"]/android.view.View[1]/android.view.View[2]/'
                                            'android.view.View[2]').click()
@@ -112,9 +112,9 @@ class CaiDan(AppReadBase):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
             self.read_issue_first(read_issue_time1)
-            if self.today_coin() > target_coin:
-                break
-            self.read_issue_city(read_issue_time2)
+            # if self.today_coin() > target_coin:
+            #     break
+            # self.read_issue_city(read_issue_time2)
 
     def cash_out(self, cash_out):
         super(CaiDan, self).cash_out(cash_out)

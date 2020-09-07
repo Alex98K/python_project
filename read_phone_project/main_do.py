@@ -46,7 +46,7 @@ def main_run(phone_serial):
     # 清理多余占用内存的APP
     CleanCash(pp).app_init()
 
-    # 低收益app： 天天爱清理，米读，快音，小糖糕,
+    # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋
 
     # 程序开始运行，开始APP任务
     t = time.time()
@@ -63,8 +63,8 @@ def main_run(phone_serial):
         #     QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
         # elif k == 3:
         #     HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
-        elif k == 4:
-            CaiDan(phone_serial, pp).recycle_main_do(target_coin=5000)
+        # elif k == 4:
+        #     CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000)
         elif k == 5:
             QuLingSheng(phone_serial, pp).recycle_main_do()
         elif k == 6:
