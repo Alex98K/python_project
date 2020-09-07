@@ -7,7 +7,7 @@ import time
 class JinDong(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(JinDong, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//android.webkit.WebView/android.view.View[1]/'
                                            'android.view.View[2]/android.view.View[3]').click()
@@ -47,7 +47,12 @@ class JinDong(AppReadBase):
                 xpath = self.pp.xpath(f'//android.support.v7.widget.RecyclerView/'
                                       f'android.widget.FrameLayout[{random.randint(1, 4)}]')
                 xpath.wait()
+                time.sleep(random.random() + 1)
                 self.click_random_position(xpath.get().bounds)
+                time.sleep(random.random() + 1)
+                if not self.pp(resourceId='com.jd.lib.jdlivelist:id/vi_img_fond').exists:
+                    self.click_random_position(xpath.get().bounds)
+                    time.sleep(random.random() + 1)
                 t = time.time()
                 while time.time() - t < read_issue_time2:
                     self.scroll_read_issue()

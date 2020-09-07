@@ -7,7 +7,7 @@ import time
 class QuLingSheng(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(QuLingSheng, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('暂不领取').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.zheyun.bumblebee:id/iv_close"]').click()

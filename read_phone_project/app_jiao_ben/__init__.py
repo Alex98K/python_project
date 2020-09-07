@@ -29,21 +29,20 @@ class AppReadBase(object):
 
     def app_start(self, app_name):
         self.app_name = app_name
-        app_list_running = self.pp.app_list_running()
-        app_install_list = self.pp.app_install()
+        app_list_running, app_install_list = self.pp.app_list_running(), self.pp.app_list()
         for k, v in self.app_info.items():
             if v[1] == app_name:
                 self.package_name = k
                 if k not in app_install_list:
                     self.logger.info(f'********没有安装 {app_name} 软件，结束********')
-                    return
+                    raise UserExceptionAppPass
                 if k in app_list_running:
                     self.pp.app_stop(k)
                 self.pp.app_start(k)
                 self.logger.info(f'********开始 {app_name} 的任务********')
                 return
         self.logger.error('app名字输入错误，无法启动app')
-        raise
+        raise UserExceptionAppPass
 
     def app_end(self):
         self.pp.app_stop(self.package_name)
@@ -105,9 +104,13 @@ class AppReadBase(object):
                 try:
                     self.main_do(duration, target_coin, cash_out)
                     break
+                except UserExceptionAppPass:
+                    break
                 except Exception as e:
                     self.logger.critical(f'出严重错误啦，以下是错误信息{e}', exc_info=True)
-                    self.pp.screenshot(pathlib.Path.cwd() / 'log' / f'出错啦{random.random()}.jpg')
+                    struct_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
+                    self.pp.screenshot(pathlib.Path.cwd() / 'log' / 'screenshot' /
+                                       f'{self.phone_serial}_{struct_time}.jpg')
                     if time.time() - t > 3600:
                         self.logger.critical('程序存在错误，试了一个小时都不行，请修改程序')
                         self.app_end()
@@ -134,3 +137,11 @@ class AppReadBase(object):
                           random.uniform(0.6, 0.85), random.uniform(0.75, 0.85),
                           steps=random.randint(20, 60))
             time.sleep(random.random() + 1)
+
+
+class UserExceptionAppPass(Exception):
+    def __init__(self):
+        super(UserExceptionAppPass, self).__init__()
+
+    def __str__(self):
+        return '程序存在错误,跳过运行这个APP'

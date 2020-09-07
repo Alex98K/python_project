@@ -7,7 +7,7 @@ import time
 class HuiTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(HuiTouTiao, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.lechuan.mdwz:id/t"]').click()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()

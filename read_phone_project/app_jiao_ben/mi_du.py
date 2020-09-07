@@ -7,7 +7,7 @@ import time
 class MiDu(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(MiDu, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.lechuan.mdwz:id/t"]').click()
         self.pp.watcher('tip2').when('关闭').click()
         self.pp.watcher('tip4').when('点击重播').press('back')

@@ -7,7 +7,7 @@ import time
 class JinRiTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(JinRiTouTiao, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.ss.android.article.lite:id/b6y"]').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.ss.android.article.lite:id/a0j"]').click()

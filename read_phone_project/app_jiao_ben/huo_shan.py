@@ -7,7 +7,7 @@ import time
 class HuoShan(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(HuoShan, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher.start(0.5)
 

@@ -29,7 +29,6 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
-
     # raise
 
     # 禁用USB充电
@@ -49,33 +48,114 @@ def main_run(phone_serial):
     # 低收益app： 天天爱清理，米读，快音，小糖糕,
     # raise
 
-    job_list = [
-        # 'JinDong(phone_serial, pp).recycle_main_do(test=True)',
-        # 'JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000, test=True)',
-        # 'TianTianAiQingLi(phone_serial, pp).recycle_main_do(test=True)',
-        # 'QuTouTiao(phone_serial, pp).recycle_main_do(test=True)',
-        # 'HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=70000, test=True)',
-        # 'KuaiYin(phone_serial, pp).recycle_main_do(test=True)',
-        # 'CaiDan(phone_serial, pp).recycle_main_do(target_coin=10000, test=True)',
-        # 'XiaoTangGao(phone_serial, pp).recycle_main_do(test=True)',
-        # 'QuLingSheng(phone_serial, pp).recycle_main_do(test=True)',
-        # 'ShuaBao(phone_serial, pp).recycle_main_do(test=True)',
-        # 'WeiShi(phone_serial, pp).recycle_main_do(test=True)',
-        # 'HuoShan(phone_serial, pp).recycle_main_do(test=True)',
-        # 'DouYin(phone_serial, pp).recycle_main_do(test=True)',
-        # 'KuaiShou(phone_serial, pp).recycle_main_do(test=True)',
-        'XiangKan(phone_serial, pp).recycle_main_do(test=True)',
-        # 'MiDu(phone_serial, pp).recycle_main_do(test=True)',
-    ]
     # 随机执行
     t = time.time()
+    job_list = [i for i in range(100)]
     # random.shuffle(job_list)
-    for i in job_list:
-        exec(i)
+    for k in job_list:
+        if k == 0:
+            JinDong(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 1:
+            JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 2:
+            QuTouTiao(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 3:
+            HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 4:
+            CaiDan(phone_serial, pp).recycle_main_do(target_coin=10000)
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 5:
+            QuLingSheng(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 6:
+            ShuaBao(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 7:
+            WeiShi(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 8:
+            HuoShan(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 9:
+            DouYin(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 10:
+            KuaiShou(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 11:
+            XiangKan(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 12:
+            pass
+        elif k == 13:
+            pass
+        elif k == 14:
+            pass
+        elif k == 15:
+            pass
+        elif k == 16:
+            pass
+        elif k == 17:
+            pass
+        elif k == 18:
+            pass
+        elif k == 19:
+            pass
+        elif k == 20:
+            pass
+        elif k == 21:
+            MiDu(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 22:
+            XiaoTangGao(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 23:
+            KuaiYin(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        elif k == 24:
+            TianTianAiQingLi(phone_serial, pp).recycle_main_do()
+            pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+            CleanCash(pp).app_init()
+            pass
+        else:
+            pass
+
         if time.time() - t > 50000:
             break
-        pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
-        CleanCash(pp).app_init()
 
     # 调用系统应用，清理缓存和垃圾
     CleanCash(pp).main_do()

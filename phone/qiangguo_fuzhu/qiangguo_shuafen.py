@@ -75,7 +75,8 @@ class QiangGuoFuZhu(object):
             phone_serial = None
         try:
             self.logger.warning(f'手机的序列号是 {phone_serial}')
-            phone = uiautomator2.connect_usb(phone_serial)
+            # phone = uiautomator2.connect_usb(phone_serial)
+            phone = uiautomator2.connect_usb('F7R0214305002612')
             return phone
         except ConnectionError:
             self.logger.critical('连接手机失败, 请拔了USB线，重新插入')

@@ -7,7 +7,7 @@ import time
 class ShuaBao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(ShuaBao, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip1').when('恭喜获得').press('back')
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="送你金元宝 快来看我吧"]').call(self.watcher_call_1)

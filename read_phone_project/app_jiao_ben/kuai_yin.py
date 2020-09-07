@@ -7,7 +7,7 @@ import time
 class KuaiYin(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(KuaiYin, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.kuaiyin.player:id/w_v_back"]').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.kuaiyin.player:id/ivDismiss"]').click()

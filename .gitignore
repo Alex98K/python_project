@@ -39,3 +39,14 @@ venv/Lib/site-packages/django/core/checks/compatibility/
 !/record_flight_plan/*.docx
 /transport_afernoon/*.xls
 !/crawl_down_pic_1024/pic/
+!/read_phone_project/log/
+__pycache__/
+computer/copy_files/__pycache__/
+crawl_down_pic_1024/pic/
+phone/qiangguo_fuzhu/__pycache__/
+read_phone_project/__pycache__/
+read_phone_project/app_jiao_ben/__pycache__/
+read_phone_project/conf/__pycache__/
+read_phone_project/log/screenshot/
+record_flight_plan/__pycache__/
+transport_afernoon/__pycache__/
