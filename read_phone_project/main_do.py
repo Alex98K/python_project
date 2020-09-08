@@ -76,12 +76,12 @@ def main_run(phone_serial):
         #     WeiShi(phone_serial, pp).recycle_main_do(target_coin=1000)
         # elif k == 8:
         #     HuoShan(phone_serial, pp).recycle_main_do(target_coin=3000)
-        elif k == 9:
-            DouYin(phone_serial, pp).recycle_main_do()
-        elif k == 10:
-            KuaiShou(phone_serial, pp).recycle_main_do()
-        elif k == 11:
-            XiangKan(phone_serial, pp).recycle_main_do()
+        # elif k == 9:
+        #     DouYin(phone_serial, pp).recycle_main_do(target_coin=2000)
+        # elif k == 10:
+        #     KuaiShou(phone_serial, pp).recycle_main_do(target_coin=6000)
+        # elif k == 11:
+        #     XiangKan(phone_serial, pp).recycle_main_do(target_coin=1000)
         # elif k == 12:
         #     MiDu(phone_serial, pp).recycle_main_do()
         elif k == 13:

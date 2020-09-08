@@ -1,0 +1,150 @@
+2020/09/08 21:29:38 - INFO - 42 - __init__ - ********开始 抖音极速版 的任务********
+2020/09/08 21:30:26 - INFO - 42 - __init__ - ********开始 抖音极速版 的任务********
+2020/09/08 21:30:35 - INFO - 16 - dou_yin - 开始签到
+2020/09/08 21:30:46 - INFO - 88 - dou_yin - 获取今日金币数量
+2020/09/08 21:30:54 - INFO - 101 - dou_yin - 今日已经获取金币 311
+2020/09/08 21:30:54 - INFO - 64 - dou_yin - 开始阅读首页视频
+2020/09/08 21:35:25 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 21:35:52 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 21:36:21 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 21:36:42 - INFO - 46 - kuai_shou - 今日已经获取金币 95
+2020/09/08 21:36:42 - INFO - 97 - kuai_shou - 开始阅读发现视频
+2020/09/08 21:51:21 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 21:51:38 - INFO - 46 - kuai_shou - 今日已经获取金币 2266
+2020/09/08 21:51:38 - INFO - 107 - kuai_shou - 开始阅读同城视频
+2020/09/08 21:57:47 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 21:58:11 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 21:58:37 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 21:58:54 - INFO - 46 - kuai_shou - 今日已经获取金币 3146
+2020/09/08 21:58:54 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:01:08 - CRITICAL - 116 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [resourceId='com.kuaishou.nebula:id/editor'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 111, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 140, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 133, in read_issue
+    self.read_issue_city(read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 124, in read_issue_city
+    self._read_issue_core(read_issue_time)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 90, in _read_issue_core
+    self.pp(resourceId='com.kuaishou.nebula:id/editor').set_text(random.choice(self.commit))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 352, in set_text
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [resourceId='com.kuaishou.nebula:id/editor'], method: None
+2020/09/08 22:03:12 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:03:35 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:03:59 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:04:16 - INFO - 46 - kuai_shou - 今日已经获取金币 3196
+2020/09/08 22:04:16 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:04:44 - CRITICAL - 116 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/android.widget.RelativeLayout[1]/android.widget.ImageView']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 111, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 140, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 133, in read_issue
+    self.read_issue_city(read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 120, in read_issue_city
+    temp_bounds = self.pp.xpath(f'//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 611, in __getattr__
+    el = self.get()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/android.widget.RelativeLayout[1]/android.widget.ImageView']
+2020/09/08 22:04:55 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:05:19 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:05:45 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:06:01 - INFO - 46 - kuai_shou - 今日已经获取金币 3196
+2020/09/08 22:06:01 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:08:57 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:09:22 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:09:48 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:10:03 - INFO - 46 - kuai_shou - 今日已经获取金币 3246
+2020/09/08 22:10:03 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:11:10 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:11:32 - CRITICAL - 116 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [resourceId='com.kuaishou.nebula:id/left_btn'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 111, in recycle_main_do
+    while True:
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 140, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 129, in read_issue
+    while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 31, in today_coin
+    self.pp(resourceId='com.kuaishou.nebula:id/left_btn').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [resourceId='com.kuaishou.nebula:id/left_btn'], method: None
+2020/09/08 22:11:50 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:12:06 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:12:32 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:12:48 - INFO - 46 - kuai_shou - 今日已经获取金币 3246
+2020/09/08 22:12:48 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:13:46 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:14:06 - CRITICAL - 116 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [resourceId='com.kuaishou.nebula:id/left_btn'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 111, in recycle_main_do
+    while True:
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 140, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 129, in read_issue
+    while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 31, in today_coin
+    self.pp(resourceId='com.kuaishou.nebula:id/left_btn').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [resourceId='com.kuaishou.nebula:id/left_btn'], method: None
+2020/09/08 22:14:21 - INFO - 42 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:14:41 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:15:15 - INFO - 44 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:15:39 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:17:02 - INFO - 44 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:17:27 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:17:52 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:18:07 - INFO - 46 - kuai_shou - 今日已经获取金币 3588
+2020/09/08 22:18:07 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:18:37 - CRITICAL - 118 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/android.widget.RelativeLayout[3]/android.widget.ImageView']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 113, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 143, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 136, in read_issue
+    self.read_issue_city(read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_shou.py", line 120, in read_issue_city
+    temp_bounds = self.pp.xpath(f'//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 611, in __getattr__
+    el = self.get()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/android.widget.RelativeLayout[3]/android.widget.ImageView']
+2020/09/08 22:18:51 - INFO - 44 - __init__ - ********开始 快手极速版 的任务********
+2020/09/08 22:19:14 - INFO - 17 - kuai_shou - 开始签到
+2020/09/08 22:19:36 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:19:51 - INFO - 46 - kuai_shou - 今日已经获取金币 3588
+2020/09/08 22:19:51 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:20:56 - INFO - 30 - kuai_shou - 获取今日金币数量
+2020/09/08 22:21:12 - INFO - 46 - kuai_shou - 今日已经获取金币 3588
+2020/09/08 22:21:12 - INFO - 110 - kuai_shou - 开始阅读同城视频
+2020/09/08 22:21:56 - INFO - 44 - __init__ - ********开始 想看资讯 的任务********
+2020/09/08 22:22:30 - INFO - 98 - xiang_kan - 今日已经获取 60 个金币
+2020/09/08 22:22:30 - INFO - 22 - xiang_kan - 开始阅读文章
+2020/09/08 22:29:36 - INFO - 98 - xiang_kan - 今日已经获取 260 个金币
+2020/09/08 22:35:54 - INFO - 98 - xiang_kan - 今日已经获取 388 个金币
+2020/09/08 22:42:48 - INFO - 98 - xiang_kan - 今日已经获取 580 个金币
+2020/09/08 22:48:48 - INFO - 98 - xiang_kan - 今日已经获取 763 个金币
+2020/09/08 22:54:45 - INFO - 98 - xiang_kan - 今日已经获取 937 个金币
+2020/09/08 22:55:35 - INFO - 44 - __init__ - ********开始 小糖糕 的任务********
+2020/09/08 22:55:48 - INFO - 36 - xiao_tang_gao - 获取今日金币数量
+2020/09/08 22:56:12 - INFO - 53 - xiao_tang_gao - 今日已经获取金币 5
+2020/09/08 22:56:12 - INFO - 29 - xiao_tang_gao - 开始阅读小视频
+2020/09/08 23:03:10 - INFO - 36 - xiao_tang_gao - 获取今日金币数量
+2020/09/08 23:03:24 - INFO - 53 - xiao_tang_gao - 今日已经获取金币 70
+2020/09/08 23:03:24 - INFO - 29 - xiao_tang_gao - 开始阅读小视频

@@ -21,6 +21,8 @@ class AppReadBase(object):
             self.app_info = json.load(f)
         with open(self.path / 'conf' / 'commit.json', 'r', encoding='UTF-8') as f:
             self.commit = json.load(f)
+        if not pathlib.Path(pathlib.Path.cwd() / 'log' / 'screenshot').exists():
+            pathlib.Path(pathlib.Path.cwd() / 'log' / 'screenshot').mkdir(parents=True)
         self.package_name = ''
         self.app_name = ''
         # self.pp.watcher('init1').when('我知道了').click()

@@ -57,6 +57,9 @@ class KuaiShou(AppReadBase):
     def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
+            if not self.pp(resourceId='com.kuaishou.nebula:id/red_packet').exists:
+                self.scroll_read_issue()
+                continue
             # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/like_icon"]').exists and \
@@ -111,7 +114,7 @@ class KuaiShou(AppReadBase):
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/tabs"]/'
                                                  'android.widget.LinearLayout[1]/android.view.View[1]').get().bounds)
         time.sleep(random.random() + 1)
-        for j in range(random.randint(0, 5)):  # 随机下滑几次
+        for j in range(random.randint(0, 2)):  # 随机下滑几次
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
         temp_bounds = self.pp.xpath(f'//*[@resource-id="com.kuaishou.nebula:id/recycler_view"]/'
@@ -119,9 +122,12 @@ class KuaiShou(AppReadBase):
                                     f'android.widget.ImageView').bounds
         self.click_random_position(temp_bounds)  # 随机选页面中的视频
         self._read_issue_core(read_issue_time)
+        time.sleep(random.random() + 1)
+        self.pp.press('back')
+        time.sleep(random.random() + 1)
 
     def read_issue(self, duration, target_coin):
-        read_issue_time1, read_issue_time2 = random.randint(600, 900), random.randint(300, 600)
+        read_issue_time1, read_issue_time2 = random.randint(600, 900), random.randint(30, 60)
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
             self.read_issue_first(read_issue_time1)
