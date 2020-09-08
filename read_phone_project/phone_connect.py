@@ -100,5 +100,5 @@ if __name__ == '__main__':
     do = PhoneConnect()
     # do.reboot_all()
     # print(do.serials_connections)
-    # do.test()
-    do.app_install_all()
+    do.test()
+    # do.app_install_all()
