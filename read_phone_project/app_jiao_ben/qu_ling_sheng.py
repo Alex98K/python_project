@@ -26,7 +26,7 @@ class QuLingSheng(AppReadBase):
             # 如果不小心切换到了关注栏目，就回到推荐栏目
             if self.pp(text='小剧场').exists:
                 self.pp(text='推荐').click(offset=(random.random(), random.random()))
-            time.sleep(random.uniform(3, 10))
+            time.sleep(random.uniform(2, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.zheyun.bumblebee:id/tv_like"]').exists and \
                     random.random() < self.probability_thumb_up:

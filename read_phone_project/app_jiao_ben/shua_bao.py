@@ -9,8 +9,9 @@ class ShuaBao(AppReadBase):
         super(ShuaBao, self).__init__(phone_serial, pp)
         # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
-        self.pp.watcher('tip1').when('恭喜获得').press('back')
-        self.pp.watcher('tip2').when(xpath='//*[@content-desc="送你金元宝 快来看我吧"]').call(self.watcher_call_1)
+        self.pp.watcher('tip2').when('恭喜获得').press('back')
+        self.pp.watcher('tip3').when(xpath='//*[@content-desc="送你金元宝 快来看我吧"]').call(self.watcher_call_1)
+        self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.jm.video:id/imgClose"]').click()
         self.pp.watcher.start(0.5)
 
     def watcher_call_1(self):
@@ -55,7 +56,7 @@ class ShuaBao(AppReadBase):
             # 如果不小心切换到了关注栏目，就回到推荐栏目
             if self.pp(resourceId='com.jm.video:id/iv_live_head').exists:
                 self.pp(text='推荐').click(offset=(random.random(), random.random()))
-            time.sleep(random.uniform(3, 10))
+            # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.jm.video:id/image_view"]').exists and \
                     random.random() < self.probability_thumb_up:

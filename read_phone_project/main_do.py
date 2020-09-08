@@ -35,18 +35,19 @@ def main_run(phone_serial):
     # raise
 
     # 禁用USB充电
-    pp.shell('dumpsys battery set usb 0')
+    # pp.shell('dumpsys battery set usb 0')
     # 设置电池电量
-    pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+    # pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
     # 设置电池为非充电状态
-    pp.shell('dumpsys battery set status 1')
+    # pp.shell('dumpsys battery set status 1')
 
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
     CleanCash(pp).app_init()
 
-    # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋
+    # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋，趣铃声
+    # 大部分APP都是前面刷的快，后面慢
 
     # 程序开始运行，开始APP任务
     t = time.time()
@@ -54,8 +55,9 @@ def main_run(phone_serial):
     # 随机执行
     # random.shuffle(job_list)
     for k in job_list:
-        if k == 0:
+        if k == -1:
             continue
+        # elif k == 0:
         #     JinDong(phone_serial, pp).recycle_main_do()
         # elif k == 1:
         #     JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
@@ -65,45 +67,28 @@ def main_run(phone_serial):
         #     HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
         # elif k == 4:
         #     CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000)
-        elif k == 5:
-            QuLingSheng(phone_serial, pp).recycle_main_do()
-        elif k == 6:
-            ShuaBao(phone_serial, pp).recycle_main_do()
-        elif k == 7:
-            WeiShi(phone_serial, pp).recycle_main_do()
-        elif k == 8:
-            HuoShan(phone_serial, pp).recycle_main_do()
+        # elif k == 5:
+        #     QuLingSheng(phone_serial, pp).recycle_main_do(target_coin=2000)
+        # elif k == 6:
+        #     ShuaBao(phone_serial, pp).recycle_main_do(target_coin=6000)
+        # elif k == 7:
+        #     # 这个APP特别卡，没有今日金币获取地方，在看视频过程中还有滑块验证
+        #     WeiShi(phone_serial, pp).recycle_main_do(target_coin=1000)
+        # elif k == 8:
+        #     HuoShan(phone_serial, pp).recycle_main_do(target_coin=3000)
         elif k == 9:
             DouYin(phone_serial, pp).recycle_main_do()
         elif k == 10:
             KuaiShou(phone_serial, pp).recycle_main_do()
         elif k == 11:
             XiangKan(phone_serial, pp).recycle_main_do()
-        elif k == 12:
-            continue
+        # elif k == 12:
+        #     MiDu(phone_serial, pp).recycle_main_do()
         elif k == 13:
-            continue
-        elif k == 14:
-            continue
-        elif k == 15:
-            continue
-        elif k == 16:
-            continue
-        elif k == 17:
-            continue
-        elif k == 18:
-            continue
-        elif k == 19:
-            continue
-        elif k == 20:
-            continue
-        elif k == 21:
-            MiDu(phone_serial, pp).recycle_main_do()
-        elif k == 22:
             XiaoTangGao(phone_serial, pp).recycle_main_do()
-        elif k == 23:
+        elif k == 14:
             KuaiYin(phone_serial, pp).recycle_main_do()
-        elif k == 24:
+        elif k == 15:
             TianTianAiQingLi(phone_serial, pp).recycle_main_do()
         else:
             continue

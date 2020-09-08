@@ -14,7 +14,7 @@ class HuoShan(AppReadBase):
     def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
-            time.sleep(random.uniform(3, 10))
+            # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/p9"]').exists and \
                     random.random() < self.probability_thumb_up:
@@ -113,10 +113,17 @@ class HuoShan(AppReadBase):
         self.pp(text="确定").click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 3)
 
+    def sig_in(self):
+        self.logger.info('开始签到')
+        self.pp(text='红包').wait()
+        self.pp(text='红包').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 5)
+
     def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('火山极速版')
         self.pp(text='我的').wait(timeout=30)
+        self.sig_in()
         self.read_issue(duration, target_coin)
         self.clean_cache()
         self.app_end()

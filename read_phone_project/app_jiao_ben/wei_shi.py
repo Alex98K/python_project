@@ -11,6 +11,8 @@ class WeiShi(AppReadBase):
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('知道了').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.tencent.weishi:id/rhu"]').click()
+        self.pp.watcher('tip4').when(xpath='//android.webkit.WebView/android.view.View[1]/android.view.View[2]/'
+                                           'android.view.View[1]/android.view.View[1]').click()
         self.pp.watcher.start(0.5)
 
     def _read_issue_core(self, read_issue_time):
@@ -19,7 +21,7 @@ class WeiShi(AppReadBase):
             # 如果不小心切换到了关注栏目，就回到推荐栏目
             if self.pp.xpath('//*[@resource-id="com.tencent.weishi:id/oyw"]').exists:
                 self.pp(text='推荐').click(offset=(random.random(), random.random()))
-            time.sleep(random.uniform(3, 10))
+            # time.sleep(random.uniform(3, 5))
             # 按照设定的点赞概率，随机点赞
             if self.pp.xpath('//*[@resource-id="com.tencent.weishi:id/ndw"]/android.view.ViewGroup[1]/'
                              'android.view.ViewGroup[2]/android.widget.FrameLayout[1]').exists and \
