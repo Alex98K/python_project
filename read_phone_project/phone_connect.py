@@ -3,7 +3,6 @@ from os import popen
 from threading import Thread
 import pathlib
 import json
-from conf.app_config import store_app_info
 
 
 class PhoneConnect(object):
@@ -98,7 +97,6 @@ class PhoneConnect(object):
 
 
 if __name__ == '__main__':
-    store_app_info()
     do = PhoneConnect()
     # do.reboot_all()
     # print(do.serials_connections)

@@ -83,9 +83,9 @@ def main_run(phone_serial):
         # elif k == 11:
         #     XiangKan(phone_serial, pp).recycle_main_do(target_coin=1000)
         # elif k == 12:
-        #     MiDu(phone_serial, pp).recycle_main_do()
-        elif k == 13:
-            XiaoTangGao(phone_serial, pp).recycle_main_do()
+        #     MiDu(phone_serial, pp).recycle_main_do(target_coin=1000)
+        # elif k == 13:
+        #     XiaoTangGao(phone_serial, pp).recycle_main_do(target_coin=2000)
         elif k == 14:
             KuaiYin(phone_serial, pp).recycle_main_do()
         elif k == 15:
