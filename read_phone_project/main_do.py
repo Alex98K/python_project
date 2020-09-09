@@ -28,6 +28,7 @@ def main_run(phone_serial):
     time.sleep(1)
     for w in range(3):
         pp.unlock()
+        time.sleep(1)
         pp.screen_on()
     print(pp.address)
 
@@ -86,10 +87,10 @@ def main_run(phone_serial):
         #     MiDu(phone_serial, pp).recycle_main_do(target_coin=1000)
         # elif k == 13:
         #     XiaoTangGao(phone_serial, pp).recycle_main_do(target_coin=2000)
-        elif k == 14:
-            KuaiYin(phone_serial, pp).recycle_main_do()
-        elif k == 15:
-            TianTianAiQingLi(phone_serial, pp).recycle_main_do()
+        # elif k == 14:
+        #     KuaiYin(phone_serial, pp).recycle_main_do(target_coin=2000)
+        # elif k == 15:
+        #     TianTianAiQingLi(phone_serial, pp).recycle_main_do(target_coin=2000)
         else:
             continue
 
@@ -102,7 +103,7 @@ def main_run(phone_serial):
     CleanCash(pp).main_do()
     # 重置电池状态
     pp.shell('dumpsys battery reset')
-    pp.screen_off()
+    # pp.screen_off()
 
 
 if __name__ == '__main__':

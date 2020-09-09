@@ -25,19 +25,22 @@ class CleanCash(object):
         self.pp(resourceId='com.letv.android.supermanager:id/deepScanButton').wait()
         self.pp(resourceId='com.letv.android.supermanager:id/deepScanButton').click()
         self.pp(resourceId='com.letv.android.supermanager:id/bottomButton').wait()
-        while self.pp(resourceId='com.letv.android.supermanager:id/bottomButton').get_text()[0] != '一':
-            time.sleep(1)
-        t = time.time()
-        while time.time() - t < 20:
-            for j in self.pp.xpath('//*[@resource-id="com.letv.android.supermanager:id/rubbishCleanListView"]//'
-                                   'android.widget.RelativeLayout/com.letv.shared.widget.LeCheckBox[1]').all():
-                img = j.screenshot()
-                r, g, b = img.resize((1, 1)).getpixel((0, 0))
-                if r > 200 and g > 200 and b > 200:
-                    j.click()
-            self.pp.swipe(0.3, 0.7, 0.3, 0.2, steps=60)
-            time.sleep(1)
-        self.pp(resourceId='com.letv.android.supermanager:id/bottomButton').click()
+        try:
+            while self.pp(resourceId='com.letv.android.supermanager:id/bottomButton').get_text()[0] != '一':
+                time.sleep(1)
+            t = time.time()
+            while time.time() - t < 20:
+                for j in self.pp.xpath('//*[@resource-id="com.letv.android.supermanager:id/rubbishCleanListView"]//'
+                                       'android.widget.RelativeLayout/com.letv.shared.widget.LeCheckBox[1]').all():
+                    img = j.screenshot()
+                    r, g, b = img.resize((1, 1)).getpixel((0, 0))
+                    if r > 200 and g > 200 and b > 200:
+                        j.click()
+                self.pp.swipe(0.3, 0.7, 0.3, 0.2, steps=60)
+                time.sleep(1)
+            self.pp(resourceId='com.letv.android.supermanager:id/bottomButton').click()
+        except uiautomator2.exceptions.UiObjectNotFoundError:
+            pass
         self.pp.app_stop('com.letv.android.supermanager')
 
     def app_init(self):

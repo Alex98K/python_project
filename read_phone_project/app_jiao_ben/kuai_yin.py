@@ -115,6 +115,13 @@ class KuaiYin(AppReadBase):
         self.pp.xpath('//*[@resource-id="com.kuaiyin.player:id/tabIndicator"]/android.widget.RelativeLayout[3]').wait()
         self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaiyin.player:id/tabIndicator"]/'
                                                  'android.widget.RelativeLayout[3]').get().bounds)
+        time.sleep(random.random() + 1)
+        self.pp.click(0.837, 0.207)
+        time.sleep(random.random() + 1)
+        self.pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25),
+                      random.uniform(0.25, 0.7), random.uniform(0.65, 0.8),
+                      steps=random.randint(20, 60))
+        time.sleep(random.random() + 1)
         coin = self.pp.xpath('//*[@content-desc="现金收益"]/preceding-sibling::android.view.View[1]') \
             .get().attrib['content-desc'].replace(',', '').replace(' 兑换', '')
         time.sleep(random.random() + 1)

@@ -92,8 +92,14 @@ class PhoneConnect(object):
     @staticmethod
     def test():
         pp = uiautomator2.connect_usb()
-        app_list = pp.app_list()
-        print(app_list)
+        # app_list = pp.app_list()
+        # for j in app_list:
+        #     try:
+        #         print(pp.app_info(j))
+        #     except uiautomator2.exceptions.BaseError:
+        #         pass
+        # print(app_list)
+        print(pp.app_current())
 
 
 if __name__ == '__main__':
