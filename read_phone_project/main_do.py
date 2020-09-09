@@ -20,6 +20,7 @@ from app_jiao_ben.jin_ri_tou_tiao import JinRiTouTiao
 from app_jiao_ben.jing_dong import JinDong
 from app_jiao_ben.mi_du import MiDu
 from app_jiao_ben.xiang_kan import XiangKan
+from app_jiao_ben.dong_fang_tou_tiao import DongFangTouTiao
 
 
 def main_run(phone_serial):
@@ -31,10 +32,10 @@ def main_run(phone_serial):
         time.sleep(1)
         pp.screen_on()
     print(pp.address)
-    print(pp.app_list_running())
 
     # 测试代码部分
-    # raise
+    DongFangTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
+    raise
 
     # 禁用USB充电
     # pp.shell('dumpsys battery set usb 0')
@@ -46,8 +47,8 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    CleanCash(pp).app_init()
-    raise
+    # CleanCash(pp).app_init()
+
     # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋，趣铃声
     # 大部分APP都是前面刷的快，后面慢
 
@@ -59,8 +60,8 @@ def main_run(phone_serial):
     for k in job_list:
         if k == -1:
             continue
-        # elif k == 0:
-        #     JinDong(phone_serial, pp).recycle_main_do()
+        elif k == 0:
+            JinDong(phone_serial, pp).recycle_main_do(target_coin=5000)
         # elif k == 1:
         #     JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
         # elif k == 2:

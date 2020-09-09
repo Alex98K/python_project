@@ -641,3 +641,51 @@ IndexError: list index out of range
 2020/09/09 13:41:31 - INFO - 60 - tian_tian_ai_qing_li - 获取今日金币数量
 2020/09/09 13:41:51 - INFO - 73 - tian_tian_ai_qing_li - 今日已经获取金币 5760
 2020/09/09 13:41:51 - INFO - 53 - tian_tian_ai_qing_li - 开始阅读视频
+2020/09/09 18:39:15 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/09 18:39:21 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/09 18:40:05 - CRITICAL - 118 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 113, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 121, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 97, in read_issue
+    while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 83, in today_coin
+    coin = self.pp.xpath('//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 525, in get_text
+    return self.get().attrib.get("text", "")
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.jd.jdlite.lib.personal:id/attention_view"]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]']
+2020/09/09 18:40:13 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/09 18:40:18 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/09 18:40:25 - INFO - 91 - jing_dong - 今日已经获取金币 23
+2020/09/09 18:40:25 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/09 18:53:43 - CRITICAL - 118 - __init__ - 出严重错误啦，以下是错误信息['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 113, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 121, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 98, in read_issue
+    self.read_issue_first(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 21, in read_issue_first
+    self._read_adv(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 54, in _read_adv
+    self.click_random_position(xpath.get().bounds)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+2020/09/09 18:53:50 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/09 18:53:55 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/09 18:54:01 - INFO - 91 - jing_dong - 今日已经获取金币 2549
+2020/09/09 18:54:01 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/09 19:03:00 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/09 19:03:06 - INFO - 91 - jing_dong - 今日已经获取金币 3785
+2020/09/09 19:03:06 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/09 19:13:42 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/09 19:13:48 - INFO - 91 - jing_dong - 今日已经获取金币 5381
+2020/09/09 19:13:48 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/09 20:02:07 - INFO - 101 - jing_dong - 开始清理缓存
+2020/09/09 20:02:14 - INFO - 51 - __init__ - ********结束 京东极速版 APP 任务********
