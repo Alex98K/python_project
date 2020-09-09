@@ -31,6 +31,7 @@ def main_run(phone_serial):
         time.sleep(1)
         pp.screen_on()
     print(pp.address)
+    print(pp.app_list_running())
 
     # 测试代码部分
     # raise
@@ -46,7 +47,7 @@ def main_run(phone_serial):
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
     CleanCash(pp).app_init()
-
+    raise
     # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋，趣铃声
     # 大部分APP都是前面刷的快，后面慢
 

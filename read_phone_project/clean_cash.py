@@ -5,13 +5,10 @@ import uiautomator2
 class CleanCash(object):
     def __init__(self, pp):
         self.pp = pp
-        self.exclude = ['com.dolby', 'com.mediatek.nlpservice', 'com.android.music', 'se.dirac.acs',
-                        'com.tencent.android.location', 'com.android.phone', 'com.android.systemui',
-                        'com.android.launcher3', 'com.letv.android.euiadplugin', 'com.letv.domain',
-                        'com.mediatek.ims', 'com.letv.android.freeflow', 'com.goodix.fingerprint',
-                        'com.android.deskclock', 'com.android.inputmethod.latin', 'com.stv.stvpush',
-                        'com.letv.android.usagestats', 'com.letv.android.phonecontrol',
-                        'com.letv.agnes', 'com.github.uiautomator', 'com.mediatek.gba']
+        self.exclude = ['com.dolby', 'com.mediatek.nlpservice', 'se.dirac.acs', 'com.tencent.android.location',
+                        'com.android.phone', 'com.android.systemui', 'com.android.launcher3', 'com.mediatek.ims',
+                        'com.goodix.fingerprint', 'com.android.deskclock', 'com.android.inputmethod.latin',
+                        'com.letv.android.phonecontrol', 'com.github.uiautomator', 'com.mediatek.gba']
 
     def main_do(self):
         self.pp.press('home')
