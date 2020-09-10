@@ -36,6 +36,8 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
+    # 重置电池状态
+    # pp.shell('dumpsys battery reset')
     # raise
 
     # 禁用USB充电
@@ -97,9 +99,10 @@ def main_run(phone_serial):
         # elif k == 16:
             # 这个注册时候账号异常，客服说不影响使用，但是被系统检测到了，尝试了下，可以获得金币，提现还在测试
             # ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=50000)
-        elif k == 17:
-            WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
-
+        # elif k == 17:
+        #     WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
+        # elif k == 18:
+        #     (phone_serial, pp).recycle_main_do(target_coin=20000)
         else:
             continue
 
