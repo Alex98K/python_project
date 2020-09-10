@@ -10135,3 +10135,118 @@ uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Sel
 2020/09/10 16:19:32 - INFO - 177 - wei_li_kan_kan - 已经获取 927 金币
 2020/09/10 16:19:32 - INFO - 61 - wei_li_kan_kan - 开始阅读头条视频
 2020/09/10 16:19:36 - INFO - 65 - wei_li_kan_kan - 开始阅读文章
+2020/09/10 20:32:44 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/10 20:33:01 - INFO - 16 - hong_bao_shi_pin - 开始签到
+2020/09/10 20:33:06 - INFO - 36 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/10 20:33:52 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/10 20:34:22 - INFO - 16 - hong_bao_shi_pin - 开始签到
+2020/09/10 20:34:45 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/10 20:35:01 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/10 20:35:43 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='立即签到'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 81, in main_do
+    self.sign_in()
+  File "D:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 20, in sign_in
+    self.pp(text='立即签到').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='立即签到'], method: None
+2020/09/10 20:35:51 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/10 20:36:18 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/10 20:36:34 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/10 20:36:41 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/10 20:36:45 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 5399
+2020/09/10 20:36:45 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/10 20:42:07 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/10 20:42:22 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/10 20:42:29 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/10 20:42:32 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 6084
+2020/09/10 20:42:32 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/10 20:52:46 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/10 20:52:49 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 7819
+2020/09/10 20:52:49 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/10 21:03:13 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/10 21:03:17 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 9214
+2020/09/10 21:03:17 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/10 21:13:41 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/10 23:29:31 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1322, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 303, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 272, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\retry.py", line 403, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\packages\six.py", line 734, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1322, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 303, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 272, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 82, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 54, in read_issue
+    while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
+  File "D:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 38, in today_coin
+    self.pp(text='我').wait()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 314, in wait
+    return self.jsonrpc.waitForExists(self.selector,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 434, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 441, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 470, in _jsonrpc_call
+    res = self.http.post("/jsonrpc/0",
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 578, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 188, in request
+    return super().request(method, url, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 108, in request
+    resp = super(TimeoutRequestsSession,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2020/09/10 23:29:31 - CRITICAL - 119 - __init__ - 程序存在错误，试了一个小时都不行，请修改程序
+2020/09/10 23:29:32 - INFO - 51 - __init__ - ********结束 红包视频 APP 任务********

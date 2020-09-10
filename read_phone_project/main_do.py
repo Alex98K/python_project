@@ -23,6 +23,7 @@ from app_jiao_ben.xiang_kan import XiangKan
 from app_jiao_ben.dong_fang_tou_tiao import DongFangTouTiao
 from app_jiao_ben.shan_dian_he_zi import ShanDianHezi
 from app_jiao_ben.wei_li_kan_kan import WeiLiKanKan
+from app_jiao_ben.hong_bao_shi_pin import HongBaoShiPin
 
 
 def main_run(phone_serial):
@@ -101,8 +102,8 @@ def main_run(phone_serial):
             # ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=50000)
         # elif k == 17:
         #     WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 18:
-        #     (phone_serial, pp).recycle_main_do(target_coin=20000)
+        elif k == 18:
+            HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=20000)
         else:
             continue
 
