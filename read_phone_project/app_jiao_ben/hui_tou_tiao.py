@@ -201,7 +201,8 @@ class HuiTouTiao(AppReadBase):
         return int(coin)
 
     def cash_out(self, cash_out):
-        super(HuiTouTiao, self).cash_out(cash_out)
+        if not cash_out:
+            return
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         self.pp(text='兑换提现').wait()
         self.pp(text='兑换提现').click(offset=(random.random(), random.random()))
@@ -232,7 +233,7 @@ class HuiTouTiao(AppReadBase):
         if self.today_coin() < target_coin:
             self.read_issue(duration, target_coin)
         else:
-            self.logger.info(f'今日已经获取超过10000个金币，不再阅读了')
+            self.logger.info(f'今日已经获取超过目标金币，不再阅读了')
         self.cash_out(cash_out)
         self.clean_cache()
         self.app_end()

@@ -1,10 +1,12 @@
-import uiautomator2
-import time, sys, traceback
+class A(object):
+    def aa(self):
+        return '1'
 
-# pp = uiautomator2.connect_usb()
-# pp.shell('reboot')
-# print(pp.address)
-# pp.shell('reboot')
-# pp = uiautomator2.connect_wifi('192.168.1.103')
-# pp.screen_off()
-# pp.unlock()
+
+class B(A):
+    def aa(self):
+        b = super(B, self).aa()
+        print(b)
+
+b = B()
+b.aa()

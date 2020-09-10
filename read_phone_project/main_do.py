@@ -21,6 +21,8 @@ from app_jiao_ben.jing_dong import JinDong
 from app_jiao_ben.mi_du import MiDu
 from app_jiao_ben.xiang_kan import XiangKan
 from app_jiao_ben.dong_fang_tou_tiao import DongFangTouTiao
+from app_jiao_ben.shan_dian_he_zi import ShanDianHezi
+from app_jiao_ben.wei_li_kan_kan import WeiLiKanKan
 
 
 def main_run(phone_serial):
@@ -34,15 +36,14 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
-    DongFangTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
-    raise
+    # raise
 
     # 禁用USB充电
-    # pp.shell('dumpsys battery set usb 0')
+    pp.shell('dumpsys battery set usb 0')
     # 设置电池电量
-    # pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
+    pp.shell(f'dumpsys battery set level {random.randint(15, 95)}')
     # 设置电池为非充电状态
-    # pp.shell('dumpsys battery set status 1')
+    pp.shell('dumpsys battery set status 1')
 
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
@@ -60,8 +61,8 @@ def main_run(phone_serial):
     for k in job_list:
         if k == -1:
             continue
-        elif k == 0:
-            JinDong(phone_serial, pp).recycle_main_do(target_coin=5000)
+        # elif k == 0:
+        #     JinDong(phone_serial, pp).recycle_main_do(target_coin=5000)
         # elif k == 1:
         #     JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
         # elif k == 2:
@@ -93,6 +94,12 @@ def main_run(phone_serial):
         #     KuaiYin(phone_serial, pp).recycle_main_do(target_coin=2000)
         # elif k == 15:
         #     TianTianAiQingLi(phone_serial, pp).recycle_main_do(target_coin=2000)
+        # elif k == 16:
+            # 这个注册时候账号异常，客服说不影响使用，但是被系统检测到了，尝试了下，可以获得金币，提现还在测试
+            # ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=50000)
+        elif k == 17:
+            WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
+
         else:
             continue
 

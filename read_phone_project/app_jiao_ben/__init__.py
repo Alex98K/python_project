@@ -92,10 +92,6 @@ class AppReadBase(object):
     def main_do(self, duration, target_coin, cash_out):
         pass
 
-    def cash_out(self, cash_out):
-        if not cash_out:
-            return
-
     def del_watcher(self):
         try:
             self.pp.watcher.stop()
