@@ -10250,3 +10250,149 @@ Traceback (most recent call last):
 requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
 2020/09/10 23:29:31 - CRITICAL - 119 - __init__ - 程序存在错误，试了一个小时都不行，请修改程序
 2020/09/10 23:29:32 - INFO - 51 - __init__ - ********结束 红包视频 APP 任务********
+2020/09/11 08:19:37 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/11 08:20:08 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/11 08:21:04 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/11 08:21:35 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/11 08:21:56 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='任务'], method: None
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 81, in main_do
+    self.sign_in()
+  File "F:\python_project\read_phone_project\app_jiao_ben\hong_bao_shi_pin.py", line 18, in sign_in
+    self.pp(text='任务').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='任务'], method: None
+2020/09/11 08:22:00 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/11 08:22:15 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/11 08:22:19 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 08:22:22 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 128
+2020/09/11 08:22:22 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/11 08:33:41 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 08:33:44 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 1778
+2020/09/11 08:33:44 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/11 08:45:04 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 08:45:08 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 2888
+2020/09/11 08:45:08 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/11 08:56:34 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 08:56:39 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 4328
+2020/09/11 08:56:39 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/11 09:07:59 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 09:08:04 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 5898
+2020/09/11 09:08:04 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/11 09:19:33 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 09:19:38 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 7343
+2020/09/11 09:19:38 - INFO - 30 - hong_bao_shi_pin - 开始阅读首页视频
+2020/09/11 09:49:38 - INFO - 58 - hong_bao_shi_pin - 开始清理缓存
+2020/09/11 10:01:49 - INFO - 44 - __init__ - ********开始 红包视频 的任务********
+2020/09/11 10:02:00 - INFO - 17 - hong_bao_shi_pin - 开始签到
+2020/09/11 10:02:06 - INFO - 37 - hong_bao_shi_pin - 获取今日金币数量
+2020/09/11 10:02:10 - INFO - 48 - hong_bao_shi_pin - 今日已经获取金币 7708
+2020/09/11 10:02:12 - INFO - 51 - __init__ - ********结束 红包视频 APP 任务********
+2020/09/11 10:07:01 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 10:07:32 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 10:07:38 - INFO - 106 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 10:08:00 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="c.l.a:id/bottom_navigation"]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 160, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 108, in read_issue
+    self.click_random_position(self.pp.xpath('//*[@resource-id="c.l.a:id/bottom_navigation"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="c.l.a:id/bottom_navigation"]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]']
+2020/09/11 10:08:08 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 10:08:24 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 10:08:29 - INFO - 106 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 10:08:42 - INFO - 130 - shan_dian_he_zi - 已经获取 63322 金币
+2020/09/11 10:08:43 - INFO - 51 - __init__ - ********结束 闪电盒子 APP 任务********
+2020/09/11 10:12:13 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 10:12:23 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 10:12:29 - INFO - 106 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 10:12:38 - INFO - 130 - shan_dian_he_zi - 已经获取 322 金币
+2020/09/11 10:12:38 - INFO - 23 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 10:14:37 - INFO - 130 - shan_dian_he_zi - 已经获取 4948 金币
+2020/09/11 10:14:37 - INFO - 95 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 10:14:58 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='玩一玩'], method: None
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 160, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 120, in read_issue
+    self.read_issue_city(read_issue_time2)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 96, in read_issue_city
+    self.pp(text='玩一玩').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='玩一玩'], method: None
+2020/09/11 10:15:02 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 10:15:18 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 10:15:23 - INFO - 106 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 10:15:33 - INFO - 130 - shan_dian_he_zi - 已经获取 7718 金币
+2020/09/11 10:15:33 - INFO - 23 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 10:16:50 - INFO - 130 - shan_dian_he_zi - 已经获取 12082 金币
+2020/09/11 10:16:50 - INFO - 95 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 10:26:55 - INFO - 130 - shan_dian_he_zi - 已经获取 45944 金币
+2020/09/11 10:26:55 - INFO - 23 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 10:27:47 - INFO - 130 - shan_dian_he_zi - 已经获取 48714 金币
+2020/09/11 10:27:47 - INFO - 95 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 10:37:55 - INFO - 130 - shan_dian_he_zi - 已经获取 71979 金币
+2020/09/11 10:37:57 - INFO - 51 - __init__ - ********结束 闪电盒子 APP 任务********
+2020/09/11 10:48:13 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 10:48:30 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 10:48:52 - INFO - 119 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 10:49:05 - INFO - 143 - shan_dian_he_zi - 已经获取 567 金币
+2020/09/11 10:49:05 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 10:59:20 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 10:59:38 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 10:59:59 - INFO - 119 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 11:00:14 - INFO - 143 - shan_dian_he_zi - 已经获取 964 金币
+2020/09/11 11:00:14 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 11:02:30 - INFO - 143 - shan_dian_he_zi - 已经获取 4623 金币
+2020/09/11 11:02:30 - INFO - 108 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 11:11:42 - INFO - 143 - shan_dian_he_zi - 已经获取 15493 金币
+2020/09/11 11:11:42 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 11:12:40 - INFO - 143 - shan_dian_he_zi - 已经获取 17186 金币
+2020/09/11 11:12:40 - INFO - 108 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 11:21:54 - INFO - 143 - shan_dian_he_zi - 已经获取 23197 金币
+2020/09/11 11:21:54 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 11:23:22 - INFO - 143 - shan_dian_he_zi - 已经获取 24668 金币
+2020/09/11 11:23:22 - INFO - 108 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 11:32:37 - INFO - 143 - shan_dian_he_zi - 已经获取 27719 金币
+2020/09/11 11:32:37 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 11:33:57 - INFO - 143 - shan_dian_he_zi - 已经获取 28382 金币
+2020/09/11 11:33:57 - INFO - 108 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/11 11:43:12 - INFO - 143 - shan_dian_he_zi - 已经获取 29408 金币
+2020/09/11 11:43:12 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 11:44:34 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='任务'], method: None
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 173, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 131, in read_issue
+    if self.today_coin() > target_coin:
+  File "F:\python_project\read_phone_project\app_jiao_ben\shan_dian_he_zi.py", line 136, in today_coin
+    self.pp(text='任务').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='任务'], method: None
+2020/09/11 11:44:44 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 11:51:24 - INFO - 44 - __init__ - ********开始 闪电盒子 的任务********
+2020/09/11 11:51:43 - INFO - 18 - shan_dian_he_zi - 开始签到
+2020/09/11 11:52:02 - INFO - 120 - shan_dian_he_zi - 开始阅读文章
+2020/09/11 11:52:17 - INFO - 144 - shan_dian_he_zi - 已经获取 232 金币
+2020/09/11 11:52:17 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
+2020/09/11 11:53:40 - INFO - 144 - shan_dian_he_zi - 已经获取 1312 金币
+2020/09/11 11:53:40 - INFO - 109 - shan_dian_he_zi - 开始阅读同城视频

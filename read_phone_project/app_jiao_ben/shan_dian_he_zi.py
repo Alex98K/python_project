@@ -16,8 +16,11 @@ class ShanDianHezi(AppReadBase):
 
     def sign_in(self):
         self.logger.info(f'开始签到')
-        if self.pp(text='签到').exists(timeout=5):
-            self.pp(text='签到').click(offset=(random.random(), random.random()))
+        self.pp(text='任务').wait()
+        self.pp(text='任务').click(offset=(random.random(), random.random()))
+        if self.pp(text='立即签到').exists(timeout=5):
+            self.pp(text='立即签到').click(offset=(random.random(), random.random()))
+
 
     def read_issue_first(self, read_issue_time, target_coin):
         self.logger.info(f'开始阅读首页视频')
@@ -42,7 +45,7 @@ class ShanDianHezi(AppReadBase):
                 if not self.pp.xpath('//*[@resource-id="c.l.a:id/read_redpacket"]').exists:
                     while not self.pp(text='头条资讯').exists:
                         self.pp.press('back')
-                        time.sleep(random.random())
+                        time.sleep(random.random() + 1)
                     continue
                 self.app_switch_current()
                 issue_time_start = time.time()  # 开始计时
@@ -87,9 +90,10 @@ class ShanDianHezi(AppReadBase):
                 self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                               random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                 time.sleep(random.random())
-        time.sleep(random.random() + 1)
-        self.pp.press('back')
-        time.sleep(random.random() + 1)
+        if not self.pp(text='我的').exists:
+            time.sleep(random.random() + 1)
+            self.pp.press('back')
+            time.sleep(random.random() + 1)
 
     def read_issue_city(self, read_issue_time):
         self.logger.info(f'开始阅读同城视频')
@@ -152,11 +156,25 @@ class ShanDianHezi(AppReadBase):
             self.pp.press('back')
             time.sleep(random.random() + 1)
 
+    def coin2mb(self):
+        self.pp(text='我的').wait()
+        self.pp(text='我的').click(offset=(random.random(), random.random()))
+        self.pp(text='我的余额').wait()
+        self.pp(text='我的余额').click(offset=(random.random(), random.random()))
+        self.pp(text='兑换现金').wait()
+        self.pp(text='兑换现金').click(offset=(random.random(), random.random()))
+        if self.pp(text='确定').exists(timeout=5):
+            self.pp(text='确定').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 1)
+        self.pp.press('back')
+        time.sleep(random.random() + 1)
+
     def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('闪电盒子')
         self.pp(text='我的').wait(timeout=30)
         self.sign_in()
         self.read_issue(duration, target_coin)
+        self.coin2mb()
         self.cash_out(cash_out)
         self.app_end()

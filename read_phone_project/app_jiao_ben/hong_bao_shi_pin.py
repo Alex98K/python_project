@@ -54,31 +54,10 @@ class HongBaoShiPin(AppReadBase):
         while time.time() - issue_time_start <= duration and self.today_coin() <= target_coin:
             self.read_issue_first(read_issue_time1)
 
-    def clean_cache(self):
-        self.logger.info(f'开始清理缓存')
-        self.pp(text='我').click(offset=(random.random(), random.random()))
-        self.pp(description='更多').wait()
-        self.pp(description='更多').click(offset=(random.random(), random.random()))
-        self.pp(text="设置").wait()
-        self.pp(text="设置").click(offset=(random.random(), random.random()))
-        t = time.time()
-        while time.time() - t < 60:
-            if not self.pp(text="清理缓存").exists:
-                self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
-                              random.uniform(0.2, 0.3), steps=random.randint(20, 60))
-                time.sleep(random.random())
-            else:
-                break
-        self.pp(text="清理缓存").wait()
-        self.pp(text="清理缓存").click(offset=(random.random(), random.random()))
-        self.pp(text="清理").wait()
-        self.pp(text="清理").click(offset=(random.random(), random.random()))
-
     def main_do(self, duration, target_coin, cash_out):
         # raise
         self.app_start('红包视频')
         self.pp(text='我').wait(timeout=30)
         self.sign_in()
         self.read_issue(duration, target_coin)
-        self.clean_cache()
         self.app_end()
