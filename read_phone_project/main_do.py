@@ -97,9 +97,9 @@ def main_run(phone_serial):
         #     KuaiYin(phone_serial, pp).recycle_main_do(target_coin=2000)
         # elif k == 15:
         #     TianTianAiQingLi(phone_serial, pp).recycle_main_do(target_coin=2000)
-        elif k == 16:
+        # elif k == 16:
             # 这个注册时候账号异常，客服说不影响使用，但是被系统检测到了，尝试了下，可以获得金币，提现还在测试
-            ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=80000)
+            # ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=80000)
         # elif k == 17:
         #     WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
         # elif k == 18:
