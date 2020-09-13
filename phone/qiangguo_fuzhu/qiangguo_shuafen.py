@@ -201,7 +201,9 @@ class QiangGuoFuZhu(object):
 
     def run_challenge(self, ti_num=5):
         self.pp(text='我要答题').click(timeout=20)
-        self.pp(text='挑战答题').click(timeout=20)
+        # self.pp(text='挑战答题').click(timeout=20)
+        self.pp.xpath('//android.webkit.WebView/android.view.View[1]/android.view.View[1]/android.view.View[3]/'
+                      'android.view.View[11]').click()
         with open(os.path.join(self.path, 'tiao_zhan_ti.json'), 'r', encoding="UTF-8") as f1:
             data_ti_ku = json.load(f1)
         for ij, j1 in enumerate(data_ti_ku):
