@@ -15,3 +15,119 @@
 2020/08/10 23:21:42 - WARNING - 1080 - qiangguo_shuafen - ****************************************************
 2020/08/10 23:21:42 - WARNING - 1084 - qiangguo_shuafen - ****************************************************
 2020/08/10 23:21:43 - WARNING - 1190 - qiangguo_shuafen - 已完成专项答题任务
+2020/09/13 10:22:11 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 10:22:13 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 10:23:12 - WARNING - 1124 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/09/13 10:23:43 - WARNING - 1169 - qiangguo_shuafen - 已完成视频观看
+2020/09/13 10:23:43 - WARNING - 1174 - qiangguo_shuafen - 已完成视听时长学习
+2020/09/13 10:23:43 - WARNING - 1178 - qiangguo_shuafen - 已完成订阅
+2020/09/13 10:23:43 - WARNING - 1182 - qiangguo_shuafen - 已完成文章阅读
+2020/09/13 10:23:43 - WARNING - 1186 - qiangguo_shuafen - 已完成每日答题任务
+2020/09/13 10:23:43 - WARNING - 1190 - qiangguo_shuafen - 已完成每周答题任务
+2020/09/13 10:23:43 - WARNING - 1194 - qiangguo_shuafen - 已完成挑战答题
+2020/09/13 10:23:43 - WARNING - 1198 - qiangguo_shuafen - 已完成视听时长学习
+2020/09/13 10:23:43 - WARNING - 1202 - qiangguo_shuafen - 已完成本地频道
+2020/09/13 10:24:24 - WARNING - 622 - qiangguo_shuafen - 开始做题-全国抗击新冠肺炎疫情表彰大会专项答题 答案是 ['ABCD', 'ABC', 'ABCD', 'ABCD', '挺身而出', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABC']
+2020/09/13 10:24:48 - CRITICAL - 1243 - qiangguo_shuafen - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [childOrSibling=['sibling'], childOrSiblingSelector=[{'mask': 16, 'childOrSibling': [], 'childOrSiblingSelector': [], 'className': 'android.view.View'}], text='0 /10'], method: None
+Traceback (most recent call last):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1234, in recycle_main_do
+    job_stat = self.main_do()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 1212, in main_do
+    self.run_special_ti()
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 631, in run_special_ti
+    if not (answer and self.do_week_and_special_ti(answer, every_ti_num=10)):
+  File "D:/python_project/phone/qiangguo_fuzhu/qiangguo_shuafen.py", line 396, in do_week_and_special_ti
+    ti_type = self.pp(text=f'{ti_num + 1} /{every_ti_num}').sibling(className='android.view.View').get_text()[:3]
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 360, in get_text
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [childOrSibling=['sibling'], childOrSiblingSelector=[{'mask': 16, 'childOrSibling': [], 'childOrSiblingSelector': [], 'className': 'android.view.View'}], text='0 /10'], method: None
+2020/09/13 10:26:48 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 10:26:50 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 10:26:56 - WARNING - 1254 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 10:27:13 - WARNING - 622 - qiangguo_shuafen - 开始做题-全国抗击新冠肺炎疫情表彰大会专项答题 答案是 ['ABCD', 'ABC', 'ABCD', 'ABCD', '挺身而出', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABC']
+2020/09/13 11:11:25 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:11:27 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:11:31 - WARNING - 1256 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:13:14 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:13:25 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:13:27 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:13:30 - WARNING - 1257 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:15:41 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:15:43 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:15:50 - WARNING - 1254 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:16:00 - WARNING - 622 - qiangguo_shuafen - 开始做题-全国抗击新冠肺炎疫情表彰大会专项答题 答案是 ['ABCD', 'ABC', 'ABCD', 'ABCD', '挺身而出', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABC']
+2020/09/13 11:16:54 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:16:56 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:16:59 - WARNING - 1256 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:18:23 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:18:25 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:18:29 - WARNING - 1257 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:20:13 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:20:15 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:20:19 - WARNING - 1257 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:21:14 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:21:16 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:21:19 - WARNING - 1257 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:21:48 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:21:50 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:21:53 - WARNING - 1257 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:23:51 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:23:53 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:23:57 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:24:43 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:24:45 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:24:48 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:25:46 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:25:48 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:25:51 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:26:19 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:26:21 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:26:25 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:26:34 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:26:36 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:26:40 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:26:54 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:26:56 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:26:59 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:27:09 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:27:11 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:27:14 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:27:27 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:27:29 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:27:33 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:27:45 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:27:47 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:27:50 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:28:04 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:28:06 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:28:09 - WARNING - 1255 - qiangguo_shuafen - 开始测试程序了
+2020/09/13 11:29:09 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:29:11 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:30:28 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:30:30 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:31:30 - WARNING - 1125 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/09/13 11:32:03 - WARNING - 1170 - qiangguo_shuafen - 已完成视频观看
+2020/09/13 11:32:03 - WARNING - 1175 - qiangguo_shuafen - 已完成视听时长学习
+2020/09/13 11:32:03 - WARNING - 1179 - qiangguo_shuafen - 已完成订阅
+2020/09/13 11:32:03 - WARNING - 1183 - qiangguo_shuafen - 已完成文章阅读
+2020/09/13 11:32:03 - WARNING - 1187 - qiangguo_shuafen - 已完成每日答题任务
+2020/09/13 11:32:03 - WARNING - 1191 - qiangguo_shuafen - 已完成每周答题任务
+2020/09/13 11:32:03 - WARNING - 1195 - qiangguo_shuafen - 已完成挑战答题
+2020/09/13 11:32:03 - WARNING - 1199 - qiangguo_shuafen - 已完成视听时长学习
+2020/09/13 11:32:03 - WARNING - 1203 - qiangguo_shuafen - 已完成本地频道
+2020/09/13 11:32:44 - WARNING - 623 - qiangguo_shuafen - 开始做题-全国抗击新冠肺炎疫情表彰大会专项答题 答案是 ['ABCD', 'ABC', 'ABCD', 'ABCD', '挺身而出', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABC']
+2020/09/13 11:33:35 - WARNING - 77 - qiangguo_shuafen - 手机的序列号是 F7R0214305002612
+2020/09/13 11:33:37 - WARNING - 25 - qiangguo_shuafen - http://localhost:3314
+2020/09/13 11:34:34 - WARNING - 1125 - qiangguo_shuafen - 这个手机学习强国的学号是 66454487
+2020/09/13 11:35:07 - WARNING - 1170 - qiangguo_shuafen - 已完成视频观看
+2020/09/13 11:35:07 - WARNING - 1175 - qiangguo_shuafen - 已完成视听时长学习
+2020/09/13 11:35:07 - WARNING - 1179 - qiangguo_shuafen - 已完成订阅
+2020/09/13 11:35:07 - WARNING - 1183 - qiangguo_shuafen - 已完成文章阅读
+2020/09/13 11:35:07 - WARNING - 1187 - qiangguo_shuafen - 已完成每日答题任务
+2020/09/13 11:35:07 - WARNING - 1191 - qiangguo_shuafen - 已完成每周答题任务
+2020/09/13 11:35:07 - WARNING - 1195 - qiangguo_shuafen - 已完成挑战答题
+2020/09/13 11:35:07 - WARNING - 1199 - qiangguo_shuafen - 已完成视听时长学习
+2020/09/13 11:35:07 - WARNING - 1203 - qiangguo_shuafen - 已完成本地频道
+2020/09/13 11:35:45 - WARNING - 623 - qiangguo_shuafen - 开始做题-全国抗击新冠肺炎疫情表彰大会专项答题 答案是 ['ABCD', 'ABC', 'ABCD', 'ABCD', '挺身而出', 'ABCD', 'ABCD', 'ABCD', 'ABCD', 'ABC']

@@ -618,7 +618,7 @@ class QiangGuoFuZhu(object):
                     date_title = re.sub(r'[^\w\u4e00-\u9fa5]', '', str(date_title).replace('\xa0', '').replace('_', ''))
                     try:
                         answer = special_ti_all[date_title]
-                        self.pp.click(j_bounds[0] + 1, j_bounds[3] - 1)
+                        self.pp.click(j_bounds[0] + 1, j_bounds[1] + 8)
                         self.logger.warning(f'开始做题-{date_title} 答案是 {answer}')
                     except KeyError:
                         self.logger.error(f'{date_title}  题目在题库里没有答案')
