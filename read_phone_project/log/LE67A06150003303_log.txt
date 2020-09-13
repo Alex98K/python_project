@@ -10396,3 +10396,127 @@ uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Sel
 2020/09/11 11:52:17 - INFO - 36 - shan_dian_he_zi - 开始阅读首页视频
 2020/09/11 11:53:40 - INFO - 144 - shan_dian_he_zi - 已经获取 1312 金币
 2020/09/11 11:53:40 - INFO - 109 - shan_dian_he_zi - 开始阅读同城视频
+2020/09/13 21:47:50 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/13 21:48:15 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/13 21:48:27 - INFO - 207 - sou_hu_zi_xun - 已经获取 149 金币
+2020/09/13 21:48:27 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/13 21:48:35 - INFO - 30 - sou_hu_zi_xun - 开始调整栏目
+2020/09/13 21:48:55 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息HTTPConnectionPool(host='localhost', port=13929): Max retries exceeded with url: /jsonrpc/0 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001972E531C70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    conn = connection.create_connection(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\connection.py", line 84, in create_connection
+    raise err
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\connection.py", line 74, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 392, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1230, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1276, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1225, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1004, in _send_output
+    self.send(msg)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 944, in send
+    self.connect()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connection.py", line 187, in connect
+    conn = self._new_conn()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connection.py", line 171, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001972E531C70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\retry.py", line 439, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=13929): Max retries exceeded with url: /jsonrpc/0 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001972E531C70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 238, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 70, in read_issue
+    self._adjust_lan_mu()
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 45, in _adjust_lan_mu
+    self.click_random_position(i.bounds)
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 84, in click_random_position
+    self.pp.click(x, y)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 994, in click
+    self.jsonrpc.click(x, y)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 434, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 441, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 470, in _jsonrpc_call
+    res = self.http.post("/jsonrpc/0",
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 578, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 188, in request
+    return super().request(method, url, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 108, in request
+    resp = super(TimeoutRequestsSession,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=13929): Max retries exceeded with url: /jsonrpc/0 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001972E531C70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+2020/09/13 21:49:32 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/13 21:50:01 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/13 21:50:11 - INFO - 207 - sou_hu_zi_xun - 已经获取 149 金币
+2020/09/13 21:50:11 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/13 21:50:16 - INFO - 30 - sou_hu_zi_xun - 开始调整栏目
+2020/09/13 21:51:05 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 238, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 71, in read_issue
+    raise
+RuntimeError: No active exception to reraise
+2020/09/13 22:17:22 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/13 22:17:47 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/13 22:18:03 - INFO - 171 - sou_hu_zi_xun - 已经获取 0 金币
+2020/09/13 22:18:03 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/13 22:23:02 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/13 22:23:26 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/13 22:23:39 - INFO - 171 - sou_hu_zi_xun - 已经获取 192 金币
+2020/09/13 22:23:39 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/13 22:26:10 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/13 22:26:38 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/13 22:26:50 - INFO - 169 - sou_hu_zi_xun - 已经获取 771 金币
+2020/09/13 22:26:50 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/13 22:27:16 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 200, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]']
+2020/09/13 22:27:25 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/13 22:27:47 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/13 22:28:01 - INFO - 169 - sou_hu_zi_xun - 已经获取 771 金币
+2020/09/13 22:28:01 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章

@@ -24,6 +24,7 @@ from app_jiao_ben.dong_fang_tou_tiao import DongFangTouTiao
 from app_jiao_ben.shan_dian_he_zi import ShanDianHezi
 from app_jiao_ben.wei_li_kan_kan import WeiLiKanKan
 from app_jiao_ben.hong_bao_shi_pin import HongBaoShiPin
+from app_jiao_ben.sou_hu_zi_xun import SouHuZiXun
 
 
 def main_run(phone_serial):
@@ -51,7 +52,7 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    # CleanCash(pp).app_init()
+    CleanCash(pp).app_init()
 
     # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋，趣铃声
     # 大部分APP都是前面刷的快，后面慢
@@ -104,6 +105,8 @@ def main_run(phone_serial):
         #     WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
         # elif k == 18:
         #     HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=7000)
+        elif k == 19:
+            SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=7000)
         else:
             continue
 

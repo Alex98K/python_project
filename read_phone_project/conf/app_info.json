@@ -63,10 +63,6 @@
     "https://imtt.dd.qq.com/16891/apk/E7506D93D144803F1692B6C9F7EDBF6D.apk?fsname=com.lechuan.mdwz_1.22.0.0903.1200_102200.apk&csr=1bbd",
     "米读极速版"
   ],
-  "com.coohua.xinwenzhuan":
-  ["https://imtt.dd.qq.com/16891/apk/AFB6803F8A3C10DC68357B01D1335018.apk?fsname=com.coohua.xinwenzhuan_4.4.5.1_40451.apk&csr=1bbd",
-  "淘新闻"
-  ],
   "c.l.a":
   [
     "https://imtt.dd.qq.com/16891/apk/92B9E684FDCD5AECC62C95A815F4C8C2.apk?fsname=c.l.a_5.6.5.7_20200731.apk&csr=1bbd",
@@ -76,21 +72,6 @@
           [
             "https://imtt.dd.qq.com/16891/apk/03521D412784DA5A97BE6C7842B4804C.apk?fsname=com.sanmiao.sound_3.0.0_100.apk&csr=1bbd",
             "红包视频"
-          ],
-  "com.baomihua.qukan":
-          [
-            "https://imtt.dd.qq.com/16891/apk/3440E1D607E4C9ECEF46C223767FDDCE.apk?fsname=com.baomihua.qukan_1.4.7.0_39.apk&csr=1bbd",
-            "趣看视频"
-          ],
-  "com.waqu.android.firebull":
-          [
-            "https://imtt.dd.qq.com/16891/apk/E5390CCBB100F40FFFD0B69FF69E53E8.apk?fsname=com.waqu.android.firebull_3.1.0_440.apk&csr=1bbd",
-            "火牛视频"
-          ],
-  "com.com.baomihuawang.androidclient":
-          [
-            "https://imtt.dd.qq.com/16891/apk/4C0BA2C1B0229C4D7CACD680CA99C57F.apk?fsname=com.com.baomihuawang.androidclient_12.3.0.0_236.apk&csr=1bbd",
-            "爆米花视频"
           ],
   "com.toutiao.hxtoutiao":
           [
@@ -111,31 +92,6 @@
           [
             "https://imtt.dd.qq.com/16891/apk/72263683C1A345CAC97D5FBCBDD3B5C4.apk?fsname=com.maihan.tredian_2.5.1_71.apk&csr=1bbd",
             "淘最热点"
-          ],
-  "com.app.quba":
-          [
-            "https://imtt.dd.qq.com/16891/apk/ED2DE3CAF949AFDDAA8CC1E1112871A4.apk?fsname=com.app.quba_1.0.5.1_20200903.apk&csr=1bbd",
-            "趣吧盒子"
-          ],
-  "com.lucky.magicbox":
-          [
-            "https://imtt.dd.qq.com/16891/apk/AD1EC5361712D470481E519DF3F7B3EC.apk?fsname=com.lucky.magicbox_1.6.9.9_65.apk&csr=1bbd",
-            "玩赚魔盒"
-          ],
-  "com.ying.miniVideo":
-          [
-            "https://imtt.dd.qq.com/16891/apk/821603F1BB95CE9A557DCCDAB034706E.apk?fsname=com.ying.miniVideo_1.3.4.1_1443.apk&csr=1bbd",
-            "花生短视频"
-          ],
-  "com.preface.megatron":
-          [
-            "https://imtt.dd.qq.com/16891/apk/9CA8D34CCBE784229971F8B59C603350.apk?fsname=com.preface.megatron_1.0.8_9.apk&csr=1bbd",
-            "荔枝铃声"
-          ],
-  "com.kugou.android.elder":
-          [
-            "https://imtt.dd.qq.com/16891/apk/16D133E421617BD24E01FA0405A28382.apk?fsname=com.kugou.android.elder_1.7.0_17060.apk&csr=1bbd",
-            "酷狗音乐大字版"
           ]
 
 }
