@@ -31,10 +31,9 @@ def main_run(phone_serial):
     """ 用来测试的乐视X620手机序列号是    LE67A06150003303   """
     pp = uiautomator2.connect_usb(phone_serial)
     time.sleep(1)
-    for w in range(3):
-        pp.unlock()
-        time.sleep(1)
-        pp.screen_on()
+    pp.unlock()
+    time.sleep(1)
+    pp.screen_on()
     print(pp.address)
 
     # 测试代码部分
@@ -52,7 +51,7 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    CleanCash(pp).app_init()
+    # CleanCash(pp).app_init()
 
     # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋，趣铃声
     # 大部分APP都是前面刷的快，后面慢
@@ -105,8 +104,9 @@ def main_run(phone_serial):
         #     WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
         # elif k == 18:
         #     HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=7000)
-        elif k == 19:
-            SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=7000)
+        # elif k == 19:
+            # 这个收益太低，10万换1元
+            # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=70000)
         else:
             continue
 

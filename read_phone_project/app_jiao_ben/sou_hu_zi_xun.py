@@ -33,11 +33,11 @@ class SouHuZiXun(AppReadBase):
         if lan_mu_num_end <= 5:
             return
         self.pp(resourceId="com.sohu.infonews:id/channel_more").wait()
-        self.pp(resourceId="com.sohu.infonews:id/channel_more")\
+        self.pp(resourceId="com.sohu.infonews:id/channel_more") \
             .click(offset=(random.uniform(0.5, 0.9), random.random()))
         time.sleep(random.random() + 1)
         self.pp(resourceId="com.sohu.infonews:id/textview_recyclerview_add_item_one").wait()
-        self.pp(resourceId="com.sohu.infonews:id/textview_recyclerview_add_item_one")\
+        self.pp(resourceId="com.sohu.infonews:id/textview_recyclerview_add_item_one") \
             .click(offset=(random.uniform(0.5, 0.9), random.random()))
         time.sleep(random.random() + 1)
         for i in reversed(self.pp.xpath('//*[@resource-id="com.sohu.infonews:id/recylerView_channel"]//'
@@ -75,9 +75,10 @@ class SouHuZiXun(AppReadBase):
         random.shuffle(random_list)
         t = time.time()
         for j in random_list:
+            time.sleep(random.random() + 1)
             self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
-                                       f'android.widget.LinearLayout[1]/android.widget.RelativeLayout[{j + 1}]'
-                                                     ).get().bounds)
+                                                     f'android.widget.LinearLayout[1]/android.widget.RelativeLayout'
+                                                     f'[{j+1}]/android.widget.RelativeLayout[1]').get().bounds)
             time.sleep(random.random() + 1)
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
                 # 每个栏目下的文章标题
@@ -86,7 +87,7 @@ class SouHuZiXun(AppReadBase):
                     if random.random() >= self.probability_read_issue:
                         continue
                     # 如果是广告，就跳过
-                    if self.pp.xpath(title.get_xpath() + '/..//*[@resource-id="com.sohu.infonews:id/tv_ad_flag"]')\
+                    if self.pp.xpath(title.get_xpath() + '/..//*[@resource-id="com.sohu.infonews:id/tv_ad_flag"]') \
                             .exists:
                         continue
                     self.click_random_position(title.bounds)
@@ -127,7 +128,7 @@ class SouHuZiXun(AppReadBase):
                                                                  'add_comment"]').get().bounds)
                         time.sleep(random.random() + 1)
                         self.pp(resourceId='com.sohu.infonews:id/comment_input').wait()
-                        self.pp(resourceId='com.sohu.infonews:id/comment_input')\
+                        self.pp(resourceId='com.sohu.infonews:id/comment_input') \
                             .set_text(random.choice(self.commit))
                         time.sleep(random.random() + 1)
                         self.pp(resourceId='com.sohu.infonews:id/comment_write_ok') \

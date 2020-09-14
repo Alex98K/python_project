@@ -10520,3 +10520,434 @@ uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.
 2020/09/13 22:27:47 - INFO - 18 - sou_hu_zi_xun - 开始签到
 2020/09/13 22:28:01 - INFO - 169 - sou_hu_zi_xun - 已经获取 771 金币
 2020/09/13 22:28:01 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:09:27 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:09:41 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:09:57 - INFO - 169 - sou_hu_zi_xun - 已经获取 1259 金币
+2020/09/14 08:09:57 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:10:22 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 200, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]']
+2020/09/14 08:10:26 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:10:38 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:10:48 - INFO - 169 - sou_hu_zi_xun - 已经获取 1259 金币
+2020/09/14 08:10:48 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:20:41 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:21:03 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:21:14 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:21:14 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:21:41 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[14]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[14]']
+2020/09/14 08:21:49 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:22:08 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:22:19 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:22:19 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:22:44 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]']
+2020/09/14 08:22:51 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:23:08 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:23:20 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:23:20 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:23:46 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]']
+2020/09/14 08:23:53 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:24:17 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:24:28 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:24:28 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:26:05 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:26:27 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:26:38 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:26:38 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:27:04 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[9]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[9]/android.widget.RelativeLayout[1]']
+2020/09/14 08:27:13 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:27:34 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:27:45 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:27:45 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:29:16 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:29:16 - INFO - 152 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:29:19 - INFO - 160 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:30:59 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:30:59 - INFO - 152 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:31:01 - INFO - 160 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:33:18 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:33:18 - INFO - 152 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:33:21 - INFO - 160 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:35:45 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:35:45 - INFO - 152 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:35:47 - INFO - 160 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:37:16 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:37:16 - INFO - 152 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:37:19 - INFO - 160 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:37:39 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]/android.widget.RelativeLayout[1]']
+2020/09/14 08:37:47 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:38:07 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:38:21 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:38:21 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:40:37 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:40:37 - INFO - 152 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:40:40 - INFO - 160 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:41:01 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    if self.today_coin() < target_coin:
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    time.sleep(random.random() + 1)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]/android.widget.RelativeLayout[1]']
+2020/09/14 08:41:08 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:41:29 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:41:42 - INFO - 170 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:41:42 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:42:09 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[8]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    if self.today_coin() < target_coin:
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 78, in read_issue
+    time.sleep(random.random() + 1)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[8]/android.widget.RelativeLayout[1]']
+2020/09/14 08:42:18 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:43:06 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息name 'j' is not defined
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 197, in main_do
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+NameError: name 'j' is not defined
+2020/09/14 08:43:07 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息name 'j' is not defined
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 197, in main_do
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+NameError: name 'j' is not defined
+2020/09/14 08:43:07 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息name 'j' is not defined
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 197, in main_do
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+NameError: name 'j' is not defined
+2020/09/14 08:43:08 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息name 'j' is not defined
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 197, in main_do
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+NameError: name 'j' is not defined
+2020/09/14 08:43:08 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息name 'j' is not defined
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 197, in main_do
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+NameError: name 'j' is not defined
+2020/09/14 08:43:59 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:44:10 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:44:20 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:44:30 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:44:40 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:44:50 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:45:01 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:45:12 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息No active exception to reraise
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 201, in main_do
+    raise
+RuntimeError: No active exception to reraise
+2020/09/14 08:45:36 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:45:55 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:46:08 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:46:08 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:46:35 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 79, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]/android.widget.RelativeLayout[1]']
+2020/09/14 08:46:43 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:47:05 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:47:18 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:47:18 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:47:46 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 79, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[10]/android.widget.RelativeLayout[1]']
+2020/09/14 08:47:55 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:48:17 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:48:30 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:48:30 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:48:58 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 79, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[12]/android.widget.RelativeLayout[1]']
+2020/09/14 08:49:07 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:49:24 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:49:40 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:49:40 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:50:08 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[11]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 79, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[11]/android.widget.RelativeLayout[1]']
+2020/09/14 08:50:16 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:50:37 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:50:50 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:50:50 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:52:49 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:52:49 - INFO - 153 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:52:52 - INFO - 161 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:53:14 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[14]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 79, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[14]/android.widget.RelativeLayout[1]']
+2020/09/14 08:53:22 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 08:53:46 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 08:54:01 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:54:01 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 08:56:34 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:56:34 - INFO - 153 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:56:37 - INFO - 161 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 08:59:07 - INFO - 171 - sou_hu_zi_xun - 已经获取 1834 金币
+2020/09/14 08:59:07 - INFO - 153 - sou_hu_zi_xun - 已经阅读获得了 1834 金币
+2020/09/14 08:59:10 - INFO - 161 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 09:02:02 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/money_item"]/android.widget.LinearLayout[1]/android.widget.TextView[2]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 151, in read_issue
+    coin_len = self.today_coin()
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 168, in today_coin
+    coin = self.pp.xpath('//*[@resource-id="com.sohu.infonews:id/money_item"]/android.widget.LinearLayout[1]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 525, in get_text
+    return self.get().attrib.get("text", "")
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/money_item"]/android.widget.LinearLayout[1]/android.widget.TextView[2]']
+2020/09/14 09:02:13 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 09:02:38 - INFO - 18 - sou_hu_zi_xun - 开始签到
+2020/09/14 09:02:57 - INFO - 171 - sou_hu_zi_xun - 已经获取 2834 金币
+2020/09/14 09:02:57 - INFO - 61 - sou_hu_zi_xun - 开始阅读文章
+2020/09/14 09:05:18 - INFO - 171 - sou_hu_zi_xun - 已经获取 2834 金币
+2020/09/14 09:05:18 - INFO - 153 - sou_hu_zi_xun - 已经阅读获得了 2834 金币
+2020/09/14 09:05:21 - INFO - 161 - sou_hu_zi_xun - 看完这个栏目了，换个栏目
+2020/09/14 09:05:43 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[9]/android.widget.RelativeLayout[1]']
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 202, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 79, in read_issue
+    self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.sohu.infonews:id/tab_bar"]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 509, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.sohu.infonews:id/tab_bar"]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[9]/android.widget.RelativeLayout[1]']
+2020/09/14 09:05:51 - INFO - 44 - __init__ - ********开始 搜狐资讯 的任务********
+2020/09/14 09:06:14 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1322, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 303, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 272, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\retry.py", line 403, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\packages\six.py", line 734, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1322, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 303, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 272, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\sou_hu_zi_xun.py", line 199, in main_do
+    self.pp(text='任务').wait(timeout=30)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 314, in wait
+    return self.jsonrpc.waitForExists(self.selector,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 431, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 438, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 467, in _jsonrpc_call
+    res = self.http.post("/jsonrpc/0",
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 578, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 188, in request
+    return super().request(method, url, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 108, in request
+    resp = super(TimeoutRequestsSession,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
