@@ -105,7 +105,7 @@ class MoFangKanDian(AppReadBase):
                     read_issue_time = random.randrange(32, 35)  # 看文章的随机时间
                     read_video_time = random.randrange(32, 35)  # 看视频的随机时间
                     # 看下是视频还是文章，视频就停着看，文章就下滑看
-                    if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/video_container"]').exists:
+                    if self.pp.xpath('//*[@resource-id="com.toutiao.hxtoutiao:id/surface_container"]').exists:
                         while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
                             if self.pp(text='关闭广告').exists:
                                 self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
