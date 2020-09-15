@@ -37,9 +37,9 @@ class MoFangKanDian(AppReadBase):
             time.sleep(random.random() + 0.5)
         time.sleep(random.random() + 1)
         lan_mu_num = 2
-        for j in reversed(self.pp(resourceId='com.toutiao.hxtoutiao:id/img_edit')):
+        for j in reversed(self.pp(resourceId='com.toutiao.hxtoutiao:id/tv_channelname')):
             if j.get_text() not in ['美女', '健身'] and \
-                    random.random() < 0.2 and lan_mu_num <= lan_mu_num_end:
+                    random.random() < 0.5 and lan_mu_num <= lan_mu_num_end:
                 j.click(offset=(random.random(), random.random()))
                 lan_mu_num += 1
         self.pp(text='完成').wait()
@@ -102,8 +102,8 @@ class MoFangKanDian(AppReadBase):
                         time.sleep(random.random() + 1)
                         continue
                     issue_time_start = time.time()  # 开始计时
-                    read_issue_time = random.randrange(35, 40)  # 看文章的随机时间
-                    read_video_time = random.randrange(35, 40)  # 看视频的随机时间
+                    read_issue_time = random.randrange(32, 35)  # 看文章的随机时间
+                    read_video_time = random.randrange(32, 35)  # 看视频的随机时间
                     # 看下是视频还是文章，视频就停着看，文章就下滑看
                     if self.pp.xpath('//*[@resource-id="com.cashtoutiao:id/video_container"]').exists:
                         while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
@@ -114,9 +114,9 @@ class MoFangKanDian(AppReadBase):
                         while time.time() - issue_time_start <= read_issue_time:
                             time.sleep(random.uniform(2, 4))
                             self.scroll_read_issue()
-                            if self.pp.xpath('//*[@resource-id="com.toutiao.hxtoutiao:id/tv_loadall"]').exists:
-                                self.click_random_position(self.pp.xpath('//*[@resource-id="com.toutiao.hxtoutiao:id/'
-                                                                         'tv_loadall"]').get().bounds)
+                            # if self.pp.xpath('//*[@resource-id="com.toutiao.hxtoutiao:id/tv_loadall"]').exists:
+                            #     self.click_random_position(self.pp.xpath('//*[@resource-id="com.toutiao.hxtoutiao:id/'
+                            #                                              'tv_loadall"]').get().bounds)
                     # 按照设定的点赞概率，随机点赞
                     if self.pp.xpath('//*[@resource-id="com.toutiao.hxtoutiao:id/iv_collection"]').exists and \
                             random.random() < self.probability_thumb_up:
@@ -136,6 +136,7 @@ class MoFangKanDian(AppReadBase):
                         self.pp(resourceId='com.toutiao.hxtoutiao:id/tv_send')\
                             .click(offset=(random.random(), random.random()))
                         time.sleep(random.random() + 1)
+                    time.sleep(random.random() + 1)
                     self.pp(scrollable=True).scroll.toEnd()
                     time.sleep(random.random() + 1)
                     self.pp.press('back')

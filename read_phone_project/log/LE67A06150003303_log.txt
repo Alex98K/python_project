@@ -11076,3 +11076,47 @@ uiautomator2.exceptions.UiObjectNotFoundError: -32001 Jsonrpc error: <android.su
 2020/09/15 16:07:27 - INFO - 18 - mo_fang_kan_dian - 开始签到
 2020/09/15 16:07:40 - INFO - 179 - mo_fang_kan_dian - 已经获取 1042 金币
 2020/09/15 16:07:40 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:21:03 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:21:22 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:21:36 - INFO - 180 - mo_fang_kan_dian - 已经获取 1592 金币
+2020/09/15 16:21:36 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:25:04 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:25:18 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:25:37 - INFO - 180 - mo_fang_kan_dian - 已经获取 1692 金币
+2020/09/15 16:25:37 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:29:05 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:29:26 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:29:40 - INFO - 180 - mo_fang_kan_dian - 已经获取 1692 金币
+2020/09/15 16:29:40 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:29:45 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 16:31:47 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:32:06 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:32:20 - INFO - 180 - mo_fang_kan_dian - 已经获取 1742 金币
+2020/09/15 16:32:20 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:32:25 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 16:32:51 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息'UiObject' object has no attribute 'text'
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 211, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 63, in read_issue
+    self._adjust_lan_mu()
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 41, in _adjust_lan_mu
+    if j.text not in ['美女', '健身'] and \
+AttributeError: 'UiObject' object has no attribute 'text'
+2020/09/15 16:32:55 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:34:06 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:34:21 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:34:34 - INFO - 180 - mo_fang_kan_dian - 已经获取 1742 金币
+2020/09/15 16:34:34 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:34:39 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 16:44:49 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:45:03 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:45:17 - INFO - 180 - mo_fang_kan_dian - 已经获取 2142 金币
+2020/09/15 16:45:17 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 16:45:22 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 16:51:28 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:51:49 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:52:01 - INFO - 180 - mo_fang_kan_dian - 已经获取 2392 金币
+2020/09/15 16:52:01 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
