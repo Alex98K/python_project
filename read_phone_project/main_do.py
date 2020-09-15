@@ -52,7 +52,7 @@ def main_run(phone_serial):
     # 调用系统应用，清理缓存和垃圾
     # CleanCash(pp).main_do()
     # 清理多余占用内存的APP
-    # CleanCash(pp).app_init()
+    CleanCash(pp).app_init()
 
     # 低收益app： 天天爱清理，米读，快音，小糖糕, 彩蛋，趣铃声
     # 大部分APP都是前面刷的快，后面慢

@@ -90,6 +90,12 @@ class MoFangKanDian(AppReadBase):
                             time.sleep(random.random() + 1)
                             self.pp.press('back')
                         continue
+                    # 如果是美女图片就返回
+                    if not self.pp(resourceId="com.toutiao.hxtoutiao:id/iv_close").exists:
+                        while not self.pp(text='我的').exists:
+                            time.sleep(random.random() + 1)
+                            self.pp.press('back')
+                        continue
                     # 如果跳转到其他app ，就回来
                     if (tp := self.pp.app_current()['package']) != self.package_name:
                         self.pp.app_stop(tp)

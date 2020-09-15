@@ -11120,3 +11120,14 @@ AttributeError: 'UiObject' object has no attribute 'text'
 2020/09/15 16:51:49 - INFO - 18 - mo_fang_kan_dian - 开始签到
 2020/09/15 16:52:01 - INFO - 180 - mo_fang_kan_dian - 已经获取 2392 金币
 2020/09/15 16:52:01 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 22:30:36 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 22:30:54 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 22:31:07 - INFO - 180 - mo_fang_kan_dian - 已经获取 2992 金币
+2020/09/15 22:31:07 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 22:38:14 - INFO - 180 - mo_fang_kan_dian - 已经获取 3292 金币
+2020/09/15 22:38:14 - INFO - 159 - mo_fang_kan_dian - 已经阅读获得了 3292 金币
+2020/09/15 22:38:16 - INFO - 167 - mo_fang_kan_dian - 看完这个栏目了，换个栏目
+2020/09/15 22:42:39 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 22:42:57 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 22:43:10 - INFO - 180 - mo_fang_kan_dian - 已经获取 3442 金币
+2020/09/15 22:43:10 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
