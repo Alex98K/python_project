@@ -10951,3 +10951,128 @@ Traceback (most recent call last):
   File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 498, in send
     raise ConnectionError(err, request=request)
 requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2020/09/15 15:37:43 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:37:53 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:38:06 - INFO - 179 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:38:06 - INFO - 53 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:38:10 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 15:39:04 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:39:17 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:39:29 - INFO - 179 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:39:29 - INFO - 53 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:39:32 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 15:40:17 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='完成'], method: None
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 210, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 64, in read_issue
+    self._adjust_lan_mu()
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 47, in _adjust_lan_mu
+    self.pp(text='完成').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='完成'], method: None
+2020/09/15 15:40:21 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:40:32 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:41:40 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:41:52 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:42:05 - INFO - 178 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:42:05 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:42:10 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 15:42:11 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息cannot unpack non-iterable float object
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 209, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 63, in read_issue
+    self._adjust_lan_mu()
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 32, in _adjust_lan_mu
+    self.pp(resourceId="com.toutiao.hxtoutiao:id/tv_edit").click(random.random(), random.random())
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 151, in click
+    x, y = self.center(offset=offset)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 181, in center
+    xoff, yoff = offset
+TypeError: cannot unpack non-iterable float object
+2020/09/15 15:42:17 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:42:26 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:42:38 - INFO - 178 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:42:38 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:42:43 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 15:42:45 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息cannot unpack non-iterable float object
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 209, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 63, in read_issue
+    self._adjust_lan_mu()
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 32, in _adjust_lan_mu
+    self.pp(resourceId="com.toutiao.hxtoutiao:id/tv_edit").click(random.random(), random.random())
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 151, in click
+    x, y = self.center(offset=offset)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 181, in center
+    xoff, yoff = offset
+TypeError: cannot unpack non-iterable float object
+2020/09/15 15:42:50 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:43:09 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:43:23 - INFO - 178 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:43:23 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:43:27 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 15:43:30 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息cannot unpack non-iterable float object
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 209, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 63, in read_issue
+    self._adjust_lan_mu()
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 32, in _adjust_lan_mu
+    self.pp(resourceId="com.toutiao.hxtoutiao:id/tv_edit").click(random.random(), random.random())
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 151, in click
+    x, y = self.center(offset=offset)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 181, in center
+    xoff, yoff = offset
+TypeError: cannot unpack non-iterable float object
+2020/09/15 15:43:34 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:44:02 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:44:18 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:44:32 - INFO - 178 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:44:32 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:44:36 - INFO - 23 - mo_fang_kan_dian - 开始调整栏目
+2020/09/15 15:47:16 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:47:31 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:47:44 - INFO - 178 - mo_fang_kan_dian - 已经获取 292 金币
+2020/09/15 15:47:44 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:49:40 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32001 Jsonrpc error: <android.support.test.uiautomator.UiObjectNotFoundException> data: UiSelector[SCROLLABLE=true], method: scrollToEnd
+Traceback (most recent call last):
+  File "F:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 209, in main_do
+    self.read_issue(duration, target_coin)
+  File "F:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 138, in read_issue
+    self.pp(scrollable=True).scroll.toEnd()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 574, in __call__
+    return jsonrpc.scrollToEnd(selector, self.vertical,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 431, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 438, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 510, in _jsonrpc_call
+    raise err
+uiautomator2.exceptions.UiObjectNotFoundError: -32001 Jsonrpc error: <android.support.test.uiautomator.UiObjectNotFoundException> data: UiSelector[SCROLLABLE=true], method: scrollToEnd
+2020/09/15 15:49:50 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 15:50:07 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 15:50:21 - INFO - 178 - mo_fang_kan_dian - 已经获取 392 金币
+2020/09/15 15:50:21 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/15 15:58:48 - INFO - 178 - mo_fang_kan_dian - 已经获取 592 金币
+2020/09/15 15:58:48 - INFO - 157 - mo_fang_kan_dian - 已经阅读获得了 592 金币
+2020/09/15 15:58:50 - INFO - 165 - mo_fang_kan_dian - 看完这个栏目了，换个栏目
+2020/09/15 16:07:08 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/15 16:07:27 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/15 16:07:40 - INFO - 179 - mo_fang_kan_dian - 已经获取 1042 金币
+2020/09/15 16:07:40 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章

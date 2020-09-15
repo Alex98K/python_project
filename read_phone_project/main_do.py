@@ -25,6 +25,7 @@ from app_jiao_ben.shan_dian_he_zi import ShanDianHezi
 from app_jiao_ben.wei_li_kan_kan import WeiLiKanKan
 from app_jiao_ben.hong_bao_shi_pin import HongBaoShiPin
 from app_jiao_ben.sou_hu_zi_xun import SouHuZiXun
+from app_jiao_ben.mo_fang_kan_dian import MoFangKanDian
 
 
 def main_run(phone_serial):
@@ -107,6 +108,8 @@ def main_run(phone_serial):
         # elif k == 19:
             # 这个收益太低，10万换1元
             # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=70000)
+        elif k == 20:
+            MoFangKanDian(phone_serial, pp).recycle_main_do(target_coin=4000)
         else:
             continue
 
