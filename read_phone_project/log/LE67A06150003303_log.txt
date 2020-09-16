@@ -11131,3 +11131,44 @@ AttributeError: 'UiObject' object has no attribute 'text'
 2020/09/15 22:42:57 - INFO - 18 - mo_fang_kan_dian - 开始签到
 2020/09/15 22:43:10 - INFO - 180 - mo_fang_kan_dian - 已经获取 3442 金币
 2020/09/15 22:43:10 - INFO - 52 - mo_fang_kan_dian - 开始阅读文章
+2020/09/16 08:46:34 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/16 08:46:46 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/16 08:47:32 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='我的'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 218, in main_do
+    if self.today_coin() < target_coin:
+  File "D:\python_project\read_phone_project\app_jiao_ben\mo_fang_kan_dian.py", line 179, in today_coin
+    self.pp(text='我的').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='我的'], method: None
+2020/09/16 08:47:36 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/16 08:47:56 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/16 08:48:02 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/16 08:48:16 - INFO - 188 - mo_fang_kan_dian - 已经获取 368 金币
+2020/09/16 08:48:16 - INFO - 54 - mo_fang_kan_dian - 开始阅读文章
+2020/09/16 08:50:08 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/16 08:50:21 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/16 08:50:34 - INFO - 188 - mo_fang_kan_dian - 已经获取 468 金币
+2020/09/16 08:50:34 - INFO - 54 - mo_fang_kan_dian - 开始阅读文章
+2020/09/16 08:59:22 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/16 08:59:35 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/16 08:59:50 - INFO - 189 - mo_fang_kan_dian - 已经获取 568 金币
+2020/09/16 08:59:50 - INFO - 54 - mo_fang_kan_dian - 开始阅读文章
+2020/09/16 09:06:35 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/16 09:06:47 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/16 09:07:02 - INFO - 189 - mo_fang_kan_dian - 已经获取 918 金币
+2020/09/16 09:07:02 - INFO - 54 - mo_fang_kan_dian - 开始阅读文章
+2020/09/16 09:19:06 - INFO - 189 - mo_fang_kan_dian - 已经获取 1568 金币
+2020/09/16 09:19:06 - INFO - 168 - mo_fang_kan_dian - 已经阅读获得了 1568 金币
+2020/09/16 09:19:08 - INFO - 176 - mo_fang_kan_dian - 看完这个栏目了，换个栏目
+2020/09/16 09:27:07 - INFO - 189 - mo_fang_kan_dian - 已经获取 1968 金币
+2020/09/16 09:27:07 - INFO - 168 - mo_fang_kan_dian - 已经阅读获得了 1968 金币
+2020/09/16 09:27:09 - INFO - 176 - mo_fang_kan_dian - 看完这个栏目了，换个栏目
+2020/09/16 09:29:59 - INFO - 189 - mo_fang_kan_dian - 已经获取 2018 金币
+2020/09/16 09:29:59 - INFO - 168 - mo_fang_kan_dian - 已经阅读获得了 2018 金币
+2020/09/16 09:30:01 - INFO - 176 - mo_fang_kan_dian - 看完这个栏目了，换个栏目

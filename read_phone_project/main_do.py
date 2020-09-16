@@ -38,6 +38,7 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
+
     # 重置电池状态
     # pp.shell('dumpsys battery reset')
     # raise
