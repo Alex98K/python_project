@@ -62,53 +62,53 @@ def main_run(phone_serial):
     t = time.time()
     job_list = [i for i in range(100)]
     # 随机执行
-    # random.shuffle(job_list)
+    random.shuffle(job_list)
     for k in job_list:
         if k == -1:
             continue
-        # elif k == 0:
-        #     JinDong(phone_serial, pp).recycle_main_do(target_coin=5000)
-        # elif k == 1:
-        #     JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
-        # elif k == 2:
-        #     QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
-        # elif k == 3:
-        #     HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
-        # elif k == 4:
-        #     CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000)
-        # elif k == 5:
-        #     QuLingSheng(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 6:
-        #     ShuaBao(phone_serial, pp).recycle_main_do(target_coin=6000)
+        elif k == 0:
+            JinDong(phone_serial, pp).recycle_main_do(target_coin=5000)
+        elif k == 1:
+            JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
+        elif k == 2:
+            QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
+        elif k == 3:
+            HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
+        elif k == 4:
+            CaiDan(phone_serial, pp).recycle_main_do(target_coin=3000)
+        elif k == 5:
+            QuLingSheng(phone_serial, pp).recycle_main_do(target_coin=1200)
+        elif k == 6:
+            ShuaBao(phone_serial, pp).recycle_main_do(target_coin=6000)
         # elif k == 7:
-        #     # 这个APP特别卡，没有今日金币获取地方，在看视频过程中还有滑块验证
-        #     WeiShi(phone_serial, pp).recycle_main_do(target_coin=1000)
-        # elif k == 8:
-        #     HuoShan(phone_serial, pp).recycle_main_do(target_coin=3000)
-        # elif k == 9:
-        #     DouYin(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 10:
-        #     KuaiShou(phone_serial, pp).recycle_main_do(target_coin=6000)
-        # elif k == 11:
-        #     XiangKan(phone_serial, pp).recycle_main_do(target_coin=1000)
-        # elif k == 12:
-        #     MiDu(phone_serial, pp).recycle_main_do(target_coin=1000)
-        # elif k == 13:
-        #     XiaoTangGao(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 14:
-        #     KuaiYin(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 15:
-        #     TianTianAiQingLi(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 16:
+            # 这个APP特别卡，没有今日金币获取地方，在看视频过程中还有滑块验证
+            # WeiShi(phone_serial, pp).recycle_main_do(target_coin=1000)
+        elif k == 8:
+            HuoShan(phone_serial, pp).recycle_main_do(target_coin=3000)
+        elif k == 9:
+            DouYin(phone_serial, pp).recycle_main_do(target_coin=2000)
+        elif k == 10:
+            KuaiShou(phone_serial, pp).recycle_main_do(target_coin=6000)
+        elif k == 11:
+            XiangKan(phone_serial, pp).recycle_main_do(target_coin=1000)
+        elif k == 12:
+            MiDu(phone_serial, pp).recycle_main_do(target_coin=1000)
+        elif k == 13:
+            XiaoTangGao(phone_serial, pp).recycle_main_do(target_coin=2000)
+        elif k == 14:
+            KuaiYin(phone_serial, pp).recycle_main_do(target_coin=2000)
+        elif k == 15:
+            TianTianAiQingLi(phone_serial, pp).recycle_main_do(target_coin=2000)
+        elif k == 16:
             # 这个注册时候账号异常，客服说不影响使用，但是被系统检测到了，尝试了下，可以获得金币，提现还在测试
-            # ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=80000)
-        # elif k == 17:
-        #     WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
-        # elif k == 18:
-        #     HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=7000)
-        # elif k == 19:
+            ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=80000)
+        elif k == 17:
+            WeiLiKanKan(phone_serial, pp).recycle_main_do(target_coin=2000)
+        elif k == 18:
+            HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=7000)
+        elif k == 19:
             # 这个收益太低，10万换1元
-            # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=70000)
+            SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=70000)
         elif k == 20:
             MoFangKanDian(phone_serial, pp).recycle_main_do(target_coin=4000)
         else:

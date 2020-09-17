@@ -11172,3 +11172,114 @@ uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Sel
 2020/09/16 09:29:59 - INFO - 189 - mo_fang_kan_dian - 已经获取 2018 金币
 2020/09/16 09:29:59 - INFO - 168 - mo_fang_kan_dian - 已经阅读获得了 2018 金币
 2020/09/16 09:30:01 - INFO - 176 - mo_fang_kan_dian - 看完这个栏目了，换个栏目
+2020/09/16 19:46:20 - INFO - 44 - __init__ - ********开始 趣铃声 的任务********
+2020/09/16 19:46:39 - INFO - 18 - qu_ling_sheng - 开始签到
+2020/09/16 19:46:45 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 19:47:15 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 64
+2020/09/16 19:47:15 - INFO - 39 - qu_ling_sheng - 开始阅读小视频
+2020/09/16 19:53:04 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 19:53:32 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 388
+2020/09/16 19:53:32 - INFO - 46 - qu_ling_sheng - 开始阅读铃声视频
+2020/09/16 20:06:22 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 20:06:50 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 820
+2020/09/16 20:06:50 - INFO - 39 - qu_ling_sheng - 开始阅读小视频
+2020/09/16 20:12:44 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 20:13:12 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 1000
+2020/09/16 20:13:12 - INFO - 46 - qu_ling_sheng - 开始阅读铃声视频
+2020/09/16 20:26:02 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 20:26:30 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 1215
+2020/09/16 20:26:30 - INFO - 39 - qu_ling_sheng - 开始阅读小视频
+2020/09/16 20:32:24 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 20:32:53 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 1290
+2020/09/16 20:32:53 - INFO - 46 - qu_ling_sheng - 开始阅读铃声视频
+2020/09/16 20:45:43 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 20:46:10 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 1470
+2020/09/16 20:46:10 - INFO - 39 - qu_ling_sheng - 开始阅读小视频
+2020/09/16 20:52:08 - INFO - 53 - qu_ling_sheng - 获取今日金币数量
+2020/09/16 20:52:35 - INFO - 65 - qu_ling_sheng - 今日已经获取金币 1545
+2020/09/16 20:52:35 - INFO - 46 - qu_ling_sheng - 开始阅读铃声视频
+2020/09/16 21:05:22 - INFO - 78 - qu_ling_sheng - 开始清理缓存
+2020/09/16 21:05:36 - INFO - 51 - __init__ - ********结束 趣铃声 APP 任务********
+2020/09/16 21:06:22 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/16 21:06:34 - INFO - 18 - jin_ri_tou_tiao - 开始签到
+2020/09/16 21:06:46 - INFO - 179 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/16 21:07:06 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [text='我的'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 206, in main_do
+    coin = self.today_coin()
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 180, in today_coin
+    self.pp(text='我的').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [text='我的'], method: None
+2020/09/16 21:07:17 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/16 21:07:25 - INFO - 18 - jin_ri_tou_tiao - 开始签到
+2020/09/16 21:07:39 - INFO - 179 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/16 21:07:49 - INFO - 188 - jin_ri_tou_tiao - 今日已经获取金币 0
+2020/09/16 21:07:49 - INFO - 55 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/16 21:38:34 - INFO - 179 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/16 21:38:37 - INFO - 188 - jin_ri_tou_tiao - 今日已经获取金币 4521
+2020/09/16 21:38:40 - INFO - 176 - jin_ri_tou_tiao - 看完这个栏目了，换个栏目
+2020/09/16 22:02:56 - INFO - 179 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/16 22:03:00 - INFO - 188 - jin_ri_tou_tiao - 今日已经获取金币 7958
+2020/09/16 22:03:00 - INFO - 174 - jin_ri_tou_tiao - 今日已经获取超过 6500 个金币，不再阅读了
+2020/09/16 22:03:00 - INFO - 192 - jin_ri_tou_tiao - 开始清理缓存
+2020/09/16 22:03:06 - INFO - 51 - __init__ - ********结束 今日头条极速版 APP 任务********
+2020/09/16 22:03:30 - INFO - 44 - __init__ - ********开始 快音 的任务********
+2020/09/16 22:03:56 - INFO - 114 - kuai_yin - 获取今日金币数量
+2020/09/16 22:04:21 - INFO - 132 - kuai_yin - 今日已经获取金币 0
+2020/09/16 22:04:21 - INFO - 53 - kuai_yin - 开始阅读主页
+2020/09/16 22:05:49 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32001 Jsonrpc error: <android.support.test.uiautomator.UiObjectNotFoundException> data: UiSelector[RESOURCE_ID=com.kuaiyin.player:id/v_next], method: objInfo
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_yin.py", line 148, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_yin.py", line 139, in read_issue
+    self.read_issue_first(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\kuai_yin.py", line 91, in read_issue_first
+    self.pp(resourceId='com.kuaiyin.player:id/v_next').click(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 151, in click
+    x, y = self.center(offset=offset)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 178, in center
+    lx, ly, rx, ry = self.bounds()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 165, in bounds
+    info = self.info
+  File "<decorator-gen-4>", line 2, in info
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\retry\api.py", line 73, in retry_decorator
+    return __retry_internal(partial(f, *args, **kwargs), exceptions, tries, delay, max_delay, backoff, jitter,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\retry\api.py", line 33, in __retry_internal
+    return f()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 130, in info
+    return self.jsonrpc.objInfo(self.selector)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 434, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 441, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 513, in _jsonrpc_call
+    raise err
+uiautomator2.exceptions.UiObjectNotFoundError: -32001 Jsonrpc error: <android.support.test.uiautomator.UiObjectNotFoundException> data: UiSelector[RESOURCE_ID=com.kuaiyin.player:id/v_next], method: objInfo
+2020/09/16 22:06:12 - INFO - 44 - __init__ - ********开始 快音 的任务********
+2020/09/16 22:06:46 - INFO - 114 - kuai_yin - 获取今日金币数量
+2020/09/16 22:07:13 - INFO - 132 - kuai_yin - 今日已经获取金币 504
+2020/09/16 22:07:13 - INFO - 53 - kuai_yin - 开始阅读主页
+2020/09/16 22:19:13 - INFO - 114 - kuai_yin - 获取今日金币数量
+2020/09/16 22:19:27 - INFO - 132 - kuai_yin - 今日已经获取金币 504
+2020/09/16 22:19:27 - INFO - 99 - kuai_yin - 已经获取了 504 金币
+2020/09/16 22:19:29 - INFO - 105 - kuai_yin - 看完这个栏目了，换个栏目
+2020/09/16 22:31:30 - INFO - 114 - kuai_yin - 获取今日金币数量
+2020/09/16 22:31:44 - INFO - 132 - kuai_yin - 今日已经获取金币 504
+2020/09/16 22:31:44 - INFO - 99 - kuai_yin - 已经获取了 504 金币
+2020/09/16 22:31:46 - INFO - 105 - kuai_yin - 看完这个栏目了，换个栏目
+2020/09/16 22:53:53 - INFO - 114 - kuai_yin - 获取今日金币数量
+2020/09/16 22:54:06 - INFO - 132 - kuai_yin - 今日已经获取金币 504
+2020/09/16 22:54:06 - INFO - 99 - kuai_yin - 已经获取了 504 金币
+2020/09/16 22:54:08 - INFO - 105 - kuai_yin - 看完这个栏目了，换个栏目
+2020/09/16 23:07:15 - INFO - 114 - kuai_yin - 获取今日金币数量
+2020/09/16 23:07:27 - INFO - 132 - kuai_yin - 今日已经获取金币 504
+2020/09/16 23:07:27 - INFO - 99 - kuai_yin - 已经获取了 504 金币
+2020/09/16 23:07:31 - INFO - 105 - kuai_yin - 看完这个栏目了，换个栏目

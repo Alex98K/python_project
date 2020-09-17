@@ -27,7 +27,7 @@ class AppReadBase(object):
         self.app_name = ''
         # self.pp.watcher('init1').when('我知道了').click()
         # self.pp.watcher('init2').when('知道了').click()
-        # self.pp.watcher('init3').when(xpath='//*[contains(@resource-id, "close")]').click()
+        self.pp.watcher('init3').when(xpath='//*[@resource-id="android:id/le_bottomsheet_default_cancel"]').click()
 
     def app_start(self, app_name):
         self.app_name = app_name

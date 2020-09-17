@@ -69,29 +69,23 @@
     "闪电盒子"
   ],
   "com.sanmiao.sound":
-          [
-            "https://imtt.dd.qq.com/16891/apk/03521D412784DA5A97BE6C7842B4804C.apk?fsname=com.sanmiao.sound_3.0.0_100.apk&csr=1bbd",
-            "红包视频"
-          ],
+  [
+    "https://imtt.dd.qq.com/16891/apk/03521D412784DA5A97BE6C7842B4804C.apk?fsname=com.sanmiao.sound_3.0.0_100.apk&csr=1bbd",
+    "红包视频"
+  ],
   "com.toutiao.hxtoutiao":
-          [
-            "https://imtt.dd.qq.com/16891/apk/D97F6AEC2E1D74142F48E6F8B1E5BCC6.apk?fsname=com.toutiao.hxtoutiao_3.3.6_72.apk&csr=1bbd",
-            "魔方看点"
-          ],
+  [
+    "https://imtt.dd.qq.com/16891/apk/D97F6AEC2E1D74142F48E6F8B1E5BCC6.apk?fsname=com.toutiao.hxtoutiao_3.3.6_72.apk&csr=1bbd",
+    "魔方看点"
+  ],
   "cn.weli.story":
-          [
-            "https://imtt.dd.qq.com/16891/apk/CE8BB659F52EDD585EFDFDC337560AFE.apk?fsname=cn.weli.story_2.1.1_860.apk&csr=1bbd",
-            "微鲤看看"
-          ],
+  [
+    "https://imtt.dd.qq.com/16891/apk/CE8BB659F52EDD585EFDFDC337560AFE.apk?fsname=cn.weli.story_2.1.1_860.apk&csr=1bbd",
+    "微鲤看看"
+  ],
   "com.sohu.infonews":
-          [
-            "https://imtt.dd.qq.com/16891/apk/10267C0B8D225F3B6305D9A62B7E891F.apk?fsname=com.sohu.infonews_4.0.7_826.apk&csr=1bbd",
-            "搜狐资讯"
-          ],
-  "com.maihan.tredian":
-          [
-            "https://imtt.dd.qq.com/16891/apk/72263683C1A345CAC97D5FBCBDD3B5C4.apk?fsname=com.maihan.tredian_2.5.1_71.apk&csr=1bbd",
-            "淘最热点"
-          ]
-
+  [
+    "https://imtt.dd.qq.com/16891/apk/10267C0B8D225F3B6305D9A62B7E891F.apk?fsname=com.sohu.infonews_4.0.7_826.apk&csr=1bbd",
+    "搜狐资讯"
+  ]
 }
