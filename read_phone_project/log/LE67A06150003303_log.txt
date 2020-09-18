@@ -11283,3 +11283,167 @@ uiautomator2.exceptions.UiObjectNotFoundError: -32001 Jsonrpc error: <android.su
 2020/09/16 23:07:27 - INFO - 132 - kuai_yin - 今日已经获取金币 504
 2020/09/16 23:07:27 - INFO - 99 - kuai_yin - 已经获取了 504 金币
 2020/09/16 23:07:31 - INFO - 105 - kuai_yin - 看完这个栏目了，换个栏目
+2020/09/17 19:12:53 - INFO - 44 - __init__ - ********开始 彩蛋视频 的任务********
+2020/09/17 19:12:59 - INFO - 91 - cai_dan - 获取今日金币数量
+2020/09/17 19:13:06 - INFO - 106 - cai_dan - 今日已经获取金币 0
+2020/09/17 19:13:06 - INFO - 61 - cai_dan - 开始阅读首页视频
+2020/09/17 19:26:07 - INFO - 91 - cai_dan - 获取今日金币数量
+2020/09/17 19:26:13 - INFO - 106 - cai_dan - 今日已经获取金币 591
+2020/09/17 19:26:13 - INFO - 61 - cai_dan - 开始阅读首页视频
+2020/09/17 19:39:19 - INFO - 91 - cai_dan - 获取今日金币数量
+2020/09/17 19:39:26 - INFO - 106 - cai_dan - 今日已经获取金币 1126
+2020/09/17 19:39:26 - INFO - 61 - cai_dan - 开始阅读首页视频
+2020/09/17 19:52:29 - INFO - 91 - cai_dan - 获取今日金币数量
+2020/09/17 19:52:36 - INFO - 106 - cai_dan - 今日已经获取金币 1627
+2020/09/17 19:52:36 - INFO - 61 - cai_dan - 开始阅读首页视频
+2020/09/17 20:05:46 - INFO - 91 - cai_dan - 获取今日金币数量
+2020/09/17 20:05:55 - INFO - 106 - cai_dan - 今日已经获取金币 2072
+2020/09/17 20:05:55 - INFO - 61 - cai_dan - 开始阅读首页视频
+2020/09/17 20:19:06 - INFO - 51 - __init__ - ********结束 彩蛋视频 APP 任务********
+2020/09/17 20:19:33 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/17 20:19:41 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:19:48 - INFO - 91 - jing_dong - 今日已经获取金币 29
+2020/09/17 20:19:48 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/17 20:34:35 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 121, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 98, in read_issue
+    self.read_issue_first(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 21, in read_issue_first
+    self._read_adv(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 54, in _read_adv
+    self.click_random_position(xpath.get().bounds)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+2020/09/17 20:34:43 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/17 20:34:48 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:34:55 - INFO - 91 - jing_dong - 今日已经获取金币 2564
+2020/09/17 20:34:55 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/17 20:44:42 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:44:48 - INFO - 91 - jing_dong - 今日已经获取金币 3888
+2020/09/17 20:44:48 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/17 20:46:24 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 121, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 98, in read_issue
+    self.read_issue_first(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 21, in read_issue_first
+    self._read_adv(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 54, in _read_adv
+    self.click_random_position(xpath.get().bounds)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+2020/09/17 20:46:33 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/17 20:46:38 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:46:44 - INFO - 91 - jing_dong - 今日已经获取金币 4068
+2020/09/17 20:46:44 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/17 20:47:56 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 121, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 98, in read_issue
+    self.read_issue_first(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 21, in read_issue_first
+    self._read_adv(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 54, in _read_adv
+    self.click_random_position(xpath.get().bounds)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+2020/09/17 20:48:05 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/17 20:48:11 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:48:17 - INFO - 91 - jing_dong - 今日已经获取金币 4128
+2020/09/17 20:48:17 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/17 20:50:11 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 121, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 98, in read_issue
+    self.read_issue_first(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 21, in read_issue_first
+    self._read_adv(read_issue_time1, read_issue_time2)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jing_dong.py", line 54, in _read_adv
+    self.click_random_position(xpath.get().bounds)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]']
+2020/09/17 20:50:19 - INFO - 44 - __init__ - ********开始 京东极速版 的任务********
+2020/09/17 20:50:24 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:50:31 - INFO - 91 - jing_dong - 今日已经获取金币 4428
+2020/09/17 20:50:31 - INFO - 17 - jing_dong - 开始阅读首页视频
+2020/09/17 20:58:27 - INFO - 76 - jing_dong - 获取今日金币数量
+2020/09/17 20:58:32 - INFO - 91 - jing_dong - 今日已经获取金币 5420
+2020/09/17 20:58:32 - INFO - 101 - jing_dong - 开始清理缓存
+2020/09/17 20:58:38 - INFO - 51 - __init__ - ********结束 京东极速版 APP 任务********
+2020/09/17 20:59:01 - INFO - 44 - __init__ - ********开始 微鲤看看 的任务********
+2020/09/17 20:59:22 - INFO - 18 - wei_li_kan_kan - 开始签到
+2020/09/17 20:59:32 - INFO - 175 - wei_li_kan_kan - 已经获取 0 金币
+2020/09/17 20:59:32 - INFO - 61 - wei_li_kan_kan - 开始阅读头条视频
+2020/09/17 20:59:37 - INFO - 23 - wei_li_kan_kan - 开始调整栏目
+2020/09/17 21:01:53 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [resourceId='cn.weli.story:id/rl_bottom_4'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 205, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 55, in read_issue
+    self.read_issue_first(read_issue_time1, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 126, in read_issue_first
+    coin = self.today_coin()
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 170, in today_coin
+    self.pp(resourceId='cn.weli.story:id/rl_bottom_4').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [resourceId='cn.weli.story:id/rl_bottom_4'], method: None
+2020/09/17 21:02:03 - INFO - 44 - __init__ - ********开始 微鲤看看 的任务********
+2020/09/17 21:02:16 - INFO - 18 - wei_li_kan_kan - 开始签到
+2020/09/17 21:02:25 - INFO - 175 - wei_li_kan_kan - 已经获取 0 金币
+2020/09/17 21:02:25 - INFO - 61 - wei_li_kan_kan - 开始阅读头条视频
+2020/09/17 21:02:29 - INFO - 23 - wei_li_kan_kan - 开始调整栏目
+2020/09/17 21:05:12 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息-32002 Client error: <> data: Selector [resourceId='cn.weli.story:id/rl_bottom_4'], method: None
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 205, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 55, in read_issue
+    self.read_issue_first(read_issue_time1, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 126, in read_issue_first
+    coin = self.today_coin()
+  File "D:\python_project\read_phone_project\app_jiao_ben\wei_li_kan_kan.py", line 170, in today_coin
+    self.pp(resourceId='cn.weli.story:id/rl_bottom_4').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 345, in must_wait
+    raise UiObjectNotFoundError({'code': -32002, 'data': str(self.selector), 'method': 'wait'})
+uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Selector [resourceId='cn.weli.story:id/rl_bottom_4'], method: None
+2020/09/17 21:05:23 - INFO - 44 - __init__ - ********开始 微鲤看看 的任务********
+2020/09/17 21:05:38 - INFO - 18 - wei_li_kan_kan - 开始签到
+2020/09/17 21:05:48 - INFO - 175 - wei_li_kan_kan - 已经获取 50 金币
+2020/09/17 21:05:48 - INFO - 61 - wei_li_kan_kan - 开始阅读头条视频
+2020/09/17 21:05:53 - INFO - 23 - wei_li_kan_kan - 开始调整栏目
+2020/09/17 21:21:20 - INFO - 118 - wei_li_kan_kan - 已经阅读了 898 秒，不看了
+2020/09/17 21:21:24 - INFO - 175 - wei_li_kan_kan - 已经获取 333 金币
+2020/09/17 21:21:24 - INFO - 137 - wei_li_kan_kan - 开始阅读同城视频
+2020/09/17 21:28:01 - INFO - 175 - wei_li_kan_kan - 已经获取 357 金币
+2020/09/17 21:28:01 - INFO - 61 - wei_li_kan_kan - 开始阅读头条视频
+2020/09/17 21:41:07 - INFO - 175 - wei_li_kan_kan - 已经获取 556 金币
+2020/09/17 21:41:10 - INFO - 134 - wei_li_kan_kan - 看完这个栏目了，换个栏目
+2020/09/17 21:54:50 - INFO - 175 - wei_li_kan_kan - 已经获取 823 金币
+2020/09/17 21:54:52 - INFO - 134 - wei_li_kan_kan - 看完这个栏目了，换个栏目
+2020/09/17 22:09:26 - INFO - 175 - wei_li_kan_kan - 已经获取 1027 金币
+2020/09/17 22:09:29 - INFO - 134 - wei_li_kan_kan - 看完这个栏目了，换个栏目
