@@ -154,7 +154,9 @@ class QuTouTiao(AppReadBase):
 
     def get_read_reward(self):
         self.logger.info(f'开始获阅读文章的奖励')
+        self.pp(text='任务').wait()
         self.pp(text='任务').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 1)
         t = time.time()
         while time.time() - t <= 300:
             t1 = time.time()
@@ -184,7 +186,9 @@ class QuTouTiao(AppReadBase):
 
     def get_advertisement_reward(self):  # 看广告的金币，收益低
         self.logger.info(f'开始看广告获金币')
+        self.pp(text='任务').wait()
         self.pp(text='任务').click(offset=(random.random(), random.random()))
+        time.sleep(random.random() + 1)
         t = time.time()
         while time.time() - t <= 300:
             t1 = time.time()
