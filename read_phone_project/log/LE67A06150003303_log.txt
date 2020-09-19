@@ -11447,3 +11447,7 @@ uiautomator2.exceptions.UiObjectNotFoundError: -32002 Client error: <> data: Sel
 2020/09/17 21:54:52 - INFO - 134 - wei_li_kan_kan - 看完这个栏目了，换个栏目
 2020/09/17 22:09:26 - INFO - 175 - wei_li_kan_kan - 已经获取 1027 金币
 2020/09/17 22:09:29 - INFO - 134 - wei_li_kan_kan - 看完这个栏目了，换个栏目
+2020/09/19 22:11:32 - INFO - 44 - __init__ - ********开始 魔方看点 的任务********
+2020/09/19 22:11:47 - INFO - 18 - mo_fang_kan_dian - 开始签到
+2020/09/19 22:12:01 - INFO - 189 - mo_fang_kan_dian - 已经获取 118 金币
+2020/09/19 22:12:01 - INFO - 54 - mo_fang_kan_dian - 开始阅读文章

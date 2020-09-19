@@ -32,9 +32,10 @@ def main_run(phone_serial):
     """ 用来测试的乐视X620手机序列号是    LE67A06150003303   """
     pp = uiautomator2.connect_usb(phone_serial)
     time.sleep(1)
-    pp.unlock()
-    time.sleep(1)
-    pp.screen_on()
+    while not pp(resourceId='android:id/content').exists:
+        pp.unlock()
+        time.sleep(1)
+        pp.screen_on()
     print(pp.address)
 
     # 测试代码部分

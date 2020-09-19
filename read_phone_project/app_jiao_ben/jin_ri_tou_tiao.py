@@ -9,6 +9,7 @@ class JinRiTouTiao(AppReadBase):
         super(JinRiTouTiao, self).__init__(phone_serial, pp)
         # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
+        self.pp.watcher('tip5').when('以后再说').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.ss.android.article.lite:id/b6y"]').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.ss.android.article.lite:id/a0j"]').click()
         self.pp.watcher('tip4').when(xpath='//*[@text="0x+wcp2R1bM4bU8gAAAABJRU5ErkJggg=="]').click()
