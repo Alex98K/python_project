@@ -7,7 +7,7 @@ import time
 class SouHuZiXun(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(SouHuZiXun, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="com.sohu.infonews:id/cancle_dialog_iv"]').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.sohu.infonews:id/act_close_image"]').click()
         # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]]').click()

@@ -7,7 +7,7 @@ import time
 class WeiLiKanKan(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(WeiLiKanKan, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('继续观看').click()
         self.pp.watcher('tip2').when('立即领取').click()
         self.pp.watcher('tip3').when('没有邀请码').click()

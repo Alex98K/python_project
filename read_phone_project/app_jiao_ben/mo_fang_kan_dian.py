@@ -7,7 +7,7 @@ import time
 class MoFangKanDian(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(MoFangKanDian, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('看视频再赚100金币').press('back')
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.toutiao.hxtoutiao:id/iv_cancel"]').click()
         # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()

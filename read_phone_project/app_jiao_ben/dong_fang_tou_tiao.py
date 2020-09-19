@@ -7,7 +7,7 @@ import time
 class DongFangTouTiao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(DongFangTouTiao, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when(xpath='//*[@content-desc="头条新闻"]/android.view.View[2]').click()
         # self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.cashtoutiao:id/img_close"]').click()
         # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()

@@ -7,7 +7,7 @@ import time
 class ShanDianHezi(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(ShanDianHezi, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when(xpath='//*[@resource-id="c.l.a:id/img_close"]').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.lechuan.mdwz:id/t"]').click()
         # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.cashtoutiao:id/iv_close"]').click()

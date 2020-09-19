@@ -7,7 +7,7 @@ import time
 class HongBaoShiPin(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(HongBaoShiPin, self).__init__(phone_serial, pp)
-        self.pp = uiautomator2.connect_usb()
+        # self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip3').when('取消').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.sanmiao.sound:id/iv_signIn_close"]').click()
