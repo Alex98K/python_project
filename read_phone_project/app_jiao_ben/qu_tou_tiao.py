@@ -13,6 +13,7 @@ class QuTouTiao(AppReadBase):
         self.pp.watcher('tip2').when('残忍离开').click()
         self.pp.watcher('tip3').when('恭喜获得').press('back')
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.jifen.qukan:id/b6l"]').click()
+        self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.jifen.qukan:id/azx"]').click()
         self.pp.watcher.start(0.5)
 
     def today_coin(self):
