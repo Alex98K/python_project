@@ -153,9 +153,9 @@ class MoFangKanDian(AppReadBase):
                     if time.time() - t > duration:
                         self.logger.info(f'今日阅读时间超过了{duration}秒，不再阅读了')
                         return
-                if not self.pp(text='我的').exists:
-                    self.pp.press('back')
-                    time.sleep(random.random() + 1)
+                time.sleep(random.random() + 1)
+                self.pp.press('back')
+                time.sleep(random.random() + 1)
                 self.app_switch_current()
                 # 随机下滑1-4次
                 for k in range(random.randint(1, 2)):
