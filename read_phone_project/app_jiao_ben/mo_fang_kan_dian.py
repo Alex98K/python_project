@@ -157,7 +157,7 @@ class MoFangKanDian(AppReadBase):
                 self.pp.press('back')
                 time.sleep(random.random() + 1)
                 self.app_switch_current()
-                # 随机下滑1-4次
+                # 随机下滑1-2次
                 for k in range(random.randint(1, 2)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                                   random.uniform(0.2, 0.3), steps=random.randint(20, 60))
