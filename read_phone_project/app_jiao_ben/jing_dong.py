@@ -45,7 +45,7 @@ class JinDong(AppReadBase):
                         time.sleep(random.random() + 1)
             elif title == '看视频赚金币':
                 xpath = self.pp.xpath(f'//android.support.v7.widget.RecyclerView/'
-                                      f'android.widget.FrameLayout[{random.randint(1, 4)}]')
+                                      f'android.widget.FrameLayout[{random.randint(2, 4)}]')
                 xpath.wait()
                 time.sleep(random.random() + 1)
                 self.click_random_position(xpath.get().bounds)
