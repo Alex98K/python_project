@@ -71,7 +71,7 @@ def main_run(phone_serial):
         elif k == 1:
             JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
         elif k == 2:
-            QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=7000)
+            QuTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
         elif k == 3:
             HuiTouTiao(phone_serial, pp).recycle_main_do(target_coin=5000)
         elif k == 4:

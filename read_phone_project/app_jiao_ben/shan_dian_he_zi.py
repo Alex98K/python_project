@@ -21,7 +21,6 @@ class ShanDianHezi(AppReadBase):
         if self.pp(text='立即签到').exists(timeout=5):
             self.pp(text='立即签到').click(offset=(random.random(), random.random()))
 
-
     def read_issue_first(self, read_issue_time, target_coin):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
@@ -109,6 +108,8 @@ class ShanDianHezi(AppReadBase):
     def read_issue(self, duration, target_coin):
         self.logger.info(f'开始阅读文章')
         time.sleep(random.random() + 1)
+        self.pp.xpath('//*[@resource-id="c.l.a:id/bottom_navigation"]/android.widget.RelativeLayout[1]/'
+                      'android.widget.RelativeLayout[1]').wait()
         self.click_random_position(self.pp.xpath('//*[@resource-id="c.l.a:id/bottom_navigation"]/'
                                                  'android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]')
                                    .get().bounds)

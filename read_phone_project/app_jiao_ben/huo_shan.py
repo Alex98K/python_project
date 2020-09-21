@@ -49,6 +49,7 @@ class HuoShan(AppReadBase):
     def read_issue_first(self, read_issue_time):
         self.logger.info(f'开始阅读首页视频')
         time.sleep(random.random() + 1)
+        self.pp(text='首页').wait()
         self.pp(text='首页').click(offset=(random.random(), random.random()))
         time.sleep(random.random() + 1)
         self._read_issue_core(read_issue_time)
@@ -72,8 +73,9 @@ class HuoShan(AppReadBase):
     def today_coin(self):
         self.logger.info('获取今日金币数量')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
-        self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/lu"]').wait()
-        coin = self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/lu"]').get_text()
+        self.pp(resourceId='com.ss.android.ugc.livelite:id/lu').wait()
+        time.sleep(random.random() + 1)
+        coin = self.pp(resourceId='com.ss.android.ugc.livelite:id/lu').get_text()
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)

@@ -18,6 +18,7 @@ class QuTouTiao(AppReadBase):
 
     def today_coin(self):
         self.logger.info(f'获取今日金币数量')
+        self.pp(text='我的').wait()
         self.pp(text='我的').click(offset=(random.random(), random.random()))
         coin = self.pp.xpath('//*[@resource-id="com.jifen.qukan.personal:id/ea"]').get_text()
         coin = int(re.search(r'\d*', coin).group())
