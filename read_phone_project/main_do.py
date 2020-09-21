@@ -36,7 +36,7 @@ def main_run(phone_serial):
         pp.unlock()
         time.sleep(1)
         pp.screen_on()
-    print(pp.address)
+    print(pp.wlan_ip)
 
     # 测试代码部分
     # 重置电池状态
