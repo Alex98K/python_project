@@ -39,10 +39,10 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
-
+    JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
     # 重置电池状态
     # pp.shell('dumpsys battery reset')
-    # raise
+    raise
 
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')
@@ -109,7 +109,7 @@ def main_run(phone_serial):
             HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=7000)
         # elif k == 19:
             # 这个收益太低，10万换1元
-            # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=70000)
+            # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=10000)
         elif k == 20:
             MoFangKanDian(phone_serial, pp).recycle_main_do(target_coin=4000)
         else:

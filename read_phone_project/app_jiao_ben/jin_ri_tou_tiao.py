@@ -26,22 +26,22 @@ class JinRiTouTiao(AppReadBase):
 
     def _adjust_lan_mu(self):
         self.logger.info(f'开始调整栏目')
-        lan_mu_num_end = len(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/'
+        lan_mu_num_end = len(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a66"]/'
                                            'android.widget.LinearLayout[1]//android.widget.FrameLayout').all()) - 1
         if lan_mu_num_end <= 5:
             return
-        if self.pp(resourceId="com.ss.android.article.lite:id/a9k").exists:
-            self.pp(resourceId="com.ss.android.article.lite:id/a9k").click(
+        if self.pp(resourceId="com.ss.android.article.lite:id/a_u").exists:
+            self.pp(resourceId="com.ss.android.article.lite:id/a_u").click(
                 offset=(random.uniform(0.5, 0.9), random.random()))
             time.sleep(random.random() + 1)
-            self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a2f"]/android.view.View[3]').wait()
+            self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a3h"]/android.view.View[3]').wait()
             self.pp.click(0.928, 0.107)
             time.sleep(random.random() + 1)
         lan_mu_num = 2
-        for j in reversed(self.pp(resourceId='com.ss.android.article.lite:id/a9q')):
+        for j in reversed(self.pp(resourceId='com.ss.android.article.lite:id/aa0')):
             j.click_exists()
         time.sleep(random.random() + 1)
-        for j in reversed(self.pp(resourceId='com.ss.android.article.lite:id/au5')):
+        for j in reversed(self.pp(resourceId='com.ss.android.article.lite:id/awh')):
             if j.get_text()[-2:] not in ['抗疫', '视频', '图片', '值点', '小说', '音频', '娱乐'] and \
                     random.random() < 0.5 and lan_mu_num < lan_mu_num_end:
                 j.click_exists()
@@ -59,18 +59,20 @@ class JinRiTouTiao(AppReadBase):
                                    .get().bounds)
         time.sleep(random.random() + 1)
         # 看情况调整栏目
-        if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/'
+        if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a66"]/android.widget.LinearLayout[1]/'
                          'android.widget.FrameLayout[last()]').get().bounds[2] > \
-                self.pp(resourceId="com.ss.android.article.lite:id/a9k").bounds()[0]:
+                self.pp(resourceId="com.ss.android.article.lite:id/a_u").bounds()[0]:
             self._adjust_lan_mu()
         # 获取栏目
-        lan_mu_num = len(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/'
+        lan_mu_num = len(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a66"]/'
                                        'android.widget.LinearLayout[1]//android.widget.FrameLayout').all())
         random_list = [x for x in range(1, lan_mu_num)]
         random.shuffle(random_list)
+        # 看文章统计
+        p = 0
         for j in random_list:
             t = time.time()
-            self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.ss.android.article.lite:id/a4x"]/'
+            self.click_random_position(self.pp.xpath(f'//*[@resource-id="com.ss.android.article.lite:id/a66"]/'
                                                      f'android.widget.LinearLayout[1]//'
                                                      f'android.widget.FrameLayout[{j + 1}]').get().bounds)
             time.sleep(random.random() + 1)
@@ -88,14 +90,14 @@ class JinRiTouTiao(AppReadBase):
                         self.pp.press('back')
                         time.sleep(random.random() + 1)
                     # 没有奖励的就跳过不看了
-                    if not (self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/aak"]').exists or
-                            self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/l9"]').exists) or \
-                            self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/round_write_button"]').exists or\
-                            self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/'
-                                          'wenda_detail_title_image"]').exists:
-                        self.pp.press('back')
-                        time.sleep(random.random() + 1)
-                        continue
+                    # if not (self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/aak"]').exists or
+                    #         self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/l9"]').exists) or \
+                    #         self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/round_write_button"]').exists or\
+                    #         self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/'
+                    #                       'wenda_detail_title_image"]').exists:
+                    #     self.pp.press('back')
+                    #     time.sleep(random.random() + 1)
+                    #     continue
                     issue_time_start = time.time()  # 开始计时
                     read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
                     read_video_time = random.randrange(5, 185)  # 看视频的随机时间
@@ -104,7 +106,7 @@ class JinRiTouTiao(AppReadBase):
                         self.pp(text="关注").click(offset=(random.random(), random.random()))
                         time.sleep(random.random() + 1)
                     # 看下是视频还是文章，视频就停着看，文章就下滑看
-                    if not self.pp.xpath('//*[@resource-id="header"]').exists:
+                    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a0h"]').exists:
                         while not (self.pp(text='重播').exists or time.time() - issue_time_start > read_video_time):
                             if self.pp(text='关闭广告').exists:
                                 self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
@@ -114,54 +116,36 @@ class JinRiTouTiao(AppReadBase):
                             time.sleep(random.uniform(3, 5))
                             self.scroll_read_issue()
                         self.pp(scrollable=True).scroll.toEnd(steps=10)
+                    # 看文章数加 1
+                    p += 1
                     # 按照设定的点赞概率，随机点赞
-                    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/b2w"]/'
-                                     'android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/'
-                                     'android.widget.ImageView[2]').exists and \
+                    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/d"]').exists and \
                             random.random() < self.probability_thumb_up:
                         self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/'
-                                                                 'b2w"]/android.widget.LinearLayout[1]/'
-                                                                 'android.widget.LinearLayout[1]/'
-                                                                 'android.widget.ImageView[2]').get().bounds)
+                                                                 'd"]').get().bounds)
                         time.sleep(random.random() + 1)
                     # 按照设定的评论概率，随机评论
-                    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/yu"]').exists and \
+                    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/d5"]').exists and \
                             random.random() < self.probability_commit:
                         self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/'
-                                                                 'yu"]').get().bounds)
+                                                                 'd5"]').get().bounds)
                         time.sleep(random.random() + 1)
-                        self.pp(resourceId='com.ss.android.article.lite:id/b5g').wait()
-                        self.pp(resourceId='com.ss.android.article.lite:id/b5g') \
+                        self.pp(resourceId='com.ss.android.article.lite:id/b88').wait()
+                        self.pp(resourceId='com.ss.android.article.lite:id/b88') \
                             .set_text(random.choice(self.commit))
                         time.sleep(random.random() + 1)
                         self.pp(text='发布').click(offset=(random.random(), random.random()))
                         time.sleep(random.random() + 1)
-                    # 阅读完看一下今日金币数量，有可能卡住，先不用了
-                    # if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/aak"]').exists:
-                    #     self.click_random_position(self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/'
-                    #                                              'aak"]').get().bounds)
-                    #     self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a0p"]').wait()
-                    #     coin = self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a0p"]').get_text()
-                    #     self.pp.press('back')
-                    #     time.sleep(random.random() + 1)
-                    #     if int(coin) > target_coin:
-                    #         self.logger.info(f'已经阅读获得了 {coin} 金币')
-                    #         self.pp.press('back')
-                    #         time.sleep(random.random() + 1)
-                    #         return
-                    #     else:
-                    #         self.pp.press('back')
-                    #         time.sleep(random.random() + 1)
                     # 阅读完文章返回
                     while not self.pp(text='我的').exists:
                         self.pp.press('back')
                         time.sleep(random.random() + 1)
                     time.sleep(random.random() + 1)
-                    if time.time() - t > duration:
+                    if time.time() - t > duration or p >= 30:
                         self.logger.info(f'今日阅读时间超过了{duration}秒，不再阅读了')
                         return
                 # 随机下滑1-4次
-                for k in range(random.randint(1, 4)):
+                for k in range(random.randint(1, 2)):
                     self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                                   random.uniform(0.2, 0.3), steps=random.randint(20, 60))
                     time.sleep(random.random())
@@ -179,8 +163,8 @@ class JinRiTouTiao(AppReadBase):
     def today_coin(self):
         self.logger.info('获取今日金币数量')
         self.pp(text='我的').click(offset=(random.random(), random.random()))
-        self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/ya"]').wait()
-        coin = self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/ya"]').get_text()
+        self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/z8"]').wait()
+        coin = self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/z8"]').get_text()
         time.sleep(random.random() + 1)
         if 'w' in coin:
             coin = int(float(coin.replace('w', '')) * 10000)

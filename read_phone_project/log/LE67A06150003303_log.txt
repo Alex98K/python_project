@@ -1,0 +1,289 @@
+2020/09/21 18:29:00 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 18:29:08 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 18:29:17 - INFO - 180 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 18:29:25 - INFO - 189 - jin_ri_tou_tiao - 今日已经获取金币 100
+2020/09/21 18:29:25 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 18:29:49 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/android.widget.FrameLayout[last()]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 209, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 62, in read_issue
+    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/android.widget.FrameLayout[last()]']
+2020/09/21 18:29:57 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 18:30:04 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 18:30:13 - INFO - 180 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 18:30:19 - INFO - 189 - jin_ri_tou_tiao - 今日已经获取金币 100
+2020/09/21 18:30:19 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 18:30:42 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息['//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/android.widget.FrameLayout[last()]']
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 209, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 62, in read_issue
+    if self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/'
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\xpath.py", line 518, in get
+    raise XPathElementNotFoundError(self._xpath_list)
+uiautomator2.exceptions.XPathElementNotFoundError: ['//*[@resource-id="com.ss.android.article.lite:id/a4x"]/android.widget.LinearLayout[1]/android.widget.FrameLayout[last()]']
+2020/09/21 18:30:51 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 18:31:00 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:12:01 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:12:10 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:12:19 - INFO - 180 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 20:12:27 - INFO - 189 - jin_ri_tou_tiao - 今日已经获取金币 100
+2020/09/21 20:12:27 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 20:12:32 - INFO - 28 - jin_ri_tou_tiao - 开始调整栏目
+2020/09/21 20:15:44 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:15:48 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:15:57 - INFO - 180 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 20:16:05 - INFO - 189 - jin_ri_tou_tiao - 今日已经获取金币 100
+2020/09/21 20:16:05 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 20:16:11 - INFO - 28 - jin_ri_tou_tiao - 开始调整栏目
+2020/09/21 20:27:55 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:28:02 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:28:11 - INFO - 180 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 20:28:16 - INFO - 189 - jin_ri_tou_tiao - 今日已经获取金币 1979
+2020/09/21 20:28:16 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 20:31:44 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:31:51 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:32:02 - INFO - 160 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 20:32:08 - INFO - 169 - jin_ri_tou_tiao - 今日已经获取金币 1979
+2020/09/21 20:32:08 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 20:37:51 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:37:59 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:38:08 - INFO - 164 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 20:38:17 - INFO - 173 - jin_ri_tou_tiao - 今日已经获取金币 2070
+2020/09/21 20:38:17 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 20:41:50 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\retry.py", line 403, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\packages\six.py", line 734, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 193, in main_do
+    self.read_issue(duration, target_coin)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 117, in read_issue
+    self.scroll_read_issue()
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 129, in scroll_read_issue
+    self.pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25),
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 1035, in swipe
+    return self.jsonrpc.swipe(fx, fy, tx, ty, steps)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 434, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 441, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 470, in _jsonrpc_call
+    res = self.http.post("/jsonrpc/0",
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 578, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 188, in request
+    return super().request(method, url, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 108, in request
+    resp = super(TimeoutRequestsSession,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2020/09/21 20:42:01 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:42:08 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:42:09 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\retry.py", line 403, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\packages\six.py", line 734, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 190, in main_do
+    self.sign_in()
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 21, in sign_in
+    self.pp(text='任务').click(offset=(random.random(), random.random()))
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 150, in click
+    self.must_wait(timeout=timeout)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 344, in must_wait
+    if not self.wait(exists, timeout):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\_selector.py", line 314, in wait
+    return self.jsonrpc.waitForExists(self.selector,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 434, in __call__
+    return self.server._jsonrpc_retry_call(self.method, params,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 441, in _jsonrpc_retry_call
+    return self._jsonrpc_call(*args, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 470, in _jsonrpc_call
+    res = self.http.post("/jsonrpc/0",
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 578, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 188, in request
+    return super().request(method, url, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 108, in request
+    resp = super(TimeoutRequestsSession,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2020/09/21 20:42:15 - CRITICAL - 114 - __init__ - 出严重错误啦，以下是错误信息('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\util\retry.py", line 403, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\packages\six.py", line 734, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 109, in recycle_main_do
+    self.main_do(duration, target_coin, cash_out)
+  File "D:\python_project\read_phone_project\app_jiao_ben\jin_ri_tou_tiao.py", line 188, in main_do
+    self.app_start('今日头条极速版')
+  File "D:\python_project\read_phone_project\app_jiao_ben\__init__.py", line 34, in app_start
+    app_list_running, app_install_list = self.pp.app_list_running(), self.pp.app_list()
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 1395, in app_list_running
+    self.shell('ps; ps -A').output, re.M)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 387, in shell
+    ret = self.http.post("/shell", data=data, timeout=timeout+10)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 578, in post
+    return self.request('POST', url, data=data, json=json, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 188, in request
+    return super().request(method, url, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\uiautomator2\__init__.py", line 108, in request
+    resp = super(TimeoutRequestsSession,
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\jiaji\AppData\Local\Programs\Python\Python38\lib\site-packages\requests\adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2020/09/21 20:42:27 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 20:42:36 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 20:42:44 - INFO - 164 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 20:42:52 - INFO - 173 - jin_ri_tou_tiao - 今日已经获取金币 2453
+2020/09/21 20:42:52 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
