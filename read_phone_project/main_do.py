@@ -39,10 +39,9 @@ def main_run(phone_serial):
     print(pp.address)
 
     # 测试代码部分
-    JinRiTouTiao(phone_serial, pp).recycle_main_do(target_coin=6500)
     # 重置电池状态
     # pp.shell('dumpsys battery reset')
-    raise
+    # raise
 
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')

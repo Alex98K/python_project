@@ -91,10 +91,9 @@ class JinRiTouTiao(AppReadBase):
                         time.sleep(random.random() + 1)
                     # 没有奖励的就跳过不看了
                     # if not (self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/aak"]').exists or
-                    #         self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/l9"]').exists) or \
-                    #         self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/round_write_button"]').exists or\
-                    #         self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/'
-                    #                       'wenda_detail_title_image"]').exists:
+                    #         self.pp.xpath('//*[@resource-id="com.ss.android.article.lite:id/l9"]').exists) or
+                    #         self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/round_write_button"]').exists or
+                    #         self.pp.xpath('//*[@resource-id="com.ss.android.newugc:id/wenda_detail_title_image"]').exists:
                     #     self.pp.press('back')
                     #     time.sleep(random.random() + 1)
                     #     continue
