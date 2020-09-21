@@ -193,6 +193,7 @@ class QuTouTiao(AppReadBase):
         time.sleep(random.random() + 1)
         t = time.time()
         while time.time() - t <= 300:
+            self.app_switch_current()
             t1 = time.time()
             while time.time() - t1 <= 60:
                 if not self.pp(text="看广告视频拿金币").exists or self.pp(text="阅读得大额奖励").center()[1] > \
