@@ -8,10 +8,11 @@ class ShuaBao(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(ShuaBao, self).__init__(phone_serial, pp)
         # self.pp = uiautomator2.connect_usb()
-        self.pp.watcher('tip1').when('我知道了').click()
+        # self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when('恭喜获得').press('back')
         self.pp.watcher('tip3').when(xpath='//*[@content-desc="送你金元宝 快来看我吧"]').call(self.watcher_call_1)
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.jm.video:id/imgClose"]').click()
+        self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.jm.video:id/tt_video_ad_close"]').click()
         self.pp.watcher.start(0.5)
 
     def watcher_call_1(self):
