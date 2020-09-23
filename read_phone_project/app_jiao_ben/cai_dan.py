@@ -13,7 +13,7 @@ class CaiDan(AppReadBase):
         self.pp.watcher('tip2').when(xpath='//*[@content-desc="加载中"]/android.view.View[1]/android.view.View[2]/'
                                            'android.view.View[2]').click()
         self.pp.watcher('tip3').when(xpath='//*[@resource-id="com.jifen.dandan:id/close_bottom_button"]').click()
-        # self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.jifen.dandan:id/iv_close"]').click()
+        self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.jifen.dandan:id/tv_upgrade_cancel"]').click()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/'
                                            'android.widget.RelativeLayout[1]/android.widget.ImageView[1]').click()
         self.pp.watcher.start(0.5)

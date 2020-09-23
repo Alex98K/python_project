@@ -287,3 +287,13 @@ requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected(
 2020/09/21 20:42:44 - INFO - 164 - jin_ri_tou_tiao - 获取今日金币数量
 2020/09/21 20:42:52 - INFO - 173 - jin_ri_tou_tiao - 今日已经获取金币 2453
 2020/09/21 20:42:52 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 21:00:26 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 21:00:33 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 21:00:45 - INFO - 164 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 21:00:52 - INFO - 173 - jin_ri_tou_tiao - 今日已经获取金币 5329
+2020/09/21 21:00:52 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
+2020/09/21 21:00:26 - INFO - 44 - __init__ - ********开始 今日头条极速版 的任务********
+2020/09/21 21:00:33 - INFO - 19 - jin_ri_tou_tiao - 开始签到
+2020/09/21 21:00:45 - INFO - 164 - jin_ri_tou_tiao - 获取今日金币数量
+2020/09/21 21:00:52 - INFO - 173 - jin_ri_tou_tiao - 今日已经获取金币 5329
+2020/09/21 21:00:52 - INFO - 56 - jin_ri_tou_tiao - 开始阅读文章
