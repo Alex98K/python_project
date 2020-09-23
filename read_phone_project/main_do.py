@@ -40,6 +40,11 @@ def main_run(phone_serial):
         time.sleep(1)
         pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25), random.uniform(0.25, 0.7),
                  random.uniform(0.65, 0.8), steps=10)
+        time.sleep(3)
+        if pp(resourceId='com.android.systemui:id/header').exists:
+            pp.press('back')
+            time.sleep(1)
+            break
     print('http://' + str(pp.wlan_ip) + ':7912/remote')
 
     # 测试代码部分
