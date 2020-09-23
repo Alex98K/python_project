@@ -32,11 +32,15 @@ def main_run(phone_serial):
     """ 用来测试的乐视X620手机序列号是    LE67A06150003303   """
     pp = uiautomator2.connect_usb(phone_serial)
     time.sleep(1)
-    while not pp(resourceId='android:id/content').exists:
+    t = time.time()
+    while not pp(resourceId='android:id/content').exists and time.time() - t < 30:
         pp.unlock()
         time.sleep(1)
         pp.screen_on()
-    print(pp.address)
+        time.sleep(1)
+        pp.swipe(random.uniform(0.25, 0.7), random.uniform(0.15, 0.25), random.uniform(0.25, 0.7),
+                 random.uniform(0.65, 0.8), steps=10)
+    print('http://' + str(pp.wlan_ip) + ':7912/remote')
 
     # 测试代码部分
     # 重置电池状态
@@ -81,8 +85,8 @@ def main_run(phone_serial):
         elif k == 6:
             ShuaBao(phone_serial, pp).recycle_main_do(target_coin=6000)
         # elif k == 7:
-            # 这个APP特别卡，没有今日金币获取地方，在看视频过程中还有滑块验证
-            # WeiShi(phone_serial, pp).recycle_main_do(target_coin=1000)
+        # 这个APP特别卡，没有今日金币获取地方，在看视频过程中还有滑块验证
+        # WeiShi(phone_serial, pp).recycle_main_do(target_coin=1000)
         elif k == 8:
             HuoShan(phone_serial, pp).recycle_main_do(target_coin=3000)
         # elif k == 9:
@@ -107,8 +111,8 @@ def main_run(phone_serial):
         elif k == 18:
             HongBaoShiPin(phone_serial, pp).recycle_main_do(target_coin=7000)
         # elif k == 19:
-            # 这个收益太低，10万换1元
-            # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=10000)
+        # 这个收益太低，10万换1元
+        # SouHuZiXun(phone_serial, pp).recycle_main_do(target_coin=10000)
         elif k == 20:
             MoFangKanDian(phone_serial, pp).recycle_main_do(target_coin=4000)
         else:
