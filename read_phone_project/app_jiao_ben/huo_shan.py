@@ -61,10 +61,17 @@ class HuoShan(AppReadBase):
             self.pp.swipe(random.uniform(0.3, 0.6), random.uniform(0.7, 0.8), random.uniform(0.3, 0.6),
                           random.uniform(0.2, 0.3), steps=random.randint(20, 60))
         time.sleep(random.random() + 1)
-        temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.livelite:id/w8"]/'
-                                    f'android.widget.RelativeLayout[{random.randint(1, 2)}]').get().bounds
-        self.click_random_position(temp_bounds)  # 随机选页面中的视频
-        time.sleep(random.random() + 1)
+        t2 = time.time()
+        while time.time() - t2 < 60 and not self.pp.xpath('//*[@resource-id="com.ss.android.ugc.livelite:id/ss"]').exists:
+            temp_bounds = self.pp.xpath(f'//*[@resource-id="com.ss.android.ugc.livelite:id/w8"]/'
+                                        f'android.widget.RelativeLayout[{random.randint(1, 2)}]').get().bounds
+            self.click_random_position(temp_bounds)  # 随机选页面中的视频
+            time.sleep(random.random() + 2)
+        if time.time() - t2 > 50:
+            time.sleep(random.random() + 1)
+            self.pp.press('back')
+            time.sleep(random.random() + 1)
+            return
         self._read_issue_core(read_issue_time)
         time.sleep(random.random() + 1)
         self.pp.press('back')

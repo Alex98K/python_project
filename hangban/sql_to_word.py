@@ -1,11 +1,11 @@
-import pymysql
 import re
-from docx.shared import Pt
-from docx.oxml.ns import qn
+import docx
+import pymysql
+import time
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
 from docx.shared import Inches
-import doc_to_docx
-import docx ,time
+from docx.shared import Pt
 
 
 class RawData(object):
