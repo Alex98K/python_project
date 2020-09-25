@@ -48,8 +48,8 @@ class ShanDianHezi(AppReadBase):
                     continue
                 self.app_switch_current()
                 issue_time_start = time.time()  # 开始计时
-                read_issue_time = random.randrange(5, 125)  # 看文章的随机时间
-                read_video_time = random.randrange(5, 135)  # 看视频的随机时间
+                read_issue_time = random.randrange(5, 65)  # 看文章的随机时间
+                read_video_time = random.randrange(5, 75)  # 看视频的随机时间
                 # 按照设定的关注概率，随机关注
                 if self.pp(resourceId="c.l.a:id/img_collect").exists and random.random() < self.probability_focus:
                     self.pp(resourceId="c.l.a:id/img_collect").click(offset=(random.random(), random.random()))
@@ -99,8 +99,8 @@ class ShanDianHezi(AppReadBase):
         self.pp(text='玩一玩').click(offset=(random.random(), random.random()))
         t = time.time()
         while time.time() - t < read_issue_time:
-            self.scroll_read_issue()
-            time.sleep(random.random() + 2)
+            self.pp.screen_on()
+            time.sleep(random.random() + 3)
         time.sleep(random.random() + 1)
         self.pp.press('back')
         time.sleep(random.random() + 1)
