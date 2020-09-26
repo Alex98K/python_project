@@ -156,10 +156,10 @@ def page_down(pic_dir_adr, thread):
 
     def condition_title(title):  # 标题不能包含什么或者必须包含什么才能下载
         title_pass_down_list = []  # 计划下载的标题中不应该包含的关键字列表
-        title_keep_down_word = ''  # 计划下载的标题中必须包含的关键字
+        title_keep_down_word = ['生活照', '反差', '露脸', '露出']  # 计划下载的标题中必须包含的关键字
         if title_pass_down_list and list(filter(lambda x: x in str(title), title_pass_down_list)):
             return False
-        elif title_keep_down_word and title_keep_down_word in str(title):
+        elif title_keep_down_word and list(filter(lambda x: x in str(title), title_keep_down_word)):
             return True
         elif title_pass_down_list == [] and title_keep_down_word == '':
             return True
@@ -196,7 +196,9 @@ def page_down(pic_dir_adr, thread):
     for key, val in PAGE_DATA.items():
         if condition_title(key) and dian_zan(val[1]) and hui_fu(val[2]) and condition_author(val[3]):
             dir_name = f'点赞：{val[1]} ' + '--' + f'回复：{val[2]} ' + '--' + f'标题：{key}' + '--' + f'作者：{val[3]}'
-            dir_path = os.path.join(pic_dir_adr, dir_name)
+            # 看看是分开文件夹保存图片，还是都保存在一起
+            # dir_path = os.path.join(pic_dir_adr, dir_name)
+            dir_path = os.path.join(pic_dir_adr, '')
             for index, pic_url_one in enumerate(val[5]):
                 try:
                     suffix = re.search(r'\.\w*$', pic_url_one).group()
