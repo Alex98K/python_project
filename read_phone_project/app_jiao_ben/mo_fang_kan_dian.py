@@ -78,6 +78,7 @@ class MoFangKanDian(AppReadBase):
             for i in range(random.randint(8, 12)):  # 每个栏目下滑随机次
                 # 每个栏目下的文章标题
                 for title in self.pp.xpath('com.toutiao.hxtoutiao:id/tv_title').all():
+                    self.app_switch_current()
                     # 需要满足看文章概率
                     if random.random() >= self.probability_read_issue:
                         continue
