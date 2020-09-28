@@ -35,6 +35,7 @@ class ShanDianHezi(AppReadBase):
             # 每个栏目下的文章标题
             for title in self.pp.xpath('//*[@resource-id="c.l.a:id/title"]').all():
                 time.sleep(random.random() + 1)
+                self.app_switch_current()
                 # 需要满足看文章概率
                 if random.random() >= self.probability_read_issue:
                     continue
@@ -93,6 +94,7 @@ class ShanDianHezi(AppReadBase):
             time.sleep(random.random() + 1)
             self.pp.press('back')
             time.sleep(random.random() + 1)
+        self.app_switch_current()
 
     def read_issue_city(self, read_issue_time):
         self.logger.info(f'开始阅读同城视频')
