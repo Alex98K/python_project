@@ -49,7 +49,7 @@ class ShanDianHezi(AppReadBase):
                     continue
                 self.app_switch_current()
                 issue_time_start = time.time()  # 开始计时
-                read_issue_time = random.randrange(5, 65)  # 看文章的随机时间
+                read_issue_time1 = random.randrange(5, 65)  # 看文章的随机时间
                 read_video_time = random.randrange(5, 75)  # 看视频的随机时间
                 # 按照设定的关注概率，随机关注
                 if self.pp(resourceId="c.l.a:id/img_collect").exists and random.random() < self.probability_focus:
@@ -62,7 +62,7 @@ class ShanDianHezi(AppReadBase):
                             self.pp(text='关闭广告').click(offset=(random.random(), random.random()))
                         time.sleep(1)
                 else:
-                    while time.time() - issue_time_start <= read_issue_time:
+                    while time.time() - issue_time_start <= read_issue_time1:
                         time.sleep(random.uniform(3, 5))
                         self.scroll_read_issue()
                         if self.pp.xpath('//*[@content-desc="展开全文"]').exists:
