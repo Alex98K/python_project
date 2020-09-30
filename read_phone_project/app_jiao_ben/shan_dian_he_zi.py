@@ -44,11 +44,11 @@ class ShanDianHezi(AppReadBase):
                 # 如果有获取金币的图标，才看，没有就返回,
                 if not self.pp.xpath('//*[@resource-id="c.l.a:id/read_redpacket"]').exists:
                     t2 = time.time()
-                    while not self.pp(text='头条资讯').exists and time.time() - t2 < 60:
+                    while not self.pp(text='头条资讯').exists and time.time() - t2 < 10:
                         self.pp.press('back')
                         time.sleep(random.random() + 1)
+                        self.app_switch_current()
                     continue
-                self.app_switch_current()
                 issue_time_start = time.time()  # 开始计时
                 read_issue_time1 = random.randrange(5, 65)  # 看文章的随机时间
                 read_video_time = random.randrange(5, 75)  # 看视频的随机时间
