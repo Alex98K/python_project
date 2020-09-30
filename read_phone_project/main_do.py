@@ -48,9 +48,10 @@ def main_run(phone_serial):
     print('http://' + str(pp.wlan_ip) + ':7912/remote')
 
     # 测试代码部分
+    ShanDianHezi(phone_serial, pp).recycle_main_do(target_coin=80000)
     # 重置电池状态
     # pp.shell('dumpsys battery reset')
-    # raise
+    raise
 
     # 禁用USB充电
     pp.shell('dumpsys battery set usb 0')
