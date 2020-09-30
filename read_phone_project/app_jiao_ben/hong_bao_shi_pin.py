@@ -12,6 +12,7 @@ class HongBaoShiPin(AppReadBase):
         self.pp.watcher('tip3').when('取消').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.sanmiao.sound:id/iv_signIn_close"]').click()
         self.pp.watcher('tip4').when(xpath='//*[@resource-id="com.sanmiao.sound:id/tt_video_ad_close_layout"]').click()
+        self.pp.watcher('tip5').when(xpath='//*[@resource-id="com.sanmiao.sound:id/tt_splash_skip_btn"]').click()
         self.pp.watcher.start(0.5)
 
     def sign_in(self):
