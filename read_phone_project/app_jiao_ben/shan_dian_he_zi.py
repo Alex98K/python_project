@@ -50,8 +50,8 @@ class ShanDianHezi(AppReadBase):
                     continue
                 self.app_switch_current()
                 issue_time_start = time.time()  # 开始计时
-                read_issue_time1 = random.randrange(5, 25)  # 看文章的随机时间
-                read_video_time = random.randrange(5, 35)  # 看视频的随机时间
+                read_issue_time1 = random.randrange(5, 65)  # 看文章的随机时间
+                read_video_time = random.randrange(5, 75)  # 看视频的随机时间
                 # 按照设定的关注概率，随机关注
                 if self.pp(resourceId="c.l.a:id/img_collect").exists and random.random() < self.probability_focus:
                     self.pp(resourceId="c.l.a:id/img_collect").click(offset=(random.random(), random.random()))
