@@ -24,6 +24,7 @@ class HongBaoShiPin(AppReadBase):
     def _read_issue_core(self, read_issue_time):
         issue_time_start = time.time()  # 开始计时
         while time.time() - issue_time_start <= read_issue_time:
+            self.app_switch_current()
             time.sleep(random.uniform(15, 25))
             self.scroll_read_issue()
 
