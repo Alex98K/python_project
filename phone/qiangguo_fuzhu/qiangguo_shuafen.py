@@ -1199,7 +1199,6 @@ class QiangGuoFuZhu(object):
             self.listen_tai_end(job_stat, t1)
         else:
             self.logger.warning('已完成视听时长学习')
-        print(job_stat)
         if job_stat[13][0] != '已完成':
             self.ben_di()
         else:
