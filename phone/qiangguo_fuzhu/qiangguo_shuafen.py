@@ -1034,6 +1034,9 @@ class QiangGuoFuZhu(object):
             self.pp(description="订阅").click_exists()
             time.sleep(1)
         if self.pp(text='你已经看到我的底线了').exists:
+            self.pp.press("back")
+            self.pp(text='我的订阅').wait()
+            self.pp.press("back")
             return False
         self.pp.press("back")
         self.pp(text='我的订阅').wait()
