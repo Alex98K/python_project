@@ -1113,6 +1113,7 @@ class QiangGuoFuZhu(object):
                            ('去看看', '0', '6', '视听学习'), ('去学习', '0', '6', '视听学习时长'),
                            ('去答题', '0', '6', '每日答题'), ('去答题', '0', '5', '每周答题'),
                            ('去看看', '0', '10', '专项答题'), ('去看看', '0', '6', '挑战答题'),
+                           ('去看看', '0', '5', '争上游答题'), ('去看看', '0', '2', '双人对战'),
                            ('去看看', '0', '2', '订阅'), ('去看看', '0', '1', '分享'), ('去看看', '0', '1', '发表观点'),
                            ('去看看', '0', '1', '本地频道')]
         # self.logger.warning(job_status1)
@@ -1196,7 +1197,7 @@ class QiangGuoFuZhu(object):
             self.listen_tai_end(job_stat, t1)
         else:
             self.logger.warning('已完成视听时长学习')
-        if job_stat[11][0] != '已完成':
+        if job_stat[13][0] != '已完成':
             self.ben_di()
         else:
             self.logger.warning('已完成本地频道')
@@ -1212,7 +1213,7 @@ class QiangGuoFuZhu(object):
             self.run_special_ti()
         else:
             self.logger.warning('已完成专项答题任务')
-        if job_stat[8][0] != '已完成':
+        if job_stat[10][0] != '已完成':
             self.run_ding_yue(job_stat)
         else:
             self.logger.warning('已完成订阅')
@@ -1238,7 +1239,7 @@ class QiangGuoFuZhu(object):
             try:
                 job_stat = self.main_do()
                 for i, k in enumerate(job_stat):
-                    if k[0] != '已完成' and i not in [5, 6, 8]:
+                    if k[0] != '已完成' and i not in [5, 6, 10]:
                         repeat_sign = 1
                         break
                 if repeat_sign == 1:
