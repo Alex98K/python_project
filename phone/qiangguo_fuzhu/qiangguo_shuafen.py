@@ -1228,6 +1228,7 @@ class QiangGuoFuZhu(object):
     def recycle_main_do(self, cl_screen=False):
         # 调用另外程序，下载每周和专项的题库
         DownTiKu().down_ti()
+        self.logger.info('http://' + str(self.pp.wlan_ip) + ':7912/remote')
         t = time.time()
         while True:
             repeat_sign = 0
