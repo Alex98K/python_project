@@ -1176,10 +1176,6 @@ class QiangGuoFuZhu(object):
         else:
             t1 = 0
             self.logger.warning('已完成视听时长学习')
-        if job_stat[8][0] != '已完成':
-            self.run_ding_yue(job_stat)
-        else:
-            self.logger.warning('已完成订阅')
         if job_stat[1][0] != '已完成':
             self.read_issue(job_stat)
         else:
@@ -1216,6 +1212,10 @@ class QiangGuoFuZhu(object):
             self.run_special_ti()
         else:
             self.logger.warning('已完成专项答题任务')
+        if job_stat[8][0] != '已完成':
+            self.run_ding_yue(job_stat)
+        else:
+            self.logger.warning('已完成订阅')
         self.pp(text='学习积分').click()
         job_stat = self.job_status()
         time.sleep(1)
