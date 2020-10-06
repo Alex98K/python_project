@@ -1090,11 +1090,10 @@ class QiangGuoFuZhu(object):
         if not self.pp(text='登录').exists:
             self.logger.critical('网络有问题，请确保联网后重试')
             raise
-        time.sleep(1)
-        self.pp(scrollable=True).scroll.toEnd(steps=10)
-        time.sleep(1)
+        length = len(
+            self.pp.xpath('//android.widget.ListView//android.view.View/android.view.View/android.view.View').all())
         job_status1 = []
-        for j in range(1, 13):
+        for j in range(1, length + 1):
             while not self.pp.xpath(f'//android.widget.ListView/android.view.View[{j}]/android.view.View[4]').exists:
                 self.pp(scrollable=True).scroll(steps=100)
                 time.sleep(1)
