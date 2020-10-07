@@ -96,7 +96,8 @@ class MoFangKanDian(AppReadBase):
                         continue
                     # 如果是美女图片就返回
                     if self.pp(resourceId="com.toutiao.hxtoutiao:id/iv_close").exists:
-                        while not self.pp(text='我的').exists:
+                        t3 = time.time()
+                        while not self.pp(text='我的').exists and time.time() - t3 < 10:
                             time.sleep(random.random() + 1)
                             self.pp.press('back')
                         continue
