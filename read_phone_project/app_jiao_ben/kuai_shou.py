@@ -7,7 +7,7 @@ import time
 class KuaiShou(AppReadBase):
     def __init__(self, phone_serial, pp):
         super(KuaiShou, self).__init__(phone_serial, pp)
-        # self.pp = uiautomator2.connect_usb()
+        self.pp = uiautomator2.connect_usb()
         self.pp.watcher('tip1').when('我知道了').click()
         self.pp.watcher('tip2').when(xpath='//*[@resource-id="com.kuaishou.nebula:id/img_nebula_pull_new_dialog"]') \
             .press('back')
@@ -17,9 +17,12 @@ class KuaiShou(AppReadBase):
         self.logger.info(f'开始签到')
         self.pp(resourceId='com.kuaishou.nebula:id/left_btn').click(offset=(random.random(), random.random()))
         self.pp(text='去赚钱').wait()
-        self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/menu_recycler_view"]/'
-                                                 'android.view.ViewGroup[2]').get().bounds)
+        self.pp(text='去赚钱').click(offset=(random.random(), random.random()))
+        # self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/menu_recycler_view"]/'
+        #                                          'android.view.ViewGroup[2]').get().bounds)
         self.pp(description='活动规则').wait()
+        if self.pp(description='立即签到').exists(timeout=3):
+            self.pp(description='立即签到').click(offset=(random.random(), random.random()))
         if self.pp(description='今天已签').exists(timeout=3):
             self.pp.press('back')
             time.sleep(random.random() + 1)
@@ -30,8 +33,9 @@ class KuaiShou(AppReadBase):
         self.logger.info('获取今日金币数量')
         self.pp(resourceId='com.kuaishou.nebula:id/left_btn').click(offset=(random.random(), random.random()))
         self.pp(text='去赚钱').wait()
-        self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/menu_recycler_view"]/'
-                                                 'android.view.ViewGroup[2]').get().bounds)
+        self.pp(text='去赚钱').click(offset=(random.random(), random.random()))
+        # self.click_random_position(self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/menu_recycler_view"]/'
+        #                                          'android.view.ViewGroup[2]').get().bounds)
         self.pp(description='活动规则').wait()
         coin = self.pp.xpath('//*[@resource-id="com.kuaishou.nebula:id/webView"]/android.webkit.WebView[1]/'
                              'android.webkit.WebView[1]/android.widget.ListView[1]/android.view.View[1]/'
